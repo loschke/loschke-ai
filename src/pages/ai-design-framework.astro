@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { promises as fs } from 'fs';
-import path from 'path';
+import conceptData from '../data/concept/concept.json';
+import contextData from '../data/context/context.json';
+import compositionData from '../data/composition/composition.json';
+import creativityData from '../data/creativity/creativity.json';
 
 interface Category {
   name: string;
@@ -20,18 +22,12 @@ interface Category {
   };
 }
 
-// Helper function to read JSON files
-async function readJsonFile(filePath) {
-  const data = await fs.readFile(filePath, 'utf-8');
-  return JSON.parse(data);
-}
-
-// Read main category files
+// Main categories array using static imports
 const mainCategories: Category[] = [
-  await readJsonFile('src/data/concept/concept.json'),
-  await readJsonFile('src/data/context/context.json'),
-  await readJsonFile('src/data/composition/composition.json'),
-  await readJsonFile('src/data/creativity/creativity.json')
+  conceptData,
+  contextData,
+  compositionData,
+  creativityData
 ];
 ---
 
@@ -77,7 +73,7 @@ const mainCategories: Category[] = [
   function setupCopyButtons() {
     document.querySelectorAll('.copy-button').forEach(button => {
       button.addEventListener('click', async () => {
-        const text = button.getAttribute('data-copy');
+        const text = button.getAttribute('data-copy') || '';
         await navigator.clipboard.writeText(text);
         
         button.textContent = 'Kopiert!';

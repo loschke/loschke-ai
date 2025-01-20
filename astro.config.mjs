@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import node from '@astrojs/node';
 
 export default defineConfig({
-  site: 'https://kvix.de',
+  site: 'https://loschke.ai',
   adapter: node({
     mode: 'standalone',
     host: '0.0.0.0',
@@ -48,6 +48,7 @@ export default defineConfig({
       'import.meta.env.CONTACT_EMAIL': JSON.stringify(process.env.CONTACT_EMAIL),
       'import.meta.env.SITE_URL': JSON.stringify(process.env.SITE_URL),
     },
+    assetsInclude: ['**/*.json'],
     build: {
       // Enable asset optimization
       assetsInlineLimit: 4096, // Inline assets smaller than 4kb
