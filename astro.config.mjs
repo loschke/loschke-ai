@@ -48,7 +48,6 @@ export default defineConfig({
       'import.meta.env.CONTACT_EMAIL': JSON.stringify(process.env.CONTACT_EMAIL),
       'import.meta.env.SITE_URL': JSON.stringify(process.env.SITE_URL),
     },
-    assetsInclude: ['**/*.json'],
     build: {
       // Enable asset optimization
       assetsInlineLimit: 4096, // Inline assets smaller than 4kb
@@ -62,9 +61,9 @@ export default defineConfig({
         }
       }
     },
-    // Optimize images during dev
+    // Configure optimizeDeps
     optimizeDeps: {
-      include: ['@astrojs/image']
+      exclude: ['@astrojs/image'] // Exclude potentially problematic package
     }
   },
   build: {

@@ -1,9 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import conceptData from '../data/concept/concept.json';
-import contextData from '../data/context/context.json';
-import compositionData from '../data/composition/composition.json';
-import creativityData from '../data/creativity/creativity.json';
+import { conceptData, contextData, compositionData, creativityData } from '../data/framework-data';
 
 interface Category {
   name: string;
@@ -22,7 +19,7 @@ interface Category {
   };
 }
 
-// Main categories array using static imports
+// Main categories array using TypeScript imports
 const mainCategories: Category[] = [
   conceptData,
   contextData,
