@@ -1,0 +1,50 @@
+{
+  "name": "🎪 Unmögliche Welten",
+  "description": "Paradoxe und mystische Landschaften",
+  "modifiers": {
+    "spatial_paradox": {
+      "name": "🌀 Räumliche Paradoxa",
+      "description": "Unmögliche räumliche Konstruktionen",
+      "items": [
+        "with impossible geometry",
+        "featuring endless staircases",
+        "with recursive architecture",
+        "in non-euclidean space",
+        "with paradoxical perspective"
+      ]
+    },
+    "nested_realities": {
+      "name": "🪄 Verschachtelte Realitäten",
+      "description": "Ineinander verwobene Welten und Dimensionen",
+      "items": [
+        "with worlds within worlds",
+        "featuring nested dimensions",
+        "with reality fragments",
+        "in layered universes",
+        "with interconnected realms"
+      ]
+    },
+    "parallel_dimensions": {
+      "name": "🌌 Parallele Dimensionen",
+      "description": "Gleichzeitig existierende Realitäten",
+      "items": [
+        "with overlapping realities",
+        "featuring parallel worlds",
+        "with dimensional portals",
+        "in multiple timelines",
+        "with reality splits"
+      ]
+    },
+    "mystical_landscapes": {
+      "name": "✨ Mystische Landschaften",
+      "description": "Übernatürliche und magische Umgebungen",
+      "items": [
+        "with floating islands",
+        "featuring luminescent forests",
+        "with crystal mountains",
+        "in ethereal dreamscape",
+        "with magical terrain"
+      ]
+    }
+  }
+}

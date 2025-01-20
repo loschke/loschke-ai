@@ -1,0 +1,21 @@
+{
+  "name": "1️⃣ Konzept",
+  "description": "Der Startpunkt der Kreativität - Was ist zu sehen und wie wurde es erstellt",
+  "icon": "concept-icon",
+  "categories": {
+    "medium": {
+      "name": "🎨 Medium",
+      "description": "Künstlerische und technische Medientypen",
+      "path": "/concept/medium"
+    },
+    "subject": {
+      "name": "📷 Subjekt",
+      "description": "Hauptmotive und Objekte der Darstellung",
+      "path": "/concept/subject"
+    }
+  },
+  "metadata": {
+    "order": 1,
+    "tags": ["basic", "foundation", "creative"]
+  }
+}

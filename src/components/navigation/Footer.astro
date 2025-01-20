@@ -1,0 +1,168 @@
+---
+import SocialIcons from "./SocialIcons.astro";
+import { Image } from "astro:assets";
+import avatarImage from "../../assets/images/rico-loschke_avatar.jpg";
+
+const currentYear = new Date().getFullYear();
+
+interface FooterLink {
+    label: string;
+    href: string;
+    external?: boolean;
+}
+
+interface FooterSection {
+    title: string;
+    links: FooterLink[];
+}
+
+const footerLinks: FooterSection[] = [
+    {
+        title: "Rechtliches",
+        links: [
+            { label: "Kontakt", href: "/contact" },
+            { label: "Impressum", href: "/impressum" },
+            { label: "Datenschutz", href: "/datenschutz" },
+        ],
+    },
+    {
+        title: "Portfolio & Projekte",
+        links: [
+            {
+                label: "queonext AI",
+                href: "https://queonext.de/ai",
+                external: true,
+            },
+            {
+                label: "PromptBärAI",
+                href: "https://promptbaer.de",
+                external: true,
+            },
+            {
+                label: "HelpBärAI",
+                href: "https://helpbaer.de",
+                external: true,
+            },
+            {
+                label: "AI-Design Guide",
+                href: "https://ai-design.guide",
+                external: true,
+            },
+            {
+                label: "AI-Design Modifier",
+                href: "/ai-design-framework",
+            },
+        ],
+    },
+];
+---
+
+<footer class="mt-32 relative">
+    <div
+        class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-transparent via-base/30 to-base-darker/90"
+    >
+    </div>
+    <div
+        class="relative bg-gradient-to-b from-base-darker via-base-darker to-base-darkest shadow-2xl"
+    >
+        <div class="container-padding py-16">
+            <div class="max-container">
+                <!-- Top Section -->
+                <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4 mb-16">
+                    <!-- Brand -->
+                    <div class="lg:col-span-2">
+                        <div class="flex items-center gap-4 mb-4">
+                            <Image
+                                src={avatarImage}
+                                alt="Rico Loschke"
+                                width={48}
+                                height={48}
+                                class="rounded-full shadow-lg object-cover"
+                            />
+                            <span class="text-xl font-medium">Rico Loschke</span
+                            >
+                        </div>
+                        <p class="text-white/80 max-w-md mb-8">
+                            Experte für künstliche Intelligenz und digitale
+                            Transformation. Ich unterstütze Unternehmen dabei,
+                            das volle Potenzial von KI zu erschließen.
+                        </p>
+                        <div class="mb-8">
+                            <SocialIcons />
+                        </div>
+                    </div>
+
+                    <!-- Links -->
+                    {
+                        footerLinks.map((section) => (
+                            <div>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {section.title}
+                                </h3>
+                                <ul class="space-y-3">
+                                    {section.links.map((link) => (
+                                        <li>
+                                            <a
+                                                href={link.href}
+                                                class="text-white/70 hover:text-white transition-colors inline-flex items-center gap-1"
+                                                target={
+                                                    link.external
+                                                        ? "_blank"
+                                                        : undefined
+                                                }
+                                                rel={
+                                                    link.external
+                                                        ? "noopener noreferrer"
+                                                        : undefined
+                                                }
+                                            >
+                                                {link.label}
+                                                {link.external && (
+                                                    <svg
+                                                        class="w-3.5 h-3.5"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    >
+                                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                        <polyline points="15 3 21 3 21 9" />
+                                                        <line
+                                                            x1="10"
+                                                            y1="14"
+                                                            x2="21"
+                                                            y2="3"
+                                                        />
+                                                    </svg>
+                                                )}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <!-- Bottom Section -->
+                <div
+                    class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4"
+                >
+                    <div class="text-white/60 text-sm">
+                        © {currentYear} Rico Loschke. Alle Rechte vorbehalten.
+                    </div>
+                    <div class="text-white/60 text-sm">
+                        <a
+                            href="mailto:agent@kvix.de"
+                            class="hover:text-white transition-colors"
+                        >
+                            agent@loschke.ai
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --font-family-base: "FF Clan Pro", system-ui, -apple-system, sans-serif;
+
+        /* Colors */
+        --color-base: #1B252F;
+        --color-primary: #3b82f6;
+        --color-primary-dark: #2563eb;
+        --color-text: #ffffff;
+        --color-text-muted: rgba(255, 255, 255, 0.7);
+
+        /* Layout */
+        --container-padding: 2rem;
+        --container-max-width: 80rem;
+        /* 1280px */
+    }
+
+    /* Base styles */
+    html {
+        font-family: var(--font-family-base);
+        @apply scroll-smooth antialiased;
+    }
+
+    body {
+        @apply bg-base text-white min-h-screen overflow-x-hidden relative;
+    }
+
+    /* Add animated background */
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        @apply bg-gradient-to-br from-primary-dark via-base to-accent;
+        opacity: 0.4;
+        z-index: -1;
+        animation: gradient 20s ease infinite;
+        background-size: 200% 200%;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    :global(.dark) body::before {
+        filter: brightness(0.8) saturate(0.9);
+    }
+
+    /* Typography System */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-family-base);
+        @apply text-white;
+    }
+
+    h1 {
+        @apply font-black;
+    }
+
+    h2 {
+        @apply font-bold;
+    }
+
+    h3 {
+        @apply font-medium;
+    }
+
+    p {
+        font-family: var(--font-family-base);
+        @apply font-light text-white leading-relaxed;
+    }
+
+    /* Focus styles for better accessibility */
+    :focus-visible {
+        @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-base;
+    }
+}
+
+/* Components */
+@layer components {
+    .social-link {
+        @apply text-white/60 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base rounded-full;
+    }
+
+    .nav-link {
+        @apply text-white/70 hover:text-white transition-colors duration-300 text-lg font-medium tracking-wide;
+    }
+
+    /* Layout Components */
+    .container-padding {
+        @apply px-8;
+    }
+
+    .max-container {
+        @apply max-w-7xl mx-auto w-full;
+    }
+
+    .content-container {
+        @apply max-w-4xl mx-auto;
+    }
+
+    .section-spacing {
+        @apply py-16 md:py-24;
+    }
+
+    .flex-center {
+        @apply flex items-center justify-center;
+    }
+
+    .flex-between {
+        @apply flex items-center justify-between;
+    }
+
+    .animated-gradient-bg {
+        background: linear-gradient(45deg,
+                #151D25 0%,
+                #1B252F 50%,
+                #151D25 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+    }
+}
+
+/* Utilities */
+@layer utilities {
+    .text-hero {
+        @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight;
+    }
+
+    .text-hero-sub {
+        @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight;
+    }
+
+    .gradient-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-dark;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .max-container {
+        @apply px-4;
+    }
+
+    .container-padding {
+        @apply px-4;
+    }
+}

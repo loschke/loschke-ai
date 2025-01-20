@@ -1,0 +1,69 @@
+{
+  "name": "🔧 Object Interactions",
+  "description": "Interaktionen mit verschiedenen Gegenständen und Werkzeugen",
+  "modifiers": {
+    "tools": {
+      "name": "🛠️ Tool Interactions",
+      "description": "Interaktionen mit verschiedenen Werkzeugen",
+      "items": [
+        "with hand tools",
+        "with power tools",
+        "with gardening tools",
+        "with kitchen utensils",
+        "with art supplies",
+        "with writing implements"
+      ]
+    },
+    "technology": {
+      "name": "💻 Technology Interactions",
+      "description": "Interaktionen mit technischen Geräten",
+      "items": [
+        "with computers",
+        "with phones",
+        "with tablets",
+        "with cameras",
+        "with gaming consoles",
+        "with virtual reality headsets"
+      ]
+    },
+    "musical": {
+      "name": "🎸 Musical Instrument Interactions",
+      "description": "Interaktionen mit Musikinstrumenten",
+      "items": [
+        "with guitars",
+        "with pianos",
+        "with drums",
+        "with violins",
+        "with flutes",
+        "with saxophones",
+        "with orchestral instruments"
+      ]
+    },
+    "sports_equipment": {
+      "name": "⚽ Sports Equipment Interactions",
+      "description": "Interaktionen mit Sportgeräten",
+      "items": [
+        "with balls",
+        "with rackets",
+        "with bats",
+        "with skis",
+        "with surfboards",
+        "with gym equipment",
+        "with climbing gear"
+      ]
+    },
+    "vehicles": {
+      "name": "🚗 Vehicle Interactions",
+      "description": "Interaktionen mit Fahrzeugen",
+      "items": [
+        "with cars",
+        "with bicycles",
+        "with motorcycles",
+        "with boats",
+        "with planes",
+        "with skateboards",
+        "with scooters"
+      ]
+    }
+  }
+}

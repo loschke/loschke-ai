@@ -1,0 +1,35 @@
+{
+  "name": "🎭 Performance",
+  "description": "Künstlerische und öffentliche Auftritte",
+  "modifiers": {
+    "artistic": {
+      "name": "🎨 Artistic Performance",
+      "description": "Künstlerische Darbietungen",
+      "items": [
+        "performing",
+        "acting",
+        "dancing",
+        "singing",
+        "playing music",
+        "conducting",
+        "entertaining",
+        "reciting",
+        "presenting"
+      ]
+    },
+    "public_speaking": {
+      "name": "🎤 Public Speaking",
+      "description": "Öffentliches Sprechen und Präsentieren",
+      "items": [
+        "speaking",
+        "presenting",
+        "teaching",
+        "lecturing",
+        "addressing",
+        "announcing",
+        "broadcasting",
+        "narrating"
+      ]
+    }
+  }
+}

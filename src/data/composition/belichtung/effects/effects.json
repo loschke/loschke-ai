@@ -1,0 +1,75 @@
+{
+  "name": "✨ Lichteffekte",
+  "description": "Spezielle Effekte und Erscheinungsformen des Lichts",
+  "modifiers": {
+    "optical": {
+      "name": "👁️ Optische Effekte",
+      "description": "Kamera- und linsenbedingte Lichteffekte",
+      "items": [
+        "lens flare",
+        "starburst",
+        "bokeh",
+        "glare",
+        "diffraction",
+        "prismatic effect",
+        "rainbow effect"
+      ]
+    },
+    "atmospheric": {
+      "name": "🌤️ Atmosphärische Effekte",
+      "description": "Umgebungsbedingte Lichteffekte",
+      "items": [
+        "volumetric light",
+        "god rays",
+        "light beams",
+        "dust particles",
+        "fog light",
+        "mist illumination",
+        "haze lighting"
+      ]
+    },
+    "reflective": {
+      "name": "💫 Reflektive Effekte",
+      "description": "Lichtreflexionen und -brechungen",
+      "items": [
+        "reflections",
+        "refractions",
+        "caustics",
+        "specular highlights",
+        "mirror effects",
+        "water reflections",
+        "metallic reflections"
+      ]
+    },
+    "shadows": {
+      "name": "🌓 Schatteneffekte",
+      "description": "Verschiedene Arten von Schatten",
+      "items": {
+        "characteristics": [
+          "soft shadows",
+          "hard shadows",
+          "crisp shadows",
+          "diffused shadows",
+          "graduated shadows",
+          "transparent shadows"
+        ],
+        "patterns": [
+          "dappled shadows",
+          "patterned shadows",
+          "lattice shadows",
+          "projected shadows",
+          "organic shadows",
+          "geometric shadows"
+        ],
+        "dramatic": [
+          "long shadows",
+          "deep shadows",
+          "dramatic shadows",
+          "cast shadows",
+          "dynamic shadows",
+          "contrasting shadows"
+        ]
+      }
+    }
+  }
+}

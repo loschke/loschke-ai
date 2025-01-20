@@ -1,0 +1,52 @@
+{
+  "name": "👥 Persons",
+  "description": "Menschen als Hauptmotive in verschiedenen Konstellationen",
+  "modifiers": {
+    "individual": {
+      "name": "👤 Individual Persons",
+      "description": "Einzelne Personen verschiedener Altersgruppen",
+      "items": [
+        "a person",
+        "a man",
+        "a woman",
+        "a child",
+        "a teenager",
+        "an elderly person",
+        "a baby",
+        "a toddler"
+      ]
+    },
+    "groups": {
+      "name": "👨‍👩‍👧‍👦 Groups of People",
+      "description": "Verschiedene Personengruppen",
+      "items": [
+        "a group of people",
+        "a crowd",
+        "a family",
+        "a couple",
+        "a team",
+        "a class",
+        "a band",
+        "a choir"
+      ]
+    },
+    "professions": {
+      "name": "👨‍⚕️ Professional Roles",
+      "description": "Menschen in verschiedenen Berufen",
+      "items": [
+        "a doctor",
+        "an artist",
+        "a teacher",
+        "a musician",
+        "a chef",
+        "a worker",
+        "a scientist",
+        "an engineer",
+        "a firefighter",
+        "a police officer",
+        "a programmer",
+        "a photographer"
+      ]
+    }
+  }
+}

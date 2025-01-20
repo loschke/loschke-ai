@@ -1,0 +1,49 @@
+{
+  "name": "❤️ Emotional Actions",
+  "description": "Gefühlsbezogene Handlungen und Ausdrücke",
+  "modifiers": {
+    "positive": {
+      "name": "😊 Positive Emotions",
+      "description": "Handlungen, die positive Gefühle ausdrücken",
+      "items": [
+        "laughing",
+        "smiling",
+        "celebrating",
+        "cheering",
+        "rejoicing",
+        "dancing",
+        "hugging",
+        "applauding",
+        "congratulating"
+      ]
+    },
+    "negative": {
+      "name": "😢 Negative Emotions",
+      "description": "Handlungen, die negative Gefühle ausdrücken",
+      "items": [
+        "crying",
+        "mourning",
+        "frowning",
+        "sulking",
+        "grieving",
+        "sobbing",
+        "weeping",
+        "lamenting"
+      ]
+    },
+    "neutral": {
+      "name": "🤔 Neutral Emotions",
+      "description": "Neutrale oder nachdenkliche Handlungen",
+      "items": [
+        "thinking",
+        "contemplating",
+        "observing",
+        "watching",
+        "listening",
+        "reflecting",
+        "pondering",
+        "considering"
+      ]
+    }
+  }
+}

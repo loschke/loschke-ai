@@ -1,0 +1,113 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  items: string[] | Record<string, string[]>;
+}
+
+const { name, description, items } = Astro.props;
+
+// Helper function to check if items is a record with subcategories
+function isGroupedItems(items: string[] | Record<string, string[]>): items is Record<string, string[]> {
+  return !Array.isArray(items);
+}
+
+// Helper function to ensure we have an array of strings
+function ensureStringArray(items: unknown): string[] {
+  if (!Array.isArray(items)) return [];
+  return items.filter((item): item is string => typeof item === 'string');
+}
+---
+
+<div class="bg-white/5 rounded-lg p-4">
+  <div class="flex items-center gap-2 mb-3">
+    <h3 class="text-lg font-medium text-white/90">{name}</h3>
+    <span class="text-sm text-white/60">{description}</span>
+  </div>
+
+  {isGroupedItems(items) ? (
+    <div class="space-y-4">
+      {Object.entries(items).map(([subgroup, modifiers]) => {
+        const safeModifiers = ensureStringArray(modifiers);
+        return (
+          <div class="flex flex-wrap gap-2">
+            {safeModifiers.map(modifier => (
+              <button 
+          class="group inline-flex items-center bg-gray-800 hover:bg-gray-800/70 rounded text-sm text-white transition-colors"
+                data-copy={modifier}
+                title="Kopieren"
+              >
+                <span class="px-3 py-1.5">{modifier}</span>
+                <span class="copy-icon border-l border-white/10 px-2 py-1.5 opacity-40 group-hover:opacity-100 transition-opacity">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </span>
+              </button>
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <div class="flex flex-wrap gap-2">
+      {ensureStringArray(items).map(modifier => (
+        <button 
+          class="group inline-flex items-center bg-gray-800 hover:bg-gray-800/70 rounded text-sm text-gray-300 transition-colors"
+          data-copy={modifier}
+          title="Kopieren"
+        >
+          <span class="px-3 py-1.5">{modifier}</span>
+          <span class="copy-icon border-l border-white/10 px-2 py-1.5 opacity-40 group-hover:opacity-100 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </span>
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  function setupCopyButtons() {
+    document.querySelectorAll('[data-copy]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const text = button.getAttribute('data-copy');
+        if (text) {
+          await navigator.clipboard.writeText(text);
+          
+          const svg = button.querySelector('svg');
+          if (svg) {
+            svg.innerHTML = `
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            `;
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+              svg.innerHTML = `
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              `;
+              button.classList.remove('copied');
+            }, 2000);
+          }
+        }
+      });
+    });
+  }
+
+  // Setup on page load
+  setupCopyButtons();
+  
+  // Setup for dynamic content
+  document.addEventListener('astro:page-load', setupCopyButtons);
+</script>
+
+<style>
+  .copied .copy-icon {
+    @apply text-green-400;
+  }
+</style>

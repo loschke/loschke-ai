@@ -1,0 +1,31 @@
+{
+  "name": "🤝 Interactions",
+  "description": "Interaktionen mit verschiedenen Entitäten",
+  "subcategories": {
+    "people": {
+      "name": "👥 People Interactions",
+      "description": "Interaktionen mit verschiedenen Personengruppen",
+      "path": "/context/interactions/people"
+    },
+    "animals": {
+      "name": "🦊 Animal Interactions",
+      "description": "Interaktionen mit verschiedenen Tierarten",
+      "path": "/context/interactions/animals"
+    },
+    "objects": {
+      "name": "🔧 Object Interactions",
+      "description": "Interaktionen mit Werkzeugen und Gegenständen",
+      "path": "/context/interactions/objects"
+    },
+    "nature": {
+      "name": "🌿 Nature Interactions",
+      "description": "Interaktionen mit natürlichen Elementen",
+      "path": "/context/interactions/nature"
+    }
+  },
+  "metadata": {
+    "order": 2,
+    "defaultSubcategory": "people",
+    "tags": ["interactions", "relationships", "connections"]
+  }
+}

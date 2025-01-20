@@ -1,0 +1,48 @@
+{
+  "name": "💻 Digital Media",
+  "description": "Digitale Kunst- und Designformen",
+  "modifiers": {
+    "general": {
+      "name": "🎨 General Digital Art",
+      "description": "Allgemeine digitale Kunstformen",
+      "items": [
+        "a digital painting of",
+        "a digital illustration of",
+        "a 3D render of"
+      ]
+    },
+    "icons": {
+      "name": "⭐ Icons",
+      "description": "Verschiedene Icon-Stile",
+      "items": [
+        "a minimalist icon of",
+        "a flat design icon of",
+        "a line art icon of",
+        "a gradient icon of",
+        "a material design icon of"
+      ]
+    },
+    "ui_elements": {
+      "name": "🔲 UI Elements",
+      "description": "Benutzeroberflächen-Elemente",
+      "items": [
+        "a user interface button of",
+        "a digital badge of",
+        "a web banner of",
+        "an app interface element of",
+        "a digital dashboard widget of"
+      ]
+    },
+    "illustrations": {
+      "name": "✨ Digital Illustrations",
+      "description": "Spezielle digitale Illustrationsformen",
+      "items": [
+        "a vector illustration of",
+        "an isometric digital illustration of",
+        "a pixel art version of",
+        "a voxel art rendering of",
+        "a low-poly 3D illustration of"
+      ]
+    }
+  }
+}

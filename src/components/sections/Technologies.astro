@@ -1,0 +1,142 @@
+---
+interface Technology {
+    name: string;
+    icon: string;
+    description: string;
+    category: string;
+}
+
+const technologies: Technology[] = [
+    {
+        name: "Claude",
+        icon: "⭐",
+        description:
+            "Mein bevorzugter KI-Chatbot, bei dem ich immer wieder über die Qualität der Antworten staune.",
+        category: "Persönlicher Assistent",
+    },
+    {
+        name: "ChatGPT",
+        icon: "🤖",
+        description:
+            "Mit CustomGPTs habe ich spezialisierte Assistenten, die genau das können, was ich brauche.",
+        category: "AI-Assistent",
+    },
+    {
+        name: "Midjourney",
+        icon: "🎨",
+        description:
+            "Mein kreatives Powerhouse, dasfast jede Bildidee genau so umgesetzt, wie ich sie mir vorstelle.",
+        category: "AI-Design & Fotografie",
+    },
+    {
+        name: "Perplexity",
+        icon: "🔍",
+        description:
+            "Mein bevorzugter KI-Search-Engine, bei dem ich immer wieder neue Ideen und Informationen entdecke.",
+        category: "Research",
+    },
+    {
+        name: "Cline",
+        icon: "⚡",
+        description:
+            "Mein bevorzugter Coding-Assistent mit dem ich endlich die Apps selbst bauen kann, die ich wirklich brauche",
+        category: "AI-Coding",
+    },
+    {
+        name: "Make & n8n",
+        icon: "🎯",
+        description:
+            "Meine Automation-Tools mit denen ich endlich alle meine Prozesse und Workflows clever verbinden kann.",
+        category: "Automatisierung",
+    },
+];
+---
+
+<section class="py-24 container-padding relative overflow-hidden">
+    <div class="max-container relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Meine KI Tools und Werkzeuge
+            </h2>
+            <p class="text-xl text-white/80 max-w-2xl mx-auto">
+                Diese KI-Tools nutze ich selbst am liebsten und kenne sie in-
+                und auswendig. Deshalb teile ich sie dir mit, damit du deine
+                eigenen KI-Entwicklung auch einfach und effizient anfange.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {
+                technologies.map((tech) => (
+                    <div>
+                        <div class="h-full p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/5">
+                            <div class="flex items-start gap-4">
+                                <span class="text-4xl">{tech.icon}</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <h3 class="text-xl font-bold text-white/90">
+                                            {tech.name}
+                                        </h3>
+                                        <span class="px-2 py-1 text-xs font-medium text-white/80 bg-white/5 rounded-full">
+                                            {tech.category}
+                                        </span>
+                                    </div>
+                                    <p class="text-white/70 leading-relaxed">
+                                        {tech.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Specialization Areas -->
+        <div class="space-y-6 mt-16">
+            <h3
+                class="text-xl font-semibold text-center text-gray-900 dark:text-gray-100"
+            >
+                Weitere KI-Tools im experimentellen und praktischen Einsatz:
+            </h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div
+                    class="bg-white dark:bg-white/5 rounded-full px-6 py-3 shadow-md flex items-center gap-2"
+                >
+                    <span class="text-xl">🎥</span>
+                    <span class="text-gray-900 dark:text-gray-100">Runway</span>
+                </div>
+                <div
+                    class="bg-white dark:bg-white/5 rounded-full px-6 py-3 shadow-md flex items-center gap-2"
+                >
+                    <span class="text-xl">📔</span>
+                    <span class="text-gray-900 dark:text-gray-100"
+                        >NotebookLM</span
+                    >
+                </div>
+                <div
+                    class="bg-white dark:bg-white/5 rounded-full px-6 py-3 shadow-md flex items-center gap-2"
+                >
+                    <span class="text-xl">🎵</span>
+                    <span class="text-gray-900 dark:text-gray-100">Whisper</span
+                    >
+                </div>
+                <div
+                    class="bg-white dark:bg-white/5 rounded-full px-6 py-3 shadow-md flex items-center gap-2"
+                >
+                    <span class="text-xl">🎥</span>
+                    <span class="text-gray-900 dark:text-gray-100">Flowise</span
+                    >
+                </div>
+                <div
+                    class="bg-white dark:bg-white/5 rounded-full px-6 py-3 shadow-md flex items-center gap-2"
+                >
+                    <span class="text-xl">💻</span>
+                    <span class="text-gray-900 dark:text-gray-100"
+                        >Copilot Studio</span
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

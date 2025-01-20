@@ -1,0 +1,47 @@
+{
+  "name": "⚔️ Combat",
+  "description": "Kampfbezogene Aktivitäten und Handlungen",
+  "modifiers": {
+    "martial": {
+      "name": "🥋 Martial Arts",
+      "description": "Kampfkunst und Training",
+      "items": [
+        "fighting",
+        "sparring",
+        "training",
+        "punching",
+        "kicking",
+        "blocking",
+        "grappling",
+        "wrestling",
+        "practicing"
+      ]
+    },
+    "warfare": {
+      "name": "🛡️ Warfare Actions",
+      "description": "Militärische und taktische Handlungen",
+      "items": [
+        "battling",
+        "defending",
+        "charging",
+        "retreating",
+        "advancing",
+        "attacking",
+        "guarding",
+        "patrolling",
+        "ambushing"
+      ]
+    },
+    "sports_combat": {
+      "name": "🥊 Combat Sports",
+      "description": "Kampfsportarten",
+      "items": [
+        "boxing",
+        "fencing",
+        "jousting",
+        "dueling",
+        "competing"
+      ]
+    }
+  }
+}

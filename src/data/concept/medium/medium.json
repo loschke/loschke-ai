@@ -1,0 +1,31 @@
+{
+  "name": "🎨 Medium",
+  "description": "Künstlerische und technische Medientypen",
+  "subcategories": {
+    "realistic": {
+      "name": "📸 Realistic Media",
+      "description": "Fotografische und filmische Medien",
+      "path": "/concept/medium/realistic"
+    },
+    "artistic": {
+      "name": "🖌️ Artistic Media",
+      "description": "Traditionelle künstlerische Medien",
+      "path": "/concept/medium/artistic"
+    },
+    "digital": {
+      "name": "💻 Digital Media",
+      "description": "Digitale Kunst und Design",
+      "path": "/concept/medium/digital"
+    },
+    "marketing": {
+      "name": "📢 Marketing Media",
+      "description": "Werbe- und Marketingmedien",
+      "path": "/concept/medium/marketing"
+    }
+  },
+  "metadata": {
+    "order": 1,
+    "defaultSubcategory": "realistic",
+    "tags": ["media", "visual", "creation"]
+  }
+}

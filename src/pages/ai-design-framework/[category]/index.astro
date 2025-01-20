@@ -1,0 +1,78 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ModifierGroup from '../../../components/framework/ModifierGroup.astro';
+import { promises as fs } from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const categories = ['concept', 'context', 'composition', 'creativity'];
+  return categories.map(category => ({
+    params: { category },
+    props: { category }
+  }));
+}
+
+interface SubcategoryData {
+  name: string;
+  description: string;
+  modifiers?: {
+    [key: string]: {
+      name: string;
+      description: string;
+      items: string[] | Record<string, string[]>;
+    };
+  };
+}
+
+const { category } = Astro.params;
+
+// Read the category data
+const categoryData = JSON.parse(
+  await fs.readFile(`src/data/${category}/${category}.json`, 'utf-8')
+);
+
+// Read all subcategory files
+const subcategoryData: Record<string, SubcategoryData> = {};
+for (const [key, value] of Object.entries(categoryData.categories)) {
+  try {
+    const data = JSON.parse(
+      await fs.readFile(`src/data/${category}/${key}/${key}.json`, 'utf-8')
+    );
+    subcategoryData[key] = data;
+  } catch (error) {
+    console.error(`Error reading subcategory ${key}:`, error);
+  }
+}
+---
+
+<Layout title={`${categoryData.name} - AI Design Framework Modifiers`}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+      <a href="/ai-design-framework" class="text-blue-500 hover:underline">← Zurück zur Übersicht</a>
+    </div>
+
+    <h1 class="text-4xl font-bold mb-4">{categoryData.name}</h1>
+    <p class="text-xl text-white dark:text-white mb-8">{categoryData.description}</p>
+
+    <div class="grid gap-8 md:grid-cols-2">
+      {Object.entries(subcategoryData).map(([key, data]) => (
+        <div class="bg-white dark:bg-gray-8000 rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-4">{data.name}</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">{data.description}</p>
+          
+          {data.modifiers && (
+            <div class="space-y-4">
+              {Object.entries(data.modifiers).map(([modKey, modifier]) => (
+                <ModifierGroup
+                  name={modifier.name}
+                  description={modifier.description}
+                  items={modifier.items}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>

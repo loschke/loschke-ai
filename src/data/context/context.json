@@ -1,0 +1,31 @@
+{
+  "name": "2️⃣ Kontext",
+  "description": "Die Bühne für die Idee - Wo, wann und was geschieht",
+  "icon": "context-icon",
+  "categories": {
+    "actions": {
+      "name": "⚡ Aktionen",
+      "description": "Verschiedene Arten von Handlungen und Aktivitäten",
+      "path": "/context/actions"
+    },
+    "interactions": {
+      "name": "🤝 Interaktionen",
+      "description": "Interaktionen mit Menschen, Tieren, Objekten und der Natur",
+      "path": "/context/interactions"
+    },
+    "environments": {
+      "name": "🌍 Schauplätze",
+      "description": "Natürliche und künstliche Umgebungen",
+      "path": "/context/environments"
+    },
+    "attributes": {
+      "name": "🎪 Umwelt oder Umgebung",
+      "description": "Zeitliche, atmosphärische, kulturelle oder historische Eigenschaften",
+      "path": "/context/attributes"
+    }
+  },
+  "metadata": {
+    "order": 2,
+    "tags": ["context", "setting", "environment"]
+  }
+}

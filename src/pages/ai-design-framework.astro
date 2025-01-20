@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { promises as fs } from 'fs';
+import path from 'path';
+
+interface Category {
+  name: string;
+  description: string;
+  icon?: string;
+  categories: {
+    [key: string]: {
+      name: string;
+      description: string;
+      path: string;
+    };
+  };
+  metadata: {
+    order: number;
+    tags: string[];
+  };
+}
+
+// Helper function to read JSON files
+async function readJsonFile(filePath) {
+  const data = await fs.readFile(filePath, 'utf-8');
+  return JSON.parse(data);
+}
+
+// Read main category files
+const mainCategories: Category[] = [
+  await readJsonFile('src/data/concept/concept.json'),
+  await readJsonFile('src/data/context/context.json'),
+  await readJsonFile('src/data/composition/composition.json'),
+  await readJsonFile('src/data/creativity/creativity.json')
+];
+---
+
+<Layout title="AI Design Framework Modifiers">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">4K | Framework - AI-Design Modifiers</h1>
+    <p class="mb-8 text-lg">Eine Sammlung von Prompt Bestandteilen, organisiert nach dem 4K | Framework als Inspiration zur Erstellung von AI-Design Prompts.</p>
+    
+    <div class="grid gap-8">
+      {mainCategories.map(category => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            {category.name}
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">{category.description}</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            {Object.entries(category.categories).map(([key, subcat]) => (
+              <a href={`/ai-design-framework/${category.metadata.order}/${key}`}
+                 class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                <h3 class="text-xl font-semibold mb-2">{subcat.name}</h3>
+                <p class="text-gray-600 dark:text-gray-300">{subcat.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .copy-button {
+    @apply px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition;
+  }
+  .copy-button.copied {
+    @apply bg-green-500 hover:bg-green-600;
+  }
+</style>
+
+<script>
+  // Add copy functionality
+  function setupCopyButtons() {
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', async () => {
+        const text = button.getAttribute('data-copy');
+        await navigator.clipboard.writeText(text);
+        
+        button.textContent = 'Kopiert!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = 'Kopieren';
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  }
+
+  // Setup on page load
+  setupCopyButtons();
+  
+  // Setup for dynamic content
+  document.addEventListener('astro:page-load', setupCopyButtons);
+</script>

@@ -1,0 +1,26 @@
+{
+  "name": "🌟 Stimmung",
+  "description": "Emotionale und atmosphärische Qualitäten des Bildes",
+  "subcategories": {
+    "peaceful": {
+      "name": "🕊️ Friedlich",
+      "description": "Ruhige und harmonische Stimmungen",
+      "path": "/komposition/mood/peaceful"
+    },
+    "dramatic": {
+      "name": "⚡ Dramatisch",
+      "description": "Intensive und dynamische Stimmungen",
+      "path": "/komposition/mood/dramatic"
+    },
+    "emotional": {
+      "name": "💖 Emotional",
+      "description": "Gefühlsbetonte und atmosphärische Stimmungen",
+      "path": "/komposition/mood/emotional"
+    }
+  },
+  "metadata": {
+    "order": 1,
+    "defaultSubcategory": "peaceful",
+    "tags": ["mood", "emotion", "atmosphere"]
+  }
+}

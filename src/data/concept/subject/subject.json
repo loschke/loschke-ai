@@ -1,0 +1,41 @@
+{
+  "name": "📷 Subject",
+  "description": "Hauptmotive und Objekte der Darstellung",
+  "subcategories": {
+    "persons": {
+      "name": "👥 People",
+      "description": "Menschen und Personengruppen",
+      "path": "/concept/subject/persons"
+    },
+    "animals": {
+      "name": "🦊 Animals",
+      "description": "Tiere aller Art",
+      "path": "/concept/subject/animals"
+    },
+    "plants": {
+      "name": "🌿 Plants",
+      "description": "Pflanzen und botanische Motive",
+      "path": "/concept/subject/plants"
+    },
+    "food": {
+      "name": "🍽️ Food and Drinks",
+      "description": "Lebensmittel und Getränke",
+      "path": "/concept/subject/food"
+    },
+    "vehicles": {
+      "name": "🚗 Vehicles",
+      "description": "Fahrzeuge aller Art",
+      "path": "/concept/subject/vehicles"
+    },
+    "furniture": {
+      "name": "🪑 Furniture",
+      "description": "Möbel und Einrichtungsgegenstände",
+      "path": "/concept/subject/furniture"
+    }
+  },
+  "metadata": {
+    "order": 2,
+    "defaultSubcategory": "persons",
+    "tags": ["subjects", "objects", "motifs"]
+  }
+}
