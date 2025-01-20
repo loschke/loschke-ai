@@ -36,7 +36,10 @@ export default defineConfig({
     // Redirect potential old RSS feed URLs
     '/blog/feed': '/rss.xml',
     '/blog/rss': '/rss.xml',
-    '/feed': '/rss.xml'
+    '/feed': '/rss.xml',
+
+    // Handle .html extension redirects
+    '/ai-design-framework.html': '/ai-design-framework'
   },
   // Add environment variables configuration
   vite: {
@@ -68,7 +71,7 @@ export default defineConfig({
   },
   build: {
     inlineStylesheets: 'auto',
-    format: 'file',
+    format: 'directory',
     // Asset optimization
     assets: 'assets',
     // Enable image optimization
