@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import marketingPrompts from '../../data/prompts/marketing-prompts.json';
+
+// Zählen der Prompts pro Bereich
+const marketingPromptsCount = marketingPrompts.prompts.length;
+
+// Extrahieren der einzigartigen Kategorien
+const marketingCategories = [...new Set(marketingPrompts.prompts.map(prompt => prompt.kategorie))];
+---
+
+<Layout title="Prompt-Bibliothek - Rico Loschke">
+  <!-- Sticky Breadcrumb Navigation -->
+  <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center gap-3 text-sm">
+        <a href="/guides" class="flex items-center gap-2 text-gray-200 hover:text-blue-300 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12L9 6m-6 6l6 6"/>
+          </svg>
+          <span>Guides</span>
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span class="text-white font-medium px-2 py-1 bg-white/5 rounded">
+          Prompt-Bibliothek
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Prompt-Bibliothek für Marketing & Kommunikation</h1>
+    
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Marketing Card -->
+      <a href="/prompt-bibliothek/marketing" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">📣</span>
+          <span>Marketing</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {marketingPromptsCount} Prompts für Content-Erstellung, Social Media, SEO und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {marketingCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Placeholder für weitere Bereiche -->
+      <div class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 opacity-50">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">📢</span>
+          <span>PR & Öffentlichkeitsarbeit</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Demnächst verfügbar
+        </p>
+      </div>
+      
+      <div class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 opacity-50">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">💼</span>
+          <span>Vertrieb</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Demnächst verfügbar
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>

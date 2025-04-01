@@ -1,0 +1,141 @@
+{
+  "bereich": "Marketing",
+  "prompts": [
+    {
+      "kategorie": "Content-Erstellung",
+      "unterkategorie": "Blog",
+      "komplexitaet": "Einfach",
+      "titel": "Schneller Blog-Outline-Generator",
+      "beschreibung": "Erstellt eine einfache Gliederung für einen Blogartikel",
+      "prompt": "Erstelle eine Gliederung für einen Blogartikel zum Thema {{THEMA}}. Der Artikel sollte eine Einleitung, 3-5 Hauptabschnitte und ein Fazit enthalten."
+    },
+    {
+      "kategorie": "Content-Erstellung",
+      "unterkategorie": "Blog",
+      "komplexitaet": "Mittel",
+      "titel": "Zielgruppenorientierter Blog-Artikel-Generator",
+      "beschreibung": "Erstellt einen Blogartikel mit Fokus auf eine spezifische Zielgruppe",
+      "prompt": "Erstelle einen Blogartikel zum Thema {{THEMA}} für folgende Zielgruppe: {{ZIELGRUPPE}}.\n\nDer Artikel sollte folgende Aspekte behandeln:\n- {{ASPEKT_1}}\n- {{ASPEKT_2}}\n- {{ASPEKT_3}}\n\nVerwende einen {{TONFALL}}-Tonfall und halte den Artikel zwischen 800-1000 Wörtern. Strukturiere den Artikel mit einer ansprechenden Überschrift, Einleitung, klar unterteilten Abschnitten und einem Fazit mit Call-to-Action."
+    },
+    {
+      "kategorie": "Content-Erstellung",
+      "unterkategorie": "Blog",
+      "komplexitaet": "Komplex",
+      "titel": "SEO-optimierter Premium-Blog-Generator",
+      "beschreibung": "Erstellt einen umfassenden, SEO-optimierten Blogartikel mit allen relevanten Elementen",
+      "prompt": "Als erfahrener Content-Stratege mit SEO-Expertise, erstelle einen umfassenden Blogartikel zum Thema {{THEMA}}.\n\nZIELGRUPPE:\n{{ZIELGRUPPE}}\n\nSEO-ANFORDERUNGEN:\n- Hauptkeyword: {{HAUPTKEYWORD}}\n- Sekundäre Keywords: {{SEKUNDÄRE_KEYWORDS}}\n- Gewünschte Meta-Beschreibung integrieren: {{META_BESCHREIBUNG}}\n\nARTIKEL-STRUKTUR:\n- Aufmerksamkeitsstarke Headline (H1)\n- Einleitender Absatz, der das Problem oder die Fragestellung klar darstellt\n- 5-7 Unterabschnitte mit beschreibenden Zwischenüberschriften (H2)\n- Mindestens ein Abschnitt sollte eine Aufzählung oder nummerierte Liste enthalten\n- Mindestens ein Abschnitt sollte ein praktisches Beispiel oder eine Fallstudie enthalten\n- Abschließender Absatz mit Zusammenfassung und klarem Call-to-Action\n- 3-5 Vorschläge für interne Verlinkungen zu verwandten Themen\n\nTON UND STIL:\n- {{TONFALL}}\n- Verwende aktive Sprache und direkte Ansprache (Du/Sie je nach Zielgruppe)\n- Fachbegriffe erklären, aber nicht zu vereinfacht\n- Authoritative, aber zugängliche Sprache\n\nBESONDERE ANFORDERUNGEN:\n- Integriere aktuelle Daten oder Statistiken (mit Platzhalter [QUELLE] für spätere Faktenprüfung)\n- Berücksichtige aktuelle Trends wie {{AKTUELLE_TRENDS}}\n- Erwähne unseren Lösungsansatz {{PRODUKT_ODER_SERVICE}} subtil, aber nicht werblich\n- Artikellänge: 1500-2000 Wörter\n\nDer Artikel sollte informativ, praxisorientiert und wertvoll für die Leser sein."
+    },
+    {
+      "kategorie": "Content-Erstellung",
+      "unterkategorie": "Whitepaper",
+      "komplexitaet": "Mittel",
+      "titel": "Whitepaper-Struktur-Generator",
+      "beschreibung": "Erstellt eine detaillierte Struktur für ein Whitepaper",
+      "prompt": "Erstelle eine umfassende Struktur für ein Whitepaper zum Thema {{THEMA}}. Das Whitepaper richtet sich an {{ZIELGRUPPE}} und soll {{ZIEL_DES_WHITEPAPERS}}.\n\nBitte erstelle eine detaillierte Gliederung mit Hauptkapiteln, Unterkapiteln und einer kurzen Beschreibung des Inhalts jedes Abschnitts. Das Whitepaper sollte akademisch fundiert, aber praxisorientiert sein."
+    },
+    {
+      "kategorie": "Content-Erstellung",
+      "unterkategorie": "Case Studies",
+      "komplexitaet": "Mittel",
+      "titel": "Case Study Framework",
+      "beschreibung": "Erstellt eine strukturierte Case Study zu einem Kundenprojekt",
+      "prompt": "Erstelle eine Case Study für folgendes Kundenprojekt:\n\nKUNDE: {{KUNDENNAME_ODER_BRANCHE}}\nHERAUSFORDERUNG: {{HERAUSFORDERUNG}}\nLÖSUNG: {{UNSERE_LÖSUNG}}\nERGEBNISSE: {{ERZIELTE_ERGEBNISSE}}\n\nDie Case Study sollte folgende Struktur haben:\n- Ansprechende Überschrift mit Hauptvorteil\n- Kurze Kundenbeschreibung\n- Klar definierte Herausforderung/Problem\n- Detaillierte Beschreibung unserer Lösung\n- Konkrete Ergebnisse mit Zahlen und Daten\n- Kundenzitat (hier Platzhalter einfügen)\n- Call-to-Action\n\nDie Case Study sollte ca. 600-800 Wörter umfassen und einen professionellen, aber zugänglichen Ton haben."
+    },
+    {
+      "kategorie": "Social Media",
+      "unterkategorie": "LinkedIn",
+      "komplexitaet": "Einfach",
+      "titel": "LinkedIn Text-Post Generator",
+      "beschreibung": "Erstellt einen engaging LinkedIn Text-Post",
+      "prompt": "Erstelle einen LinkedIn-Post zum Thema {{THEMA}}. Der Post sollte aufmerksamkeitsstark beginnen, 3-4 kurze Absätze umfassen und mit einer Frage oder einem Call-to-Action enden. Halte den Ton professionell, aber persönlich. Füge am Ende 2-3 relevante Hashtags hinzu."
+    },
+    {
+      "kategorie": "Social Media",
+      "unterkategorie": "LinkedIn",
+      "komplexitaet": "Mittel",
+      "titel": "LinkedIn Content-Serie",
+      "beschreibung": "Erstellt eine zusammenhängende Serie von 5 LinkedIn-Posts",
+      "prompt": "Erstelle eine Serie von 5 zusammenhängenden LinkedIn-Posts zum Thema {{THEMA}}. Die Posts sollen aufeinander aufbauen und ein tieferes Verständnis des Themas vermitteln.\n\nZIELGRUPPE: {{ZIELGRUPPE}}\n\nJeder Post sollte folgendes enthalten:\n- Einen aufmerksamkeitsstarken ersten Satz\n- Einen informativen Hauptteil (3-4 kurze Absätze)\n- Ein spezifisches Beispiel oder einen praktischen Tipp\n- Eine Frage oder einen Call-to-Action zum Abschluss\n- 2-3 relevante Hashtags\n\nPost 1 sollte als Einführung dienen, Posts 2-4 sollten verschiedene Aspekte des Themas vertiefen, und Post 5 sollte als Zusammenfassung mit nächsten Schritten dienen.\n\nTon: Professionell, aber persönlich und zugänglich."
+    },
+    {
+      "kategorie": "Social Media",
+      "unterkategorie": "Instagram",
+      "komplexitaet": "Einfach",
+      "titel": "Instagram Caption Generator",
+      "beschreibung": "Erstellt eine ansprechende Instagram-Bildunterschrift",
+      "prompt": "Erstelle eine Instagram-Caption für ein Bild, das {{BILDBESCHREIBUNG}} zeigt. Die Caption sollte aufmerksamkeitsstark beginnen, persönlich und inspirierend sein, und nicht länger als 100 Wörter. Füge am Ende 3-5 passende Hashtags hinzu."
+    },
+    {
+      "kategorie": "Social Media",
+      "unterkategorie": "TikTok",
+      "komplexitaet": "Mittel",
+      "titel": "TikTok Skript-Generator",
+      "beschreibung": "Erstellt ein kurzes Skript für ein TikTok-Video",
+      "prompt": "Erstelle ein Skript für ein 30-60 Sekunden TikTok-Video zum Thema {{THEMA}}. Das Video richtet sich an {{ZIELGRUPPE}} und soll {{ZIEL_DES_VIDEOS}}.\n\nDas Skript sollte folgendes enthalten:\n- Einen aufmerksamkeitsstarken Hook für die ersten 3 Sekunden\n- Klare Anweisungen für Szenen/Übergänge\n- Konkreten Sprechtext\n- Vorschläge für Texteinblendungen\n- Einen starken Call-to-Action am Ende\n\nDer Ton sollte authentisch, unterhaltsam und zum Thema passend sein."
+    },
+    {
+      "kategorie": "E-Mail-Marketing",
+      "unterkategorie": "Newsletter",
+      "komplexitaet": "Mittel",
+      "titel": "Newsletter-Vorlage",
+      "beschreibung": "Erstellt einen strukturierten Newsletter",
+      "prompt": "Erstelle einen Newsletter zum Thema {{THEMA}} für unsere {{ZIELGRUPPE}}.\n\nDer Newsletter sollte folgende Struktur haben:\n- Ansprechende Betreffzeile\n- Persönliche Anrede\n- Kurze Einleitung (max. 2 Absätze)\n- Hauptteil mit 2-3 Abschnitten zu aktuellen Themen/Neuigkeiten\n- Einen Tipp oder Trick des Monats\n- Abschluss mit Call-to-Action\n- Freundliche Grußformel\n\nTon: {{TONFALL}}\nLänge: Maximal 400 Wörter insgesamt"
+    },
+    {
+      "kategorie": "E-Mail-Marketing",
+      "unterkategorie": "Kampagnen",
+      "komplexitaet": "Komplex",
+      "titel": "E-Mail-Sequenz-Generator",
+      "beschreibung": "Erstellt eine mehrteilige E-Mail-Kampagne",
+      "prompt": "Als E-Mail-Marketing-Experte, entwickle eine 5-teilige E-Mail-Sequenz für {{KAMPAGNENZIEL}} (z.B. Produkt-Launch, Lead-Nurturing, Kundenreaktivierung).\n\nZIELGRUPPE: {{ZIELGRUPPE}}\nPRODUKT/SERVICE: {{PRODUKT_ODER_SERVICE}}\nHAUPTVORTEILE: {{VORTEILE}}\n\nFür jede E-Mail der Sequenz gib bitte an:\n1. Betreffzeile (+ 1 Alternative)\n2. Timing (wann soll die E-Mail gesendet werden)\n3. Hauptziel dieser spezifischen E-Mail\n4. Vollständigen E-Mail-Text mit:\n   - Ansprechender Einleitung\n   - Hauptteil mit relevanten Informationen\n   - Klarem Call-to-Action\n   - Passender Abschlussformel\n\nE-Mail 1 sollte Aufmerksamkeit erregen und Interesse wecken.\nE-Mail 2-4 sollten Mehrwert bieten, Einwände behandeln und Vertrauen aufbauen.\nE-Mail 5 sollte zum finalen Call-to-Action führen.\n\nACHTUNG: Jede E-Mail sollte eigenständig funktionieren, aber auch Teil eines kohärenten Narrativs sein."
+    },
+    {
+      "kategorie": "SEO & SEM",
+      "unterkategorie": "Keyword-Recherche",
+      "komplexitaet": "Mittel",
+      "titel": "Keyword-Cluster-Generator",
+      "beschreibung": "Erstellt thematische Keyword-Cluster für die Content-Planung",
+      "prompt": "Als SEO-Experte, erstelle einen umfassenden Keyword-Cluster zum Thema {{HAUPTTHEMA}}.\n\nBitte strukturiere die Keywords in folgende Kategorien:\n\n1. Hauptkeywords (3-5 zentrale Begriffe mit hohem Suchvolumen)\n2. Long-Tail-Varianten (10-15 spezifischere Suchbegriffe)\n3. Frage-Keywords (8-10 typische Fragen, die Nutzer zu diesem Thema stellen)\n4. Transaktionale Keywords (5-8 Keywords mit Kaufabsicht)\n5. Informationelle Keywords (5-8 Keywords für Recherchephase)\n\nFür jedes Keyword gib bitte an:\n- Vermutete Suchintention\n- Vorschlag für passenden Content-Typ (Blog, Landing Page, FAQ, etc.)\n\nMerke: Die Keywords sollten für die Branche {{BRANCHE}} relevant sein und die Zielgruppe {{ZIELGRUPPE}} ansprechen."
+    },
+    {
+      "kategorie": "SEO & SEM",
+      "unterkategorie": "Meta-Beschreibungen",
+      "komplexitaet": "Einfach",
+      "titel": "Meta-Beschreibungs-Generator",
+      "beschreibung": "Erstellt SEO-optimierte Meta-Beschreibungen für Webseiten",
+      "prompt": "Erstelle 3 Varianten einer Meta-Beschreibung für eine Webseite zum Thema {{THEMA}}. Jede Beschreibung sollte:\n- Maximal 155 Zeichen lang sein\n- Das Keyword {{HAUPTKEYWORD}} enthalten\n- Einen klaren Mehrwert kommunizieren\n- Einen Call-to-Action enthalten\n- Die Zielgruppe {{ZIELGRUPPE}} ansprechen"
+    },
+    {
+      "kategorie": "Marktanalyse & Recherche",
+      "unterkategorie": "Wettbewerbsanalyse",
+      "komplexitaet": "Komplex",
+      "titel": "Strukturierte Wettbewerbsanalyse",
+      "beschreibung": "Erstellt einen Framework für eine umfassende Wettbewerbsanalyse",
+      "prompt": "Als Marktstratege, erstelle ein Framework für eine umfassende Wettbewerbsanalyse in der Branche {{BRANCHE}}. Wir möchten folgende Hauptwettbewerber analysieren: {{WETTBEWERBER_LISTE}}.\n\nDie Analyse sollte folgende Aspekte umfassen:\n\n1. MARKTPOSITIONIERUNG\n   - Positionierung und USPs\n   - Zielgruppenfokus\n   - Preisstrategien\n\n2. MARKETING & KOMMUNIKATION\n   - Hauptkommunikationskanäle\n   - Tonalität und Markenpersönlichkeit\n   - Content-Strategien\n   - Kampagnenbeispiele\n\n3. PRODUKT/SERVICE\n   - Portfoliobreite und -tiefe\n   - Alleinstellungsmerkmale\n   - Qualitäts- und Service-Level\n\n4. ONLINE-PRÄSENZ\n   - Website-Analyse (Struktur, UX, Conversion-Optimierung)\n   - SEO-Performance\n   - Social Media Aktivitäten\n   - Online-Reputation\n\n5. STÄRKEN-SCHWÄCHEN-ANALYSE\n   - Top 3 Stärken jedes Wettbewerbers\n   - Top 3 Schwächen/Chancen\n\n6. ABLEITUNGEN FÜR UNSERE STRATEGIE\n   - Differenzierungsmöglichkeiten\n   - Zu schließende Lücken\n   - Empfehlungen für Marketingmaßnahmen\n\nBei jeder Kategorie, gib konkrete Untersuchungsmethoden und Leitfragen an, die für eine gründliche Analyse beantwortet werden sollten."
+    },
+    {
+      "kategorie": "Kampagnenplanung",
+      "unterkategorie": "Konzeptentwicklung",
+      "komplexitaet": "Komplex",
+      "titel": "Kampagnenkonzept-Generator",
+      "beschreibung": "Erstellt ein detailliertes Konzept für eine Marketing-Kampagne",
+      "prompt": "Als Creative Director, entwickle ein umfassendes Konzept für eine Marketing-Kampagne mit folgenden Parametern:\n\nPRODUKT/SERVICE: {{PRODUKT_ODER_SERVICE}}\nKAMPAGNENZIEL: {{KAMPAGNENZIEL}}\nZIELGRUPPE: {{ZIELGRUPPE}}\nBUDGET-RAHMEN: {{BUDGET}}\nZEITRAHMEN: {{ZEITRAHMEN}}\n\nDas Kampagnenkonzept sollte folgende Elemente enthalten:\n\n1. KREATIVE LEITIDEE\n   - Kampagnentitel\n   - Kernbotschaft\n   - Kreativer Ansatz/Big Idea\n   - Visuelles Konzept (Beschreibung)\n\n2. STORYTELLING & CONTENT\n   - Story-Arc der Kampagne\n   - Hauptnarrative\n   - Content-Formate\n\n3. KANALSTRATEGIE\n   - Primäre und sekundäre Kanäle\n   - Kanalspezifische Anpassungen\n   - Media-Mix-Empfehlung\n\n4. CUSTOMER JOURNEY\n   - Touchpoints entlang der Journey\n   - Erwartete Nutzerinteraktionen\n   - Conversion-Pfade\n\n5. KAMPAGNEN-ASSETS\n   - Liste benötigter Kreativ-Assets\n   - Content-Kalender (grobe Struktur)\n\n6. ERFOLGSMESSUNG\n   - KPIs je Kampagnenphase\n   - Tracking-Methoden\n\nBesondere Anforderungen:\n- Die Kampagne sollte multi-channel sein aber mit Fokus auf {{HAUPTKANAL}}\n- Sie sollte unsere Markenidentität stärken\n- Innovative oder unerwartete Elemente integrieren\n- Mindestens eine Komponente für virales Potential einbauen"
+    },
+    {
+      "kategorie": "Werbetexte & Slogans",
+      "unterkategorie": "Produkt-Beschreibungen",
+      "komplexitaet": "Mittel",
+      "titel": "Verkaufsstarke Produktbeschreibung",
+      "beschreibung": "Erstellt eine überzeugende Produktbeschreibung für E-Commerce",
+      "prompt": "Erstelle eine verkaufsstarke Produktbeschreibung für {{PRODUKTNAME}}.\n\nPRODUKTKATEGORIE: {{KATEGORIE}}\nHAUPTMERKMALE: {{MERKMALE}}\nHAUPTVORTEILE: {{VORTEILE}}\nZIELGRUPPE: {{ZIELGRUPPE}}\nPREISSEGMENT: {{PREISSEGMENT}}\n\nDie Beschreibung sollte:\n- Mit einem aufmerksamkeitsstarken Einstieg beginnen\n- Die wichtigsten Merkmale und Vorteile klar herausstellen\n- Die emotionalen und rationalen Kaufmotive ansprechen\n- Eine klare, scanbare Struktur haben (Zwischenüberschriften, Bullet Points)\n- Zwischen 150-200 Wörter umfassen\n- Mit einem überzeugenden Call-to-Action enden\n\nTon: {{TONFALL}} - passend zur Marke und Zielgruppe"
+    },
+    {
+      "kategorie": "Werbetexte & Slogans",
+      "unterkategorie": "Ad Copy",
+      "komplexitaet": "Mittel",
+      "titel": "Google Ads Anzeigentext-Generator",
+      "beschreibung": "Erstellt verschiedene Varianten für Google Ads Anzeigentexte",
+      "prompt": "Erstelle 3 verschiedene Google Ads Anzeigentexte für {{PRODUKT_ODER_SERVICE}} mit folgenden Spezifikationen:\n\nZIELGRUPPE: {{ZIELGRUPPE}}\nHAUPTVORTEIL: {{HAUPTVORTEIL}}\nLANDING PAGE FOKUS: {{LANDING_PAGE_THEMA}}\nHAUPTKEYWORD: {{HAUPTKEYWORD}}\n\nFür jede Anzeige erstelle:\n\nVariante 1: Fokus auf emotionalen Nutzen\n- Headline 1 (max. 30 Zeichen)\n- Headline 2 (max. 30 Zeichen)\n- Headline 3 (max. 30 Zeichen)\n- Beschreibung 1 (max. 90 Zeichen)\n- Beschreibung 2 (max. 90 Zeichen)\n\nVariante 2: Fokus auf funktionalen Nutzen\n[gleiche Struktur]\n\nVariante 3: Fokus auf Dringlichkeit/FOMO\n[gleiche Struktur]\n\nJede Anzeige sollte einen klaren CTA enthalten und das Hauptkeyword in mindestens einer Headline verwenden."
+    }
+  ]
+}

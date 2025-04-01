@@ -1,0 +1,188 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import marketingPrompts from '../../../data/prompts/marketing-prompts.json';
+
+interface Prompt {
+  kategorie: string;
+  unterkategorie: string;
+  komplexitaet: string;
+  titel: string;
+  beschreibung: string;
+  prompt: string;
+}
+
+export function getStaticPaths() {
+  return marketingPrompts.prompts.map((prompt: Prompt) => ({
+    params: { 
+      promptId: prompt.titel.toLowerCase().replace(/\s+/g, '-')
+    },
+    props: { prompt },
+  }));
+}
+
+const { prompt } = Astro.props;
+
+// Extrahieren der Variablen aus dem Prompt-Text
+const variables: string[] = [];
+const regex = /\{\{([^}]+)\}\}/g;
+let match;
+const promptText = prompt.prompt;
+while ((match = regex.exec(promptText)) !== null) {
+  if (!variables.includes(match[1])) {
+    variables.push(match[1]);
+  }
+}
+---
+
+<Layout title={`${prompt.titel} - Prompt-Bibliothek`}>
+  <!-- Sticky Breadcrumb Navigation -->
+  <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center gap-3 text-sm">
+        <a href="/prompt-bibliothek" class="flex items-center gap-2 text-gray-200 hover:text-blue-300 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12L9 6m-6 6l6 6"/>
+          </svg>
+          <span>Prompt-Bibliothek</span>
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <a href="/prompt-bibliothek/marketing" class="text-white/70 hover:text-white transition-colors px-2 py-1 rounded hover:bg-white/5">
+          Marketing
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span class="text-white font-medium px-2 py-1 bg-white/5 rounded truncate max-w-[200px]">
+          {prompt.titel}
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+      <!-- Badges über dem Namen -->
+      <div class="flex flex-wrap gap-2 mb-3">
+        <span class="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">{prompt.kategorie}</span>
+        <span class="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">{prompt.unterkategorie}</span>
+        <span class="px-2 py-0.5 text-xs bg-primary/10 rounded-full ml-auto">{prompt.komplexitaet}</span>
+      </div>
+      
+      <!-- Name -->
+      <h1 class="text-3xl font-bold mb-3">{prompt.titel}</h1>
+      
+      <!-- Kurzbeschreibung -->
+      <p class="text-lg mb-8">{prompt.beschreibung}</p>
+      
+      <!-- Prompt Box -->
+      <div class="relative mb-8">
+        <div class="absolute top-4 right-4">
+          <button class="copy-button px-3 py-1 text-sm bg-primary text-white rounded hover:bg-primary-dark transition" data-copy={prompt.prompt}>
+            Kopieren
+          </button>
+        </div>
+        <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg whitespace-pre-wrap font-mono text-sm">
+          {prompt.prompt}
+        </div>
+      </div>
+      
+      <!-- Variablen -->
+      {variables.length > 0 && (
+        <div class="mb-8">
+          <h2 class="text-xl font-bold mb-4">Variablen</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            {variables.map(variable => (
+              <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h3 class="font-semibold mb-2">{variable}</h3>
+                <input 
+                  type="text" 
+                  placeholder={`Wert für ${variable} eingeben`} 
+                  class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+                  data-variable={variable} 
+                />
+              </div>
+            ))}
+          </div>
+          
+          <div class="mt-4">
+            <button class="fill-variables-button px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition">
+              Variablen einsetzen
+            </button>
+          </div>
+        </div>
+      )}
+      
+      <!-- Angepasster Prompt -->
+      <div class="hidden filled-prompt-container mb-8">
+        <h2 class="text-xl font-bold mb-4">Angepasster Prompt</h2>
+        <div class="relative">
+          <div class="absolute top-4 right-4">
+            <button class="copy-filled-button px-3 py-1 text-sm bg-primary text-white rounded hover:bg-primary-dark transition">
+              Kopieren
+            </button>
+          </div>
+          <div class="filled-prompt p-4 bg-gray-100 dark:bg-gray-700 rounded-lg whitespace-pre-wrap font-mono text-sm">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Copy to clipboard functionality
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', async () => {
+      const text = button.getAttribute('data-copy') || '';
+      await navigator.clipboard.writeText(text);
+      
+      button.textContent = 'Kopiert!';
+      setTimeout(() => {
+        button.textContent = 'Kopieren';
+      }, 2000);
+    });
+  });
+  
+  // Fill variables functionality
+  const fillButton = document.querySelector('.fill-variables-button');
+  if (fillButton) {
+    fillButton.addEventListener('click', () => {
+      const promptText = document.querySelector('.copy-button')?.getAttribute('data-copy') || '';
+      let filledText = promptText;
+      
+      document.querySelectorAll('input[type="text"]').forEach(input => {
+        const variable = input.getAttribute('data-variable');
+        if (variable) {
+          const value = (input as HTMLInputElement).value.trim() || `[${variable}]`;
+          filledText = filledText.replace(new RegExp(`\\{\\{${variable}\\}\\}`, 'g'), value);
+        }
+      });
+      
+      const filledPromptContainer = document.querySelector('.filled-prompt-container');
+      const filledPrompt = document.querySelector('.filled-prompt');
+      
+      if (filledPromptContainer && filledPrompt) {
+        filledPrompt.textContent = filledText;
+        filledPromptContainer.classList.remove('hidden');
+        
+        const copyFilledButton = document.querySelector('.copy-filled-button');
+        copyFilledButton?.addEventListener('click', async () => {
+          await navigator.clipboard.writeText(filledText);
+          
+          if (copyFilledButton) {
+            copyFilledButton.textContent = 'Kopiert!';
+            setTimeout(() => {
+              if (copyFilledButton) copyFilledButton.textContent = 'Kopieren';
+            }, 2000);
+          }
+        });
+      }
+    });
+  }
+</script>

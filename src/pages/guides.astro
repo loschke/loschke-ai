@@ -6,154 +6,212 @@ import Layout from "../layouts/Layout.astro";
     title="KI Guides - Rico Loschke"
     description="Praktische Anleitungen und Tutorials für KI-Technologien und deren Anwendung"
 >
-    <section class="container-padding">
+    <section class="container-padding mt-20">
         <div class="max-container">
-            <h1 class="text-4xl md:text-5xl font-bold mb-8">KI Guides</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-8">Meine KI Guides</h1>
             <p class="text-xl mb-12 max-w-3xl">
-                Entdecken Sie praxisnahe Anleitungen und Tutorials, die Ihnen
+                Entdecke praxisnahe Anleitungen und Tutorials, die dir
                 helfen, KI-Technologien besser zu verstehen und erfolgreich
                 einzusetzen.
             </p>
 
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <!-- How-to-Prompt Guide -->
-                <article
-                    class="bg-background-light/5 rounded-xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors"
-                >
-                    <div
-                        class="aspect-video bg-gradient-to-br from-[#2a4858] to-[#162a36] flex items-center justify-center"
-                    >
-                        <span class="text-4xl">💬</span>
-                    </div>
-                    <div class="p-6">
-                        <div
-                            class="flex items-center gap-2 text-sm text-white/60 mb-4"
-                        >
-                            <span class="px-3 py-1 bg-primary/10 rounded-full"
-                                >Prompt Engineering</span
-                            >
-                            <span class="px-3 py-1 bg-primary/10 rounded-full"
-                                >Framework</span
-                            >
-                        </div>
-                        <h2 class="text-2xl font-bold mb-4">
-                            How-to-Prompt Guide
-                        </h2>
-                        <p class="text-white/80 mb-6">
-                            Systematisches Framework für effektive KI-Kommunikation und optimale Ergebnisse mit ChatGPT & Co.
-                        </p>
-                        <a
-                            href="/how-to-prompt-guide"
-                            class="inline-flex items-center text-primary hover:text-primary-light transition-colors"
-                        >
-                            Zum Guide
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
+            <!-- Abschnitt 1: Prompting & Chat Assistenten -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold mb-6">Prompting & Chat Assistenten</h2>
 
-                <!-- AI-Design Framework -->
-                <article
-                    class="bg-background-light/5 rounded-xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors"
-                >
-                    <div
-                        class="aspect-video bg-gradient-to-br from-[#3a3a59] to-[#232339] flex items-center justify-center"
+                
+                <div class="grid gap-8 md:grid-cols-2 mb-8">
+                    <!-- How-to-Prompt Guide -->
+                    <article
+                        class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all"
                     >
-                        <span class="text-4xl">🎨</span>
-                    </div>
-                    <div class="p-6">
                         <div
-                            class="flex items-center gap-2 text-sm text-white/60 mb-4"
+                            class="aspect-video bg-gradient-to-br from-[#2a4858] to-[#162a36] flex items-center justify-center"
                         >
-                            <span class="px-3 py-1 bg-primary/10 rounded-full"
-                                >Bildgenerierung</span
-                            >
-                            <span class="px-3 py-1 bg-primary/10 rounded-full"
-                                >Modifiers</span
-                            >
+                            <span class="text-4xl">💬</span>
                         </div>
-                        <h2 class="text-2xl font-bold mb-4">
-                            AI-Design Framework
-                        </h2>
-                        <p class="text-white/80 mb-6">
-                            Modifiers für beeindruckende KI-generierte Bilder mit Midjourney, DALL-E und Stable Diffusion.
-                        </p>
-                        <a
-                            href="/ai-design-framework"
-                            class="inline-flex items-center text-primary hover:text-primary-light transition-colors"
-                        >
-                            Zum Guide
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-2 text-sm text-white/60 mb-4"
                             >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >Prompt Crafting</span
+                                >
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >Chat Assistenten</span
+                                >
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">
+                                How-to-Prompt Guide
+                            </h3>
+                            <p class="text-white/80 mb-6">
+                                Systematisches Framework für effektive KI-Kommunikation und optimale Ergebnisse mit ChatGPT & Co.
+                            </p>
+                            <a
+                                href="/how-to-prompt-guide"
+                                class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+                            >
+                                Zum Guide
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 ml-2"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <!-- Prompt-Bibliothek -->
+                    <article
+                        class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all"
+                    >
+                        <div
+                            class="aspect-video bg-gradient-to-br from-[#4a3c59] to-[#2a1c39] flex items-center justify-center"
+                        >
+                            <span class="text-4xl">📚</span>
+                        </div>
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-2 text-sm text-white/60 mb-4"
+                            >
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >Prompt Engineering</span
+                                >
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >Marketing</span
+                                >
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">
+                                Prompt-Bibliothek
+                            </h3>
+                            <p class="text-white/80 mb-6">
+                                Kuratierte Sammlung von Prompts für Marketing, PR und Vertrieb - sofort einsetzbar und anpassbar.
+                            </p>
+                            <a
+                                href="/prompt-bibliothek"
+                                class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+                            >
+                                Zur Bibliothek
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 ml-2"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Abschnitt 2: AI-Design & AI-Fotografie -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6">AI-Design & AI-Fotografie</h2>
+                
+                <div class="grid gap-8 md:grid-cols-2 mb-8">
+                    <!-- AI-Design Guide (External) -->
+                    <article
+                        class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all"
+                    >
+                        <div
+                            class="aspect-video bg-gradient-to-br from-[#005461] to-[#003049] flex items-center justify-center"
+                        >
+                            <span class="text-4xl">📷</span>
+                        </div>
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-2 text-sm text-white/60 mb-4"
+                            >
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >AI-Design</span
+                                >
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >4K Framework</span
+                                >
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">
+                                AI-Design Guide
+                            </h3>
+                            <p class="text-white/80 mb-6">
+                                Leitfaden für AI-Design & AI-Fotografie: Lerne, gestalte und realisiere beeindruckende KI-generierte Bilder.
+                            </p>
+                            <a
+                                href="https://ai-design.guide/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+                            >
+                                Zum Guide
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    class="h-4 w-4 ml-2" 
+                                    viewBox="0 0 20 20" 
+                                    fill="currentColor"
+                                >
+                                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
 
-                <!-- Guide Card 3 -->
-                <article
-                    class="bg-background-light/5 rounded-xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors"
-                >
-                    <div
-                        class="aspect-video bg-background-light/10 flex items-center justify-center"
+                    <!-- AI-Design Modifiers -->
+                    <article
+                        class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all"
                     >
-                        <span class="text-4xl">📊</span>
-                    </div>
-                    <div class="p-6">
                         <div
-                            class="flex items-center gap-2 text-sm text-white/60 mb-4"
+                            class="aspect-video bg-gradient-to-br from-[#3a3a59] to-[#232339] flex items-center justify-center"
                         >
-                            <span class="px-3 py-1 bg-primary/10 rounded-full"
-                                >Spezial</span
-                            >
-                            <span class="px-3 py-1 bg-primary/10 rounded-full"
-                                >30 Min.</span
-                            >
+                            <span class="text-4xl">🎨</span>
                         </div>
-                        <h2 class="text-2xl font-bold mb-4">
-                            KI-Modelle evaluieren
-                        </h2>
-                        <p class="text-white/80 mb-6">
-                            Lernen Sie, wie Sie die Qualität und Leistung von
-                            KI-Modellen effektiv bewerten können.
-                        </p>
-                        <a
-                            href="#"
-                            class="inline-flex items-center text-primary hover:text-primary-light transition-colors"
-                        >
-                            Zum Guide
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-2 text-sm text-white/60 mb-4"
                             >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >Bildgenerierung</span
+                                >
+                                <span class="px-3 py-1 bg-primary/10 rounded-full"
+                                    >Modifiers</span
+                                >
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">
+                                AI-Design Modifiers
+                            </h3>
+                            <p class="text-white/80 mb-6">
+                                Sammlung von Prompt-Modifiers für beeindruckende KI-generierte Bilder mit Midjourney, Flux, Ideogram und mehr.
+                            </p>
+                            <a
+                                href="/ai-design-framework"
+                                class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+                            >
+                                Zur Bibliothek
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 ml-2"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
     </section>

@@ -1,0 +1,218 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import marketingPrompts from '../../../data/prompts/marketing-prompts.json';
+
+// Gruppieren der Prompts nach Kategorie
+interface Prompt {
+  kategorie: string;
+  unterkategorie: string;
+  komplexitaet: string;
+  titel: string;
+  beschreibung: string;
+  prompt: string;
+}
+
+const promptsByCategory: Record<string, Prompt[]> = {};
+marketingPrompts.prompts.forEach((prompt: Prompt) => {
+  if (!promptsByCategory[prompt.kategorie]) {
+    promptsByCategory[prompt.kategorie] = [];
+  }
+  promptsByCategory[prompt.kategorie].push(prompt);
+});
+
+// Komplexitätsstufen für Filter
+const complexityLevels = [...new Set(marketingPrompts.prompts.map(prompt => prompt.komplexitaet))];
+
+// Unterkategorien für Filter
+const subcategories = [...new Set(marketingPrompts.prompts.map(prompt => prompt.unterkategorie))];
+---
+
+<Layout title="Marketing Prompts - Rico Loschke">
+  <!-- Sticky Breadcrumb Navigation -->
+  <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center gap-3 text-sm">
+        <a href="/prompt-bibliothek" class="flex items-center gap-2 text-gray-200 hover:text-blue-300 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12L9 6m-6 6l6 6"/>
+          </svg>
+          <span>Prompt-Bibliothek</span>
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span class="text-white font-medium px-2 py-1 bg-white/5 rounded">
+          Marketing
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Marketing Prompts</h1>
+    
+    <!-- Prominente Suche -->
+    <div class="mb-8">
+      <div class="relative">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Nach Prompt-Titel oder Beschreibung suchen..." 
+          class="w-full p-4 pl-12 text-lg border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 shadow-md focus:ring-2 focus:ring-primary focus:border-primary"
+        />
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Reduzierte Filter-Optionen -->
+      <div class="mt-4 flex flex-wrap gap-4">
+        <div class="flex-1 min-w-[200px]">
+          <select id="category-filter" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700">
+            <option value="all">Alle Kategorien</option>
+            {Object.keys(promptsByCategory).map(category => (
+              <option value={category}>{category}</option>
+            ))}
+          </select>
+        </div>
+        
+        <div class="flex-1 min-w-[200px]">
+          <select id="complexity-filter" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700">
+            <option value="all">Alle Komplexitätsstufen</option>
+            {complexityLevels.map(level => (
+              <option value={level}>{level}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Kategorien -->
+    <div class="grid gap-8" id="prompt-categories">
+      {Object.entries(promptsByCategory).map(([category, prompts]) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 category-section" data-category={category}>
+          <h2 class="text-2xl font-bold mb-4">{category}</h2>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            {prompts.map(prompt => (
+              <a href={`/prompt-bibliothek/marketing/${encodeURIComponent(prompt.titel.toLowerCase().replace(/\s+/g, '-'))}`}
+                 class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition prompt-card"
+                 data-subcategory={prompt.unterkategorie}
+                 data-complexity={prompt.komplexitaet}>
+                <div class="flex justify-between items-start">
+                  <h3 class="text-xl font-semibold mb-2">{prompt.titel}</h3>
+                  <span class="px-2 py-1 bg-primary/10 rounded-full text-xs">{prompt.komplexitaet}</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">{prompt.beschreibung}</p>
+                <div class="flex gap-2 mt-2">
+                  <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">{prompt.unterkategorie}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Filtering and search functionality
+  function setupFiltersAndSearch() {
+    const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement | null;
+    const complexityFilter = document.getElementById('complexity-filter') as HTMLSelectElement | null;
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    
+    if (!categoryFilter || !complexityFilter || !searchInput) {
+      console.error('Filter or search elements not found');
+      return;
+    }
+    
+    const categorySections = document.querySelectorAll<HTMLElement>('.category-section');
+    const promptCards = document.querySelectorAll<HTMLElement>('.prompt-card');
+    
+    function applyFiltersAndSearch() {
+      const selectedCategory = categoryFilter.value;
+      const selectedComplexity = complexityFilter.value;
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      
+      // Track if any cards are visible in each section
+      const visibleCardsInSection: Record<string, boolean> = {};
+      
+      // First reset all cards to potentially visible
+      promptCards.forEach(card => {
+        card.style.display = 'block';
+      });
+      
+      // Then apply filters and search to each card
+      promptCards.forEach(card => {
+        const cardComplexity = card.dataset.complexity || '';
+        const sectionCategory = card.closest('.category-section')?.dataset.category || '';
+        
+        // Get card content for search
+        const cardTitle = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+        const cardDescription = card.querySelector('p')?.textContent?.toLowerCase() || '';
+        
+        // Check if card matches all criteria
+        const matchesCategory = selectedCategory === 'all' || sectionCategory === selectedCategory;
+        const matchesComplexity = selectedComplexity === 'all' || cardComplexity === selectedComplexity;
+        const matchesSearch = searchTerm === '' || 
+                             cardTitle.includes(searchTerm) || 
+                             cardDescription.includes(searchTerm);
+        
+        // Show/hide card based on all criteria
+        if (matchesCategory && matchesComplexity && matchesSearch) {
+          card.style.display = 'block';
+          // Track that this section has at least one visible card
+          visibleCardsInSection[sectionCategory] = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      // Show/hide sections based on whether they have any visible cards
+      categorySections.forEach(section => {
+        const sectionCategory = section.dataset.category || '';
+        
+        // If filtering by category, respect that first
+        if (selectedCategory !== 'all' && sectionCategory !== selectedCategory) {
+          section.style.display = 'none';
+          return;
+        }
+        
+        // Otherwise show/hide based on whether section has visible cards
+        if (visibleCardsInSection[sectionCategory]) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    }
+    
+    // Add event listeners with debounce for search
+    categoryFilter.addEventListener('change', applyFiltersAndSearch);
+    complexityFilter.addEventListener('change', applyFiltersAndSearch);
+    
+    // Debounce function for search input
+    let searchTimeout: number | null = null;
+    searchInput.addEventListener('input', () => {
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+      searchTimeout = setTimeout(applyFiltersAndSearch, 300) as unknown as number;
+    });
+    
+    // Initial application of filters
+    applyFiltersAndSearch();
+  }
+  
+  // Setup on page load
+  document.addEventListener('DOMContentLoaded', setupFiltersAndSearch);
+  
+  // Setup for dynamic content
+  document.addEventListener('astro:page-load', setupFiltersAndSearch);
+</script>
