@@ -3,7 +3,10 @@ import SocialIcons from "../navigation/SocialIcons.astro";
 import { Image } from "astro:assets";
 import avatarImage from "../../assets/images/rico-loschke_avatar.jpg";
 
-const navItems = [{ href: "/contact", label: "Anfrage" }];
+const navItems = [
+    { href: "/guides", label: "Guides" },
+    { href: "/contact", label: "Anfrage" }
+];
 
 // Check if we're on the homepage
 const isHomepage = Astro.url.pathname === "/";

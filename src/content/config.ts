@@ -51,13 +51,45 @@ const blogSchema = z.object({
     twitterHandle: z.string().optional(),
 });
 
-// Define the collection
+// Prompt Guide schema definition
+const promptGuideSchema = z.object({
+    // Basic information
+    title: z.string().min(1),
+    description: z.string(),
+    
+    // Categorization
+    category: z.string(), // einfuehrung, framework, komponenten, ressourcen
+    subcategory: z.string().optional(),
+    
+    // Display order
+    order: z.number().default(0),
+    
+    // Visual elements
+    icon: z.string().optional(), // Emoji or icon name
+    
+    // Taxonomy
+    tags: z.array(z.string()).default([]),
+    
+    // Additional metadata
+    relatedContent: z.array(z.string()).optional(),
+    
+    // SEO
+    seo: seoSchema.default({}),
+});
+
+// Define the collections
 const blog = defineCollection({
     type: 'content',
     schema: blogSchema,
 });
 
+const howToPromptGuide = defineCollection({
+    type: 'content',
+    schema: promptGuideSchema,
+});
+
 // Export the collections
 export const collections = {
     blog,
+    'how-to-prompt-guide': howToPromptGuide,
 };

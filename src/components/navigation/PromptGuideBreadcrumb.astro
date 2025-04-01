@@ -1,0 +1,64 @@
+---
+interface Props {
+  category: string;
+  subcategory: string;
+}
+
+const { category, subcategory } = Astro.props;
+
+// Map category keys to display names
+const categoryNames = {
+  "einfuehrung": "Einführung",
+  "framework": "Framework",
+  "komponenten": "Komponenten",
+  "ressourcen": "Ressourcen"
+};
+
+// Map subcategory keys to display names
+const subcategoryNames = {
+  // Einführung
+  "ki-grundlagen": "KI-Grundlagen",
+  "prompting-grundlagen": "Prompting-Grundlagen",
+  
+  // Framework
+  "prompt-framework": "Das Prompt Framework",
+  
+  // Komponenten
+  "expertenrolle": "Expertenrolle",
+  "aufgabenstellung": "Aufgabenstellung",
+  "kontext": "Kontext",
+  "ausdruck": "Ausdruck",
+  "format": "Format",
+  "dialog-followups": "Dialog & Follow-ups",
+  
+  // Ressourcen
+  "prompt-bibliothek": "Prompt-Bibliothek aufbauen",
+  "ethik-compliance": "Ethik und Compliance",
+  "ki-content-verbessern": "KI-Content verbessern",
+  "ki-prompt-experimente": "KI-Prompt-Experimente",
+  "prompt-fehlerbehebung": "Prompt-Fehlerbehebung",
+  "prompt-glossar": "Prompt-Glossar",
+  "zukunftssichere-strategien": "Zukunftssichere Strategien"
+};
+
+const categoryName = categoryNames[category as keyof typeof categoryNames] || category;
+const subcategoryName = subcategoryNames[subcategory as keyof typeof subcategoryNames] || subcategory;
+---
+
+<div class="bg-gray-900/50 backdrop-blur-sm border-b border-gray-800 py-3 mb-8">
+  <div class="max-w-[1200px] mx-auto px-4 flex items-center text-sm">
+    <a href="/how-to-prompt-guide" class="text-blue-400 hover:text-blue-300 transition-colors">
+      Übersicht
+    </a>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+    <a href="/how-to-prompt-guide" class="text-blue-400 hover:text-blue-300 transition-colors">
+      {categoryName}
+    </a>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+    <span class="text-white font-medium">{subcategoryName}</span>
+  </div>
+</div>

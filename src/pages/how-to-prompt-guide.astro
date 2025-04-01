@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Category {
+  name: string;
+  description: string;
+  icon?: string;
+  categories: {
+    [key: string]: {
+      name: string;
+      description: string;
+      path: string;
+    };
+  };
+  metadata: {
+    order: number;
+    tags: string[];
+  };
+}
+
+// Define the main categories for the How-to-Prompt Guide
+const mainCategories: Category[] = [
+  {
+    name: "Einführung",
+    description: "Grundlegende Konzepte und Herangehensweisen für effektives Prompt Engineering",
+    icon: "💡",
+    categories: {
+      "ki-grundlagen": {
+        name: "KI-Grundlagen",
+        description: "Die drei Kernfähigkeiten generativer KI und ihre Anwendungsmöglichkeiten im Marketing",
+        path: "/how-to-prompt-guide/einfuehrung/ki-grundlagen"
+      },
+      "prompting-grundlagen": {
+        name: "Prompting-Grundlagen",
+        description: "Strategische Vorüberlegungen und Best Practices für effektives Prompting",
+        path: "/how-to-prompt-guide/einfuehrung/prompting-grundlagen"
+      }
+    },
+    metadata: {
+      order: 1,
+      tags: ["Grundlagen", "Einführung", "KI", "Prompting"]
+    }
+  },
+  {
+    name: "Framework",
+    description: "Strukturierte Kommunikation mit KI für bessere Ergebnisse durch ein systematisches Framework",
+    icon: "📊",
+    categories: {
+      "prompt-framework": {
+        name: "Das Prompt Framework",
+        description: "Ein systematischer Ansatz für effektive KI-Kommunikation",
+        path: "/how-to-prompt-guide/framework/prompt-framework"
+      }
+    },
+    metadata: {
+      order: 2,
+      tags: ["Framework", "Struktur", "Methodik", "Systematik"]
+    }
+  },
+  {
+    name: "Komponenten",
+    description: "Die einzelnen Bausteine des Prompt Frameworks im Detail",
+    icon: "🧩",
+    categories: {
+      "expertenrolle": {
+        name: "Expertenrolle",
+        description: "Wer soll antworten? Die Macht der richtigen Perspektive",
+        path: "/how-to-prompt-guide/komponenten/expertenrolle"
+      },
+      "aufgabenstellung": {
+        name: "Aufgabenstellung",
+        description: "Was soll getan werden? Das Herzstück deines Prompts",
+        path: "/how-to-prompt-guide/komponenten/aufgabenstellung"
+      },
+      "kontext": {
+        name: "Kontext",
+        description: "Was sind relevante Rahmenbedingungen? Das Fundament für passgenaue Antworten",
+        path: "/how-to-prompt-guide/komponenten/kontext"
+      },
+      "ausdruck": {
+        name: "Ausdruck",
+        description: "Wie soll kommuniziert werden? Die Stimme deiner Marke",
+        path: "/how-to-prompt-guide/komponenten/ausdruck"
+      },
+      "format": {
+        name: "Format",
+        description: "Welche Form soll das Ergebnis haben? Die optimale Strukturierung",
+        path: "/how-to-prompt-guide/komponenten/format"
+      },
+      "dialog-followups": {
+        name: "Dialog & Follow-ups",
+        description: "Der Weg zum optimalen Ergebnis durch geschickten Dialog",
+        path: "/how-to-prompt-guide/komponenten/dialog-followups"
+      }
+    },
+    metadata: {
+      order: 3,
+      tags: ["Komponenten", "Bausteine", "Elemente", "Prompt-Teile"]
+    }
+  },
+  {
+    name: "Ressourcen",
+    description: "Praktische Hilfsmittel, Tipps und weiterführende Informationen für fortgeschrittenes Prompt Engineering",
+    icon: "🧰",
+    categories: {
+      "prompt-bibliothek": {
+        name: "Prompt-Bibliothek aufbauen",
+        description: "Systematisches Wissensmanagement für KI-Prompts",
+        path: "/how-to-prompt-guide/ressourcen/prompt-bibliothek"
+      },
+      "ethik-compliance": {
+        name: "Ethik und Compliance",
+        description: "Verantwortungsvoller Einsatz von KI im Marketing",
+        path: "/how-to-prompt-guide/ressourcen/ethik-compliance"
+      },
+      "ki-content-verbessern": {
+        name: "KI-Content verbessern",
+        description: "Vom generischen zum authentischen Inhalt",
+        path: "/how-to-prompt-guide/ressourcen/ki-content-verbessern"
+      },
+      "ki-prompt-experimente": {
+        name: "KI-Prompt-Experimente",
+        description: "Unkonventionelle Techniken für kreative Durchbrüche",
+        path: "/how-to-prompt-guide/ressourcen/ki-prompt-experimente"
+      },
+      "prompt-fehlerbehebung": {
+        name: "Prompt-Fehlerbehebung",
+        description: "Typische Probleme und deren Lösungen",
+        path: "/how-to-prompt-guide/ressourcen/prompt-fehlerbehebung"
+      },
+      "prompt-glossar": {
+        name: "Prompt-Glossar",
+        description: "Die wichtigsten Fachbegriffe im Überblick",
+        path: "/how-to-prompt-guide/ressourcen/prompt-glossar"
+      },
+      "zukunftssichere-strategien": {
+        name: "Zukunftssichere Strategien",
+        description: "Vorbereitet für die nächste KI-Generation",
+        path: "/how-to-prompt-guide/ressourcen/zukunftssichere-strategien"
+      }
+    },
+    metadata: {
+      order: 4,
+      tags: ["Ressourcen", "Hilfsmittel", "Tipps", "Fortgeschritten"]
+    }
+  }
+];
+---
+
+<Layout title="How-to-Prompt Guide">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">How-to-Prompt Guide: Effektive KI-Kommunikation</h1>
+    <p class="mb-8 text-lg">Ein umfassender Leitfaden für effektives Prompt Engineering, strukturiert nach einem systematischen Framework für optimale Ergebnisse mit KI-Assistenten.</p>
+    
+    <div class="grid gap-8">
+      {mainCategories.map(category => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            {category.name}
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">{category.description}</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            {Object.entries(category.categories).map(([key, subcat]) => (
+              <a href={subcat.path}
+                 class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                <h3 class="text-xl font-semibold mb-2">{subcat.name}</h3>
+                <p class="text-gray-600 dark:text-gray-300">{subcat.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .copy-button {
+    @apply px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition;
+  }
+  .copy-button.copied {
+    @apply bg-green-500 hover:bg-green-600;
+  }
+</style>
+
+<script>
+  // Add copy functionality
+  function setupCopyButtons() {
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', async () => {
+        const text = button.getAttribute('data-copy') || '';
+        await navigator.clipboard.writeText(text);
+        
+        button.textContent = 'Kopiert!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = 'Kopieren';
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  }
+
+  // Setup on page load
+  setupCopyButtons();
+  
+  // Setup for dynamic content
+  document.addEventListener('astro:page-load', setupCopyButtons);
+</script>

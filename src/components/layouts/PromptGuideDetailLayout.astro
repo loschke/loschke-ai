@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PromptGuideBreadcrumb from '../navigation/PromptGuideBreadcrumb.astro';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  category: string;
+  subcategory: string;
+  entryPath: string;
+}
+
+const { category, subcategory, entryPath } = Astro.props;
+
+// Get the content entry
+const entry = await getEntry('how-to-prompt-guide', entryPath);
+if (!entry) {
+  throw new Error(`Content entry not found: ${entryPath}`);
+}
+
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <PromptGuideBreadcrumb category={category} subcategory={subcategory} />
+  
+  <main class="max-w-[1200px] mx-auto px-4 pb-16">
+    <div class="max-w-4xl mx-auto">
+      <article class="prose prose-lg dark:prose-invert max-w-none bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-800">
+        <Content />
+      </article>
+    </div>
+  </main>
+</Layout>
