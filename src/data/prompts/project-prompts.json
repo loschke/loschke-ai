@@ -53,7 +53,7 @@
         "kategorie": "Aufgabenmanagement",
         "unterkategorie": "Agile Tools",
         "komplexitaet": "Einfach",
-        "titel": "Effektive Jira/Trello-Struktur",
+        "titel": "Effektive Jira-Trello-Struktur",
         "beschreibung": "Entwickelt eine effiziente Projektmanagement-Board-Struktur für Agenturprojekte",
         "prompt": "Entwickle eine effektive Struktur für ein {{TOOL}}-Board (z.B. Jira, Trello, Asana) zur optimalen Verwaltung eines {{PROJEKTTYP}}-Projekts in einer Agentur. Die Struktur sollte sowohl für interne Teams als auch für die Transparenz gegenüber dem Kunden geeignet sein.\n\nDas Board sollte folgende Aspekte berücksichtigen:\n\n1. SPALTEN/STATUS-WORKFLOW\n   - Logischer Aufgabenfortschritt von Ideenfindung bis Abschluss\n   - Sinnvolle Zwischenstatus (z.B. Review, Feedback, Genehmigung)\n   - Integration von Kundenfeedback-Schleifen\n\n2. KATEGORISIERUNG\n   - Sinnvolle Labels/Tags zur Filterung\n   - Gruppierung nach Projektphasen oder Arbeitspaketen\n   - Prioritätsstufen und deren Definition\n\n3. KARTENSTRUKTUR\n   - Template für Aufgabenbeschreibungen\n   - Wichtige Metadaten je Karte\n   - Checklisten und Subtasks\n\n4. AUTOMATISIERUNG\n   - Vorschläge für sinnvolle Automatisierungsregeln\n   - Erinnerungen und Alerts\n   - Statusübergänge\n\n5. BERICHTERSTELLUNG\n   - Empfohlene Reports und Dashboards\n   - KPIs für Projektfortschritt\n   - Format für Statusberichte\n\nDie Struktur sollte einen guten Überblick über den Projektfortschritt ermöglichen, Engpässe frühzeitig sichtbar machen und die Zusammenarbeit im Team fördern. Berücksichtige auch die Integration mit anderen Tools im Agentur-Ökosystem."
       },
