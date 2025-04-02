@@ -6,7 +6,7 @@ import Newsletter from "../components/sections/Newsletter.astro";
 import Expertise from "../components/sections/Expertise.astro";
 import AboutMe from "../components/sections/AboutMe.astro";
 import Speaker from "../components/sections/Speaker.astro";
-import Guides from "./guides.astro";
+import Guides from "../components/sections/Guides.astro";
 import Resources from "~/components/sections/Resources.astro";
 
 const expertiseAreas = [
@@ -66,6 +66,7 @@ const jsonLd = {
     <Speaker />
     <Technologies />
     <Expertise />
+    <Guides />
     <Resources />
     <Newsletter />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

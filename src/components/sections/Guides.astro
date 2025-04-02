@@ -2,27 +2,36 @@
 const guides = [
     {
         title: "How-to-Prompt Guide",
-        description: "Systematisches Framework für effektive KI-Kommunikation",
+        description: "Systematisches Framework für effektive KI-Kommunikation und optimale Ergebnisse mit ChatGPT & Co.",
         color: "from-[#2a4858] to-[#162a36]",
-        href: "/how-to-prompt-guide"
+        href: "/how-to-prompt-guide",
+        image: "/images/how-to-prompt-guide.png",
+        tags: ["Prompt Crafting", "Chat Assistenten"]
     },
     {
-        title: "AI-Design Framework",
-        description: "Modifiers für beeindruckende KI-generierte Bilder",
+        title: "Prompt-Bibliothek",
+        description: "Kuratierte Sammlung von Prompts für Marketing, PR und Vertrieb - sofort einsetzbar und anpassbar.",
+        color: "from-[#4a3c59] to-[#2a1c39]",
+        href: "/prompt-bibliothek",
+        image: "/images/prompt-bibliothek.png",
+        tags: ["Prompt Engineering", "Marketing"]
+    },
+    {
+        title: "AI-Design Guide",
+        description: "Leitfaden für AI-Design & AI-Fotografie: Lerne, gestalte und realisiere beeindruckende KI-generierte Bilder.",
+        color: "from-[#005461] to-[#003049]",
+        href: "https://ai-design.guide/",
+        image: "/images/ai-design-guide.png",
+        external: true,
+        tags: ["AI-Design", "4K Framework"]
+    },
+    {
+        title: "AI-Design Modifiers",
+        description: "Sammlung von Prompt-Modifiers für beeindruckende KI-generierte Bilder mit Midjourney, Flux, Ideogram und mehr.",
         color: "from-[#3a3a59] to-[#232339]",
-        href: "/ai-design-framework"
-    },
-    {
-        title: "KI im Content Marketing",
-        description: "Wie du KI für bessere Texte und Content-Strategien nutzt",
-        color: "from-[#432843] to-[#2d1b2d]",
-        href: "/guides/ki-content-marketing"
-    },
-    {
-        title: "Bildgenerierung mit KI",
-        description: "Meistere Midjourney und Stable Diffusion für kreative Projekte",
-        color: "from-[#3d2835] to-[#261720]",
-        href: "/guides/ki-bildgenerierung"
+        href: "/ai-design-framework",
+        image: "/images/ai-design-modifier.png",
+        tags: ["Bildgenerierung", "Modifiers"]
     }
 ];
 ---
@@ -38,48 +47,59 @@ const guides = [
             </p>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-2">
-            {guides.map((guide, index) => (
-                <a 
-                    href={guide.href}
-                    class="group relative h-[280px] overflow-hidden rounded-xl transition-transform duration-300 hover:-translate-y-1"
-                    style={`animation: fadeSlideUp 600ms ${index * 100}ms backwards`}
-                >
-                    <div class={`absolute inset-0 bg-gradient-to-br ${guide.color}`}></div>
-                    
-                    {/* Animated gradient overlay */}
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/20 opacity-0 
-                                transition-opacity duration-500 group-hover:opacity-100"></div>
-                    
-                    {/* Content */}
-                    <div class="relative h-full p-8 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-3 text-white/90">
-                                {guide.title}
-                            </h3>
-                            <p class="text-white/70 leading-relaxed">
-                                {guide.description}
-                            </p>
-                        </div>
-                        
-                        <div class="flex items-center text-primary/90 font-medium">
-                            Zum Guide
-                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                 class="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" 
-                                 viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" 
-                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                                      clip-rule="evenodd" />
-                            </svg>
-                        </div>
+        <div class="grid gap-8 md:grid-cols-2">
+            {guides.map((guide) => (
+                <article class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
+                    <div class={`aspect-video bg-gradient-to-br ${guide.color} overflow-hidden`}>
+                        <img 
+                            src={guide.image} 
+                            alt={guide.title} 
+                            class="w-full h-full object-cover"
+                        />
                     </div>
-
-                    {/* Decorative elements */}
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl 
-                                transform translate-x-16 -translate-y-16"></div>
-                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl 
-                                transform -translate-x-16 translate-y-16"></div>
-                </a>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-sm text-white/60 mb-4">
+                            {guide.tags.map(tag => (
+                                <span class="px-3 py-1 bg-primary/10 rounded-full">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">
+                            {guide.title}
+                        </h3>
+                        <p class="text-white/80 mb-6">
+                            {guide.description}
+                        </p>
+                        <a
+                            href={guide.href}
+                            target={guide.external ? "_blank" : undefined}
+                            rel={guide.external ? "noopener noreferrer" : undefined}
+                            class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+                        >
+                            {guide.external ? "Zum externen Guide" : 
+                              (guide.title === "Prompt-Bibliothek" || guide.title === "AI-Design Modifiers" 
+                                ? "Zur Bibliothek" 
+                                : "Zum Guide")}
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                class="h-4 w-4 ml-2" 
+                                viewBox="0 0 20 20" 
+                                fill="currentColor"
+                            >
+                                {guide.external ? (
+                                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                ) : (
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                    />
+                                )}
+                            </svg>
+                        </a>
+                    </div>
+                </article>
             ))}
         </div>
 
@@ -97,16 +117,3 @@ const guides = [
         </div>
     </div>
 </section>
-
-<style>
-    @keyframes fadeSlideUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
