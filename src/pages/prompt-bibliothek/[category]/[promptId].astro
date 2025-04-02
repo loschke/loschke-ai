@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import marketingPrompts from '../../../data/prompts/marketing-prompts.json';
 
+// Interface für die Prompt-Struktur
 interface Prompt {
   kategorie: string;
   unterkategorie: string;
@@ -11,16 +11,121 @@ interface Prompt {
   prompt: string;
 }
 
+// Mapping von URL-Kategorien zu JSON-Dateinamen und Anzeigenamen
+const categoryMapping = {
+  'marketing': {
+    jsonFile: 'marketing-prompts.json',
+    displayName: 'Marketing'
+  },
+  'pr': {
+    jsonFile: 'pr-prompts.json',
+    displayName: 'PR & Öffentlichkeitsarbeit'
+  },
+  'project': {
+    jsonFile: 'project-prompts.json',
+    displayName: 'Projektmanagement'
+  },
+  'sales': {
+    jsonFile: 'sales-prompts.json',
+    displayName: 'Vertrieb'
+  },
+  'education': {
+    jsonFile: 'education-prompts.json',
+    displayName: 'Bildung & Training'
+  },
+  'leader': {
+    jsonFile: 'leader-prompts.json',
+    displayName: 'Führung & Management'
+  },
+  'creative': {
+    jsonFile: 'creative-prompts.json',
+    displayName: 'Kreativ & Design'
+  },
+  'support': {
+    jsonFile: 'support-prompts.json',
+    displayName: 'Kundenservice & Support'
+  },
+  'strategy': {
+    jsonFile: 'strategy-prompts.json',
+    displayName: 'Strategie & Planung'
+  },
+  'keynote': {
+    jsonFile: 'keynote-prompts.json',
+    displayName: 'Vorträge & Präsentationen'
+  }
+};
+
+// Importiere alle JSON-Dateien statisch
+import marketingPrompts from '../../../data/prompts/marketing-prompts.json';
+import prPrompts from '../../../data/prompts/pr-prompts.json';
+import projectPrompts from '../../../data/prompts/project-prompts.json';
+import salesPrompts from '../../../data/prompts/sales-prompts.json';
+import educationPrompts from '../../../data/prompts/education-prompts.json';
+import leaderPrompts from '../../../data/prompts/leader-prompts.json';
+import creativePrompts from '../../../data/prompts/creative-prompts.json';
+import supportPrompts from '../../../data/prompts/support-prompts.json';
+import strategyPrompts from '../../../data/prompts/strategy-prompts.json';
+import keynotePrompts from '../../../data/prompts/keynote-prompts.json';
+
+// Generiere statische Pfade für alle Kategorien und Prompts
 export function getStaticPaths() {
-  return marketingPrompts.prompts.map((prompt: Prompt) => ({
-    params: { 
-      promptId: prompt.titel.toLowerCase().replace(/\s+/g, '-')
-    },
-    props: { prompt },
-  }));
+  const paths = [];
+  
+  // Definiere das Mapping von Kategorien zu Anzeigenamen direkt in der Funktion
+  const categoryInfo = {
+    'marketing': { displayName: 'Marketing' },
+    'pr': { displayName: 'PR & Öffentlichkeitsarbeit' },
+    'project': { displayName: 'Projektmanagement' },
+    'sales': { displayName: 'Vertrieb' },
+    'education': { displayName: 'Bildung & Training' },
+    'leader': { displayName: 'Führung & Management' },
+    'creative': { displayName: 'Kreativ & Design' },
+    'support': { displayName: 'Kundenservice & Support' },
+    'strategy': { displayName: 'Strategie & Planung' },
+    'keynote': { displayName: 'Vorträge & Präsentationen' }
+  };
+  
+  // Mapping von Kategorien zu Prompt-Daten
+  const promptsData = {
+    'marketing': { data: marketingPrompts, info: categoryInfo['marketing'] },
+    'pr': { data: prPrompts, info: categoryInfo['pr'] },
+    'project': { data: projectPrompts, info: categoryInfo['project'] },
+    'sales': { data: salesPrompts, info: categoryInfo['sales'] },
+    'education': { data: educationPrompts, info: categoryInfo['education'] },
+    'leader': { data: leaderPrompts, info: categoryInfo['leader'] },
+    'creative': { data: creativePrompts, info: categoryInfo['creative'] },
+    'support': { data: supportPrompts, info: categoryInfo['support'] },
+    'strategy': { data: strategyPrompts, info: categoryInfo['strategy'] },
+    'keynote': { data: keynotePrompts, info: categoryInfo['keynote'] }
+  };
+  
+  // Durchlaufe alle Kategorien
+  for (const [categorySlug, categoryData] of Object.entries(promptsData)) {
+    try {
+      // Generiere Pfade für jeden Prompt in dieser Kategorie
+      for (const prompt of categoryData.data.prompts) {
+        paths.push({
+          params: {
+            category: categorySlug,
+            promptId: prompt.titel.toLowerCase().replace(/\s+/g, '-')
+          },
+          props: {
+            prompt,
+            categoryInfo: categoryData.info
+          }
+        });
+      }
+    } catch (error) {
+      console.error(`Fehler beim Laden der Prompts für ${categorySlug}:`, error);
+    }
+  }
+  
+  return paths;
 }
 
-const { prompt } = Astro.props;
+// Hole die Props aus getStaticPaths
+const { prompt, categoryInfo } = Astro.props;
+const { category } = Astro.params;
 
 // Extrahieren der Variablen aus dem Prompt-Text
 const variables: string[] = [];
@@ -50,8 +155,8 @@ while ((match = regex.exec(promptText)) !== null) {
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
         </span>
-        <a href="/prompt-bibliothek/marketing" class="text-white/70 hover:text-white transition-colors px-2 py-1 rounded hover:bg-white/5">
-          Marketing
+        <a href={`/prompt-bibliothek/${category}`} class="text-white/70 hover:text-white transition-colors px-2 py-1 rounded hover:bg-white/5">
+          {categoryInfo.displayName}
         </a>
         <span class="text-white/40">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

@@ -1,6 +1,74 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import marketingPrompts from '../../../data/prompts/marketing-prompts.json';
+import prPrompts from '../../../data/prompts/pr-prompts.json';
+import projectPrompts from '../../../data/prompts/project-prompts.json';
+import salesPrompts from '../../../data/prompts/sales-prompts.json';
+import educationPrompts from '../../../data/prompts/education-prompts.json';
+import leaderPrompts from '../../../data/prompts/leader-prompts.json';
+import creativePrompts from '../../../data/prompts/creative-prompts.json';
+import supportPrompts from '../../../data/prompts/support-prompts.json';
+import strategyPrompts from '../../../data/prompts/strategy-prompts.json';
+import keynotePrompts from '../../../data/prompts/keynote-prompts.json';
+
+// Generiere statische Pfade für alle Kategorien
+export function getStaticPaths() {
+  // Definiere das Mapping direkt in der Funktion
+  const promptsData = {
+    'marketing': { 
+      displayName: 'Marketing',
+      data: marketingPrompts
+    },
+    'pr': { 
+      displayName: 'PR & Öffentlichkeitsarbeit',
+      data: prPrompts
+    },
+    'project': { 
+      displayName: 'Projektmanagement',
+      data: projectPrompts
+    },
+    'sales': { 
+      displayName: 'Vertrieb',
+      data: salesPrompts
+    },
+    'education': { 
+      displayName: 'Bildung & Training',
+      data: educationPrompts
+    },
+    'leader': { 
+      displayName: 'Führung & Management',
+      data: leaderPrompts
+    },
+    'creative': { 
+      displayName: 'Kreativ & Design',
+      data: creativePrompts
+    },
+    'support': { 
+      displayName: 'Kundenservice & Support',
+      data: supportPrompts
+    },
+    'strategy': { 
+      displayName: 'Strategie & Planung',
+      data: strategyPrompts
+    },
+    'keynote': { 
+      displayName: 'Vorträge & Präsentationen',
+      data: keynotePrompts
+    }
+  };
+  
+  return Object.keys(promptsData).map(category => ({
+    params: { category },
+    props: { 
+      displayName: promptsData[category].displayName,
+      prompts: promptsData[category].data.prompts
+    }
+  }));
+}
+
+// Hole die Props aus getStaticPaths
+const { category } = Astro.params;
+const { displayName, prompts } = Astro.props;
 
 // Gruppieren der Prompts nach Kategorie
 interface Prompt {
@@ -13,7 +81,7 @@ interface Prompt {
 }
 
 const promptsByCategory: Record<string, Prompt[]> = {};
-marketingPrompts.prompts.forEach((prompt: Prompt) => {
+prompts.forEach((prompt: Prompt) => {
   if (!promptsByCategory[prompt.kategorie]) {
     promptsByCategory[prompt.kategorie] = [];
   }
@@ -21,13 +89,13 @@ marketingPrompts.prompts.forEach((prompt: Prompt) => {
 });
 
 // Komplexitätsstufen für Filter
-const complexityLevels = [...new Set(marketingPrompts.prompts.map(prompt => prompt.komplexitaet))];
+const complexityLevels = [...new Set(prompts.map(prompt => prompt.komplexitaet))];
 
 // Unterkategorien für Filter
-const subcategories = [...new Set(marketingPrompts.prompts.map(prompt => prompt.unterkategorie))];
+const subcategories = [...new Set(prompts.map(prompt => prompt.unterkategorie))];
 ---
 
-<Layout title="Marketing Prompts - Rico Loschke">
+<Layout title={`${displayName} Prompts - Rico Loschke`}>
   <!-- Sticky Breadcrumb Navigation -->
   <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
     <div class="container mx-auto px-4 py-3">
@@ -44,14 +112,14 @@ const subcategories = [...new Set(marketingPrompts.prompts.map(prompt => prompt.
           </svg>
         </span>
         <span class="text-white font-medium px-2 py-1 bg-white/5 rounded">
-          Marketing
+          {displayName}
         </span>
       </div>
     </div>
   </nav>
 
   <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8">Marketing Prompts</h1>
+    <h1 class="text-4xl font-bold mb-8">{displayName} Prompts</h1>
     
     <!-- Prominente Suche -->
     <div class="mb-8">
@@ -93,13 +161,13 @@ const subcategories = [...new Set(marketingPrompts.prompts.map(prompt => prompt.
     
     <!-- Kategorien -->
     <div class="grid gap-8" id="prompt-categories">
-      {Object.entries(promptsByCategory).map(([category, prompts]) => (
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 category-section" data-category={category}>
-          <h2 class="text-2xl font-bold mb-4">{category}</h2>
+      {Object.entries(promptsByCategory).map(([promptCategory, categoryPrompts]) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 category-section" data-category={promptCategory}>
+          <h2 class="text-2xl font-bold mb-4">{promptCategory}</h2>
           
           <div class="grid md:grid-cols-2 gap-4">
-            {prompts.map(prompt => (
-              <a href={`/prompt-bibliothek/marketing/${encodeURIComponent(prompt.titel.toLowerCase().replace(/\s+/g, '-'))}`}
+            {categoryPrompts.map(prompt => (
+              <a href={`/prompt-bibliothek/${category}/${encodeURIComponent(prompt.titel.toLowerCase().replace(/\s+/g, '-'))}`}
                  class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition prompt-card"
                  data-subcategory={prompt.unterkategorie}
                  data-complexity={prompt.komplexitaet}>

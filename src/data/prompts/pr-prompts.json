@@ -1,0 +1,109 @@
+{
+    "bereich": "Öffentlichkeitsarbeit",
+    "prompts": [
+      {
+        "kategorie": "Pressemitteilungen",
+        "unterkategorie": "Standardmitteilung",
+        "komplexitaet": "Einfach",
+        "titel": "Basis-Pressemitteilung",
+        "beschreibung": "Erstellt eine einfache Pressemitteilung nach journalistischem Standard",
+        "prompt": "Erstelle eine Pressemitteilung zum Thema {{THEMA}}. Die Mitteilung sollte einen prägnanten Titel, einen informativen Lead-Absatz und einen strukturierten Hauptteil mit den wichtigsten W-Fragen (Wer, Was, Wann, Wo, Warum) beantworten. Füge ein kurzes Zitat einer relevanten Person hinzu und schließe mit einem Absatz über {{UNTERNEHMEN/ORGANISATION}}."
+      },
+      {
+        "kategorie": "Pressemitteilungen",
+        "unterkategorie": "Produkteinführung",
+        "komplexitaet": "Mittel",
+        "titel": "Produkt-Launch-Pressemitteilung",
+        "beschreibung": "Erstellt eine Pressemitteilung für die Einführung eines neuen Produkts oder einer neuen Dienstleistung",
+        "prompt": "Erstelle eine Pressemitteilung für die Markteinführung von {{PRODUKT/DIENSTLEISTUNG}}.\n\nDie Mitteilung sollte folgende Struktur haben:\n- Aufmerksamkeitsstarker Titel\n- Lead-Absatz mit den Kerninfos zur Innovation\n- Hauptteil mit:\n  * Beschreibung des Produkts und seiner Alleinstellungsmerkmale\n  * Erläuterung, welches Problem es löst\n  * Informationen zur Verfügbarkeit und Preisgestaltung\n- Zitat des {{POSITION}} (z.B. CEO, Produktmanager)\n- Zitat eines Beta-Testers oder Branchenexperten (Platzhalter)\n- Kontext zur Marktlage und Relevanz des Produkts\n- Standardabsatz über {{UNTERNEHMEN}}\n- Kontaktdaten für Presseanfragen\n\nDie Mitteilung sollte zwischen 400-500 Wörter umfassen und einen professionellen, informativen Ton haben."
+      },
+      {
+        "kategorie": "Pressemitteilungen",
+        "unterkategorie": "Unternehmensmeldung",
+        "komplexitaet": "Komplex",
+        "titel": "Strategische Unternehmensmeldung",
+        "beschreibung": "Erstellt eine umfassende Pressemitteilung zu strategischen Unternehmensentscheidungen",
+        "prompt": "Als PR-Experte, verfasse eine strategische Pressemitteilung zum Thema {{THEMA}} (z.B. Fusion, Übernahme, Strategiewechsel, Expansion, Führungswechsel).\n\nUNTERNEHMENSKONTEXT:\n- Name und Kerngeschäft: {{UNTERNEHMEN}}\n- Aktuelle Marktposition: {{MARKTPOSITION}}\n- Bisherige Strategie: {{BISHERIGE_STRATEGIE}}\n\nSTRATEGISCHE ÄNDERUNG:\n- Art der Änderung: {{ART_DER_ÄNDERUNG}}\n- Hauptgründe für die Entscheidung: {{GRÜNDE}}\n- Erwartete Auswirkungen: {{AUSWIRKUNGEN}}\n- Zeitplan der Umsetzung: {{ZEITPLAN}}\n\nSTRUKTUR DER MITTEILUNG:\n- Prägnanter, informativer Titel\n- Starker Lead-Absatz mit Kernbotschaft\n- Detaillierte Darstellung der strategischen Entscheidung\n- Einordnung in den Markt- und Unternehmenskontext\n- Aussagekräftiges Zitat der Geschäftsführung\n- Ggf. Zitat eines weiteren Stakeholders (Aufsichtsrat, Partner, etc.)\n- Erläuterung der Vorteile für verschiedene Stakeholder (Kunden, Mitarbeiter, Investoren)\n- Klare Aussage zu möglichen sensiblen Themen (z.B. Arbeitsplätze bei Fusionen)\n- Standardabsatz zum Unternehmen mit relevanten Kennzahlen\n- Kontaktinformationen mit tatsächlich erreichbarer Pressekontaktstelle\n\nTON:\n- Professionell und faktenbasiert\n- Ausgewogen zwischen positiver Darstellung und Glaubwürdigkeit\n- Transparent bei sensiblen Themen\n- Klare, präzise Sprache ohne Fachjargon\n\nLänge: 500-700 Wörter"
+      },
+      {
+        "kategorie": "Medienarbeit",
+        "unterkategorie": "Medienkontakte",
+        "komplexitaet": "Einfach",
+        "titel": "Pitch-Mail an Journalisten",
+        "beschreibung": "Erstellt eine kurze, prägnante E-Mail zur Kontaktaufnahme mit Journalisten",
+        "prompt": "Erstelle eine kurze Pitch-E-Mail an einen Journalisten zum Thema {{THEMA}}. Die E-Mail sollte:\n- Eine prägnante, relevante Betreffzeile haben\n- Mit einer personalisierten Anrede beginnen\n- In 2-3 Sätzen erklären, warum das Thema für die Leserschaft des {{MEDIUM}} relevant ist\n- Den Nachrichtenwert klar herausstellen\n- Eine konkrete Geschichte oder einen Interviewpartner anbieten\n- Maximal 150 Wörter umfassen\n- Mit einem klaren Call-to-Action enden (z.B. Angebot für Gespräch, weitere Informationen)\n\nDer Ton sollte professionell, hilfreich und nicht werblich sein."
+      },
+      {
+        "kategorie": "Medienarbeit",
+        "unterkategorie": "Interview-Vorbereitung",
+        "komplexitaet": "Mittel",
+        "titel": "Interview-Leitfaden",
+        "beschreibung": "Erstellt einen Vorbereitungsleitfaden für Medieninterviews",
+        "prompt": "Erstelle einen umfassenden Interview-Vorbereitungsleitfaden für {{INTERVIEWPARTNER}} (Position) zum Thema {{THEMA}} mit {{MEDIENTYP}} (z.B. Fachmagazin, Tageszeitung, TV, Radio, Podcast).\n\nDer Leitfaden sollte folgende Bereiche umfassen:\n\n1. HINTERGRUND\n   - Medienoutlet und Zielgruppe\n   - Format des Interviews (Live/Aufzeichnung, Länge, Art)\n   - Profil und Fokus des Interviewers\n\n2. KERNBOTSCHAFTEN\n   - 3 Hauptbotschaften, die vermittelt werden sollen\n   - Unterstützende Fakten und Beispiele für jede Botschaft\n   - Brücken-Formulierungen, um zu Kernbotschaften zurückzukehren\n\n3. WAHRSCHEINLICHE FRAGEN\n   - 10 wahrscheinliche Standardfragen mit vorbereiteten Antworten\n   - 5 kritische/schwierige Fragen mit Antwortstrategien\n   - 3 Opportunitätsfragen, die Raum für Kernbotschaften bieten\n\n4. DOS AND DON'TS\n   - Sprachliche Formulierungen, die verwendet werden sollten\n   - Formulierungen und Themen, die vermieden werden sollten\n   - Umgang mit vertraulichen Informationen\n\n5. PRAKTISCHE TIPPS\n   - Für dieses spezifische Medienformat\n   - Zur nonverbalen Kommunikation\n   - Zum Umgang mit Unterbrechungen oder Nachfragen\n\nFormat: Übersichtlich strukturiert, mit konkreten Formulierungsvorschlägen und Beispielen."
+      },
+      {
+        "kategorie": "Medienarbeit",
+        "unterkategorie": "Media Kit",
+        "komplexitaet": "Komplex",
+        "titel": "Umfassendes Media Kit",
+        "beschreibung": "Erstellt ein vollständiges Media Kit für Pressevertreter",
+        "prompt": "Als PR-Spezialist, erstelle ein umfassendes Media Kit für {{UNTERNEHMEN/ORGANISATION}} zu {{ANLASS}} (z.B. Produktlaunch, Event, Jahresbericht).\n\nUNTERNEHMENSINFO:\n- Kerngeschäft: {{KERNGESCHÄFT}}\n- Gründungsjahr: {{GRÜNDUNGSJAHR}}\n- Mitarbeiter: {{MITARBEITERZAHL}}\n- Standorte: {{STANDORTE}}\n- Schlüsselkennzahlen: {{KENNZAHLEN}}\n\nDas Media Kit sollte folgende Komponenten enthalten:\n\n1. EINLEITUNGSTEXT/PITCH\n   - Kernbotschaft zum Anlass\n   - Relevanz für Medienvertreter\n   - Wichtigste News-Hooks\n\n2. FACTSHEET ZUM UNTERNEHMEN\n   - Kurzprofil in 100 Wörtern\n   - Wichtige Meilensteine\n   - Kennzahlen zur Marktstellung\n   - Management-Team (Kurzbeschreibung)\n\n3. PRESSE-FAQ\n   - 10 relevante Fragen und Antworten zum Anlass\n   - 5 allgemeine Unternehmensfragen und Antworten\n\n4. ZITATE\n   - 3 attributierbare Zitate von Führungskräften\n   - 1 Zitat eines externen Stakeholders (Partner, Kunde, Experte)\n\n5. BILDMATERIAL-BESCHREIBUNG\n   - Beschreibung der beiliegenden Bilder/Grafiken\n   - Vorschlag für Bildunterschriften\n   - Nutzungsrechte und Attributionshinweise\n\n6. KONTEXTMATERIALIEN\n   - Beschreibung ergänzender Dokumente (z.B. Whitepaper, Studien, Präsentationen)\n   - Erläuterung deren Relevanz für verschiedene Story-Winkel\n\n7. KONTAKTINFORMATIONEN\n   - Primärer und sekundärer Pressekontakt\n   - Verfügbarkeit für Interviews\n   - Social-Media-Profile\n\nFormat: Professionell strukturiert, scanbar für schnell arbeitende Journalisten, printfreundlich gestaltet."
+      },
+      {
+        "kategorie": "Krisenmanagement",
+        "unterkategorie": "Krisenkommunikationsplan",
+        "komplexitaet": "Komplex",
+        "titel": "Krisenvorsorge-Framework",
+        "beschreibung": "Erstellt einen strukturierten Krisenkommunikationsplan",
+        "prompt": "Als Experte für Krisenkommunikation, entwickle einen umfassenden Krisenkommunikationsplan für {{UNTERNEHMEN/ORGANISATION}} in der Branche {{BRANCHE}}.\n\nPOTENZIELLE KRISENSZENARIEN:\n- {{KRISENSZENARIO_1}} (z.B. Produktrückruf, Datenschutzverletzung, Arbeitsunfall)\n- {{KRISENSZENARIO_2}}\n- {{KRISENSZENARIO_3}}\n\nDer Plan sollte folgende Komponenten enthalten:\n\n1. KRISENMANAGEMENT-TEAM\n   - Zusammensetzung (Positionen, nicht Personennamen)\n   - Rollen und Verantwortlichkeiten\n   - Aktivierungsprotokoll und Eskalationsstufen\n   - Kontaktliste und Erreichbarkeit (Struktur)\n\n2. KOMMUNIKATIONSSTRATEGIE JE KRISENSZENARIO\n   - Erste 60 Minuten: Sofortmaßnahmen\n   - Erste 24 Stunden: Kommunikationsschritte\n   - Mittelfristige Maßnahmen (Tag 2-7)\n   - Langfristige Strategie (Woche 2-4)\n\n3. STAKEHOLDER-MAPPING\n   - Identifikation aller relevanten Stakeholder\n   - Priorisierungsmatrix (Einfluss/Betroffenheit)\n   - Kommunikationskanäle je Stakeholder\n   - Kernbotschaften je Stakeholdergruppe\n\n4. BOTSCHAFTS-TEMPLATES\n   - Erste Stellungnahme (Statement of Awareness)\n   - Umfassenderes Statement mit Fakten\n   - Empathie-zentrierte Botschaften für Betroffene\n   - Update-Templates\n   - Abschluss-/Recovery-Kommunikation\n\n5. MEDIENMANAGEMENT\n   - Sprecherauswahl und -vorbereitung\n   - Medienkontaktliste (Struktur)\n   - Social Media Monitoring und Response\n   - Faktencheck-Protokoll\n\n6. INTERNE KOMMUNIKATION\n   - Mitarbeiterinformation (Timing, Kanäle, Verantwortlichkeiten)\n   - Verhaltensregeln für Mitarbeiter in der Krise\n   - Schulungsbedarf und Ressourcen\n\n7. DOKUMENTATION & EVALUATION\n   - Protokollführung während der Krise\n   - Bewertungsmatrix für Kommunikationsmaßnahmen\n   - Nachbereitungsprozess\n\nJeder Abschnitt sollte konkrete Handlungsanweisungen, Checklisten und Vorlagen enthalten, die unmittelbar in einer Krisensituation angewendet werden können."
+      },
+      {
+        "kategorie": "Krisenmanagement",
+        "unterkategorie": "Stellungnahmen",
+        "komplexitaet": "Mittel",
+        "titel": "Krisen-Statement-Generator",
+        "beschreibung": "Erstellt verschiedene Stellungnahmen für Krisensituationen",
+        "prompt": "Erstelle drei verschiedene Versionen einer Krisen-Stellungnahme für folgendes Szenario:\n\nUNTERNEHMEN: {{UNTERNEHMEN}}\nKRISENSZENARIO: {{KRISENSZENARIO}} (z.B. Produktfehler, Service-Ausfall, Beschwerde mit viraler Verbreitung)\nBEKANNTE FAKTEN: {{BEKANNTE_FAKTEN}}\nNOCH UNKLARE PUNKTE: {{UNKLARE_PUNKTE}}\nBETROFFENE STAKEHOLDER: {{BETROFFENE}}\n\nFür jede Version erstelle:\n\nVersion 1: Erste schnelle Reaktion (innerhalb 1-2 Stunden)\n- Maximal 100 Wörter\n- Fokus auf Awareness und Engagement\n- Hinweis auf weitere Updates\n\nVersion 2: Detailliertere Stellungnahme (innerhalb 24 Stunden)\n- 200-300 Wörter\n- Integration der bekannten Fakten\n- Beschreibung eingeleiteter Maßnahmen\n- Transparenz bezüglich noch unklarer Punkte\n\nVersion 3: Umfassende Stellungnahme (nach vollständiger Untersuchung)\n- 300-400 Wörter\n- Vollständige Darstellung des Vorfalls\n- Konkrete Abhilfemaßnahmen \n- Vorkehrungen für die Zukunft\n- Bei Bedarf: Entschuldigung und Wiedergutmachung\n\nJede Version sollte:\n- Einen angemessenen, empathischen Ton wahren\n- Die Unternehmenswerte widerspiegeln\n- Die richtigen Kommunikationskanäle für diese Art von Krise berücksichtigen\n- Das richtige Maß an Übernahme von Verantwortung zeigen"
+      },
+      {
+        "kategorie": "Krisenmanagement",
+        "unterkategorie": "Social Media",
+        "komplexitaet": "Einfach",
+        "titel": "Social Media Krisenreaktionen",
+        "beschreibung": "Erstellt angemessene Reaktionen für Krisensituationen in sozialen Medien",
+        "prompt": "Erstelle kurze, angemessene Social-Media-Reaktionen für folgendes Krisenszenario auf verschiedenen Plattformen:\n\nUNTERNEHMEN: {{UNTERNEHMEN}}\nSITUATION: {{KRISENSITUATION}}\n\nFür jede Plattform erstelle eine passende Reaktion:\n\n1. Twitter/X (max. 280 Zeichen)\n2. LinkedIn (professioneller Kontext, max. 150 Wörter)\n3. Instagram (visueller Kontext mit Text-Empfehlung, max. 100 Wörter)\n4. Facebook (Community-orientiert, max. 150 Wörter)\n\nJede Reaktion sollte:\n- Den Plattform-spezifischen Ton treffen\n- Empathie ausdrücken\n- Konkrete nächste Schritte nennen\n- Bei Bedarf auf eine Landing Page verweisen\n- Einen angemessenen Grad an Formalität wahren"
+      },
+      {
+        "kategorie": "Storytelling",
+        "unterkategorie": "Corporate Story",
+        "komplexitaet": "Mittel",
+        "titel": "Unternehmensgeschichte",
+        "beschreibung": "Entwickelt eine überzeugende Narrative zur Unternehmensgeschichte",
+        "prompt": "Entwickle eine überzeugende Corporate Story für {{UNTERNEHMEN}} basierend auf folgenden Elementen:\n\nGRÜNDUNGSGESCHICHTE: {{GRÜNDUNGSKONTEXT}}\nVISION & MISSION: {{VISION_MISSION}}\nMEILENSTEINE: {{WICHTIGE_MEILENSTEINE}}\nWERTE: {{UNTERNEHMENSWERTE}}\nBESONDERHEITEN: {{ALLEINSTELLUNGSMERKMALE}}\n\nDie Corporate Story sollte:\n- Mit einem fesselnden Hook beginnen\n- Die Motivation und Vision der Gründer vermitteln\n- Herausforderungen und deren Überwindung darstellen\n- Die Entwicklung des Unternehmens als sinnvolle Reise präsentieren\n- Kunden und Mitarbeiter als Teil der Geschichte einbinden\n- Die Werte des Unternehmens durch konkrete Beispiele illustrieren\n- Einen Ausblick auf die Zukunftsvision geben\n\nFormat: 500-700 Wörter, aufgeteilt in klar definierte Abschnitte mit Zwischenüberschriften\n\nTon: Authentisch, inspirierend, aber nicht übertrieben werblich"
+      },
+      {
+        "kategorie": "Storytelling",
+        "unterkategorie": "Mitarbeitergeschichten",
+        "komplexitaet": "Einfach",
+        "titel": "Employee-Storytelling",
+        "beschreibung": "Erstellt Interviewleitfäden zur Erfassung von Mitarbeitergeschichten",
+        "prompt": "Erstelle einen Interviewleitfaden zur Erfassung von authentischen Mitarbeitergeschichten für interne und externe Kommunikation bei {{UNTERNEHMEN}}.\n\nDer Leitfaden sollte folgende Bereiche abdecken:\n\n1. PERSÖNLICHER WERDEGANG\n   - 3-4 Fragen zum beruflichen Hintergrund und Weg ins Unternehmen\n   - 2-3 Fragen zu prägenden Erfahrungen und Lernmomenten\n\n2. TÄTIGKEITEN UND PROJEKTE\n   - 3-4 Fragen zu aktuellen Aufgaben und Herausforderungen\n   - 2-3 Fragen zu besonderen Erfolgen und stolzen Momenten\n\n3. UNTERNEHMENSKULTUR\n   - 3-4 Fragen zur persönlichen Erfahrung mit der Unternehmenskultur\n   - 2 Fragen zu konkreten Beispielen gelebter Unternehmenswerte\n\n4. PERSÖNLICHE EINBLICKE\n   - 2-3 Fragen zu Leidenschaften außerhalb der Arbeit\n   - 2 Fragen zu persönlichen Zukunftsvisionen\n\n5. ABSCHLUSSFRAGEN\n   - 2 Fragen, die überraschende oder unerwartete Einblicke ermöglichen\n\nDie Fragen sollten:\n- Offen formuliert sein (keine Ja/Nein-Fragen)\n- Authentische Geschichten und Beispiele hervorlocken\n- Sowohl berufliche als auch persönliche Aspekte abdecken\n- Raum für Reflektionen und Emotionen lassen\n\nFüge am Ende Hinweise für Interviewer hinzu, wie die Antworten optimal für verschiedene Kommunikationskanäle (Social Media, Intranet, Karriereseite) aufbereitet werden können."
+      },
+      {
+        "kategorie": "Storytelling",
+        "unterkategorie": "Nachhaltigkeitskommunikation",
+        "komplexitaet": "Komplex",
+        "titel": "Impact-Story-Framework",
+        "beschreibung": "Entwickelt ein Framework für wirkungsvolle Nachhaltigkeitsgeschichten",
+        "prompt": "Als Experte für Nachhaltigkeitskommunikation, entwickle ein umfassendes Storytelling-Framework für die Kommunikation der Nachhaltigkeitsinitiativen von {{UNTERNEHMEN}} in der Branche {{BRANCHE}}.\n\nNACHHALTIGKEITSSCHWERPUNKTE:\n- {{SCHWERPUNKT_1}} (z.B. CO2-Reduktion, soziale Lieferkette, Ressourcenschonung)\n- {{SCHWERPUNKT_2}}\n- {{SCHWERPUNKT_3}}\n\nZIELGRUPPEN:\n- {{ZIELGRUPPE_1}} (z.B. Kunden, Investoren, Mitarbeiter, NGOs)\n- {{ZIELGRUPPE_2}}\n- {{ZIELGRUPPE_3}}\n\nDas Framework sollte folgende Elemente enthalten:\n\n1. NARRATIVE STRUKTUREN\n   - Helden-/Transformationsgeschichte (Vorlage mit Schlüsselelementen)\n   - Problem-Lösung-Impact-Struktur (mit Leitfragen)\n   - Zukunftsvisions-Narrative (Framework mit Kernkomponenten)\n\n2. CHARACTER-DEVELOPMENT\n   - Identifikation relevanter Protagonisten je Nachhaltigkeitsthema\n   - Vorlage zur Charakterentwicklung mit Motivationen und Herausforderungen\n   - Integrationspunkte für verschiedene Stakeholder-Perspektiven\n\n3. EMOTIONALE ANKER\n   - Identifikation emotionaler Kernthemen je Nachhaltigkeitsschwerpunkt\n   - Balance-Framework für Hoffnung vs. Dringlichkeit\n   - Verbindung zu universellen Werten und Zielen\n\n4. FAKTEN-INTEGRATION\n   - Leitlinien zur Integration quantitativer Daten in Narrativen\n   - Visualisierungsempfehlungen für komplexe Nachhaltigkeitsdaten\n   - Vertrauensbildende Elemente (Zertifizierungen, Partnerschaften, etc.)\n\n5. KANALSPEZIFISCHE ANPASSUNGEN\n   - Story-Modifikationen für verschiedene Formate (Langform, Social Media, Video, etc.)\n   - Zielgruppenspezifische Anpassungen der Narrativen\n   - Empfehlungen für transmedialen Storytelling-Ansatz\n\n6. VERMEIDUNG VON GREENWASHING\n   - Checkliste zur Prüfung auf Greenwashing-Elemente\n   - Authentizitätssicherung durch Transparenz und Konsistenz\n   - Umgang mit Nachhaltigkeits-Dilemmata und Zielkonflikten\n\n7. IMPACT-MESSUNG\n   - KPIs zur Bewertung der Storytelling-Effektivität\n   - Feedback-Mechanismen verschiedener Stakeholder\n   - Integration von Lernerfahrungen in zukünftige Narrativen\n\nJeder Abschnitt sollte konkrete Beispiele, Templates und Leitfragen enthalten, die direkt auf die spezifischen Nachhaltigkeitsschwerpunkte des Unternehmens anwendbar sind."
+      },
+      {
+        "kategorie": "Corporate Communications",
+        "unterkategorie": "Interne Kommunikation",
+        "komplexitaet": "Mittel",
+        "titel": "Change-Kommunikationsplan",
+        "beschreibung": "Erstellt einen strukturierten Kommunikationsplan für Veränderungsprozesse",
+        "prompt": "Entwickle einen umfassenden internen Kommunikationsplan für folgenden Veränderungsprozess:\n\nUNTERNEHMEN: {{UNTERNEHMEN}}\nART DER VERÄNDERUNG: {{VERÄNDERUNG}} (z.B. Reorganisation, Fusion, Kulturwandel, neues ERP-System)\nZEITRAHMEN: {{ZEITRAHMEN}}\nBETROFFENE BEREICHE: {{BETROFFENE_BEREICHE}}\n\nDer Kommunikationsplan sollte folgende Komponenten enthalten:\n\n1. KOMMUNIKATIONSSTRATEGIE\n   - Kommunikationsziele der Change-Kommunikation\n   - Kernbotschaften für verschiedene Phasen des Veränderungsprozesses\n   - Tonalität und Grundsätze der Kommunikation\n\n2. STAKEHOLDER-ANALYSE\n   - Mapping der internen Stakeholder (Führungskräfte, direkt Betroffene, indirekt Betroffene)\n   - Informationsbedürfnisse je Stakeholder-Gruppe\n   - Einbindungsstrategie für Multiplikatoren und Influencer\n\n3. KOMMUNIKATIONSPHASEN\n   - Ankündigungsphase: Kommunikationsaktivitäten und -inhalte\n   - Umsetzungsphase: Regelmäßige Updates und Fortschrittsberichte\n   - Stabilisierungsphase: Erfolgsgeschichten und Lessons Learned\n\n4. KANALSTRATEGIE\n   - Optimale Kanäle je nach Botschaft und Zielgruppe\n   - Kaskadenkommunikation über Führungsebenen\n   - Dialog- und Feedback-Formate\n\n5. KOMMUNIKATIONSMATERIALIEN\n   - Übersicht benötigter Materialien je Phase und Zielgruppe\n   - Strukturvorschläge für zentrale Dokumente\n   - FAQ-Konzept mit Update-Prozess\n\n6. ZEITPLAN\n   - Detaillierter Kommunikations-Zeitplan mit Meilensteinen\n   - Trigger-Events und kommunikative Reaktion\n   - Buffer für unerwartete Entwicklungen\n\n7. ERFOLGSMESSUNG\n   - KPIs zur Messung der Kommunikationswirksamkeit\n   - Feedback-Mechanismen und Anpassungsprozesse\n\nBei der Erstellung des Plans berücksichtige typische Widerstände und Bedenken sowie Strategien, diese kommunikativ aufzufangen und zu adressieren."
+      }
+    ]
+  }

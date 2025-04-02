@@ -1,12 +1,39 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import marketingPrompts from '../../data/prompts/marketing-prompts.json';
+import prPrompts from '../../data/prompts/pr-prompts.json';
+import projectPrompts from '../../data/prompts/project-prompts.json';
+import salesPrompts from '../../data/prompts/sales-prompts.json';
+import educationPrompts from '../../data/prompts/education-prompts.json';
+import leaderPrompts from '../../data/prompts/leader-prompts.json';
+import creativePrompts from '../../data/prompts/creative-prompts.json';
+import supportPrompts from '../../data/prompts/support-prompts.json';
+import strategyPrompts from '../../data/prompts/strategy-prompts.json';
+import keynotePrompts from '../../data/prompts/keynote-prompts.json';
 
 // Zählen der Prompts pro Bereich
 const marketingPromptsCount = marketingPrompts.prompts.length;
+const prPromptsCount = prPrompts.prompts.length;
+const projectPromptsCount = projectPrompts.prompts.length;
+const salesPromptsCount = salesPrompts.prompts.length;
+const educationPromptsCount = educationPrompts.prompts.length;
+const leaderPromptsCount = leaderPrompts.prompts.length;
+const creativePromptsCount = creativePrompts.prompts.length;
+const supportPromptsCount = supportPrompts.prompts.length;
+const strategyPromptsCount = strategyPrompts.prompts.length;
+const keynotePromptsCount = keynotePrompts.prompts.length;
 
 // Extrahieren der einzigartigen Kategorien
 const marketingCategories = [...new Set(marketingPrompts.prompts.map(prompt => prompt.kategorie))];
+const prCategories = [...new Set(prPrompts.prompts.map(prompt => prompt.kategorie))];
+const projectCategories = [...new Set(projectPrompts.prompts.map(prompt => prompt.kategorie))];
+const salesCategories = [...new Set(salesPrompts.prompts.map(prompt => prompt.kategorie))];
+const educationCategories = [...new Set(educationPrompts.prompts.map(prompt => prompt.kategorie))];
+const leaderCategories = [...new Set(leaderPrompts.prompts.map(prompt => prompt.kategorie))];
+const creativeCategories = [...new Set(creativePrompts.prompts.map(prompt => prompt.kategorie))];
+const supportCategories = [...new Set(supportPrompts.prompts.map(prompt => prompt.kategorie))];
+const strategyCategories = [...new Set(strategyPrompts.prompts.map(prompt => prompt.kategorie))];
+const keynoteCategories = [...new Set(keynotePrompts.prompts.map(prompt => prompt.kategorie))];
 ---
 
 <Layout title="Prompt-Bibliothek - Rico Loschke">
@@ -33,7 +60,7 @@ const marketingCategories = [...new Set(marketingPrompts.prompts.map(prompt => p
   </nav>
 
   <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8">Prompt-Bibliothek für Marketing & Kommunikation</h1>
+    <h1 class="text-4xl font-bold mb-8">Prompt-Bibliothek</h1>
     
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       <!-- Marketing Card -->
@@ -52,26 +79,149 @@ const marketingCategories = [...new Set(marketingPrompts.prompts.map(prompt => p
         </div>
       </a>
       
-      <!-- Placeholder für weitere Bereiche -->
-      <div class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 opacity-50">
+      <!-- PR & Öffentlichkeitsarbeit Card -->
+      <a href="/prompt-bibliothek/pr" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
         <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
           <span class="text-3xl">📢</span>
           <span>PR & Öffentlichkeitsarbeit</span>
         </h2>
         <p class="text-gray-600 dark:text-gray-300 mb-4">
-          Demnächst verfügbar
+          {prPromptsCount} Prompts für Pressemitteilungen, Medienarbeit, Krisenmanagement und mehr
         </p>
-      </div>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {prCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
       
-      <div class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 opacity-50">
+      <!-- Projektmanagement Card -->
+      <a href="/prompt-bibliothek/project" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">📋</span>
+          <span>Projektmanagement</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {projectPromptsCount} Prompts für Terminmanagement, Anforderungsmanagement, Teamkommunikation und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {projectCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Vertrieb Card -->
+      <a href="/prompt-bibliothek/sales" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
         <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
           <span class="text-3xl">💼</span>
           <span>Vertrieb</span>
         </h2>
         <p class="text-gray-600 dark:text-gray-300 mb-4">
-          Demnächst verfügbar
+          {salesPromptsCount} Prompts für Kaltakquise, Angebotserstellung, Einwandbehandlung und mehr
         </p>
-      </div>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {salesCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Education Card -->
+      <a href="/prompt-bibliothek/education" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">🎓</span>
+          <span>Bildung & Training</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {educationPromptsCount} Prompts für Lernmaterialien, Kursentwicklung, Wissenstransfer und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {educationCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Leadership Card -->
+      <a href="/prompt-bibliothek/leader" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">👥</span>
+          <span>Führung & Management</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {leaderPromptsCount} Prompts für Mitarbeiterführung, Teamentwicklung, Feedback und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {leaderCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Creative Card -->
+      <a href="/prompt-bibliothek/creative" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">🎨</span>
+          <span>Kreativ & Design</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {creativePromptsCount} Prompts für Ideenfindung, Storytelling, Designkonzepte und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {creativeCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Support Card -->
+      <a href="/prompt-bibliothek/support" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">🛟</span>
+          <span>Kundenservice & Support</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {supportPromptsCount} Prompts für Kundenanfragen, Problemlösung, Kundenbindung und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {supportCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Strategy Card -->
+      <a href="/prompt-bibliothek/strategy" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">🧩</span>
+          <span>Strategie & Planung</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {strategyPromptsCount} Prompts für Geschäftsstrategie, Marktanalyse, Zukunftsplanung und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {strategyCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
+      
+      <!-- Keynote Card -->
+      <a href="/prompt-bibliothek/keynote" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-3xl">🎤</span>
+          <span>Vorträge & Präsentationen</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          {keynotePromptsCount} Prompts für Keynotes, Fachvorträge, Präsentationstechniken und mehr
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {keynoteCategories.map(category => (
+            <span class="px-3 py-1 bg-primary/10 rounded-full text-sm">{category}</span>
+          ))}
+        </div>
+      </a>
     </div>
   </main>
 </Layout>

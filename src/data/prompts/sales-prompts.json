@@ -1,0 +1,101 @@
+{
+  "bereich": "Vertrieb",
+  "prompts": [
+    {
+      "kategorie": "Kaltakquise",
+      "unterkategorie": "Telefon",
+      "komplexitaet": "Einfach",
+      "titel": "Telefonisches Erstkontakt-Skript",
+      "beschreibung": "Erstellt ein strukturiertes Gesprächsskript für telefonische Kaltakquise",
+      "prompt": "Erstelle ein Telefonskript für die Kaltakquise zum Produkt/zur Dienstleistung {{PRODUKT/DIENSTLEISTUNG}}. Das Skript sollte folgende Elemente enthalten: eine kurze Vorstellung, einen aufmerksamkeitsstarken Einstieg (Hook), 1-2 qualifizierende Fragen, eine prägnante Wertaussage und einen klaren nächsten Schritt. Der Anruf sollte nicht länger als 3-4 Minuten geplant sein und eine natürliche Gesprächsführung ermöglichen."
+    },
+    {
+      "kategorie": "Kaltakquise",
+      "unterkategorie": "E-Mail",
+      "komplexitaet": "Mittel",
+      "titel": "Kaltakquise-E-Mail-Sequenz",
+      "beschreibung": "Erstellt eine mehrteilige E-Mail-Sequenz für die Kaltakquise",
+      "prompt": "Erstelle eine 4-teilige E-Mail-Sequenz für die Kaltakquise von {{ZIELGRUPPE}} für {{PRODUKT/DIENSTLEISTUNG}}.\n\nJede E-Mail sollte enthalten:\n- Eine prägnante, relevante Betreffzeile\n- Einen personalisierten Einstieg, der Aufmerksamkeit erregt\n- Eine klare Wertaussage, die auf Herausforderungen der Zielgruppe eingeht\n- Einen deutlichen Call-to-Action\n- Eine professionelle Signatur\n\nFolgende Struktur für die Sequenz:\n\nE-Mail 1: Erste Kontaktaufnahme mit Hauptnutzen (max. 150 Wörter)\nE-Mail 2: Follow-up nach 3 Tagen mit zusätzlichen Informationen/Beweis (max. 120 Wörter)\nE-Mail 3: Alternative Perspektive/Ansatz nach weiteren 4 Tagen (max. 100 Wörter)\nE-Mail 4: Abschließende Nachfrage nach weiteren 5 Tagen (max. 80 Wörter)\n\nDie E-Mails sollten einen professionellen, nicht aufdringlichen Ton haben und auf konkrete Schmerzpunkte der {{BRANCHE}} eingehen."
+    },
+    {
+      "kategorie": "Kaltakquise",
+      "unterkategorie": "Social Selling",
+      "komplexitaet": "Komplex",
+      "titel": "LinkedIn-Akquisestrategie",
+      "beschreibung": "Entwickelt eine umfassende Social-Selling-Strategie für LinkedIn",
+      "prompt": "Als Vertriebsexperte, entwickle eine umfassende LinkedIn-Akquisestrategie für Vertriebsmitarbeiter in der {{BRANCHE}}, die {{PRODUKT/DIENSTLEISTUNG}} verkaufen.\n\nZIELGRUPPE:\n- Funktionen/Positionen: {{ZIELPOSITIONEN}}\n- Branchen: {{ZIELBRANCHEN}}\n- Unternehmensgröße: {{UNTERNEHMENSGRÖSSE}}\n\nDie Strategie sollte folgende Komponenten enthalten:\n\n1. PROFIL-OPTIMIERUNG\n   - Struktur eines verkaufsorientierten LinkedIn-Profils\n   - Schlüsselelemente für Headline und About-Sektion\n   - Empfehlungen für Featured Content\n\n2. ZIELGRUPPEN-IDENTIFIKATION\n   - Such- und Filter-Strategien für LinkedIn\n   - Priorisierungsansatz nach Kontaktpotential\n   - Tracking-System für Kontakte (Struktur)\n\n3. ENGAGEMENT-STRATEGIE\n   - Content-Interaktionsstrategie vor direkter Kontaktaufnahme\n   - Kommentierungs-Leitfaden mit Beispielen\n   - Strategie für eigene Content-Erstellung\n\n4. KONTAKTAUFNAHME\n   - 3 Vorlagen für personalisierte Kontaktanfragen\n   - Follow-up-Sequenz nach Verbindung (5 Nachrichten)\n   - Übergang von Online- zu Offline-Gespräch\n\n5. ACCOUNT-BASED SELLING\n   - Strategie für Mehrpersonenkontakt in Zielunternehmen\n   - Nurturing-Ansatz für Langzeitkontakte\n   - Empfehlungs-/Referral-Strategie\n\n6. TOOLS & EFFIZIENZTIPPS\n   - Empfohlene Automatisierungsansätze (unter Berücksichtigung von LinkedIn-Limits)\n   - Vorlagen für tägliche/wöchentliche Aktivitäten\n   - KPIs für Erfolgsmessung\n\nJeder Abschnitt sollte konkrete Handlungsanweisungen, Vorlagen und Best Practices enthalten, die sofort implementiert werden können."
+    },
+    {
+      "kategorie": "Angebotserstellung",
+      "unterkategorie": "Standardangebote",
+      "komplexitaet": "Einfach",
+      "titel": "Überzeugendes Standardangebot",
+      "beschreibung": "Erstellt ein klar strukturiertes, überzeugendes Standardangebot",
+      "prompt": "Erstelle ein überzeugendes Standardangebot für {{PRODUKT/DIENSTLEISTUNG}} an {{ZIELKUNDE}}. Das Angebot sollte folgende Elemente enthalten:\n\n- Personalisierte Einleitung mit Bezug auf das Vorgespräch/den Bedarf\n- Klare Darstellung des Kundennutzens und der Problemlösung\n- Übersichtliche Auflistung der Leistungskomponenten\n- Transparente Preisgestaltung mit optionalen Zusatzleistungen\n- Klarer Zeitplan für die Umsetzung/Lieferung\n- Konkrete nächste Schritte und Call-to-Action\n- Professioneller Abschluss mit Vertrauensbildenden Elementen\n\nDas Angebot sollte einen professionellen, kundenorientierten Ton haben und nicht mehr als 2 Seiten umfassen."
+    },
+    {
+      "kategorie": "Angebotserstellung",
+      "unterkategorie": "Komplexe Lösungen",
+      "komplexitaet": "Komplex",
+      "titel": "Lösungsorientiertes Komplexangebot",
+      "beschreibung": "Erstellt ein umfassendes Angebot für komplexe Produkte oder Dienstleistungen",
+      "prompt": "Als Vertriebsexperte für komplexe Lösungen, erstelle ein umfassendes Angebot für {{KOMPLEXE_LÖSUNG}} an {{ZIELKUNDE}} in der Branche {{BRANCHE}}.\n\nKUNDENSITUATION:\n- Aktuelle Herausforderungen: {{HERAUSFORDERUNGEN}}\n- Geschäftsziele: {{ZIELE}}\n- Bestehende Infrastruktur/Lösungen: {{BESTAND}}\n\nLÖSUNGSANSATZ:\n- Kernkomponenten: {{KERNKOMPONENTEN}}\n- Optionale Erweiterungen: {{OPTIONEN}}\n- Implementation/Onboarding: {{IMPLEMENTATION}}\n\nDas Angebot sollte folgende Struktur haben:\n\n1. EXECUTIVE SUMMARY\n   - Prägnante Zusammenfassung des Gesamtangebots (max. 1 Seite)\n   - Hervorhebung des Hauptnutzens und ROI\n   - Differenzierung zu Alternativlösungen\n\n2. AUSGANGSSITUATION & BEDARFSANALYSE\n   - Detaillierte Darstellung der Kundensituation\n   - Identifizierte Schmerzpunkte und Optimierungspotentiale\n   - Qualitative und quantitative Auswirkungen\n\n3. LÖSUNGSKONZEPT\n   - Gesamtarchitektur der Lösung\n   - Detaillierte Beschreibung einzelner Komponenten\n   - Anpassungen für spezifische Kundenanforderungen\n   - Visualisierungen und Diagramme zur Verdeutlichung\n\n4. IMPLEMENTIERUNGSPLAN\n   - Phasenmodell mit konkreten Meilensteinen\n   - Zeitplan und Ressourcenplanung\n   - Verantwortlichkeiten und Mitwirkungspflichten\n\n5. INVESTITION & ROI\n   - Transparente Kostenaufstellung (einmalig und wiederkehrend)\n   - Staffelungsoptionen und Volumendegression\n   - Finanzierungsmodelle (wenn relevant)\n   - ROI-Berechnung mit konkreten Annahmen\n\n6. RISIKOMINIMIERUNG\n   - Referenzen und Case Studies\n   - Qualitätssicherungsmaßnahmen\n   - Garantien und Service Level Agreements\n\n7. NÄCHSTE SCHRITTE\n   - Konkreter Aktionsplan\n   - Entscheidungsprozess und Zeitplan\n\nDas Angebot sollte einen professionellen, lösungsorientierten Ton haben und durch Visualisierungen, Tabellen und Grafiken unterstützt werden. Wichtig ist die Herausstellung des Kundennutzens statt reiner Produktfeatures."
+    },
+    {
+      "kategorie": "Angebotserstellung",
+      "unterkategorie": "Nachfassstrategie",
+      "komplexitaet": "Mittel",
+      "titel": "Angebotsnachfass-Strategie",
+      "beschreibung": "Entwickelt eine strukturierte Nachfassstrategie für versendete Angebote",
+      "prompt": "Entwickle eine strukturierte Nachfassstrategie für versendete Angebote zu {{PRODUKT/DIENSTLEISTUNG}} an {{ZIELGRUPPE}}.\n\nDie Strategie sollte folgende Elemente umfassen:\n\n1. TIMING UND SEQUENZ\n   - Optimaler Zeitpunkt für erste Nachfassaktion\n   - Vollständige Sequenz mit 3-4 Kontaktpunkten\n   - Eskalationsstrategie (von E-Mail zu Telefon etc.)\n\n2. KOMMUNIKATIONSVORLAGEN\n   - E-Mail-Vorlage für erste Nachfassaktion (max. 150 Wörter)\n   - E-Mail-Vorlage für zweite Nachfassaktion mit neuem Mehrwert (max. 150 Wörter)\n   - Telefonskript für Nachfassgespräch\n   - Finale \"letzte Chance\"-Kommunikation (max. 100 Wörter)\n\n3. MEHRWERTELEMENTE\n   - 3-5 zusätzliche Informationen/Materialien, die bei Nachfassaktionen geteilt werden können\n   - Situationsabhängige Angebotsnachbesserungen oder -varianten\n\n4. EINWANDBEHANDLUNG\n   - Vorbereitung auf typische Verzögerungsgründe\n   - Konkrete Formulierungsvorschläge für 5 häufige Einwände\n\n5. ABSCHLUSSSTRATEGIEN\n   - Techniken zur sanften Dringlichkeitserzeugung\n   - Alternative Abschlussoptionen für zögernde Kunden\n\n6. TRACKING UND OPTIMIERUNG\n   - Vorschlag für einfaches Tracking-System\n   - Erfolgsindikatoren und Anpassungsstrategie\n\nDie Strategie soll professionell und nicht aufdringlich sein, den Kundenwert in den Vordergrund stellen und flexibel an verschiedene Reaktionen anpassbar sein."
+    },
+    {
+      "kategorie": "Einwandbehandlung",
+      "unterkategorie": "Preis-Einwände",
+      "komplexitaet": "Mittel",
+      "titel": "Strategie für Preiseinwände",
+      "beschreibung": "Entwickelt Strategien und Formulierungen zur Behandlung von Preiseinwänden",
+      "prompt": "Entwickle eine umfassende Strategie zur professionellen Behandlung von Preiseinwänden für {{PRODUKT/DIENSTLEISTUNG}} in der {{PREISKATEGORIE}} (Premium, Mittelklasse, Einstieg).\n\nDie Strategie sollte folgende Komponenten enthalten:\n\n1. TYPISCHE PREISEINWÄNDE\n   - 5-7 häufigste Preiseinwände in dieser Kategorie\n   - Psychologische Motivation hinter jedem Einwand\n\n2. GRUNDLEGENDE PRINZIPIEN\n   - Mindset und Haltung bei Preiseinwänden\n   - Dos and Don'ts in der Reaktion\n   - Wertbasierter vs. preisbasierter Gesprächsansatz\n\n3. EINWANDBEHANDLUNGSTECHNIKEN\n   - Feel-Felt-Found Methode mit Beispielen\n   - Kosten-Nutzen-Argumentation mit ROI-Beispielen\n   - Differenzierungsstrategie gegenüber günstigeren Alternativen\n   - Sandwich-Technik mit Beispielformulierungen\n\n4. KONKRETE ANTWORTEN\n   - 3-4 Formulierungsoptionen für jeden identifizierten Einwand\n   - Brücken von Preisdiskussion zurück zum Kundennutzen\n   - Formulierungen für verschiedene Gesprächsphasen\n\n5. PREISVERHANDLUNGSOPTIONEN\n   - Alternativen zu Preisnachlässen\n   - Value-Add-Strategien statt Rabattierung\n   - Paketangebote und Cross-Selling-Ansätze\n   - Bedingte Preisnachlässe mit Gegenleistung\n\n6. ABSCHLUSSTECHNIKEN\n   - Umgang mit finalen Preiseinwänden kurz vor Abschluss\n   - Commitment-Techniken nach gelösten Preiseinwänden\n\nDie Strategien sollten einen professionellen, wertschätzenden Ton haben und die Balance zwischen Kundenorientierung und wirtschaftlichen Interessen wahren."
+    },
+    {
+      "kategorie": "Einwandbehandlung",
+      "unterkategorie": "Wettbewerbseinwände",
+      "komplexitaet": "Komplex",
+      "titel": "Wettbewerbsdifferenzierung",
+      "beschreibung": "Entwickelt Strategien zur überzeugenden Differenzierung gegenüber Wettbewerbern",
+      "prompt": "Als Vertriebsstratege, entwickle eine umfassende Strategie zur überzeugenden Differenzierung von {{PRODUKT/DIENSTLEISTUNG}} gegenüber den Hauptwettbewerbern {{WETTBEWERBER_1}}, {{WETTBEWERBER_2}} und {{WETTBEWERBER_3}} in der Branche {{BRANCHE}}.\n\nMARKTPOSITIONIERUNG:\n- Unsere Kernstärken: {{KERNSTÄRKEN}}\n- Typische Kundenbedürfnisse: {{KUNDENBEDÜRFNISSE}}\n- Unsere Positionierung: {{POSITIONIERUNG}} (z.B. Premiumanbieter, Innovationsführer, Spezialist)\n\nDie Strategie sollte folgende Komponenten enthalten:\n\n1. WETTBEWERBSANALYSE\n   - Stärken-Schwächen-Profil jedes Hauptwettbewerbers\n   - Typische Verkaufsargumente der Wettbewerber\n   - Häufigste Wettbewerbsvergleiche durch Kunden\n\n2. DIFFERENZIERUNGSSTRATEGIEN\n   - Zentrale Alleinstellungsmerkmale (USPs) mit Relevanz für Kundenbedürfnisse\n   - Konkrete Vorteile in verschiedenen Evaluierungskategorien\n   - Nutzensorientierte Positionierungsmatrix\n\n3. EINWANDBEHANDLUNGSTECHNIKEN\n   - Strategien für direkte Wettbewerbsvergleiche\n   - Umgang mit Preis-Leistungs-Vergleichen\n   - Rückführung auf Kundenkriterien vs. Wettbewerbsfokus\n\n4. KONKRETE ANTWORTEN\n   - 5-7 häufigste wettbewerbsbezogene Einwände\n   - 3 Antwortvarianten pro Einwand mit unterschiedlichem Ansatz\n   - Formulierungen für verschiedene Stakeholder (technisch, kommerziell, Management)\n\n5. BEWEISFÜHRUNG\n   - Fact-Sheet mit überprüfbaren Differenzierungsmerkmalen\n   - ROI-Berechnungen im Vergleich zu Wettbewerbern\n   - Case Studies und Referenzen für Glaubwürdigkeit\n\n6. PRO-AKTIVE WETTBEWERBSSTRATEGIEN\n   - Ansätze, um Wettbewerbsthemen selbst anzusprechen\n   - Faire aber überzeugende Wettbewerbsabgrenzung\n   - Umgang mit kritischen Marktvergleichen und Tests\n\nDie Strategie sollte einen professionellen, faktischen Ton haben, keine unethischen Praktiken empfehlen und echten Mehrwert für den Kunden in den Vordergrund stellen."
+    },
+    {
+      "kategorie": "Einwandbehandlung",
+      "unterkategorie": "Verzögerungseinwände",
+      "komplexitaet": "Einfach",
+      "titel": "Umgang mit Verzögerungstaktiken",
+      "beschreibung": "Entwickelt Strategien zum Umgang mit Aufschubeinwänden",
+      "prompt": "Entwickle Strategien und Formulierungen zum professionellen Umgang mit Verzögerungs- und Aufschubeinwänden im Verkauf von {{PRODUKT/DIENSTLEISTUNG}}.\n\nDie Strategien sollten folgende Aspekte abdecken:\n\n1. TYPISCHE VERZÖGERUNGSEINWÄNDE\n   - 5 häufigste Aufschubeinwände (z.B. \"Wir warten auf das nächste Budget\", \"Wir müssen erst intern besprechen\")\n   - Identifikation echter vs. vorgeschobener Einwände\n\n2. REAKTIONSSTRATEGIEN\n   - Fragetechniken zur Klärung der wahren Einwände\n   - Einwandprävention in früheren Verkaufsphasen\n   - Balance zwischen Dringlichkeit und Respekt\n\n3. KONKRETE ANTWORTEN\n   - 2-3 Formulierungsoptionen pro identifiziertem Einwand\n   - Brücken zum konkreten Kundennutzen bei sofortiger Entscheidung\n   - Follow-up Strategie nach initialer Antwort\n\n4. COMMITMENT-TECHNIKEN\n   - Methoden zum Erlangen kleinerer Zwischencommitments\n   - Alternative Vorschläge für nächste Schritte\n   - Vereinbarung konkreter Zeitpläne\n\nDie Strategien sollten einen professionellen, lösungsorientierten Ton haben und nicht manipulativ wirken."
+    },
+    {
+      "kategorie": "Follow-up-Kommunikation",
+      "unterkategorie": "Nachverfolgung",
+      "komplexitaet": "Einfach",
+      "titel": "Follow-up-E-Mail-Vorlagen",
+      "beschreibung": "Erstellt verschiedene E-Mail-Vorlagen für die Nachverfolgung nach Kundenkontakten",
+      "prompt": "Erstelle 5 verschiedene E-Mail-Vorlagen für Follow-ups nach unterschiedlichen Vertriebssituationen für {{PRODUKT/DIENSTLEISTUNG}}:\n\n1. Nach einem Erstgespräch/Kennenlernen\n2. Nach einer Produktdemonstration/Präsentation\n3. Nach einem Beratungsgespräch mit konkretem Bedarf\n4. Nach längerer Funkstille (Reaktivierung)\n5. Nach einer Absage (für langfristige Beziehungspflege)\n\nJede Vorlage sollte enthalten:\n- Eine prägnante, situationsbezogene Betreffzeile\n- Eine persönliche Einleitung mit Bezug zum letzten Kontakt\n- Eine Zusammenfassung der wichtigsten Punkte/nächsten Schritte\n- Einen klaren Call-to-Action\n- Eine professionelle Signatur\n\nDie Vorlagen sollten einen personalisierbaren Rahmen bieten (mit {{PLATZHALTERN}} für individuelle Anpassungen), maximal 150-200 Wörter umfassen und einen professionellen, aber persönlichen Ton haben."
+    },
+    {
+      "kategorie": "Follow-up-Kommunikation",
+      "unterkategorie": "Langfristige Beziehungspflege",
+      "komplexitaet": "Mittel",
+      "titel": "Beziehungspflege-Strategie",
+      "beschreibung": "Entwickelt eine Strategie zur langfristigen Kontaktpflege mit Interessenten",
+      "prompt": "Entwickle eine umfassende Strategie zur langfristigen Beziehungspflege mit Interessenten und potentiellen Kunden im Vertrieb von {{PRODUKT/DIENSTLEISTUNG}} in der {{BRANCHE}}.\n\nZIELGRUPPEN:\n- Entscheidungsträger: {{ENTSCHEIDER_POSITIONEN}}\n- Beeinflusser: {{INFLUENCER_POSITIONEN}}\n- Einkauf/Beschaffung: {{EINKÄUFER_POSITIONEN}}\n\nVERKAUFSZYKLUS:\n- Typische Dauer: {{VERKAUFSZYKLUS}}\n- Häufige Verzögerungspunkte: {{VERZÖGERUNGEN}}\n\nDie Strategie sollte folgende Komponenten enthalten:\n\n1. KONTAKTSTRATEGIE\n   - Optimale Kontaktfrequenz für verschiedene Interessentenphasen\n   - Mix aus persönlichen und automatisierten Kontaktpunkten\n   - Relevant bleiben ohne zu belästigen\n\n2. MEHRWERT-CONTENT\n   - 10 Ideen für relevante Mehrwert-Inhalte für verschiedene Stakeholder\n   - Individualisierungsansätze je nach Interessentensituation\n   - Content-Kalender mit saisonalen/aktuellen Anlässen\n\n3. KOMMUNIKATIONSVORLAGEN\n   - 3 E-Mail-Vorlagen für verschiedene Phasen des Nurturings\n   - Social-Media-Interaktionsstrategien\n   - Leitfaden für kurze, wertvolle Telefonkontakte\n\n4. TRIGGER-EREIGNISSE\n   - Liste relevanter Business-Trigger, die Kontaktaufnahme legitimieren\n   - Reaktivierungsstrategien nach längerer Funkstille\n   - Ansätze für erneuten Kontakt nach Absagen\n\n5. VERFOLGUNG UND OPTIMIERUNG\n   - Tracking-System für langfristige Beziehungen\n   - Engagement-Bewertung und Priorisierung\n   - A/B-Testing-Ansätze für verschiedene Kontaktstrategien\n\nDie Strategie sollte eine Balance zwischen Vertriebszielen und echtem Mehrwert für Interessenten bieten, verschiedene Kommunikationskanäle integrieren und skalierbar für verschiedene Kontaktvolumina sein."
+    },
+    {
+      "kategorie": "Follow-up-Kommunikation",
+      "unterkategorie": "Gesprächsdokumentation",
+      "komplexitaet": "Mittel",
+      "titel": "CRM-Dokumentationsstandard",
+      "beschreibung": "Erstellt Standards für effiziente und wertvolle Gesprächsdokumentation im CRM",
+      "prompt": "Entwickle einen umfassenden Standard für die effiziente und wertvolle Dokumentation von Vertriebsgesprächen im CRM-System für {{PRODUKT/DIENSTLEISTUNG}} in der {{BRANCHE}}.\n\nCRM-SYSTEM: {{CRM_SYSTEM}} (z.B. Salesforce, HubSpot, Microsoft Dynamics)\n\nDer Dokumentationsstandard sollte folgende Elemente umfassen:\n\n1. GESPRÄCHSPROTOKOLLE\n   - Strukturvorlage für verschiedene Gesprächstypen (Erstgespräch, Demo, Verhandlung)\n   - Must-have Informationen je Gesprächstyp\n   - Balance zwischen Detailtiefe und Effizienz\n   - Beispiele für gut dokumentierte Gespräche\n\n2. KUNDENBEDÜRFNISSE & SCHMERZPUNKTE\n   - Kategorisierung relevanter Kundenbedürfnisse\n   - Dokumentationsformat für Herausforderungen und Ziele\n   - Priorisierungssystem für identifizierte Bedarfe\n\n3. VERKAUFSPROZESS-TRACKING\n   - Definition von Meilensteinen und Status-Updates\n   - Dokumentation von Erfolgsfaktoren und Hindernissen\n   - Chancenbewertung und Prognoseelemente\n\n4. STAKEHOLDER-MAPPING\n   - Erfassung verschiedener Stakeholder und ihrer Rollen\n   - Dokumentation von Einfluss und Haltung je Stakeholder\n   - Beziehungen zwischen Stakeholdern\n\n5. AKTIVITÄTSPLANUNG\n   - Format für Follow-up-Aufgaben und Verantwortlichkeiten\n   - Zeitleistendokumentation und Erinnerungssystem\n   - Verknüpfung mit Verkaufsphasen\n\n6. RESSOURCENNUTZUNG\n   - Tracking gesendeter Materialien und Informationen\n   - Dokumentation von Kundeninteraktionen mit Inhalten\n\n7. BEST PRACTICES\n   - Zeitmanagement für effiziente Dokumentation\n   - Integration in täglichen Workflow\n   - Kollaborationsansätze im Team\n\nDer Standard sollte die Balance zwischen vollständiger Information und praktischer Anwendbarkeit wahren, sowie konkrete Beispiele und Vorlagen für jede Komponente enthalten."
+    }
+  ]
+}
