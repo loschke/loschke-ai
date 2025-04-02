@@ -77,6 +77,26 @@ const promptGuideSchema = z.object({
     seo: seoSchema.default({}),
 });
 
+// Aufgaben schema definition
+const aufgabenSchema = z.object({
+    // Basic information
+    title: z.string().min(1),
+    description: z.string(),
+    
+    // Categorization
+    branch: z.string(), // bildung-schule, marketing, etc.
+    complexity: z.enum(["simple", "medium", "advanced", "complex"]),
+    
+    // Taxonomy
+    tags: z.array(z.string()).default([]),
+    
+    // Display order
+    order: z.number().optional(),
+    
+    // SEO
+    seo: seoSchema.default({}),
+});
+
 // Define the collections
 const blog = defineCollection({
     type: 'content',
@@ -88,8 +108,14 @@ const howToPromptGuide = defineCollection({
     schema: promptGuideSchema,
 });
 
+const aufgaben = defineCollection({
+    type: 'content',
+    schema: aufgabenSchema,
+});
+
 // Export the collections
 export const collections = {
     blog,
     'how-to-prompt-guide': howToPromptGuide,
+    'aufgaben': aufgaben,
 };

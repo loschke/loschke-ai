@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all exercises
+const allAufgaben = await getCollection('aufgaben');
+
+// Group by branch
+const branchGroups = allAufgaben.reduce((groups, aufgabe) => {
+  const branch = aufgabe.data.branch;
+  if (!groups[branch]) {
+    groups[branch] = [];
+  }
+  groups[branch].push(aufgabe);
+  return groups;
+}, {});
+
+// Function to format branch name
+function formatBranch(branch) {
+  switch(branch) {
+    case 'bildung-schule': return 'Bildung & Schule';
+    case 'projektmanagement': return 'Projektmanagement';
+    case 'anwendungsentwicklung': return 'Anwendungsentwicklung';
+    case 'marketing': return 'Marketing';
+    // Add more branches here as needed
+    default: return branch.replace('-', ' & ').replace(/\b\w/g, l => l.toUpperCase());
+  }
+}
+
+// Function to check if branch is in progress
+function isInProgress(branch) {
+  return ['projektmanagement', 'anwendungsentwicklung', 'marketing'].includes(branch);
+}
+
+// Function to format complexity
+function formatComplexity(complexity) {
+  switch(complexity) {
+    case 'simple': return 'Einfach';
+    case 'medium': return 'Mittel';
+    case 'advanced': return 'Fortgeschritten';
+    case 'complex': return 'Komplex';
+    default: return complexity;
+  }
+}
+---
+
+<Layout title="KI-Übungsaufgaben">
+  <!-- Sticky Breadcrumb Navigation -->
+  <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center gap-3 text-sm">
+        <span class="text-white font-medium px-2 py-1 bg-white/5 rounded">
+          Aufgaben
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">KI-Übungsaufgaben</h1>
+    <p class="mb-8 text-lg">Praktische Übungen zur Anwendung von KI in verschiedenen Branchen und mit unterschiedlichen Schwierigkeitsgraden.</p>
+    
+    <div class="grid gap-8">
+      {Object.entries(branchGroups).map(([branch, aufgaben]) => {
+        const inProgress = isInProgress(branch);
+        return (
+          <div class={`rounded-lg shadow-lg p-6 ${inProgress ? 'bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700' : 'bg-white dark:bg-gray-800'}`}>
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>{formatBranch(branch)}</span>
+              {inProgress && (
+                <span class="text-sm font-normal bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
+                  In Progress
+                </span>
+              )}
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+              {aufgaben
+                .sort((a, b) => {
+                  // Sort by complexity and then by title
+                  const complexityOrder = { simple: 1, medium: 2, advanced: 3, complex: 4 };
+                  return complexityOrder[a.data.complexity] - complexityOrder[b.data.complexity] || 
+                         a.data.title.localeCompare(b.data.title);
+                })
+                .slice(0, 4) // Only show the first 4
+                .map(aufgabe => {
+                  const slug = aufgabe.slug;
+                  const complexity = aufgabe.data.complexity;
+                  
+                  return (
+                    <a href={`/aufgaben/${slug}`} class="block p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                      <div class="flex items-center mb-2">
+                        <span class={`px-2 py-1 text-xs font-medium rounded-full mr-2 ${
+                          complexity === 'simple' ? 'bg-green-600 text-white' : 
+                          complexity === 'medium' ? 'bg-yellow-600 text-white' : 
+                          complexity === 'advanced' ? 'bg-red-600 text-white' :
+                          'bg-purple-600 text-white'
+                        }`}>
+                          {formatComplexity(complexity)}
+                        </span>
+                      </div>
+                      <h3 class="text-xl font-semibold">{aufgabe.data.title}</h3>
+                      <p class="text-gray-600 dark:text-gray-300 mt-2">{aufgabe.data.description}</p>
+                    </a>
+                  );
+                })
+              }
+            </div>
+            
+            {aufgaben.length > 4 && (
+              <div class="mt-4 text-center">
+                <a href={`/aufgaben/${branch}`} class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                  Alle {aufgaben.length} Aufgaben anzeigen
+                </a>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </main>
+</Layout>

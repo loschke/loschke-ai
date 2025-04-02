@@ -1,0 +1,205 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Accordion from '../ui/Accordion.astro';
+import { getEntry, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  branch: string;
+  complexity: string;
+  entryPath: string;
+}
+
+const { branch, complexity, entryPath } = Astro.props;
+
+// Get the content entry
+const entry = await getEntry('aufgaben', entryPath) as CollectionEntry<'aufgaben'>;
+if (!entry) {
+  throw new Error(`Content entry not found: ${entryPath}`);
+}
+
+const { Content } = await entry.render();
+
+// Function to format complexity
+function formatComplexity(complexity: string): string {
+  switch(complexity) {
+    case 'simple': return 'Einfach';
+    case 'medium': return 'Mittel';
+    case 'advanced': return 'Fortgeschritten';
+    case 'complex': return 'Komplex';
+    default: return complexity;
+  }
+}
+
+// Function to format branch name
+function formatBranch(branch: string): string {
+  switch(branch) {
+    case 'bildung-schule': return 'Bildung & Schule';
+    // Add more branches here as needed
+    default: return branch.replace('-', ' & ').replace(/\b\w/g, l => l.toUpperCase());
+  }
+}
+---
+
+<Layout title={entry.data.title || 'Übungsaufgabe'}>
+  <!-- Sticky Breadcrumb Navigation -->
+  <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center gap-3 text-sm">
+        <a href="/aufgaben" class="flex items-center gap-2 text-gray-200 hover:text-blue-300 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12L9 6m-6 6l6 6"/>
+          </svg>
+          <span>Aufgaben</span>
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <a href={`/aufgaben/${branch}`} class="text-white/70 hover:text-white transition-colors px-2 py-1 rounded hover:bg-white/5">
+          {formatBranch(branch)}
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span class="text-white font-medium px-2 py-1 bg-white/5 rounded truncate max-w-[200px]">
+          {entry.data.title}
+        </span>
+      </div>
+    </div>
+  </nav>
+  
+  <main class="max-w-[1200px] mx-auto px-4 py-6 pb-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-6 flex items-center">
+        <span class={`px-3 py-1 text-sm font-medium rounded-full mr-3 ${
+          complexity === 'simple' ? 'bg-green-600 text-white' : 
+          complexity === 'medium' ? 'bg-yellow-600 text-white' : 
+          complexity === 'advanced' ? 'bg-red-600 text-white' :
+          'bg-purple-600 text-white'
+        }`}>
+          {formatComplexity(complexity)}
+        </span>
+        <span class="px-3 py-1 bg-gray-700 text-white text-sm font-medium rounded-full">
+          {formatBranch(branch)}
+        </span>
+      </div>
+      
+      <article class="prose prose-lg dark:prose-invert max-w-none bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-800">
+        <div id="exercise-content">
+          <Content />
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Script to wrap solution sections in accordions
+  document.addEventListener('astro:page-load', () => {
+    const exerciseContent = document.getElementById('exercise-content');
+    if (!exerciseContent) return;
+    
+    // Find all h2 elements with "Lösungsansatz" or similar titles
+    const solutionHeadings = Array.from(exerciseContent.querySelectorAll('h2')).filter(h2 => 
+      h2.textContent?.includes('Lösung') || 
+      h2.textContent?.includes('Lösungsansatz') ||
+      h2.textContent?.includes('Musterlösung')
+    );
+    
+    solutionHeadings.forEach(heading => {
+      // Create wrapper for all content after the heading until the next heading or end of content
+      const wrapper = document.createElement('div');
+      wrapper.className = 'solution-wrapper';
+      
+      // Collect all elements that belong to the solution
+      let currentElement = heading.nextElementSibling;
+      const solutionElements = [];
+      
+      while (currentElement && 
+             !(currentElement.tagName === 'H2' || currentElement.tagName === 'H1')) {
+        const nextElement = currentElement.nextElementSibling;
+        solutionElements.push(currentElement);
+        currentElement = nextElement;
+      }
+      
+      // Create accordion structure
+      const accordionContainer = document.createElement('div');
+      accordionContainer.className = 'accordion-container mt-6 mb-8';
+      
+      const accordionHeader = document.createElement('button');
+      accordionHeader.className = 'accordion-header w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-t-lg flex justify-between items-center';
+      accordionHeader.setAttribute('aria-expanded', 'false');
+      const headingId = `solution-${Math.random().toString(36).substring(2, 9)}`;
+      accordionHeader.setAttribute('aria-controls', headingId + '-panel');
+      accordionHeader.id = headingId + '-header';
+      
+      const headerText = document.createElement('span');
+      headerText.className = 'text-xl font-semibold';
+      headerText.textContent = heading.textContent || 'Lösungsansatz';
+      
+      const headerIcon = document.createElement('span');
+      headerIcon.className = 'accordion-icon';
+      headerIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      `;
+      
+      accordionHeader.appendChild(headerText);
+      accordionHeader.appendChild(headerIcon);
+      
+      const accordionContent = document.createElement('div');
+      accordionContent.className = 'accordion-content overflow-hidden transition-all duration-300 ease-in-out';
+      accordionContent.id = headingId + '-panel';
+      accordionContent.setAttribute('aria-labelledby', headingId + '-header');
+      accordionContent.style.display = 'none';
+      
+      const contentInner = document.createElement('div');
+      contentInner.className = 'p-4 bg-gray-900/50 border border-gray-800 rounded-b-lg';
+      
+      // Move solution elements into the accordion
+      solutionElements.forEach(el => {
+        contentInner.appendChild(el.cloneNode(true));
+      });
+      
+      accordionContent.appendChild(contentInner);
+      accordionContainer.appendChild(accordionHeader);
+      accordionContainer.appendChild(accordionContent);
+      
+      // Replace the original heading with the accordion
+      heading.replaceWith(accordionContainer);
+      
+      // Remove the original solution elements
+      solutionElements.forEach(el => {
+        if (el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
+      });
+      
+      // Add click event to the accordion header
+      accordionHeader.addEventListener('click', () => {
+        const isExpanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+        accordionHeader.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+        
+        if (isExpanded) {
+          accordionContent.style.display = 'none';
+        } else {
+          accordionContent.style.display = 'block';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .accordion-header[aria-expanded="true"] .accordion-icon svg {
+    transform: rotate(180deg);
+  }
+  
+  .accordion-icon svg {
+    transition: transform 0.3s ease;
+  }
+</style>

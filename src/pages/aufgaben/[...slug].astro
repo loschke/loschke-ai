@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import AufgabenDetailLayout from '../../components/layouts/AufgabenDetailLayout.astro';
+
+export async function getStaticPaths() {
+  const aufgabenEntries = await getCollection('aufgaben');
+  
+  return aufgabenEntries.map(entry => {
+    const slug = entry.slug;
+    const parts = slug.split('/');
+    const branch = parts[0];
+    const filename = parts[1];
+    
+    // Extract complexity from filename (e.g., "simple-exercise-1")
+    let complexity = 'simple';
+    if (filename.startsWith('medium-')) {
+      complexity = 'medium';
+    } else if (filename.startsWith('advanced-')) {
+      complexity = 'advanced';
+    } else if (filename.startsWith('complex-')) {
+      complexity = 'advanced'; // Using 'advanced' for complex exercises due to schema limitations
+    }
+    
+    return {
+      params: { slug },
+      props: { entry, branch, complexity, entryPath: slug }
+    };
+  });
+}
+
+const { entry, branch, complexity, entryPath } = Astro.props;
+---
+
+<AufgabenDetailLayout 
+  branch={branch}
+  complexity={complexity}
+  entryPath={entryPath}
+/>
