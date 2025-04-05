@@ -2,8 +2,8 @@
 title: "KI-Content erkennen und verbessern"
 description: "Vom generischen zum authentischen Inhalt: Strategien zur Optimierung KI-generierter Texte"
 pubDate: 2025-04-05
-categories: ["KI", "Content"]
-tags: ["Content", "Optimierung", "Authentizität", "Textverbesserung", "Menschlichkeit"]
+categories: ["KI-Praxis"]
+tags: ["KI-Textgenerierung", "Content Creation", "Marketing", "Optimierung", "Authentizität"]
 draft: false
 author:
   name: "Rico Loschke"

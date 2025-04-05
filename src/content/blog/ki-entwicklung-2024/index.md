@@ -2,8 +2,8 @@
 title: 'KI-Entwicklung in 2024'
 description: 'Ein kurzer Überblick über aktuelle KI-Trends und Entwicklungen im Bereich der künstlichen Intelligenz für das Jahr 2024'
 pubDate: 2024-01-21
-categories: ['KI']
-tags: ['Artificial Intelligence', 'Machine Learning', 'Trends']
+categories: ['KI-Transformation']
+tags: ['Generative KI', 'KI-Strategie', 'Business', 'Trends', 'Innovation']
 draft: false
 featured: true
 author:

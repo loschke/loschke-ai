@@ -2,8 +2,8 @@
 title: "Ethik und Compliance"
 description: "Verantwortungsvoller Einsatz von KI im Marketing und rechtliche Rahmenbedingungen"
 pubDate: 2025-04-05
-categories: ["KI", "Marketing"]
-tags: ["Ethik", "Compliance", "Datenschutz", "Rechtliche Aspekte", "Verantwortung"]
+categories: ["KI-Transformation"]
+tags: ["KI-Ethik", "Generative KI", "Business", "Datenschutz", "Compliance"]
 draft: false
 author:
   name: "Rico Loschke"

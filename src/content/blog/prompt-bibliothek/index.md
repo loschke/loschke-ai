@@ -2,8 +2,8 @@
 title: "Prompt-Bibliothek aufbauen"
 description: "Systematisches Wissensmanagement für KI-Prompts und effiziente Wiederverwendung"
 pubDate: 2025-04-05
-categories: ["KI", "Wissensmanagement"]
-tags: ["Prompt-Bibliothek", "Wissensmanagement", "Dokumentation", "Best Practices"]
+categories: ["Prompt Engineering"]
+tags: ["Prompt Engineering", "KI-Textgenerierung", "Content Creation", "Wissensmanagement", "Produktivität"]
 draft: false
 author:
   name: "Rico Loschke"

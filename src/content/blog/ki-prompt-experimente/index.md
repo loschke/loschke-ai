@@ -2,8 +2,8 @@
 title: "KI-Prompt-Experimente"
 description: "Unkonventionelle Techniken für kreative Durchbrüche und innovative Ergebnisse"
 pubDate: 2025-04-05
-categories: ["KI", "Kreativität"]
-tags: ["Kreativität", "Experimente", "Innovation", "Unkonventionell", "Techniken"]
+categories: ["Prompt Engineering"]
+tags: ["Prompt Engineering", "KI-Textgenerierung", "Produktivität", "Kreativität", "Innovation"]
 draft: false
 author:
   name: "Rico Loschke"

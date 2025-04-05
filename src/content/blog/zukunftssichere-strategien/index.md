@@ -2,8 +2,8 @@
 title: "Zukunftssichere Prompt-Strategien"
 description: "Vorbereitet für die nächste KI-Generation: Langfristig relevante Ansätze und Techniken"
 pubDate: 2025-04-05
-categories: ["KI", "Strategie"]
-tags: ["Zukunft", "Strategie", "Langfristig", "Entwicklung", "Trends"]
+categories: ["KI-Strategie", "Prompt Engineering"]
+tags: ["KI-Strategie", "Prompt Engineering", "Business", "Generative KI", "Zukunft"]
 draft: false
 author:
   name: "Rico Loschke"

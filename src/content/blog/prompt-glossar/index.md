@@ -2,8 +2,8 @@
 title: "Glossar der Prompt-Begriffe"
 description: "Die wichtigsten Fachbegriffe im Bereich Prompt Engineering im Überblick"
 pubDate: 2025-04-05
-categories: ["KI", "Referenz"]
-tags: ["Glossar", "Begriffe", "Terminologie", "Definitionen", "Referenz"]
+categories: ["Prompt Engineering"]
+tags: ["Prompt Engineering", "Generative KI", "Bildung", "Referenz", "Terminologie"]
 draft: false
 author:
   name: "Rico Loschke"

@@ -2,8 +2,8 @@
 title: "Prompt-Fehlerbehebung"
 description: "Typische Probleme und deren Lösungen für effektivere KI-Interaktionen"
 pubDate: 2025-04-05
-categories: ["KI", "Troubleshooting"]
-tags: ["Fehlerbehebung", "Troubleshooting", "Optimierung", "Problemlösung", "Best Practices"]
+categories: ["Prompt Engineering"]
+tags: ["Prompt Engineering", "KI-Textgenerierung", "Produktivität", "Fehlerbehebung", "Optimierung"]
 draft: false
 author:
   name: "Rico Loschke"
