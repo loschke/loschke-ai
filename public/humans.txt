@@ -1,0 +1,15 @@
+/* TEAM */
+	Developer: Rico Loschke
+	Contact: agent@loschke.ai
+	LinkedIn: https://www.linkedin.com/in/rico-loschke/
+	GitHub: https://github.com/loschke
+	Instagram: https://www.instagram.com/kvix_studio/
+	From: Germany
+
+/* SITE */
+	Last update: 2025/04/05
+	Language: German
+	Doctype: HTML5
+	IDE: Visual Studio Code
+	Generator: Astro
+	Technology: Astro, TypeScript, Tailwind CSS

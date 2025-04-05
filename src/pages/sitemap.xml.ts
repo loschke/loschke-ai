@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { promises as fs } from 'fs';
+import { getBlogPosts } from '../utils/blog';
 
 // Statische Seiten
 const staticPages = [
@@ -7,7 +8,9 @@ const staticPages = [
     "contact",
     "impressum",
     "datenschutz",
-    "how-to-prompt-guide"  // Hinzugefügt
+    "how-to-prompt-guide",  // Hinzugefügt
+    "blog",  // Blog-Übersichtsseite
+    "guides",
 ];
 
 // Funktion zum Generieren der AI Design Framework URLs
@@ -68,6 +71,24 @@ function getPromptBibliothekUrls(): string[] {
     return urls;
 }
 
+// Funktion zum Generieren der Blog-URLs
+async function getBlogUrls(): Promise<string[]> {
+    const blogPosts = await getBlogPosts();
+    
+    // Blog-Post-URLs generieren
+    const blogUrls = blogPosts.map(post => `blog/${post.id}`);
+    
+    // Blog-Kategorie-URLs generieren
+    const categories = [...new Set(blogPosts.flatMap(post => post.data.categories || []))];
+    const categoryUrls = categories.map(category => `blog/category/${category.toLowerCase()}`);
+    
+    // Blog-Tag-URLs generieren
+    const tags = [...new Set(blogPosts.flatMap(post => post.data.tags || []))];
+    const tagUrls = tags.map(tag => `blog/tag/${tag.toLowerCase()}`);
+    
+    return [...blogUrls, ...categoryUrls, ...tagUrls];
+}
+
 // Sitemap generieren
 async function generateSitemap(): Promise<string> {
     const baseUrl = 'https://loschke.ai';
@@ -76,13 +97,16 @@ async function generateSitemap(): Promise<string> {
     const staticUrls = staticPages;
     const aiFrameworkUrls = await getAiDesignFrameworkUrls();
     const promptBibliothekUrls = getPromptBibliothekUrls();
+    const blogUrls = await getBlogUrls();
     
     // Alle URLs kombinieren
-    const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls];
+    const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls, ...blogUrls];
     
     // XML generieren
     return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+       xmlns:xhtml="http://www.w3.org/1999/xhtml"
+       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     ${allUrls.map(page => `
     <url>
         <loc>${baseUrl}/${page}</loc>

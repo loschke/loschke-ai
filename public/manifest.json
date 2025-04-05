@@ -1,0 +1,20 @@
+{
+  "name": "Rico Loschke - KI Experte",
+  "short_name": "Rico Loschke",
+  "description": "Ganzheitliches Wissen zu generativer KI und deren Anwendung in der Praxis",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "lang": "de-DE",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["business", "education", "technology", "ai"]
+}

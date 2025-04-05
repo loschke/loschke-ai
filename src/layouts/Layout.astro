@@ -123,6 +123,11 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
 						name: "apple-mobile-web-app-status-bar-style",
 						content: "black",
 					},
+					{ name: "robots", content: "index, follow" },
+					{ name: "googlebot", content: "index, follow" },
+					{ name: "bingbot", content: "index, follow" },
+					{ name: "yandex", content: "index, follow" },
+					{ name: "perplexitybot", content: "index, follow" },
 				],
 				link: [
 					{
@@ -143,6 +148,8 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
 						crossorigin: "anonymous",
 					},
 					{ rel: "stylesheet", href: "/fonts/fonts.css" },
+					{ rel: "manifest", href: "/manifest.json" },
+					{ rel: "author", href: "/humans.txt" },
 				],
 			}}
 		/>

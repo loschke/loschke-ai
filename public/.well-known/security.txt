@@ -1,0 +1,5 @@
+Contact: mailto:agent@loschke.ai
+Expires: 2026-04-05T11:00:00.000Z
+Preferred-Languages: de, en
+Canonical: https://loschke.ai/.well-known/security.txt
+Policy: https://loschke.ai/datenschutz

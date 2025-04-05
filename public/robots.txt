@@ -1,9 +1,15 @@
+# Allow all user agents by default
 User-agent: *
 Allow: /
 
-# Disallow utility pages
+# Explicitly allow PerplexityBot
+User-agent: PerplexityBot
+Allow: /
+
+# Disallow utility pages for all bots
+User-agent: *
 Disallow: /404
 Disallow: /500
 
 # Sitemap
-Sitemap: https://kvix.de/sitemap.xml
+Sitemap: https://loschke.ai/sitemap.xml
