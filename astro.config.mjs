@@ -16,6 +16,15 @@ export default defineConfig({
       wrap: true
     }
   },
+  // Add HTTP headers
+  headers: {
+    '/*': [
+      {
+        key: 'X-Robots-Tag',
+        value: 'index, follow'
+      }
+    ]
+  },
   // Add redirects configuration
   redirects: {
     // Redirect old blog URL patterns to new ones
