@@ -1,0 +1,37 @@
+---
+// src/components/ui/OptimizedImage.astro
+import { Image } from 'astro:assets';
+
+const { 
+    src, 
+    alt, 
+    className = "", 
+    width, 
+    height,
+    sizes = "(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw",
+    loading = "lazy"
+} = Astro.props;
+
+// Unterscheiden zwischen importierten und Pfad-basierten Bildern
+const isImported = typeof src === 'object' && src.src !== undefined;
+---
+
+{isImported ? (
+  <Image 
+    src={src} 
+    alt={alt} 
+    class={className}
+    sizes={sizes}
+    loading={loading}
+  />
+) : (
+  <Image 
+    src={src} 
+    alt={alt} 
+    width={width || 800} 
+    height={height || 450} 
+    class={className}
+    sizes={sizes}
+    loading={loading}
+  />
+)}

@@ -1,6 +1,6 @@
 ---
 import { type MarkdownHeading } from "astro";
-import { Picture } from "astro:assets";
+import { Picture, Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import ErrorLayout from "../../layouts/ErrorLayout.astro";
 import BackToLink from "../../components/ui/BackToLink.astro";
@@ -64,7 +64,12 @@ if (!renderError) {
     seoTitle =
         entry.data.seo?.metaTitle || `${entry.data.title} - Rico Loschke`;
     seoDescription = entry.data.seo?.metaDescription || entry.data.description;
-    ogImage = entry.data.seo?.ogImage || entry.data.heroImage;
+    
+    // For SEO, we need a string URL for the ogImage
+    // If we have a coverImage (which is an object), we can't use it directly for ogImage
+    // So we'll use the seo.ogImage or heroImage (which are strings) for the ogImage
+    ogImage = entry.data.seo?.ogImage || entry.data.heroImage || undefined;
+    
     authorName = entry.data.author?.name || "Rico Loschke";
     authorAvatar =
         entry.data.author?.avatar || "/images/rico-loschke_avatar.jpg";
@@ -115,7 +120,19 @@ const formatDate = (date: Date): string => {
             canonicalURL={entry.data.seo?.canonicalURL}
         >
             <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
-                {entry.data.heroImage && (
+                {entry.data.coverImage ? (
+                    <div class="relative w-full aspect-[16/9] mb-8">
+                        <Image
+                            src={entry.data.coverImage}
+                            alt={entry.data.title}
+                            width={1200}
+                            height={675}
+                            loading="eager"
+                            class="w-full h-full object-cover rounded-xl"
+                            transition:name={`hero-${entry.id}`}
+                        />
+                    </div>
+                ) : entry.data.heroImage && (
                     <div class="relative w-full aspect-[16/9] mb-8">
                         <Picture
                             src={entry.data.heroImage}

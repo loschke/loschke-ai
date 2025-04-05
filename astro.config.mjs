@@ -78,26 +78,26 @@ export default defineConfig({
       exclude: ['@astrojs/image'] // Exclude potentially problematic package
     }
   },
+  // Image optimization configuration
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    },
+    // Default image optimization settings
+    defaultOptions: {
+      format: 'webp',
+      quality: 80,
+      widths: [640, 750, 828, 1080, 1200, 1920],
+      sizes: '(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw',
+      loading: 'lazy',
+      decoding: 'async'
+    }
+  },
   build: {
     inlineStylesheets: 'auto',
     format: 'directory',
     // Asset optimization
     assets: 'assets',
-    // Enable image optimization
-    image: {
-      service: {
-        entrypoint: 'astro/assets/services/sharp'
-      },
-      // Default image optimization settings
-      defaultOptions: {
-        format: 'webp',
-        quality: 80,
-        widths: [640, 750, 828, 1080, 1200, 1920],
-        sizes: '(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw',
-        loading: 'lazy',
-        decoding: 'async'
-      }
-    }
   },
   // Add trailingSlash config to ensure consistent URL handling
   trailingSlash: 'never',

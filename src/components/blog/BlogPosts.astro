@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import { Picture } from "astro:assets";
+import { Picture, Image } from "astro:assets";
+import OptimizedImage from "../ui/OptimizedImage.astro";
 
 type BlogPost = CollectionEntry<"blog">;
 
@@ -22,6 +23,7 @@ interface BlogData {
     categories?: string[];
     tags?: string[];
     heroImage?: string;
+    coverImage?: any; // For optimized images
 }
 
 const {
@@ -120,7 +122,17 @@ const formatDate = (date: Date): string => {
                     >
                         <article class="flex flex-col md:flex-row gap-6 bg-base-darker/90 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300">
                             <div class="md:w-[45%]">
-                                {post.data.heroImage ? (
+                                {post.data.coverImage ? (
+                                    <Image 
+                                        src={post.data.coverImage}
+                                        alt={post.data.title}
+                                        width={800}
+                                        height={450}
+                                        class="w-full h-full object-cover aspect-[16/9]"
+                                        loading="lazy"
+                                        transition:name={`hero-${post.id}`}
+                                    />
+                                ) : post.data.heroImage ? (
                                     <Picture
                                         src={post.data.heroImage}
                                         alt={post.data.title}

@@ -1,11 +1,27 @@
 ---
+import OptimizedImage from '../ui/OptimizedImage.astro';
+
+// Bilder importieren
+import howToPromptGuide from '../../assets/guides/how-to-prompt-guide.png';
+import promptBibliothek from '../../assets/guides/prompt-bibliothek.png';
+import aiDesignGuide from '../../assets/guides/ai-design-guide.png';
+import aiDesignModifier from '../../assets/guides/ai-design-modifier.png';
+
+// Bildmap erstellen
+const imageMap = {
+    "/images/how-to-prompt-guide.png": howToPromptGuide,
+    "/images/prompt-bibliothek.png": promptBibliothek,
+    "/images/ai-design-guide.png": aiDesignGuide,
+    "/images/ai-design-modifier.png": aiDesignModifier
+};
+
 const guides = [
     {
         title: "How-to-Prompt Guide",
         description: "Systematisches Framework für effektive KI-Kommunikation und optimale Ergebnisse mit ChatGPT & Co.",
         color: "from-[#2a4858] to-[#162a36]",
         href: "/how-to-prompt-guide",
-        image: "/images/how-to-prompt-guide.png",
+        image: imageMap["/images/how-to-prompt-guide.png"],
         tags: ["Prompt Crafting", "Chat Assistenten"]
     },
     {
@@ -13,7 +29,7 @@ const guides = [
         description: "Kuratierte Sammlung von Prompts für Marketing, PR und Vertrieb - sofort einsetzbar und anpassbar.",
         color: "from-[#4a3c59] to-[#2a1c39]",
         href: "/prompt-bibliothek",
-        image: "/images/prompt-bibliothek.png",
+        image: imageMap["/images/prompt-bibliothek.png"],
         tags: ["Prompt Engineering", "Marketing"]
     },
     {
@@ -21,7 +37,7 @@ const guides = [
         description: "Leitfaden für AI-Design & AI-Fotografie: Lerne, gestalte und realisiere beeindruckende KI-generierte Bilder.",
         color: "from-[#005461] to-[#003049]",
         href: "https://ai-design.guide/",
-        image: "/images/ai-design-guide.png",
+        image: imageMap["/images/ai-design-guide.png"],
         external: true,
         tags: ["AI-Design", "4K Framework"]
     },
@@ -30,7 +46,7 @@ const guides = [
         description: "Sammlung von Prompt-Modifiers für beeindruckende KI-generierte Bilder mit Midjourney, Flux, Ideogram und mehr.",
         color: "from-[#3a3a59] to-[#232339]",
         href: "/ai-design-framework",
-        image: "/images/ai-design-modifier.png",
+        image: imageMap["/images/ai-design-modifier.png"],
         tags: ["Bildgenerierung", "Modifiers"]
     }
 ];
@@ -51,10 +67,10 @@ const guides = [
             {guides.map((guide) => (
                 <article class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
                     <div class={`aspect-video bg-gradient-to-br ${guide.color} overflow-hidden`}>
-                        <img 
+                        <OptimizedImage 
                             src={guide.image} 
                             alt={guide.title} 
-                            class="w-full h-full object-cover"
+                            className="w-full h-full object-cover"
                         />
                     </div>
                     <div class="p-6">
