@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { Picture, Image } from "astro:assets";
 import OptimizedImage from "../ui/OptimizedImage.astro";
+import { categoryColors, isValidCategory } from "../../utils/categoryColors";
 
 type BlogPost = CollectionEntry<"blog">;
 
@@ -98,15 +99,21 @@ const formatDate = (date: Date): string => {
                 <div class="mb-12">
                     <h2 class="text-xl font-bold mb-4">Kategorien</h2>
                     <div class="flex flex-wrap gap-2">
-                        {categories.map((category: string) => (
-                            <a
-                                href={`/blog/category/${category.toLowerCase()}`}
-                                class="px-3 py-1 bg-white/5 rounded-full text-sm hover:bg-white/10 transition-colors"
-                                aria-label={`Zeige Artikel in der Kategorie ${category}`}
-                            >
-                                {category}
-                            </a>
-                        ))}
+                        {categories.map((category: string) => {
+                            const bgColorClass = isValidCategory(category) 
+                                ? `${categoryColors[category]} bg-opacity-20` 
+                                : "bg-white/5";
+                            
+                            return (
+                                <a
+                                    href={`/blog/category/${category.toLowerCase()}`}
+                                    class={`px-3 py-1 ${bgColorClass} rounded-full text-sm hover:bg-opacity-30 transition-colors`}
+                                    aria-label={`Zeige Artikel in der Kategorie ${category}`}
+                                >
+                                    {category}
+                                </a>
+                            );
+                        })}
                     </div>
                 </div>
             )
@@ -120,7 +127,7 @@ const formatDate = (date: Date): string => {
                         class="block group"
                         aria-label={`Lese den Artikel: ${post.data.title}`}
                     >
-                        <article class="flex flex-col md:flex-row gap-6 bg-base-darker/90 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300">
+                        <article class="flex flex-col md:flex-row gap-6 bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
                             <div class="md:w-[45%]">
                                 {post.data.coverImage ? (
                                     <Image 
@@ -187,11 +194,17 @@ const formatDate = (date: Date): string => {
                                     transition:name={`categories-${post.id}`}
                                 >
                                     {post.data.categories?.map(
-                                        (category: string) => (
-                                            <span class="px-3 py-1 bg-white/5 rounded-full group-hover:bg-white/10 transition-colors text-sm text-white/60">
-                                                {category}
-                                            </span>
-                                        ),
+                                        (category: string) => {
+                                            const bgColorClass = isValidCategory(category) 
+                                                ? `${categoryColors[category]} bg-opacity-20` 
+                                                : "bg-white/5";
+                                            
+                                            return (
+                                                <span class={`px-3 py-1 ${bgColorClass} rounded-full group-hover:bg-opacity-30 transition-colors text-sm text-white/60`}>
+                                                    {category}
+                                                </span>
+                                            );
+                                        }
                                     )}
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ const staticPages = [
     "how-to-prompt-guide",  // Hinzugefügt
     "blog",  // Blog-Übersichtsseite
     "guides",
+    "projekte",  // Projektseite hinzugefügt
 ];
 
 // Funktion zum Generieren der AI Design Framework URLs

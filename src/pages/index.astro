@@ -7,7 +7,8 @@ import Expertise from "../components/sections/Expertise.astro";
 import AboutMe from "../components/sections/AboutMe.astro";
 import Speaker from "../components/sections/Speaker.astro";
 import Guides from "../components/sections/Guides.astro";
-import Resources from "~/components/sections/Resources.astro";
+import Projects from "~/components/sections/Projects.astro";
+import LatestPosts from "../components/sections/LatestPosts.astro";
 
 const expertiseAreas = [
     "Generative KI",
@@ -63,11 +64,12 @@ const jsonLd = {
 >
     <Welcome />
     <AboutMe />
-    <Speaker />
-    <Technologies />
     <Expertise />
     <Guides />
-    <Resources />
+    <Speaker />
+    <Projects />
+    <Technologies />
+    <LatestPosts />
     <Newsletter />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </Layout>

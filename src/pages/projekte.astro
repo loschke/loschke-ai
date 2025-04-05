@@ -1,81 +1,144 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { categoryColors, isValidCategory, type CategoryKey } from "../utils/categoryColors";
+
+// Definiere die Projektdaten
+const projects = [
+    {
+        emoji: "🎨",
+        title: "AI-Design.Guide",
+        url: "https://ai-design.guide",
+        categories: ["AI-Design", "Prompt Engineering"],
+        role: "Initiator & Lead Architect",
+        description: "Ein umfassender Leitfaden für AI-Design und AI-Fotografie, der Anfängern und Kreativen den Einstieg in die KI-gestützte Bildgenerierung ermöglicht.",
+        features: [
+            "4K Framework für AI-Design",
+            "Dreistufiger Lernpfad",
+            "Umfangreiche Prompt-Bibliothek",
+            "Kategorisierte Beispiele"
+        ]
+    },
+    {
+        emoji: "🐻",
+        title: "PromptBär",
+        url: "https://promptbaer.de",
+        categories: ["Prompt Engineering", "AI-Design"],
+        role: "Initiator & Product Owner",
+        description: "Eine kuratierte Sammlung von Prompt-Formeln und Beispielbildern für KI-Bildgenerierung, die aus realen Anwendungsfällen im Agenturalltag entstanden ist.",
+        features: [
+            "Kuratierte Prompt-Bibliothek",
+            "Beispielbilder",
+            "Kategorisierung nach Anwendungsfällen",
+            "Einfache Copy & Paste-Funktionalität"
+        ]
+    },
+    {
+        emoji: "🤖",
+        title: "HelpBärAI",
+        url: "https://helpbaer.de",
+        categories: ["KI-Tools", "KI-Automation", "KI-Praxis"],
+        role: "Initiator & Lead Architect",
+        description: "Eine interaktive Demo-Plattform, die verschiedene spezialisierte KI-Assistenten für unterschiedliche Anwendungsbereiche präsentiert.",
+        features: [
+            "Spezialisierte KI-Assistenten",
+            "Interaktive Demo-Umgebung",
+            "Verschiedene Integrationsoptionen",
+            "Technologische Basis"
+        ]
+    },
+    {
+        emoji: "🚀",
+        title: "queonext AI",
+        url: "https://queonext.de/ai",
+        categories: ["KI-Transformation", "KI-Strategie", "KI-Praxis"],
+        role: "Director Automation & AI",
+        description: "Die spezialisierte KI-Abteilung der queonext Agentur, die Unternehmen bei der Integration von KI-Technologien in Marketing, Vertrieb und Unternehmensprozesse unterstützt.",
+        features: [
+            "Strategische KI-Beratung",
+            "KI-Upskilling für Teams",
+            "Pilotprojekte & Workflows",
+            "Spezialisierte Fachbereiche"
+        ]
+    },
+    {
+        emoji: "⚙️",
+        title: "next:move.ai",
+        url: "https://next-move.ai",
+        categories: ["KI-Automation", "KI-Transformation", "KI-Tools"],
+        role: "Initiator & Lead Architect",
+        description: "Eine Kooperation der Digitalagenturen queonext und move:elevator, die Unternehmen einen strukturierten und praxisnahen Einstieg in die KI-Transformation ermöglicht.",
+        features: [
+            "Ganzheitlicher Transformationsansatz",
+            "KI-Toolbox mit spezialisierten Werkzeugen",
+            "Fair-Flat-Rate-Modell",
+            "Praxisorientierte Workshops & Trainings"
+        ]
+    }
+];
 ---
 
 <Layout
-    title="Projekte - Rico Loschke"
-    description="Entdecken Sie meine Projekte im Bereich KI und Softwareentwicklung"
+    title="Meine KI-Projekte - Rico Loschke"
+    description="Praktische KI-Anwendungen, die ich als Initiator, Product Owner oder Lead Architect entwickelt habe"
 >
-    <section class="container-padding">
+    <section class="container-padding mt-20">
         <div class="max-container">
-            <h1 class="text-4xl md:text-5xl font-bold mb-8">Projekte</h1>
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <!-- Projekt Card 1 -->
-                <article
-                    class="bg-background-light/5 rounded-xl p-6 border border-white/10 hover:border-primary/50 transition-colors"
-                >
-                    <h3 class="text-2xl font-bold mb-4">KI-Assistenzsysteme</h3>
-                    <p class="text-white/80 mb-4">
-                        Entwicklung intelligenter Assistenzsysteme für
-                        verschiedene Branchen und Anwendungsfälle.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span
-                            class="px-3 py-1 bg-primary/10 rounded-full text-sm"
-                            >Machine Learning</span
-                        >
-                        <span
-                            class="px-3 py-1 bg-primary/10 rounded-full text-sm"
-                            >NLP</span
-                        >
-                    </div>
-                </article>
-
-                <!-- Projekt Card 2 -->
-                <article
-                    class="bg-background-light/5 rounded-xl p-6 border border-white/10 hover:border-primary/50 transition-colors"
-                >
-                    <h3 class="text-2xl font-bold mb-4">
-                        Automatisierungslösungen
-                    </h3>
-                    <p class="text-white/80 mb-4">
-                        Implementierung von KI-gestützten
-                        Automatisierungsprozessen für gesteigerte Effizienz.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span
-                            class="px-3 py-1 bg-primary/10 rounded-full text-sm"
-                            >Automation</span
-                        >
-                        <span
-                            class="px-3 py-1 bg-primary/10 rounded-full text-sm"
-                            >Process Mining</span
-                        >
-                    </div>
-                </article>
-
-                <!-- Projekt Card 3 -->
-                <article
-                    class="bg-background-light/5 rounded-xl p-6 border border-white/10 hover:border-primary/50 transition-colors"
-                >
-                    <h3 class="text-2xl font-bold mb-4">
-                        KI-Training & Workshops
-                    </h3>
-                    <p class="text-white/80 mb-4">
-                        Entwicklung und Durchführung von Schulungsprogrammen für
-                        KI-Technologien.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span
-                            class="px-3 py-1 bg-primary/10 rounded-full text-sm"
-                            >Education</span
-                        >
-                        <span
-                            class="px-3 py-1 bg-primary/10 rounded-full text-sm"
-                            >Consulting</span
-                        >
-                    </div>
-                </article>
+            <h1 class="text-4xl md:text-5xl font-bold mb-8">Meine KI-Projekte</h1>
+            <p class="text-xl text-white/80 mb-12 max-w-3xl">Von der Idee zur Umsetzung: Praktische KI-Anwendungen, die ich als Initiator, Product Owner oder Lead Architect entwickelt habe</p>
+            
+            <div class="grid gap-8 md:grid-cols-2">
+                {projects.map((project) => (
+                    <article class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="text-3xl" aria-hidden="true">{project.emoji}</span>
+                                <h2 class="text-2xl md:text-3xl font-bold">{project.title}</h2>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                {project.categories.map((category: string) => {
+                                    const bgColorClass = isValidCategory(category) 
+                                        ? categoryColors[category] 
+                                        : "bg-gray-500"; // Fallback-Farbe
+                                    
+                                    return (
+                                        <span class={`px-3 py-1 ${bgColorClass} bg-opacity-20 text-white rounded-full text-sm`}>
+                                            {category}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                            
+                            <div class="mb-4">
+                                <span class="text-white/60 block mb-1">Meine Rolle:</span>
+                                <span class="font-medium">{project.role}</span>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <span class="text-white/60 block mb-1">Kurzbeschreibung:</span>
+                                <p class="text-white/90">{project.description}</p>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <span class="text-white/60 block mb-2">Hauptmerkmale:</span>
+                                <ul class="list-disc pl-5 space-y-1 text-white/90">
+                                    {project.features.map((feature: string) => (
+                                        <li>{feature}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            
+                            <a href={project.url} target="_blank" rel="noopener noreferrer" 
+                               class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors">
+                                Zum Projekt
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                ))}
             </div>
         </div>
     </section>

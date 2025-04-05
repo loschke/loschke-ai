@@ -2,6 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import BlogPosts from "../../../components/blog/BlogPosts.astro";
 import BackToLink from "../../../components/ui/BackToLink.astro";
+import { categoryColors, isValidCategory } from "../../../utils/categoryColors";
 import {
     getBlogPosts,
     getUniqueCategories,
@@ -41,18 +42,25 @@ const { category, posts } = Astro.props;
 if (!category || posts.length === 0) {
     return Astro.redirect("/404");
 }
+
+// Get category color class
+const bgColorClass = isValidCategory(category) 
+    ? `${categoryColors[category]} bg-opacity-20` 
+    : "bg-white/5";
 ---
 
 <Layout
     title={`${category} - Blog - Rico Loschke`}
     description={`Alle Blogbeiträge in der Kategorie ${category}`}
 >
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 mt-20">
         <div class="mb-12">
             <BackToLink href="/blog" />
-            <h1 class="text-4xl md:text-5xl font-bold mt-4">
-                Kategorie: {category}
-            </h1>
+            <div class="flex items-center gap-3 mt-4">
+                <h1 class="text-4xl md:text-5xl font-bold">
+                    Kategorie: <span class={`px-3 py-1 ${bgColorClass} rounded-md`}>{category}</span>
+                </h1>
+            </div>
         </div>
 
         <BlogPosts posts={posts} />
