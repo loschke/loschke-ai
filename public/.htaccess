@@ -1,0 +1,126 @@
+# ----------------------------------------------------------------------
+# | Grundlegende Sicherheitseinstellungen für statische Websites       |
+# ----------------------------------------------------------------------
+
+# Apache-Konfiguration aktivieren
+RewriteEngine On
+
+# ----------------------------------------------------------------------
+# | WWW zu Nicht-WWW Umleitung                                         |
+# ----------------------------------------------------------------------
+# Leitet alle Anfragen von www.domain.com auf domain.com um
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# ----------------------------------------------------------------------
+# | HTTP zu HTTPS Umleitung                                            |
+# ----------------------------------------------------------------------
+# Stellt sicher, dass alle Anfragen über HTTPS erfolgen
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# ----------------------------------------------------------------------
+# | Sicherheitsheader                                                  |
+# ----------------------------------------------------------------------
+# Wichtige Sicherheitsheader setzen
+<IfModule mod_headers.c>
+    # Verhindert Clickjacking-Angriffe
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Verhindert MIME-Sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # XSS-Schutz aktivieren
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Referrer-Policy einschränken
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content-Security-Policy (CSP) - Anpassen nach Bedarf
+    # Dies ist eine Basis-CSP, die Sie an Ihre spezifischen Anforderungen anpassen sollten
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'self'; form-action 'self';"
+    
+    # HSTS (HTTP Strict Transport Security) aktivieren
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Permissions-Policy (ehemals Feature-Policy)
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Verzeichnisschutz                                                  |
+# ----------------------------------------------------------------------
+# Verhindert das Auflisten von Verzeichnisinhalten
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# Zugriff auf versteckte Dateien und Verzeichnisse verbieten
+<FilesMatch "^\\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Zugriff auf sensible Dateien verbieten
+<FilesMatch "(^#.*#|\\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ----------------------------------------------------------------------
+# | Hotlink-Schutz                                                     |
+# ----------------------------------------------------------------------
+# Verhindert, dass andere Websites Ihre Bilder direkt einbinden
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?loschke\.ai [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp|svg)$ - [F]
+
+# ----------------------------------------------------------------------
+# | MIME-Typen und Zeichenkodierung                                    |
+# ----------------------------------------------------------------------
+<IfModule mod_mime.c>
+    # Zeichenkodierung
+    AddDefaultCharset utf-8
+    
+    # MIME-Typen für Webfonts
+    AddType application/font-woff2 .woff2
+    AddType application/font-woff .woff
+    AddType font/ttf .ttf
+    AddType font/otf .otf
+    AddType font/eot .eot
+    AddType image/svg+xml .svg
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Komprimierung und Caching                                          |
+# ----------------------------------------------------------------------
+# Komprimierung aktivieren
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml
+</IfModule>
+
+# Browser-Caching für statische Ressourcen
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresDefault "access plus 1 month"
+    
+    # CSS
+    ExpiresByType text/css "access plus 1 year"
+    
+    # JavaScript
+    ExpiresByType application/javascript "access plus 1 year"
+    
+    # Bilder
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    
+    # Webfonts
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+</IfModule>
