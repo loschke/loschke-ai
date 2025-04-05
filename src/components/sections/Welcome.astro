@@ -2,13 +2,13 @@
 import Button from "../../components/ui/Button.astro";
 ---
 
-<section class="relative h-screen overflow-hidden z-0">
+<section class="relative min-h-[100svh] overflow-hidden z-0">
     <div
-        class="flex flex-col justify-center h-full container-padding relative z-10"
+        class="flex flex-col justify-center min-h-[70svh] md:min-h-[80svh] container-padding relative z-10 pt-24 md:pt-0"
     >
         <div class="max-container">
-            <div class="ml-auto max-w-4xl text-right">
-                <h1 class="text-hero font-black mb-8">
+            <div class="mx-auto md:ml-auto md:mr-0 max-w-4xl text-center md:text-right">
+                <h1 class="text-hero font-black mb-4 md:mb-8">
                     <span class="text-primary block">Gemeinsam</span>
                     <span class="text-primary block">neues schaffen</span>
                     <span class="text-primary block">im Dialog</span>
@@ -22,11 +22,11 @@ import Button from "../../components/ui/Button.astro";
     </div>
 
     <!-- Bottom Bar -->
-    <div class="absolute bottom-28 inset-x-0 container-padding z-20">
-        <div class="max-container flex justify-between items-center">
-            <div class="space-y-1">
-                <h2 class="text-4xl font-bold tracking-tight">Rico Loschke</h2>
-                <p class="text-white text-xl tracking-wide">
+    <div class="relative md:absolute md:bottom-28 inset-x-0 container-padding z-20 py-8 md:py-0">
+        <div class="max-container flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
+            <div class="space-y-1 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Rico Loschke</h2>
+                <p class="text-white text-lg md:text-xl tracking-wide">
                     Vermittelt ganzheitliches Wissen zu generativer KI
                 </p>
             </div>
@@ -38,5 +38,13 @@ import Button from "../../components/ui/Button.astro";
 <style>
     section {
         isolation: isolate;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (max-width: 768px) {
+        section {
+            justify-content: space-between;
+        }
     }
 </style>

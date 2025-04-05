@@ -36,14 +36,14 @@ const currentPath = Astro.url.pathname;
                     aria-hidden="true"
                 />
                 <span
-                    class="text-xl font-medium tracking-wide text-white/90 group-hover:text-white transition-colors duration-300"
+                    class="text-xl font-medium tracking-wide text-white/90 group-hover:text-white transition-colors duration-300 hidden md:inline"
                 >
                     Hi, ich bin Rico
                 </span>
             </a>
 
-            <!-- Navigation and Social Icons -->
-            <div class="flex items-center relative">
+            <!-- Desktop Navigation and Social Icons -->
+            <div class="hidden md:flex items-center relative">
                 <!-- Navigation Menu -->
                 <nav class="flex gap-10 mr-16" aria-label="Main navigation">
                     {
@@ -76,6 +76,101 @@ const currentPath = Astro.url.pathname;
                 <div class="border-l border-white/10 pl-16">
                     <SocialIcons />
                 </div>
+            </div>
+
+            <!-- Mobile Hamburger Menu Button -->
+            <button
+                id="mobile-menu-toggle"
+                class="md:hidden flex items-center justify-center w-10 h-10 text-white focus:outline-none"
+                aria-label="Toggle menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    id="hamburger-icon"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                    />
+                </svg>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 hidden"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    id="close-icon"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-base-darker bg-opacity-95 backdrop-blur-lg z-40 transform translate-x-full transition-transform duration-300 md:hidden"
+        aria-hidden="true"
+    >
+        <div class="container-padding py-24 h-full flex flex-col">
+            <!-- Close button inside the menu -->
+            <button
+                id="mobile-menu-close"
+                class="absolute top-6 right-8 flex items-center justify-center w-10 h-10 text-white focus:outline-none"
+                aria-label="Close menu"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+            
+            <nav class="flex flex-col gap-8 items-center" aria-label="Mobile navigation">
+                {
+                    navItems.map(({ href, label }) => {
+                        const isActive =
+                            currentPath === href ||
+                            (href !== "/" && currentPath.startsWith(href));
+                        return (
+                            <a
+                                href={href}
+                                class:list={[
+                                    "nav-link text-2xl text-white/80 hover:text-white transition-colors",
+                                    { active: isActive },
+                                ]}
+                            >
+                                {label}
+                            </a>
+                        );
+                    })
+                }
+            </nav>
+            <div class="mt-auto flex justify-center">
+                <SocialIcons />
             </div>
         </div>
     </div>
@@ -110,6 +205,11 @@ const currentPath = Astro.url.pathname;
     #nav-backdrop.scrolled {
         border-color: rgba(255, 255, 255, 0.1);
     }
+
+    /* Mobile menu animation */
+    #mobile-menu.open {
+        transform: translateX(0);
+    }
 </style>
 
 <script>
@@ -128,4 +228,73 @@ const currentPath = Astro.url.pathname;
 
     window.addEventListener("scroll", updateNavigation, { passive: true });
     updateNavigation();
+
+    // Mobile menu toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const body = document.body;
+
+        // Check if all required elements exist
+        if (!menuToggle || !mobileMenu || !hamburgerIcon || !closeIcon) {
+            console.error('Mobile menu elements not found');
+            return;
+        }
+
+        // Function to open the mobile menu
+        const openMobileMenu = () => {
+            if (!mobileMenu || !hamburgerIcon || !closeIcon || !menuToggle) return;
+            
+            mobileMenu.classList.add('open');
+            hamburgerIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            body.style.overflow = 'hidden';
+        };
+
+        // Function to close the mobile menu
+        const closeMobileMenu = () => {
+            if (!mobileMenu || !hamburgerIcon || !closeIcon || !menuToggle) return;
+            
+            mobileMenu.classList.remove('open');
+            hamburgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            body.style.overflow = '';
+        };
+
+        // Toggle menu when clicking the hamburger button
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+
+        // Close menu when clicking the close button inside the menu
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+        }
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close mobile menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+    });
 </script>
