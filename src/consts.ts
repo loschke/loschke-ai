@@ -1,11 +1,11 @@
 // Site metadata
 export const SITE_TITLE = "Rico Loschke";
 export const SITE_DESCRIPTION = "Blog über KI, Web Development und Tech Trends";
-export const SITE_URL = "https://kvix.de";
+export const SITE_URL = "https://loschke.ai";
 
 // Social media
-export const TWITTER_HANDLE = "@ricoloschke";
-export const GITHUB_HANDLE = "ricoloschke";
+export const TWITTER_HANDLE = "@loschke";
+export const GITHUB_HANDLE = "loschke";
 
 // RSS Feed settings
 export const RSS_TITLE = `${SITE_TITLE} Blog`;

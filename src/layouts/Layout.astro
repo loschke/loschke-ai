@@ -36,7 +36,7 @@ const isHomepage = Astro.url.pathname === "/";
 // Prepare canonical URL
 const finalCanonicalURL =
 	canonicalURL ||
-	new URL(Astro.url.pathname, Astro.site || "https://kvix.de").toString();
+	new URL(Astro.url.pathname, Astro.site || "https://loschke.ai").toString();
 
 // Navigation items in order (used to determine direction)
 const NAV_ITEMS = ["/about", "/projekte", "/blog", "/playground", "/guides"];
@@ -64,13 +64,13 @@ const jsonLd = {
 	...(ogImage && {
 		image: {
 			"@type": "ImageObject",
-			url: new URL(ogImage, Astro.site || "https://kvix.de").toString(),
+			url: new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
 		},
 	}),
 	publisher: {
 		"@type": "Person",
 		name: "Rico Loschke",
-		url: "https://kvix.de",
+		url: "https://loschke.ai",
 	},
 };
 

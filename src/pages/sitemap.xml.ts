@@ -70,7 +70,7 @@ function getPromptBibliothekUrls(): string[] {
 
 // Sitemap generieren
 async function generateSitemap(): Promise<string> {
-    const baseUrl = 'https://kvix.de';
+    const baseUrl = 'https://loschke.ai';
     
     // Alle URLs sammeln
     const staticUrls = staticPages;
