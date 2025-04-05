@@ -68,7 +68,7 @@ if (!renderError) {
     // For SEO, we need a string URL for the ogImage
     // If we have a coverImage (which is an object), we can't use it directly for ogImage
     // So we'll use the seo.ogImage or heroImage (which are strings) for the ogImage
-    ogImage = entry.data.seo?.ogImage || entry.data.heroImage || undefined;
+    ogImage = entry.data.seo?.ogImage || entry.data.heroImage || null;
     
     authorName = entry.data.author?.name || "Rico Loschke";
     authorAvatar =
@@ -115,13 +115,13 @@ const formatDate = (date: Date): string => {
         <Layout
             title={seoTitle}
             description={seoDescription}
-            ogImage={ogImage}
+            ogImage={ogImage || undefined}
             article={articleMetadata}
-            canonicalURL={entry.data.seo?.canonicalURL}
+            canonicalURL={entry.data.seo?.canonicalURL || undefined}
         >
             <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
-                {entry.data.coverImage ? (
-                    <div class="relative w-full aspect-[16/9] mb-8">
+                <div class="relative w-full aspect-[16/9] mb-8">
+                    {entry.data.coverImage ? (
                         <Image
                             src={entry.data.coverImage}
                             alt={entry.data.title}
@@ -131,9 +131,7 @@ const formatDate = (date: Date): string => {
                             class="w-full h-full object-cover rounded-xl"
                             transition:name={`hero-${entry.id}`}
                         />
-                    </div>
-                ) : entry.data.heroImage && (
-                    <div class="relative w-full aspect-[16/9] mb-8">
+                    ) : entry.data.heroImage ? (
                         <Picture
                             src={entry.data.heroImage}
                             alt={entry.data.title}
@@ -145,8 +143,20 @@ const formatDate = (date: Date): string => {
                             class="w-full h-full object-cover rounded-xl"
                             transition:name={`hero-${entry.id}`}
                         />
-                    </div>
-                )}
+                    ) : (
+                        <Picture
+                            src="/images/blog/default/blog-hero.png"
+                            alt={entry.data.title}
+                            formats={["avif", "webp"]}
+                            fallbackFormat="png"
+                            width={1200}
+                            height={675}
+                            loading="eager"
+                            class="w-full h-full object-cover rounded-xl"
+                            transition:name={`hero-${entry.id}`}
+                        />
+                    )}
+                </div>
 
                 <div class="text-center">
                     {entry.data.pubDate && (
@@ -197,8 +207,8 @@ const formatDate = (date: Date): string => {
 
                     <div class="flex items-center justify-center mt-6 gap-3">
                         <Picture
-                            src={authorAvatar}
-                            alt={authorName}
+                            src={authorAvatar || "/images/rico-loschke_avatar.jpg"}
+                            alt={authorName || "Rico Loschke"}
                             formats={["avif", "webp"]}
                             fallbackFormat="jpg"
                             width={40}
