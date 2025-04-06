@@ -6,6 +6,7 @@ import ErrorLayout from "../../layouts/ErrorLayout.astro";
 import BackToLink from "../../components/ui/BackToLink.astro";
 import ErrorBoundary from "../../components/ui/ErrorBoundary.astro";
 import { getBlogPosts, type BlogPost } from "../../utils/blog";
+import { getCategoryImage } from "../../utils/imageImports";
 
 export const prerender = true;
 
@@ -144,15 +145,15 @@ const formatDate = (date: Date): string => {
                             transition:name={`hero-${entry.id}`}
                         />
                     ) : (
-                        <Picture
-                            src="/images/blog/default/blog-hero.png"
+                        <Image
+                            src={getCategoryImage(entry.data.categories?.[0])}
                             alt={entry.data.title}
-                            formats={["avif", "webp"]}
-                            fallbackFormat="png"
                             width={1200}
                             height={675}
-                            loading="eager"
+                            format="webp"
+                            quality={80}
                             class="w-full h-full object-cover rounded-xl"
+                            loading="eager"
                             transition:name={`hero-${entry.id}`}
                         />
                     )}
