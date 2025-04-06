@@ -1,0 +1,198 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { categoryColors, isValidCategory, type CategoryKey } from "../utils/categoryColors";
+
+// Definiere die Vortragsdaten
+const presentations = [
+{
+        title: "Generative KI verstehen: Ein ehrlicher Blick auf das neue Werkzeug",
+        categories: ["KI-Strategie", "KI-Praxis"],
+        formats: ["Keynote", "Webinar", "Impulsvortrag"],
+        duration: "30-60 Minuten",
+        description: "Eine praxisorientierte Einführung in die Welt der generativen KI, die sowohl die grundlegenden Konzepte als auch konkrete Anwendungsmöglichkeiten vermittelt. Der Vortrag beleuchtet Potenziale und Einsatzgebiete verschiedener KI-Technologien, geht auf Compliance-Aspekte und Herausforderungen ein und macht Mut, mit ersten praktischen Schritten zu beginnen.",
+        keyPoints: [
+            "Überblick über aktuelle generative KI-Technologien und ihre Funktionsweise",
+            "Konkrete Einsatzgebiete und Anwendungsfälle für verschiedene Unternehmensbereiche",
+            "Realistische Einschätzung der Potenziale und Limitationen von generativer KI",
+            "Niedrigschwellige Einstiegsmöglichkeiten und Quick Wins"
+        ],
+        audience: "Führungskräfte, Entscheider und Teams aller Fachbereiche, die einen fundierten, aber verständlichen Einstieg in das Thema generative KI suchen"
+    },
+    {
+        title: "KI-Transformation ohne Illusionen: Wege durch die Komplexität",
+        categories: ["KI-Transformation", "KI-Strategie"],
+        formats: ["Keynote", "Impulsvortrag"],
+        duration: "30-45 Minuten",
+        description: "Dieser Impulsvortrag beleuchtet das zentrale Paradoxon der aktuellen KI-Einführung in Unternehmen: Wie unterschiedliche Formen der Überforderung zu ähnlichen Hindernissen führen und welche praktischen Auswege sich für Organisationen bieten. Statt theoretischer Konzepte liefert der Vortrag praxisnahe Einblicke und konkrete Denkanstöße für eine zukunftsfähige Organisationsentwicklung im KI-Zeitalter.",
+        keyPoints: [
+            "Das Paradoxon der KI-Transformation: Ähnliche Hindernisse trotz unterschiedlicher Ausgangslagen",
+            "Erforderliche Fähigkeiten und Denkweisen für die KI-Ära",
+            "Verschiebung der Kompetenzprofile: Vom Spezialisten zum KI-Generalisten",
+            "Die richtige Balance bei KI-Tools beim internem Know-how-Aufbau"
+        ],
+        audience: "Führungskräfte und Entscheidungsträger, die ihre Organisation für die KI-Ära zukunftsfähig aufstellen wollen"
+    },
+    {
+        title: "Websites der Zukunft – Neue Konzepte im Zeitalter der KI",
+        categories: ["KI-Strategie", "KI-Praxis"],
+        formats: ["Webinar", "Impulsvortrag"],
+        duration: "30-60 Minuten",
+        description: "Wie werden wir in Zukunft mit Websites interagieren? Dieser Vortrag beleuchtet, wie Websites relevant bleiben, wenn KI-Suchen und ChatGPT klassische Webauftritte in Frage stellen. Ein praxisnaher Blick auf die KI-Integration in Websites – ohne Hype, dafür mit echtem Mehrwert.",
+        keyPoints: [
+            "Veränderung der Nutzerführung und Interaktion auf Websites durch KI",
+            "Konkrete Beispiele für sinnvolle KI-Integration (intelligente Suche, personalisierte Nutzererfahrung)",
+            "Praxisnaher Einblick in die Konzeption moderner Websites mit cleverer KI-Nutzung",
+            "Praktische Tipps für den Einstieg in KI-gestützte Features"
+        ],
+        audience: "Websitebetreiber, Konzeptioner und Digital-Verantwortliche, die verstehen möchten, wie sie mit KI ihre digitale Präsenz zukunftssicher gestalten können"
+    },
+    {
+        title: "Smarte KI Workflows für Content & Marketing",
+        categories: ["KI-Automation", "KI-Praxis", "KI-Tools"],
+        formats: ["Webinar", "Workshop"],
+        duration: "60-180 Minuten",
+        description: "Ein praxisorientiertes Webinar, das konkrete KI-Workflows für den Content- und Marketing-Alltag demonstriert. Statt theoretischer Konzepte zeigt dieser Vortrag mit Live-Demos, wie speziell trainierte KI-Assistenten und automatisierte Prozesse Routineaufgaben vereinfachen und in bestehende Arbeitsabläufe integriert werden können.",
+        keyPoints: [
+            "Live-Demonstrationen speziell trainierter KI-Assistenten für Marketing-Aufgaben",
+            "End-to-End Workflows von der Ideenfindung bis zur Veröffentlichung",
+            "Praktische Ansätze zur teilweisen Automatisierung von Routineaufgaben",
+            "Integration von KI-Tools in bestehende Marketing- und Content-Prozesse"
+        ],
+        audience: "Content-Manager, Marketing-Teams, Social Media Manager und alle, die im Content- und Marketing-Bereich arbeiten"
+    },
+    {
+        title: "Prompt Engineering für KI-gestützte Entwicklung: Vom Code zum System",
+        categories: ["Prompt Engineering", "KI-Automation", "KI-Tools"],
+        formats: ["Workshop", "Webinar", "Fachvortrag"],
+        duration: "60-180 Minuten",
+        description: "Dieser Vortrag beleuchtet die spezifischen Anforderungen des Prompt Engineerings für AI-Assistenten, Agenten und programmatische Anwendungen. Im Gegensatz zum Prompting für einfache Textinteraktionen werden hier strukturierte Frameworks, Skalierbarkeit und systematische Ansätze in den Fokus gerückt. Der Vortrag vermittelt praxisnahe Methoden zur Entwicklung robuster Prompt-Systeme für entwicklungsorientierte und automatisierte Anwendungsfälle.",
+        keyPoints: [
+            "Unterschiede zwischen dialogorientiertem und strukturiertem Prompting",
+            "Komponenten eines skalierbaren Prompt-Frameworks (Expertenrollen, Hauptaufgaben, Kontext, Variablen, etc.)",
+            "Entwicklung von Prompt-Modulen als wiederverwendbare Bausteine",
+            "Token-Effizienz und Optimierungstechniken für programmatische Anwendungen",
+            "Sicherheitsaspekte: Prompt Injection, Prompt Leaking und Validierungsstrategien"
+        ],
+        audience: "Entwickler, Softwarearchitekten, AI Engineers und technisch versierte Fachleute, die KI-Assistenten und -Agenten in Anwendungen, Workflows oder Entwicklungsprozesse integrieren möchten"
+    },
+    {
+        title: "ChatGPT & Co - So spreche ich mit einer KI!",
+        categories: ["Prompt Engineering", "KI-Praxis"],
+        formats: ["Workshop", "Webinar"],
+        duration: "60-180 Minuten",
+        description: "Ein praxisorientierter Workshop, der die Grundlagen und fortgeschrittenen Techniken des Prompt Engineerings vermittelt. Statt theoretischer Abhandlungen bietet dieser Kurs konkrete Methoden, um KI-Tools wie ChatGPT effektiver zu nutzen und präzise Ergebnisse zu erzielen.",
+        keyPoints: [
+            "Grundlegende Prinzipien der Kommunikation mit KI-Systemen",
+            "Strukturierte Prompt-Techniken für konsistente und präzise Ergebnisse",
+            "Häufige Fehlerquellen identifizieren und vermeiden",
+            "Anwendungsspezifische Prompt-Strategien für verschiedene Berufsfelder"
+        ],
+        audience: "Marketingprofis, Kreative, Teams und Entscheider, die KI-Tools effektiver nutzen wollen, ohne tiefes technisches Verständnis aufbauen zu müssen"
+    },
+    {
+        title: "Kreativer Einstieg in AI-Design und AI-Fotografie",
+        categories: ["AI-Design", "KI-Praxis"],
+        formats: ["Webinar", "Impulsvortrag", "Workshop"],
+        duration: "45-180 Minuten",
+        description: "Eine praxisnahe Einführung in die Welt des KI-gestützten Designs und der KI-Fotografie. Statt theoretischer Konzepte bietet dieser Vortrag einen ehrlichen Blick auf Möglichkeiten und Grenzen von AI-Design und zeigt konkrete Wege, wie Kreative KI als wertvolles Werkzeug in ihren Arbeitsalltag integrieren können.",
+        keyPoints: [
+            "Realistische Bestandsaufnahme der aktuellen Möglichkeiten und Grenzen von AI-Design",
+            "Transformation der Kreativbranche durch KI – Chancen und Herausforderungen",
+            "Vorstellung des 4K Prompt Frameworks für effektive Kommunikation mit Bild-KIs",
+            "Praktische Anwendungsfälle für den kreativen Alltag"
+        ],
+        audience: "Designer, Marketingfachleute, Kreative und Interessierte, die einen realistischen Einblick in die Möglichkeiten von AI-Design suchen"
+    },
+    {
+        title: "AI-Design Tools – Demos & Best Practices",
+        categories: ["AI-Design", "KI-Tools", "KI-Praxis"],
+        formats: ["Webinar", "Workshop"],
+        duration: "60-180 Minuten",
+        description: "Ein praktisch orientiertes Webinar mit Live-Demonstrationen der wichtigsten AI-Design-Tools. Statt theoretischer Erklärungen bietet dieser Vortrag konkrete Einblicke in den Einsatz von Midjourney, LeonardoAI und Canva – mit allen Vor- und Nachteilen sowie praxiserprobten Techniken.",
+        keyPoints: [
+            "Live-Demonstrationen führender KI-Bildgenerierungstools in ihrer praktischen Anwendung",
+            "Entwicklung komplexer visueller Szenen aus einfachen Bildprompts",
+            "Fortgeschrittene Techniken für präzise KI-Bildprompts, die konsistente Ergebnisse liefern",
+            "Integration der KI-Tools in bestehende Designworkflows"
+        ],
+        audience: "Designer, Marketing-Teams, Content-Creator und Kreative, die praktische Erfahrung mit KI-Bildgenerierungstools sammeln möchten"
+    }
+];
+---
+
+<Layout
+    title="Vorträge & Workshops | KI-Strategie, AI-Design, Prompt Engineering | Rico Loschke"
+    description="✓ Praxisnahe Vorträge & Workshops zu KI-Themen ✓ Von AI-Design über Prompt Engineering bis KI-Transformation ✓ Individuell anpassbar ➤ Jetzt entdecken!"
+>
+    <section class="container-padding mt-20">
+        <div class="max-container">
+            <h1 class="text-4xl md:text-5xl font-bold mb-8">Vorträge & Workshops</h1>
+            <p class="text-xl text-white/80 mb-6 max-w-3xl">Praxisnahe Impulse zu KI-Themen für Unternehmen, Konferenzen und Bildungseinrichtungen</p>
+            <p class="text-lg text-white/70 mb-12 max-w-3xl">Alle Vorträge und Workshops können flexibel an Ihre Bedürfnisse angepasst werden – sowohl im zeitlichen Rahmen als auch in der inhaltlichen Schwerpunktsetzung. Größere Formate wie Workshops werden individuell auf Ihre spezifischen Anforderungen zugeschnitten.</p>
+            
+            <div class="grid gap-8 md:grid-cols-2">
+                {presentations.map((presentation) => (
+                    <article class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
+                        <div class="p-6">
+                            <h2 class="text-2xl md:text-3xl font-bold mb-4">{presentation.title}</h2>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                {presentation.categories.map((category: string) => {
+                                    const bgColorClass = isValidCategory(category) 
+                                        ? categoryColors[category] 
+                                        : "bg-gray-500"; // Fallback-Farbe
+                                    
+                                    return (
+                                        <span class={`px-3 py-1 ${bgColorClass} bg-opacity-20 text-white rounded-full text-sm`}>
+                                            {category}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                            
+                            <div class="mb-4">
+                                <span class="text-white/60 block mb-1">Formate:</span>
+                                <span class="font-medium">{presentation.formats.join(", ")}</span>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <span class="text-white/60 block mb-1">Dauer:</span>
+                                <span class="font-medium">{presentation.duration}</span>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <span class="text-white/60 block mb-1">Kurzbeschreibung:</span>
+                                <p class="text-white/90">{presentation.description}</p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <span class="text-white/60 block mb-2">Kerninhalte:</span>
+                                <ul class="list-disc pl-5 space-y-1 text-white/90">
+                                    {presentation.keyPoints.map((point: string) => (
+                                        <li>{point}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <span class="text-white/60 block mb-1">Zielgruppe:</span>
+                                <p class="text-white/90">{presentation.audience}</p>
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </div>
+            
+            <div class="mt-16 bg-gray-800/30 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold mb-4">Individuelles Angebot anfragen</h2>
+                <p class="mb-6">Sie suchen nach einem maßgeschneiderten Vortrag oder Workshop zu einem KI-Thema für Ihr Unternehmen oder Ihre Veranstaltung? Kontaktieren Sie mich für ein individuelles Angebot.</p>
+                <a href="/contact" class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors">
+                    Kontakt aufnehmen
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>

@@ -12,6 +12,7 @@ const staticPages = [
     "blog",  // Blog-Übersichtsseite
     "guides",
     "projekte",  // Projektseite hinzugefügt
+    "impulse",  // Vortragsseite hinzugefügt
 ];
 
 // Funktion zum Generieren der AI Design Framework URLs
