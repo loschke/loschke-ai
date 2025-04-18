@@ -1,5 +1,5 @@
 ---
-title: "Glossar der Prompt-Begriffe"
+title: "Prompt Engineering Glossar: Die wichtigsten Fachbegriffe erklärt"
 description: "Die wichtigsten Fachbegriffe im Bereich Prompt Engineering im Überblick"
 pubDate: 2025-04-05
 categories: ["Prompt Engineering"]

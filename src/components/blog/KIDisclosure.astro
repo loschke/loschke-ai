@@ -1,0 +1,23 @@
+---
+// src/components/blog/KIDisclosure.astro
+
+interface Props {
+    detailed?: boolean;
+}
+
+const { detailed = false } = Astro.props;
+---
+
+<div class="ki-disclosure mt-8 text-white/50 text-xs italic">
+    {detailed ? (
+        <p class="flex items-start gap-1.5">
+            <span>
+                Meine Inhalte sind mit KI-Unterstützung entstanden und wurden anschließend von mir redaktionell geprüft, um Genauigkeit und Qualität sicherzustellen. Ich setze KI als Werkzeug ein, um effizient hochwertige Inhalte zu produzieren, während die redaktionelle Verantwortung stets bei mir liegt.
+            </span>
+        </p>
+    ) : (
+        <p>
+            <span>Meine Inhalte sind mit KI-Unterstützung entstanden und wurden redaktionell geprüft.</span>
+        </p>
+    )}
+</div>

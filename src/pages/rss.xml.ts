@@ -16,7 +16,8 @@ export async function GET(context: { site: URL }) {
             title: post.data.title,
             description: post.data.description,
             pubDate: post.data.pubDate,
-            link: `/blog/${post.id}/`,
+            // Remove trailing slash to match the new URL format
+            link: `/blog/${post.id.replace(/\.md$/, "")}`,
             // Optional: Add categories as RSS categories
             categories: post.data.categories || [],
             // Optional: Add custom data

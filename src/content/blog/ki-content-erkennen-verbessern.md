@@ -1,5 +1,5 @@
 ---
-title: "KI-Content erkennen und verbessern"
+title: "KI-Content authentisch gestalten: Strategien für überzeugende Texte"
 description: "Vom generischen zum authentischen Inhalt: Strategien zur Optimierung KI-generierter Texte"
 pubDate: 2025-04-05
 categories: ["KI-Praxis"]

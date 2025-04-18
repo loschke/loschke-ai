@@ -1,0 +1,87 @@
+---
+// src/components/blog/CategoryTeaser.astro
+import { Image } from 'astro:assets';
+import howToPromptGuide from '../../assets/guides/how-to-prompt-guide.png';
+import aiDesignGuide from '../../assets/guides/ai-design-guide.png';
+
+interface Props {
+  categories: string[];
+}
+
+const { categories = [] } = Astro.props;
+
+// Hauptkategorie ermitteln (erste in der Liste)
+const mainCategory = categories[0] || "";
+
+// Teaser-Daten basierend auf der Kategorie
+let teaser = null;
+
+switch(mainCategory) {
+  case "Prompt Engineering":
+    teaser = {
+      title: "How-to-Prompt Guide",
+      description: "Systematisches Framework für effektive KI-Kommunikation und optimale Ergebnisse mit ChatGPT & Co.",
+      icon: "📝", // Emoji statt Bild
+      href: "/how-to-prompt-guide",
+      color: "from-[#2a4858] to-[#162a36]",
+      type: "guide"
+    };
+    break;
+  case "KI-Transformation":
+    teaser = {
+      title: "next:move.ai",
+      description: "Die Agenturen queonext und move:elevator, bieten Unternehmen einen praxisnahen Einstieg in die KI-Transformation. Mit einem Fokus auf Marketing-Anwendungen bieten wir Beratung, Workshops und eine spezialisierte KI-Toolbox.",
+      icon: "🚀", // Raketen-Emoji wie gewünscht
+      href: "https://next-move.ai",
+      color: "from-[#3a3a59] to-[#232339]",
+      type: "project",
+      external: true
+    };
+    break;
+  case "KI-Strategie":
+    teaser = {
+      title: "queonext AI",
+      description: "Als Director Automation & AI entwickle ich gemeinsam mit unserem Team KI-Strategien und setzen diese in konkrete Lösungen um. Wir integrieren generative KI in deine Unternehmensprozesse und gestalten die digitale Transformation.",
+      icon: "🚀", // Raketen-Emoji wie gewünscht
+      href: "https://queonext.de/ai",
+      color: "from-[#4a3c59] to-[#2a1c39]",
+      type: "project",
+      external: true
+    };
+    break;
+  case "AI-Design":
+    teaser = {
+      title: "AI-Design Guide",
+      description: "Leitfaden für AI-Design & AI-Fotografie: Lerne, gestalte und realisiere beeindruckende KI-generierte Bilder.",
+      icon: "🎨", // Emoji statt Bild
+      href: "https://ai-design.guide/",
+      color: "from-[#005461] to-[#003049]",
+      type: "guide",
+      external: true
+    };
+    break;
+}
+---
+
+{teaser && (
+  <div class="category-teaser my-8">
+    <div class={`py-4 px-5 bg-gradient-to-br ${teaser.color} border border-white/10 rounded-lg`}>
+      <h4 class="text-xl font-bold text-white mb-3 mt-0">
+        {teaser.title}
+      </h4>
+      
+      <p class="text-sm text-white/80 mb-3">
+        {teaser.description.substring(0, 300) + (teaser.description.length > 300 ? "..." : "")}
+      </p>
+      
+      <a href={teaser.href} target={teaser.external ? "_blank" : undefined} 
+         class="inline-flex items-center px-3 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-sm font-medium transition-colors">
+        {teaser.type === "guide" ? "Zum Guide" : "Zum Projekt"}
+        <svg class="w-3.5 h-3.5 ml-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14"></path>
+          <path d="M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+)}

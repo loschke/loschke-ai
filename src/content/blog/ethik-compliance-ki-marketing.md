@@ -1,5 +1,5 @@
 ---
-title: "Ethik und Compliance"
+title: "Ethik und Compliance: Verantwortungsvoller Einsatz von KI im Marketing"
 description: "Verantwortungsvoller Einsatz von KI im Marketing und rechtliche Rahmenbedingungen"
 pubDate: 2025-04-05
 categories: ["KI-Transformation"]

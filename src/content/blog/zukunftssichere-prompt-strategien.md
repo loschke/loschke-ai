@@ -1,5 +1,5 @@
 ---
-title: "Zukunftssichere Prompt-Strategien"
+title: "Prompt-Strategien 2025+: Zukunftssichere Techniken für die nächste Generation von Sprachmodellen"
 description: "Vorbereitet für die nächste KI-Generation: Langfristig relevante Ansätze und Techniken"
 pubDate: 2025-04-05
 categories: ["KI-Strategie", "Prompt Engineering"]

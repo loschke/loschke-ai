@@ -5,6 +5,9 @@ import Layout from "../../layouts/Layout.astro";
 import ErrorLayout from "../../layouts/ErrorLayout.astro";
 import BackToLink from "../../components/ui/BackToLink.astro";
 import ErrorBoundary from "../../components/ui/ErrorBoundary.astro";
+import AuthorBox from "../../components/blog/AuthorBox.astro";
+import KIDisclosure from "../../components/blog/KIDisclosure.astro";
+import CategoryTeaser from "../../components/blog/CategoryTeaser.astro";
 import { getBlogPosts, type BlogPost } from "../../utils/blog";
 import { getCategoryImage } from "../../utils/imageImports";
 
@@ -223,7 +226,7 @@ const formatDate = (date: Date): string => {
 
             <div class="border-t border-white/5 my-8" role="separator" />
 
-            <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+            <div class="max-container container-padding">
                 <div class="relative flex flex-col xl:flex-row xl:gap-24">
                     <main class="flex-1">
                         <div class="max-w-[85ch] mx-auto">
@@ -253,6 +256,17 @@ const formatDate = (date: Date): string => {
                                         </div>
                                     )}
 
+                                <CategoryTeaser 
+                                    categories={entry.data.categories || []}
+                                />
+
+                                <AuthorBox 
+                                    name={authorName}
+                                    avatar={authorAvatar}
+                                />
+                                
+                                <KIDisclosure />
+                                
                                 <footer class="mt-12 pt-8 border-t border-white/5">
                                     <BackToLink href="/blog" />
                                 </footer>

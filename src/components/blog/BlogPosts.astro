@@ -77,17 +77,17 @@ const formatDate = (date: Date): string => {
 ---
 
 <section class:list={["blog-posts", className]}>
-    <div class="max-w-4xl mx-auto">
+    <div class="max-container">
         {
             (title || description) && (
-                <div class="text-center mb-16">
+                <div class="mb-16">
                     {title && (
                         <h2 class="text-4xl md:text-5xl font-bold mb-6">
                             {title}
                         </h2>
                     )}
                     {description && (
-                        <p class="text-xl text-white/80 max-w-2xl mx-auto">
+                        <p class="text-xl text-white/80 max-w-2xl">
                             {description}
                         </p>
                     )}

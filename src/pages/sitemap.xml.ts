@@ -78,7 +78,7 @@ async function getBlogUrls(): Promise<string[]> {
     const blogPosts = await getBlogPosts();
     
     // Blog-Post-URLs generieren
-    const blogUrls = blogPosts.map(post => `blog/${post.id}`);
+    const blogUrls = blogPosts.map(post => `blog/${post.id.replace(/\.md$/, "")}`);
     
     // Blog-Kategorie-URLs generieren
     const categories = [...new Set(blogPosts.flatMap(post => post.data.categories || []))];

@@ -132,7 +132,8 @@ export function generateRSSItems(posts: BlogPost[]): RSSItem[] {
         description: post.data.description,
         pubDate: post.data.pubDate,
         updatedDate: post.data.updatedDate,
-        link: `/blog/${post.id}/`,
+        // Remove trailing slash to match the new URL format
+        link: `/blog/${post.id.replace(/\.md$/, "")}`,
         categories: post.data.categories || [],
     }));
 }
