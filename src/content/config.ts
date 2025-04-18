@@ -24,6 +24,7 @@ const blog = defineCollection({
         // Media
         heroImage: z.string().optional(), // Legacy support for string paths
         coverImage: image().optional(), // Using image() helper for optimization
+        audio: z.string().optional(), // Audio file for blog post
 
         // Taxonomy
         categories: z.array(z.string()).min(1).default(['Allgemein']),

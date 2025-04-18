@@ -4,6 +4,7 @@ description: "Wie du verschiedene KI-Modelltypen erkennst und durch angepasstes 
 pubDate: 2025-04-18
 categories: ["Prompt Engineering", "KI-Tools"]
 tags: ["Prompt Engineering", "KI-Textgenerierung", "Reasoning", "LLMs", "Modelltypen"]
+audio: "ki-praxis-sprachmodelle-allrounder-vs-reasoning.mp3"
 draft: false
 author:
   name: "Rico Loschke"

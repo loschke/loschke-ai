@@ -122,6 +122,8 @@ const formatDate = (date: Date): string => {
             ogImage={ogImage || undefined}
             article={articleMetadata}
             canonicalURL={entry.data.seo?.canonicalURL || undefined}
+            audioFile={entry.data.audio}
+            audioTitle={entry.data.title}
         >
             <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
                 <div class="relative w-full aspect-[16/9] mb-8">
@@ -173,12 +175,14 @@ const formatDate = (date: Date): string => {
                         </time>
                     )}
 
-                    <h1
-                        class="text-4xl md:text-5xl font-bold my-6"
-                        transition:name={`title-${entry.id}`}
-                    >
-                        {entry.data.title}
-                    </h1>
+                    <div class="relative">
+                        <h1
+                            class="text-4xl md:text-5xl font-bold my-6"
+                            transition:name={`title-${entry.id}`}
+                        >
+                            {entry.data.title}
+                        </h1>
+                    </div>
 
                     {entry.data.description && (
                         <p
@@ -188,6 +192,19 @@ const formatDate = (date: Date): string => {
                             {entry.data.description}
                         </p>
                     )}
+                    
+                    {entry.data.audio && 
+                        <button 
+                            id="blog-audio-trigger" 
+                            class="flex items-center gap-2 mx-auto my-8 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-full transition-colors"
+                            aria-label={`Artikel "${entry.data.title}" als Audio anhören`}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.828-2.828" />
+                            </svg>
+                            <span>Als Audio anhören</span>
+                        </button>
+                    }
 
                     {entry.data.categories &&
                         entry.data.categories.length > 0 && (

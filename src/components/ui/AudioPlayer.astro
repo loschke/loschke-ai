@@ -1,0 +1,208 @@
+---
+// Global Audio Player component for blog articles
+---
+
+<!-- No floating trigger button anymore -->
+
+<!-- Audio Player -->
+<div id="global-audio-player" class="fixed bottom-0 left-0 right-0 bg-base-darker bg-opacity-95 backdrop-blur-lg border-t border-white/10 transform translate-y-full transition-transform duration-300 z-40">
+  <div class="max-container container-padding py-5">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-5 w-full sm:flex-1">
+        <button id="play-pause-button" class="w-12 h-12 flex items-center justify-center rounded-full bg-primary hover:bg-primary-dark transition-colors shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" id="play-icon" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" id="pause-icon" class="h-6 w-6 text-white hidden" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div class="flex-1">
+          <div class="text-base text-white/80 truncate" id="audio-title">Artikel als Audio anhören</div>
+          <div class="relative w-full h-2 bg-white/10 rounded-full mt-2">
+            <div id="progress-bar" class="absolute left-0 top-0 h-full bg-primary rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 mt-2 sm:mt-0">
+        <span id="current-time" class="text-sm text-white/60">0:00</span>
+        <span class="text-sm text-white/60">/</span>
+        <span id="duration" class="text-sm text-white/60">0:00</span>
+        <button id="close-player" class="text-white/60 hover:text-white transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <audio id="audio-element" preload="metadata"></audio>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Get DOM elements
+    const audioPlayer = document.getElementById('global-audio-player');
+    const audioElement = document.getElementById('audio-element') as HTMLAudioElement;
+    const playPauseButton = document.getElementById('play-pause-button');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const currentTimeDisplay = document.getElementById('current-time');
+    const durationDisplay = document.getElementById('duration');
+    const audioTitle = document.getElementById('audio-title');
+    const closeButton = document.getElementById('close-player');
+    
+    // We'll now use a different trigger element that will be placed in the blog post header
+    const audioTrigger = document.getElementById('blog-audio-trigger');
+    
+    // Check if we're on a blog page with audio
+    const checkForAudio = () => {
+      // Get the audio file path from a data attribute set by the blog page
+      const audioFile = document.body.dataset.audioFile;
+      const articleTitle = document.body.dataset.articleTitle;
+      
+      if (audioFile) {
+        // Set the audio source
+        audioElement.src = `/audio/blog/${audioFile}`;
+        
+        // Set the title
+        if (audioTitle && articleTitle) {
+          audioTitle.textContent = `${articleTitle}`;
+        }
+        
+        // Make sure the trigger in the blog header is visible if it exists
+        if (audioTrigger) {
+          audioTrigger.classList.remove('hidden');
+          audioTrigger.setAttribute('aria-label', `Artikel "${articleTitle}" als Audio anhören`);
+        }
+        
+        // Load the audio metadata
+        audioElement.load();
+      } else {
+        // Hide the trigger button and player if no audio file
+        if (audioTrigger) {
+          audioTrigger.classList.add('hidden');
+        }
+        if (audioPlayer) {
+          audioPlayer.classList.add('translate-y-full');
+        }
+      }
+    };
+    
+    // Show player when trigger is clicked
+    if (audioTrigger) {
+      audioTrigger.addEventListener('click', () => {
+        if (audioPlayer) {
+          audioPlayer.classList.remove('translate-y-full');
+          // No need to hide the trigger in the blog header
+          
+          // Start playing automatically when triggered
+          if (audioElement) {
+            audioElement.play()
+              .then(() => {
+                playIcon?.classList.add('hidden');
+                pauseIcon?.classList.remove('hidden');
+              })
+              .catch(error => {
+                console.error('Audio playback failed:', error);
+              });
+          }
+        }
+      });
+    }
+    
+    // Format time in MM:SS
+    const formatTime = (seconds: number) => {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.floor(seconds % 60);
+      return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    };
+    
+    // Update progress bar and time displays
+    const updateProgress = () => {
+      if (!audioElement || !progressBar || !currentTimeDisplay) return;
+      
+      const currentTime = audioElement.currentTime;
+      const duration = audioElement.duration || 0;
+      
+      // Update progress bar
+      if (progressBar) {
+        const progressPercent = (currentTime / duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+      }
+      
+      // Update time displays
+      if (currentTimeDisplay) {
+        currentTimeDisplay.textContent = formatTime(currentTime);
+      }
+    };
+    
+    // Set up event listeners
+    if (playPauseButton) {
+      playPauseButton.addEventListener('click', () => {
+        if (audioElement.paused) {
+          audioElement.play();
+          playIcon?.classList.add('hidden');
+          pauseIcon?.classList.remove('hidden');
+        } else {
+          audioElement.pause();
+          playIcon?.classList.remove('hidden');
+          pauseIcon?.classList.add('hidden');
+        }
+      });
+    }
+    
+    if (closeButton) {
+      closeButton.addEventListener('click', () => {
+        audioElement.pause();
+        playIcon?.classList.remove('hidden');
+        pauseIcon?.classList.add('hidden');
+        audioPlayer?.classList.add('translate-y-full');
+        
+        // No need to show the trigger again
+      });
+    }
+    
+    if (audioElement) {
+      // Update duration when metadata is loaded
+      audioElement.addEventListener('loadedmetadata', () => {
+        if (durationDisplay) {
+          durationDisplay.textContent = formatTime(audioElement.duration);
+        }
+      });
+      
+      // Update progress as audio plays
+      audioElement.addEventListener('timeupdate', updateProgress);
+      
+      // Reset player when audio ends
+      audioElement.addEventListener('ended', () => {
+        playIcon?.classList.remove('hidden');
+        pauseIcon?.classList.add('hidden');
+        if (progressBar) {
+          progressBar.style.width = '0%';
+        }
+        if (currentTimeDisplay) {
+          currentTimeDisplay.textContent = '0:00';
+        }
+      });
+    }
+    
+    // Progress bar click to seek
+    if (progressBar && progressBar.parentElement) {
+      const progressBarParent = progressBar.parentElement;
+      progressBarParent.addEventListener('click', (e) => {
+        const rect = progressBarParent.getBoundingClientRect();
+        const clickPosition = (e.clientX - rect.left) / rect.width;
+        audioElement.currentTime = clickPosition * audioElement.duration;
+        updateProgress();
+      });
+    }
+    
+    // Check for audio when page loads
+    checkForAudio();
+    
+    // Listen for custom event that might be triggered when navigating between pages
+    document.addEventListener('audioContentChanged', checkForAudio);
+  });
+</script>
