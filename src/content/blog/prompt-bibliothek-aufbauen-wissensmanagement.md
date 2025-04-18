@@ -1,7 +1,7 @@
 ---
 title: "Prompt-Bibliothek erstellen: Management für wiederverwendbare Prompts"
 description: "Systematisches Wissensmanagement für KI-Prompts und effiziente Wiederverwendung"
-pubDate: 2025-04-05
+pubDate: 2025-04-04
 categories: ["Prompt Engineering"]
 tags: ["Prompt Engineering", "KI-Textgenerierung", "Content Creation", "Wissensmanagement", "Produktivität"]
 draft: false

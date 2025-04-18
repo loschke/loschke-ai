@@ -85,6 +85,7 @@ export function getUniqueTags(posts: BlogPost[]): string[] {
     ))].sort();
 }
 
+
 /**
  * Filters posts by category (case-insensitive)
  * Returns posts sorted by date
@@ -112,6 +113,7 @@ export function filterPostsByTag(posts: BlogPost[], tag: string): BlogPost[] {
         )
         .sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
+
 
 /**
  * Finds a post by its ID/slug

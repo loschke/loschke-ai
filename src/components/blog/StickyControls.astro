@@ -1,0 +1,274 @@
+---
+interface Props {
+  title: string;
+  hasAudio: boolean;
+  audioFile?: string;
+  url: string;
+  hasScalableContent: boolean;
+}
+
+const { title, hasAudio, audioFile, url, hasScalableContent } = Astro.props;
+
+// Ensure we have an absolute URL for sharing
+let absoluteUrl = url;
+if (!url.startsWith('http')) {
+  // If we're in development, use a fallback domain
+  const baseUrl = import.meta.env.PROD 
+    ? (Astro.site?.toString() || 'https://loschke.ai') 
+    : 'https://loschke.ai';
+  
+  // Remove leading slash if present to avoid double slashes
+  const relativePath = url.startsWith('/') ? url.substring(1) : url;
+  absoluteUrl = `${baseUrl}/${relativePath}`;
+}
+
+const encodedUrl = encodeURIComponent(absoluteUrl);
+const encodedTitle = encodeURIComponent(title);
+
+// Simplified share links for the sticky bar
+const shareLinks = [
+  {
+    name: "Twitter",
+    url: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+    icon: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+  },
+  {
+    name: "LinkedIn",
+    url: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
+    icon: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
+  },
+  {
+    name: "Facebook",
+    url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    icon: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z",
+  },
+];
+---
+
+<div id="sticky-controls" class="sticky-controls container-padding">
+  <div class="max-container py-2 flex items-center justify-between">
+    <!-- Left: Content Depth Controls with Label -->
+    {hasScalableContent && (
+      <div class="flex items-center">
+        <span class="text-white/70 text-xs mr-2">Inhaltsdetails:</span>
+        <div class="depth-controls flex space-x-1">
+          <button 
+            data-depth="1" 
+            class="depth-button depth-button-1 px-2 py-0.5 text-xs rounded-md bg-white/5 hover:bg-white/10 transition-all duration-300 relative"
+            title="Nur die wichtigsten Kernaussagen anzeigen"
+          >
+            <span class="relative z-10">Kernpunkte</span>
+          </button>
+          <button 
+            data-depth="2" 
+            class="depth-button depth-button-2 px-2 py-0.5 text-xs rounded-md bg-white/5 hover:bg-white/10 transition-all duration-300 relative active"
+            title="Standard-Informationstiefe anzeigen"
+          >
+            <span class="relative z-10">Relevante</span>
+          </button>
+          <button 
+            data-depth="3" 
+            class="depth-button depth-button-3 px-2 py-0.5 text-xs rounded-md bg-white/5 hover:bg-white/10 transition-all duration-300 relative"
+            title="Alle Details und Hintergrundinformationen anzeigen"
+          >
+            <span class="relative z-10">Deep Insights</span>
+          </button>
+        </div>
+      </div>
+    )}
+    
+    <!-- Middle: Audio Button -->
+    {hasAudio && (
+      <div class="flex-shrink-0 mx-4">
+        <button 
+          id="sticky-audio-trigger" 
+          class="audio-button flex items-center gap-1 px-2 py-0.5 bg-primary/80 hover:bg-primary text-white text-xs rounded-md transition-colors"
+          aria-label={`Artikel "${title}" als Audio anhören`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.828-2.828" />
+          </svg>
+          <span>Audio Zusammenfassung</span>
+        </button>
+      </div>
+    )}
+    
+    <!-- Right: Share Buttons with Label -->
+    <div class="flex items-center">
+      <span class="text-white/70 text-xs mr-2">Teilen:</span>
+      <div class="share-buttons flex space-x-1">
+        {
+          shareLinks.map(({ name, url, icon }) => (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="share-button p-1 bg-white/5 hover:bg-white/15 rounded-full transition-colors"
+              aria-label={`Auf ${name} teilen`}
+              title={`Auf ${name} teilen`}
+            >
+              <svg 
+                class="w-3 h-3" 
+                fill="currentColor" 
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d={icon} />
+              </svg>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const stickyControls = document.getElementById('sticky-controls');
+    const mainDepthButtons = document.querySelectorAll<HTMLButtonElement>('.content-depth-control .depth-button');
+    const stickyDepthButtons = document.querySelectorAll<HTMLButtonElement>('#sticky-controls .depth-button');
+    const mainAudioButton = document.getElementById('blog-audio-trigger');
+    const stickyAudioButton = document.getElementById('sticky-audio-trigger');
+    
+    if (!stickyControls) return;
+    
+    // Sync active state between main and sticky depth buttons
+    function syncActiveDepthButton() {
+      mainDepthButtons.forEach((button, index) => {
+        if (button.classList.contains('active') && stickyDepthButtons[index]) {
+          stickyDepthButtons[index].classList.add('active');
+        } else if (stickyDepthButtons[index]) {
+          stickyDepthButtons[index].classList.remove('active');
+        }
+      });
+    }
+    
+    // Add click handlers to sticky depth buttons
+    stickyDepthButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        if (mainDepthButtons[index]) {
+          mainDepthButtons[index].click();
+          syncActiveDepthButton();
+        }
+      });
+    });
+    
+    // Add click handler to sticky audio button
+    if (stickyAudioButton && mainAudioButton) {
+      stickyAudioButton.addEventListener('click', () => {
+        mainAudioButton.click();
+      });
+    }
+    
+    // Show/hide sticky controls based on scroll position
+    const articleContent = document.querySelector('article.prose');
+    const contentTop = articleContent ? articleContent.getBoundingClientRect().top + window.scrollY : 200;
+    
+    function handleScroll() {
+      if (!stickyControls) return;
+      
+      if (window.scrollY > contentTop + 100) {
+        stickyControls.classList.add('visible');
+      } else {
+        stickyControls.classList.remove('visible');
+      }
+      
+      // Keep depth buttons in sync
+      syncActiveDepthButton();
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial sync
+    syncActiveDepthButton();
+    handleScroll();
+  });
+</script>
+
+<style>
+  .sticky-controls {
+    position: fixed;
+    top: 96px; /* Position below the main navigation */
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background-color: rgba(17, 24, 39, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    pointer-events: none; /* Disable interactions when hidden */
+  }
+  
+  .sticky-controls.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Enable interactions when visible */
+  }
+  
+  /* Farbschema für Buttons - weniger dominant */
+  .depth-button-1.active {
+    background-color: rgba(59, 130, 246, 0.6);
+    color: white;
+  }
+  
+  .depth-button-2.active {
+    background-color: rgba(16, 185, 129, 0.6);
+    color: white;
+  }
+  
+  .depth-button-3.active {
+    background-color: rgba(139, 92, 246, 0.6);
+    color: white;
+  }
+  
+  /* Hover-Effekte */
+  .depth-button-1:hover {
+    background-color: rgba(59, 130, 246, 0.15);
+  }
+  
+  .depth-button-2:hover {
+    background-color: rgba(16, 185, 129, 0.15);
+  }
+  
+  .depth-button-3:hover {
+    background-color: rgba(139, 92, 246, 0.15);
+  }
+  
+  @media (max-width: 640px) {
+    .sticky-controls {
+      top: 72px; /* Smaller offset for mobile navigation */
+    }
+    
+    /* Hide labels on mobile */
+    .sticky-controls .text-white\/70 {
+      display: none;
+    }
+    
+    /* Adjust spacing */
+    .sticky-controls .mx-4 {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    
+    /* Make audio button smaller */
+    .sticky-controls .audio-button span {
+      display: none;
+    }
+    
+    .sticky-controls .audio-button {
+      padding: 0.25rem;
+      border-radius: 9999px;
+    }
+    
+    /* Hide depth controls on very small screens */
+    @media (max-width: 480px) {
+      .sticky-controls .depth-controls {
+        display: none;
+      }
+    }
+  }
+</style>

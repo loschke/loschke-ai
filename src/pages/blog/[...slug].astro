@@ -8,6 +8,9 @@ import ErrorBoundary from "../../components/ui/ErrorBoundary.astro";
 import AuthorBox from "../../components/blog/AuthorBox.astro";
 import KIDisclosure from "../../components/blog/KIDisclosure.astro";
 import CategoryTeaser from "../../components/blog/CategoryTeaser.astro";
+import ShareButtons from "../../components/blog/ShareButtons.astro";
+import ContentDepthControlCompact from "../../components/blog/ContentDepthControlCompact.astro";
+import StickyControls from "../../components/blog/StickyControls.astro";
 import { getBlogPosts, type BlogPost } from "../../utils/blog";
 import { getCategoryImage } from "../../utils/imageImports";
 
@@ -125,6 +128,14 @@ const formatDate = (date: Date): string => {
             audioFile={entry.data.audio}
             audioTitle={entry.data.title}
         >
+            {/* Sticky controls bar that appears on scroll */}
+            <StickyControls 
+                title={entry.data.title}
+                hasAudio={!!entry.data.audio}
+                audioFile={entry.data.audio}
+                url={Astro.url.href}
+                hasScalableContent={!!entry.data.hasScalableContent}
+            />
             <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
                 <div class="relative w-full aspect-[16/9] mb-8">
                     {entry.data.coverImage ? (
@@ -202,7 +213,7 @@ const formatDate = (date: Date): string => {
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.828-2.828" />
                             </svg>
-                            <span>Als Audio anhören</span>
+                            <span>Audio Zusammenfassung</span>
                         </button>
                     }
 
@@ -238,6 +249,7 @@ const formatDate = (date: Date): string => {
                         />
                         <span class="text-white/80">{authorName}</span>
                     </div>
+                    
                 </div>
             </div>
 
@@ -248,7 +260,27 @@ const formatDate = (date: Date): string => {
                     <main class="flex-1">
                         <div class="max-w-[85ch] mx-auto">
                             <article class="prose prose-invert max-w-none bg-base-darker/90 backdrop-blur-sm rounded-xl p-8">
+                            {entry.data.hasScalableContent && (
+                                <div class="mb-4">
+                                    <ContentDepthControlCompact />
+                                </div>
+                            )}
+                            
+                            <div class="mb-8">
+                                <ShareButtons 
+                                    url={Astro.url.href} 
+                                    title={entry.data.title} 
+                                />
+                            </div>
+                                
                                 <Content />
+                                
+                                <div class="mt-8">
+                                    <ShareButtons 
+                                        url={Astro.url.href} 
+                                        title={entry.data.title} 
+                                    />
+                                </div>
 
                                 {entry.data.tags &&
                                     entry.data.tags.length > 0 && (
@@ -296,7 +328,7 @@ const formatDate = (date: Date): string => {
                             class="hidden xl:block w-80 shrink-0"
                             aria-label="Inhaltsverzeichnis"
                         >
-                            <div class="sticky top-24">
+                            <div class="sticky top-36">
                                 <div class="p-6 bg-white/5 backdrop-blur-sm rounded-xl">
                                     <h2 class="text-xl font-bold mb-4">
                                         Inhaltsverzeichnis
@@ -334,7 +366,7 @@ const formatDate = (date: Date): string => {
 
 <style>
     .prose {
-        @apply prose-headings:scroll-mt-32;
+        @apply prose-headings:scroll-mt-44;
     }
 
     .toc-item {

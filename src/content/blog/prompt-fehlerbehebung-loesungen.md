@@ -2,7 +2,7 @@
 title: "Prompt Troubleshooting: Häufige Probleme & deren Lösungen"
 description: "Typische Probleme und deren Lösungen für effektivere KI-Interaktionen"
 pubDate: 2025-04-05
-categories: ["Prompt Engineering"]
+categories: ["KI-Praxis","Prompt Engineering"]
 tags: ["Prompt Engineering", "KI-Textgenerierung", "Produktivität", "Fehlerbehebung", "Optimierung"]
 draft: false
 author:

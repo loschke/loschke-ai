@@ -4,6 +4,7 @@ description: "Verantwortungsvoller Einsatz von KI im Marketing und rechtliche Ra
 pubDate: 2025-04-05
 categories: ["KI-Transformation"]
 tags: ["KI-Ethik", "Generative KI", "Business", "Datenschutz", "Compliance"]
+audio: "ethik-compliance-ki-marketing.mp3"
 draft: false
 author:
   name: "Rico Loschke"

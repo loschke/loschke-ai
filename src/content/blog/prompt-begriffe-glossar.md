@@ -1,7 +1,7 @@
 ---
 title: "Prompt Engineering Glossar: Die wichtigsten Fachbegriffe erklärt"
 description: "Die wichtigsten Fachbegriffe im Bereich Prompt Engineering im Überblick"
-pubDate: 2025-04-05
+pubDate: 2025-04-01
 categories: ["Prompt Engineering"]
 tags: ["Prompt Engineering", "Generative KI", "Bildung", "Referenz", "Terminologie"]
 draft: false

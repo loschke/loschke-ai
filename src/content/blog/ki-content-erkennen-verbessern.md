@@ -1,10 +1,11 @@
 ---
 title: "KI-Content authentisch gestalten: Strategien für überzeugende Texte"
 description: "Vom generischen zum authentischen Inhalt: Strategien zur Optimierung KI-generierter Texte"
-pubDate: 2025-04-05
+pubDate: 2025-04-06
 categories: ["KI-Praxis"]
 tags: ["KI-Textgenerierung", "Content Creation", "Marketing", "Optimierung", "Authentizität"]
 draft: false
+audio: "ki-content-erkennen-verbessern.mp3"
 author:
   name: "Rico Loschke"
   avatar: "/images/rico-loschke_avatar.jpg"

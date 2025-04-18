@@ -73,8 +73,8 @@ function getPromptBibliothekUrls(): string[] {
     return urls;
 }
 
-// Funktion zum Generieren der Blog-URLs
-async function getBlogUrls(): Promise<string[]> {
+// Funktion zum Generieren der Blog-URLs und Audio-Metadaten
+async function getBlogUrls(): Promise<{ urls: string[], audioMap: Map<string, string> }> {
     const blogPosts = await getBlogPosts();
     
     // Blog-Post-URLs generieren
@@ -84,11 +84,19 @@ async function getBlogUrls(): Promise<string[]> {
     const categories = [...new Set(blogPosts.flatMap(post => post.data.categories || []))];
     const categoryUrls = categories.map(category => `blog/category/${category.toLowerCase()}`);
     
-    // Blog-Tag-URLs generieren
-    const tags = [...new Set(blogPosts.flatMap(post => post.data.tags || []))];
-    const tagUrls = tags.map(tag => `blog/tag/${tag.toLowerCase()}`);
+    // Audio-Metadaten für Posts mit Audio-Dateien sammeln
+    const audioMap = new Map<string, string>();
+    blogPosts.forEach(post => {
+        if (post.data.audio) {
+            const postUrl = `blog/${post.id.replace(/\.md$/, "")}`;
+            audioMap.set(postUrl, post.data.audio);
+        }
+    });
     
-    return [...blogUrls, ...categoryUrls, ...tagUrls];
+    return { 
+        urls: [...blogUrls, ...categoryUrls],
+        audioMap
+    };
 }
 
 // Sitemap generieren
@@ -99,7 +107,9 @@ async function generateSitemap(): Promise<string> {
     const staticUrls = staticPages;
     const aiFrameworkUrls = await getAiDesignFrameworkUrls();
     const promptBibliothekUrls = getPromptBibliothekUrls();
-    const blogUrls = await getBlogUrls();
+    const blogResult = await getBlogUrls();
+    const blogUrls = blogResult.urls;
+    const audioMap = blogResult.audioMap;
     
     // Alle URLs kombinieren
     const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls, ...blogUrls];
@@ -108,14 +118,26 @@ async function generateSitemap(): Promise<string> {
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    ${allUrls.map(page => `
+       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+       xmlns:audio="http://www.google.com/schemas/sitemap-audio/1.1">
+    ${allUrls.map(page => {
+        const hasAudio = audioMap.has(page);
+        const audioFile = hasAudio ? audioMap.get(page) : null;
+        
+        return `
     <url>
         <loc>${baseUrl}/${page}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>${page === "" ? "daily" : "monthly"}</changefreq>
-        <priority>${page === "" ? "1.0" : "0.8"}</priority>
-    </url>`).join('')}
+        <priority>${page === "" ? "1.0" : "0.8"}</priority>${hasAudio ? `
+        <audio:audio>
+            <audio:content_loc>${baseUrl}/audio/blog/${audioFile}</audio:content_loc>
+            <audio:title>Audio-Zusammenfassung: ${page.replace('blog/', '')}</audio:title>
+            <audio:description>Audio-Zusammenfassung des Artikels</audio:description>
+            <audio:format>audio/mpeg</audio:format>
+        </audio:audio>` : ''}
+    </url>`;
+    }).join('')}
 </urlset>`;
 }
 

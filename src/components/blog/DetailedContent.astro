@@ -13,8 +13,13 @@ const { className = "" } = Astro.props;
 <style>
   .detailed-content {
     position: relative;
-    border-left: 3px solid rgba(139, 92, 246, 0.2);
-    padding-left: 1rem;
+    background-color: rgba(139, 92, 246, 0.02);
+    padding: 0.75rem 1rem;
     margin-bottom: 1rem;
+    border-radius: 0.25rem;
+  }
+  
+  .detailed-content:hover {
+    background-color: rgba(139, 92, 246, 0.05);
   }
 </style>
