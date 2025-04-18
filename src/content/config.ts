@@ -32,6 +32,7 @@ const blog = defineCollection({
         // Content status
         draft: z.boolean().default(false),
         featured: z.boolean().default(false),
+        hasScalableContent: z.boolean().default(false), // Indicates articles with scalable content depth
 
         // Author information
         author: z.object({

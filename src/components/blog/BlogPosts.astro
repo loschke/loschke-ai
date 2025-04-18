@@ -128,8 +128,32 @@ const formatDate = (date: Date): string => {
                         class="block group"
                         aria-label={`Lese den Artikel: ${post.data.title}`}
                     >
-                        <article class="flex flex-col md:flex-row gap-6 bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all">
-                            <div class="md:w-[45%]">
+                        <article class="flex flex-col md:flex-row gap-6 bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all relative">
+                            <div class="md:w-[45%] relative">
+                                {/* Badge für skalierbare Inhaltstiefe */}
+                                {post.data.hasScalableContent && (
+                                    <div class="absolute top-3 left-3 z-10">
+                                        <div class="group relative">
+                                            {(() => {
+                                                const category = post.data.categories?.[0] || '';
+                                                const bgColorClass = isValidCategory(category) 
+                                                    ? `${categoryColors[category]}` 
+                                                    : "bg-primary";
+                                                
+                                                return (
+                                                    <span class={`${bgColorClass} bg-opacity-90 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md`}>
+                                                        Smart
+                                                    </span>
+                                                );
+                                            })()}
+                                            
+                                            {/* Tooltip bei Hover */}
+                                            <div class="absolute top-full left-0 mt-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg p-2 w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out z-20">
+                                                Tiefgehender Artikel mit skalierbarer Inhaltstiefe – passe die Detailtiefe an deine Bedürfnisse an
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 {post.data.coverImage ? (
                                     <Image 
                                         src={post.data.coverImage}
