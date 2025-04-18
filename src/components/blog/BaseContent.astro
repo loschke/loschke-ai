@@ -1,0 +1,30 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={`base-content ${className}`} data-section-depth="1">
+  <slot />
+</div>
+
+<style>
+  .base-content {
+    position: relative;
+    border-left: 3px solid rgba(59, 130, 246, 0.7);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script>
+  // Ensure base content is always visible
+  document.addEventListener('astro:page-load', () => {
+    const baseContents = document.querySelectorAll<HTMLElement>('.base-content');
+    baseContents.forEach(content => {
+      content.style.display = 'block';
+    });
+  });
+</script>

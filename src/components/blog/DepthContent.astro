@@ -1,0 +1,80 @@
+---
+interface Props {
+  depth: 1 | 2 | 3;
+}
+
+const { depth } = Astro.props;
+
+// Bestimme die Tiefenstufen-Bezeichnung
+const depthLabel = {
+  1: "Key Insights",
+  2: "Standard",
+  3: "Detailliert"
+}[depth];
+
+// Bestimme die Farbe basierend auf der Tiefe
+const depthOpacity = {
+  1: "0.7",
+  2: "0.4",
+  3: "0.2"
+}[depth];
+---
+
+<div data-content-depth={depth} class={`depth-content depth-level-${depth} mb-6`}>
+  <div class="depth-indicator-wrapper relative">
+    <div class="depth-content-inner relative p-2 rounded-r-md">
+      <div class="depth-dot absolute -right-1 top-0 w-2 h-2 rounded-full opacity-60 hover:opacity-100 transition-opacity" title={`Tiefenstufe: ${depthLabel}`}></div>
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style define:vars={{ depthOpacity }}>
+  .depth-content {
+    position: relative;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+  }
+  
+  /* Farbschema für verschiedene Tiefenstufen */
+  .depth-level-1 .depth-content-inner {
+    background-color: rgba(59, 130, 246, 0.04); /* Blau - Primary */
+    border-top: 2px solid rgba(59, 130, 246, 0.2);
+  }
+  
+  .depth-level-2 .depth-content-inner {
+    background-color: rgba(16, 185, 129, 0.03); /* Grün */
+    border-top: 2px solid rgba(16, 185, 129, 0.15);
+  }
+  
+  .depth-level-3 .depth-content-inner {
+    background-color: rgba(139, 92, 246, 0.02); /* Lila */
+    border-top: 2px solid rgba(139, 92, 246, 0.1);
+  }
+  
+  /* Hover-Effekt für bessere Erkennbarkeit */
+  .depth-level-1:hover .depth-content-inner {
+    background-color: rgba(59, 130, 246, 0.07);
+  }
+  
+  .depth-level-2:hover .depth-content-inner {
+    background-color: rgba(16, 185, 129, 0.06);
+  }
+  
+  .depth-level-3:hover .depth-content-inner {
+    background-color: rgba(139, 92, 246, 0.05);
+  }
+  
+  /* Farbige Punkte als visuelle Indikatoren */
+  .depth-level-1 .depth-dot {
+    background-color: rgba(59, 130, 246, 0.8); /* Blau */
+  }
+  
+  .depth-level-2 .depth-dot {
+    background-color: rgba(16, 185, 129, 0.8); /* Grün */
+  }
+  
+  .depth-level-3 .depth-dot {
+    background-color: rgba(139, 92, 246, 0.8); /* Lila */
+  }
+</style>

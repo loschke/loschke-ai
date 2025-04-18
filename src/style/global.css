@@ -9,6 +9,7 @@
         /* Colors */
         --color-base: #1B252F;
         --color-primary: #3b82f6;
+        --color-primary-rgb: 59, 130, 246; /* RGB values for primary color */
         --color-primary-dark: #2563eb;
         --color-text: #ffffff;
         --color-text-muted: rgba(255, 255, 255, 0.7);

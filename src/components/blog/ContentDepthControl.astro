@@ -1,0 +1,382 @@
+<div class="content-depth-control">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 bg-white/5 p-4 rounded-lg shadow-lg backdrop-blur-sm">
+    <div class="flex items-center mb-3 sm:mb-0">
+      <span class="text-white/80 mr-2">Inhaltstiefe:</span>
+      <div class="text-xs text-white/60 depth-info"></div>
+    </div>
+    <div class="flex space-x-2">
+      <button 
+        data-depth="1" 
+        class="depth-button depth-button-1 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 relative group"
+        title="Nur die wichtigsten Kernaussagen anzeigen"
+      >
+        <span class="relative z-10">Key Insights</span>
+        <span class="depth-indicator absolute inset-0 opacity-0 rounded-full transition-opacity duration-300"></span>
+        <span class="depth-tooltip opacity-0 group-hover:opacity-100 absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200 whitespace-nowrap">Nur Kernaussagen</span>
+      </button>
+      <button 
+        data-depth="2" 
+        class="depth-button depth-button-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 relative group active"
+        title="Standard-Informationstiefe anzeigen"
+      >
+        <span class="relative z-10">Standard</span>
+        <span class="depth-indicator absolute inset-0 opacity-0 rounded-full transition-opacity duration-300"></span>
+        <span class="depth-tooltip opacity-0 group-hover:opacity-100 absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200 whitespace-nowrap">Ausgewogene Informationstiefe</span>
+      </button>
+      <button 
+        data-depth="3" 
+        class="depth-button depth-button-3 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 relative group"
+        title="Alle Details und Hintergrundinformationen anzeigen"
+      >
+        <span class="relative z-10">Detailliert</span>
+        <span class="depth-indicator absolute inset-0 opacity-0 rounded-full transition-opacity duration-300"></span>
+        <span class="depth-tooltip opacity-0 group-hover:opacity-100 absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200 whitespace-nowrap">Alle Details anzeigen</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // JavaScript für die Steuerung der Inhaltstiefe mit Animationen
+  document.addEventListener('astro:page-load', () => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.depth-button');
+    const depthElements = document.querySelectorAll<HTMLElement>('[data-content-depth], [data-section-depth]');
+    const depthInfo = document.querySelector<HTMLElement>('.depth-info');
+    
+    // Speichert die zuvor sichtbaren Elemente
+    let previouslyVisibleElements = new Set<HTMLElement>();
+    
+    // Standardtiefe setzen (aus localStorage oder default)
+    const savedDepth = localStorage.getItem('contentDepth') || '2';
+    setDepth(savedDepth, false); // Initial ohne Animation
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const depth = button.getAttribute('data-depth');
+        if (depth) {
+          setDepth(depth, true); // Mit Animation beim Klick
+          localStorage.setItem('contentDepth', depth);
+        }
+      });
+    });
+    
+    function setDepth(depth: string, animate: boolean) {
+      // Aktuelle Tiefe als Zahl
+      const depthNum = parseInt(depth);
+      
+      // Buttons aktualisieren
+      buttons.forEach(btn => {
+        const isActive = btn.getAttribute('data-depth') === depth;
+        btn.classList.toggle('active', isActive);
+        
+        // Indikator-Animation
+        const indicator = btn.querySelector<HTMLElement>('.depth-indicator');
+        if (indicator) {
+          indicator.style.opacity = isActive ? '0.2' : '0';
+        }
+      });
+      
+      // Sammle aktuell sichtbare Elemente vor der Änderung
+      const currentlyVisibleElements = new Set<HTMLElement>();
+      if (animate) {
+        depthElements.forEach(element => {
+          if (element.style.display !== 'none' && element.style.opacity !== '0') {
+            currentlyVisibleElements.add(element);
+          }
+        });
+      }
+      
+      // Zähle Elemente pro Tiefenstufe
+      const depthCounts = [0, 0, 0, 0]; // Index 0 nicht verwendet
+      depthElements.forEach(element => {
+        const contentDepth = element.getAttribute('data-content-depth');
+        const sectionDepth = element.getAttribute('data-section-depth');
+        const elementDepth = parseInt(contentDepth || sectionDepth || '0');
+        if (elementDepth > 0 && elementDepth <= 3) {
+          depthCounts[elementDepth]++;
+        }
+      });
+      
+      // Aktualisiere Info-Text
+      if (depthInfo) {
+        const totalElements = depthCounts[1] + depthCounts[2] + depthCounts[3];
+        const visibleElements = depthCounts[1] + (depthNum >= 2 ? depthCounts[2] : 0) + (depthNum >= 3 ? depthCounts[3] : 0);
+        const percentage = Math.round((visibleElements / totalElements) * 100);
+        
+        depthInfo.textContent = `${visibleElements}/${totalElements} Abschnitte (${percentage}%)`;
+      }
+      
+      // Inhalte mit Transition ein-/ausblenden
+      depthElements.forEach(element => {
+        // Bestimme die Tiefe des Elements
+        const contentDepth = element.getAttribute('data-content-depth');
+        const sectionDepth = element.getAttribute('data-section-depth');
+        let elementDepth = 0;
+        let shouldShow = false;
+        
+        // Verarbeite je nach Elementtyp
+        if (contentDepth) {
+          // DepthContent-Element (ganzer Abschnitt)
+          elementDepth = parseInt(contentDepth);
+          shouldShow = elementDepth <= depthNum;
+        } else if (sectionDepth) {
+          // SectionContent-Element (abschnittsintern)
+          elementDepth = parseInt(sectionDepth);
+          shouldShow = elementDepth <= depthNum;
+        }
+        
+        if (elementDepth > 0) {
+          // Stelle sicher, dass Elemente die richtige Basis-Styles haben
+          if (element.style.display === 'none' && shouldShow) {
+            element.style.display = 'block';
+            element.style.opacity = '0';
+            element.style.maxHeight = '0';
+            element.style.overflow = 'hidden';
+          }
+          
+          if (animate) {
+            if (shouldShow) {
+              // Element soll angezeigt werden
+              setTimeout(() => {
+                element.style.transition = 'opacity 0.5s ease';
+                element.style.opacity = '1';
+                element.style.maxHeight = 'none'; // Keine Begrenzung der Höhe
+                element.style.overflow = 'visible';
+                
+                // Prüfe, ob es ein neues Element ist
+                const isNewElement = shouldShow && !previouslyVisibleElements.has(element);
+                if (isNewElement) {
+                  // Highlight-Animation für neue Elemente
+                  element.classList.add('depth-highlight');
+                  setTimeout(() => {
+                    element.classList.remove('depth-highlight');
+                  }, 2000);
+                  
+                  // Scrolle zum ersten neuen Element
+                  if (!document.querySelector('.scrolled-to-new')) {
+                    element.classList.add('scrolled-to-new');
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                }
+              }, 50);
+            } else {
+              // Element soll ausgeblendet werden
+              element.style.transition = 'opacity 0.3s ease, max-height 0.4s ease';
+              element.style.opacity = '0';
+              element.style.maxHeight = '0';
+              
+              // Nach der Transition ausblenden
+              setTimeout(() => {
+                if (!shouldShow) { // Nochmal prüfen, falls sich was geändert hat
+                  element.style.display = 'none';
+                }
+              }, 500);
+            }
+          } else {
+            // Ohne Animation direkt setzen
+            element.style.display = shouldShow ? 'block' : 'none';
+            element.style.opacity = shouldShow ? '1' : '0';
+            element.style.maxHeight = shouldShow ? 'none' : '0';
+            element.style.overflow = shouldShow ? 'visible' : 'hidden';
+          }
+        }
+      });
+      
+      // Aktualisiere die Liste der sichtbaren Elemente für den nächsten Wechsel
+      previouslyVisibleElements.clear();
+      depthElements.forEach(element => {
+        const contentDepth = element.getAttribute('data-content-depth');
+        const sectionDepth = element.getAttribute('data-section-depth');
+        
+        if (contentDepth) {
+          const elementDepth = parseInt(contentDepth);
+          if (elementDepth && elementDepth <= depthNum) {
+            previouslyVisibleElements.add(element);
+          }
+        } else if (sectionDepth) {
+          const elementDepth = parseInt(sectionDepth);
+          if (elementDepth && elementDepth <= depthNum) {
+            previouslyVisibleElements.add(element);
+          }
+        }
+      });
+      
+      // Entferne die Scroll-Markierung nach einer Weile
+      setTimeout(() => {
+        document.querySelectorAll('.scrolled-to-new').forEach(el => {
+          el.classList.remove('scrolled-to-new');
+        });
+      }, 1000);
+    }
+  });
+</script>
+
+<style>
+  /* Farbschema für Buttons */
+  .depth-button-1.active {
+    background-color: rgba(59, 130, 246, 0.8);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+  }
+  
+  .depth-button-2.active {
+    background-color: rgba(16, 185, 129, 0.8);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+  }
+  
+  .depth-button-3.active {
+    background-color: rgba(139, 92, 246, 0.8);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+  }
+  
+  /* Hover-Effekte */
+  .depth-button-1:hover {
+    background-color: rgba(59, 130, 246, 0.2);
+  }
+  
+  .depth-button-2:hover {
+    background-color: rgba(16, 185, 129, 0.2);
+  }
+  
+  .depth-button-3:hover {
+    background-color: rgba(139, 92, 246, 0.2);
+  }
+  
+  /* Indikatoren */
+  .depth-button-1 .depth-indicator {
+    background-color: rgba(59, 130, 246, 0.8);
+  }
+  
+  .depth-button-2 .depth-indicator {
+    background-color: rgba(16, 185, 129, 0.8);
+  }
+  
+  .depth-button-3 .depth-indicator {
+    background-color: rgba(139, 92, 246, 0.8);
+  }
+  
+  .depth-button.active .depth-indicator {
+    opacity: 0.2 !important;
+  }
+  
+  /* Highlight-Animationen für neue Inhalte */
+  .depth-highlight {
+    animation: highlight-pulse 3s ease-in-out;
+    position: relative;
+  }
+  
+  /* Farbspezifische Highlight-Animationen */
+  .depth-level-1.depth-highlight {
+    animation: highlight-pulse-1 3s ease-in-out;
+  }
+  
+  .depth-level-2.depth-highlight {
+    animation: highlight-pulse-2 3s ease-in-out;
+  }
+  
+  .depth-level-3.depth-highlight {
+    animation: highlight-pulse-3 3s ease-in-out;
+  }
+  
+  /* Seitlicher Indikator für neue Inhalte */
+  .depth-highlight::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    animation: highlight-bar 3s ease-in-out;
+  }
+  
+  .depth-level-1.depth-highlight::before {
+    background-color: rgba(59, 130, 246, 0.8); /* Blau */
+  }
+  
+  .depth-level-2.depth-highlight::before {
+    background-color: rgba(16, 185, 129, 0.8); /* Grün */
+  }
+  
+  .depth-level-3.depth-highlight::before {
+    background-color: rgba(139, 92, 246, 0.8); /* Lila */
+  }
+  
+  /* "Neu"-Badge für neue Inhalte */
+  .depth-highlight::after {
+    content: 'Neu';
+    position: absolute;
+    right: -5px;
+    top: 0;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: white;
+    opacity: 0;
+    animation: highlight-badge 3s ease-in-out;
+  }
+  
+  .depth-level-1.depth-highlight::after {
+    background-color: rgba(59, 130, 246, 0.8); /* Blau */
+  }
+  
+  .depth-level-2.depth-highlight::after {
+    background-color: rgba(16, 185, 129, 0.8); /* Grün */
+  }
+  
+  .depth-level-3.depth-highlight::after {
+    background-color: rgba(139, 92, 246, 0.8); /* Lila */
+  }
+  
+  /* Keyframes für verschiedene Farben */
+  @keyframes highlight-pulse-1 {
+    0% { background-color: rgba(59, 130, 246, 0); }
+    15% { background-color: rgba(59, 130, 246, 0.15); }
+    40% { background-color: rgba(59, 130, 246, 0.1); }
+    100% { background-color: rgba(59, 130, 246, 0); }
+  }
+  
+  @keyframes highlight-pulse-2 {
+    0% { background-color: rgba(16, 185, 129, 0); }
+    15% { background-color: rgba(16, 185, 129, 0.15); }
+    40% { background-color: rgba(16, 185, 129, 0.1); }
+    100% { background-color: rgba(16, 185, 129, 0); }
+  }
+  
+  @keyframes highlight-pulse-3 {
+    0% { background-color: rgba(139, 92, 246, 0); }
+    15% { background-color: rgba(139, 92, 246, 0.15); }
+    40% { background-color: rgba(139, 92, 246, 0.1); }
+    100% { background-color: rgba(139, 92, 246, 0); }
+  }
+  
+  @keyframes highlight-pulse {
+    0% { background-color: rgba(var(--color-primary-rgb), 0); }
+    15% { background-color: rgba(var(--color-primary-rgb), 0.15); }
+    40% { background-color: rgba(var(--color-primary-rgb), 0.1); }
+    100% { background-color: rgba(var(--color-primary-rgb), 0); }
+  }
+  
+  @keyframes highlight-bar {
+    0% { opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+  
+  @keyframes highlight-badge {
+    0% { opacity: 0; transform: translateX(10px); }
+    15% { opacity: 1; transform: translateX(0); }
+    85% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(0); }
+  }
+  
+  /* Allgemeine Transitions für Inhaltstiefe-Elemente */
+  [data-content-depth], [data-section-depth] {
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+  }
+</style>
