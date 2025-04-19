@@ -4,6 +4,7 @@ description: "Typische Probleme und deren Lösungen für effektivere KI-Interakt
 pubDate: 2025-04-05
 categories: ["KI-Praxis","Prompt Engineering"]
 tags: ["Prompt Engineering", "KI-Textgenerierung", "Produktivität", "Fehlerbehebung", "Optimierung"]
+audio: "prompt-fehlerbehebung-loesungen.mp3"
 draft: false
 author:
   name: "Rico Loschke"

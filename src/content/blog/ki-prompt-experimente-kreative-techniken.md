@@ -1,7 +1,7 @@
 ---
 title: "Kreative Prompts: Unkonventionelle Techniken für bessere Ergebnisse"
 description: "Unkonventionelle Techniken für kreative Durchbrüche und innovative Ergebnisse"
-pubDate: 2025-04-05
+pubDate: 2025-04-03
 categories: ["Prompt Engineering"]
 tags: ["Prompt Engineering", "KI-Textgenerierung", "Produktivität", "Kreativität", "Innovation"]
 draft: false
