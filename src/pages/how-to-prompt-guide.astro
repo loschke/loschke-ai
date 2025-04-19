@@ -97,52 +97,6 @@ const mainCategories: Category[] = [
       order: 3,
       tags: ["Komponenten", "Bausteine", "Elemente", "Prompt-Teile"]
     }
-  },
-  {
-    name: "Ressourcen",
-    description: "Praktische Hilfsmittel, Tipps und weiterführende Informationen für fortgeschrittenes Prompt Engineering",
-    icon: "🧰",
-    categories: {
-      "prompt-bibliothek": {
-        name: "Prompt-Bibliothek aufbauen",
-        description: "Systematisches Wissensmanagement für KI-Prompts",
-        path: "/how-to-prompt-guide/ressourcen/prompt-bibliothek"
-      },
-      "ethik-compliance": {
-        name: "Ethik und Compliance",
-        description: "Verantwortungsvoller Einsatz von KI im Marketing",
-        path: "/how-to-prompt-guide/ressourcen/ethik-compliance"
-      },
-      "ki-content-verbessern": {
-        name: "KI-Content verbessern",
-        description: "Vom generischen zum authentischen Inhalt",
-        path: "/how-to-prompt-guide/ressourcen/ki-content-verbessern"
-      },
-      "ki-prompt-experimente": {
-        name: "KI-Prompt-Experimente",
-        description: "Unkonventionelle Techniken für kreative Durchbrüche",
-        path: "/how-to-prompt-guide/ressourcen/ki-prompt-experimente"
-      },
-      "prompt-fehlerbehebung": {
-        name: "Prompt-Fehlerbehebung",
-        description: "Typische Probleme und deren Lösungen",
-        path: "/how-to-prompt-guide/ressourcen/prompt-fehlerbehebung"
-      },
-      "prompt-glossar": {
-        name: "Prompt-Glossar",
-        description: "Die wichtigsten Fachbegriffe im Überblick",
-        path: "/how-to-prompt-guide/ressourcen/prompt-glossar"
-      },
-      "zukunftssichere-strategien": {
-        name: "Zukunftssichere Strategien",
-        description: "Vorbereitet für die nächste KI-Generation",
-        path: "/how-to-prompt-guide/ressourcen/zukunftssichere-strategien"
-      }
-    },
-    metadata: {
-      order: 4,
-      tags: ["Ressourcen", "Hilfsmittel", "Tipps", "Fortgeschritten"]
-    }
   }
 ];
 ---
@@ -222,59 +176,6 @@ const mainCategories: Category[] = [
               <p class="text-gray-600 dark:text-gray-300">{subcat.description}</p>
             </a>
           ))}
-        </div>
-      </div>
-      
-      {/* Ressourcen */}
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-          <span class="text-3xl" aria-hidden="true">🧰</span>
-          <span>Ressourcen & Tipps</span>
-        </h2>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Praktische Hilfsmittel und weiterführende Informationen für fortgeschrittenes Prompt Engineering</p>
-        
-        <div class="grid md:grid-cols-2 gap-4">
-          <a href={mainCategories[3].categories["prompt-bibliothek"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Wie du eine effektive Prompt-Bibliothek aufbaust</h3>
-            <p class="text-gray-600 dark:text-gray-300">Systematisches Wissensmanagement für deine KI-Prompts</p>
-          </a>
-          
-          <a href={mainCategories[3].categories["ethik-compliance"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Ethik & Compliance im KI-Marketing</h3>
-            <p class="text-gray-600 dark:text-gray-300">Verantwortungsvoller Einsatz von KI in deiner Marketingstrategie</p>
-          </a>
-          
-          <a href={mainCategories[3].categories["ki-content-verbessern"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">So verbesserst du KI-generierten Content</h3>
-            <p class="text-gray-600 dark:text-gray-300">Vom generischen zum authentischen Inhalt in wenigen Schritten</p>
-          </a>
-          
-          <a href={mainCategories[3].categories["ki-prompt-experimente"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">5 unkonventionelle Prompt-Experimente für kreative Durchbrüche</h3>
-            <p class="text-gray-600 dark:text-gray-300">Neue Techniken, um das volle Potenzial von KI auszuschöpfen</p>
-          </a>
-          
-          <a href={mainCategories[3].categories["prompt-fehlerbehebung"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Troubleshooting: Die häufigsten Prompt-Probleme lösen</h3>
-            <p class="text-gray-600 dark:text-gray-300">Typische Fehler erkennen und beheben</p>
-          </a>
-          
-          <a href={mainCategories[3].categories["prompt-glossar"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Das ultimative Prompt-Glossar</h3>
-            <p class="text-gray-600 dark:text-gray-300">Alle wichtigen Fachbegriffe auf einen Blick erklärt</p>
-          </a>
-          
-          <a href={mainCategories[3].categories["zukunftssichere-strategien"].path}
-             class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Zukunftssichere Prompt-Strategien entwickeln</h3>
-            <p class="text-gray-600 dark:text-gray-300">Wie du dich auf die nächste KI-Generation vorbereitest</p>
-          </a>
         </div>
       </div>
     </div>

@@ -66,7 +66,7 @@ const howToPromptGuide = defineCollection({
         description: z.string(),
         
         // Categorization
-        category: z.string(), // einfuehrung, framework, komponenten, ressourcen
+        category: z.string(), // einfuehrung, framework, komponenten
         subcategory: z.string().optional(),
         
         // Display order

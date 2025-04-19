@@ -10,8 +10,7 @@ const { category, subcategory } = Astro.props;
 const categoryNames = {
   "einfuehrung": "Einführung",
   "framework": "Framework",
-  "komponenten": "Komponenten",
-  "ressourcen": "Ressourcen"
+  "komponenten": "Komponenten"
 };
 
 // Map subcategory keys to display names
@@ -29,16 +28,7 @@ const subcategoryNames = {
   "kontext": "Kontext",
   "ausdruck": "Ausdruck",
   "format": "Format",
-  "dialog-followups": "Dialog & Follow-ups",
-  
-  // Ressourcen
-  "prompt-bibliothek": "Wie du eine effektive Prompt-Bibliothek aufbaust",
-  "ethik-compliance": "Ethik & Compliance im KI-Marketing",
-  "ki-content-verbessern": "So verbesserst du KI-generierten Content",
-  "ki-prompt-experimente": "5 unkonventionelle Prompt-Experimente für kreative Durchbrüche",
-  "prompt-fehlerbehebung": "Troubleshooting: Die häufigsten Prompt-Probleme lösen",
-  "prompt-glossar": "Das ultimative Prompt-Glossar",
-  "zukunftssichere-strategien": "Zukunftssichere Prompt-Strategien entwickeln"
+  "dialog-followups": "Dialog & Follow-ups"
 };
 
 const categoryName = categoryNames[category as keyof typeof categoryNames] || category;
