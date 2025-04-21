@@ -1,0 +1,50 @@
+[
+  {
+    "id": "grundlagen-ki-rolle",
+    "title": "Grundlegendes zu KI und meiner Rolle",
+    "description": "Erfahre mehr über meine Arbeit als KI-Generalist, meinen Werdegang und meine Herangehensweise an künstliche Intelligenz.",
+    "icon": "💡",
+    "color": "from-[#2a4858] to-[#162a36]",
+    "order": 1
+  },
+  {
+    "id": "ki-einstieg-unternehmen",
+    "title": "Einstieg in KI für Unternehmen",
+    "description": "Praktische Ratschläge für Unternehmen, die mit KI starten möchten – von der ersten Potenzialanalyse bis zur konkreten Implementierung.",
+    "icon": "🚀",
+    "color": "from-[#4a3c59] to-[#2a1c39]",
+    "order": 2
+  },
+  {
+    "id": "prompt-engineering-ki-nutzung",
+    "title": "Prompt Engineering und KI-Nutzung",
+    "description": "Praktische Tipps zur effektiven Kommunikation mit KI-Systemen, Vermeidung häufiger Fehler und Auswahl der richtigen KI-Modelle für verschiedene Anwendungsfälle.",
+    "icon": "💬",
+    "color": "from-[#005461] to-[#003049]",
+    "order": 3
+  },
+  {
+    "id": "ai-design-kreativprozesse",
+    "title": "AI-Design und Kreativprozesse",
+    "description": "Einblicke in die Zukunft kreativer Arbeit mit KI, praktische Tipps zur Optimierung KI-generierter Bilder und Informationen zum 4K-Framework für AI-Design.",
+    "icon": "🎨",
+    "color": "from-[#3a3a59] to-[#232339]",
+    "order": 4
+  },
+  {
+    "id": "ki-transformation-unternehmen",
+    "title": "KI-Transformation im Unternehmen",
+    "description": "Praktische Erkenntnisse und Strategien zur erfolgreichen Implementierung von KI-Technologien in Unternehmen, vom Zeithorizont über die Priorisierung bis hin zum Change Management.",
+    "icon": "🔄",
+    "color": "from-[#2d4263] to-[#1a2639]",
+    "order": 5
+  },
+  {
+    "id": "zukunftsperspektiven-trends",
+    "title": "Zukunftsperspektiven und Trends",
+    "description": "Einschätzungen zu kommenden KI-Entwicklungen, deren Auswirkungen auf Arbeitsplätze und Kompetenzen sowie Ausblicke auf die Zukunft der Mensch-KI-Kollaboration.",
+    "icon": "🔮",
+    "color": "from-[#3b5249] to-[#1e2a25]",
+    "order": 6
+  }
+]

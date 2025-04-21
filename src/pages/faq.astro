@@ -1,0 +1,118 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { loadFAQData, type FAQCategory, type FAQQuestion } from "../utils/faqData";
+
+// Load FAQ data from JSON files
+const { categories, topQuestions } = await loadFAQData();
+
+// JSON-LD structured data for the main FAQ page
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": categories.map(category => {
+    return {
+      "@type": "Question",
+      "name": category.title,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": category.description
+      }
+    };
+  })
+};
+---
+
+<Layout
+  title="KI-FAQ: Expertenwissen zu Künstlicher Intelligenz | Rico Loschke"
+  description="Umfassende Antworten auf häufig gestellte Fragen zu KI, Prompt Engineering, AI-Design und digitaler Transformation – von KI-Experte Rico Loschke"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="container-padding mt-20">
+    <div class="max-container">
+      <h1 class="text-4xl md:text-5xl font-bold mb-8">Häufig gestellte Fragen zu KI</h1>
+      <p class="text-xl mb-12 max-w-3xl">
+        Hier findest du ausführliche Antworten auf die häufigsten Fragen zu künstlicher Intelligenz, 
+        Prompt Engineering, AI-Design und der digitalen Transformation von Unternehmen.
+      </p>
+
+      <!-- FAQ Categories -->
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+        {categories.map((category) => (
+          <div class="bg-white/5 rounded-xl overflow-hidden border border-white/10 shadow-lg hover:shadow-xl transition-all group">
+            <div class={`aspect-[3/1] bg-gradient-to-br ${category.color} p-6 flex items-center`}>
+              <div class="flex items-center gap-4">
+                <span class="text-4xl">{category.icon}</span>
+                <h2 class="text-2xl font-bold text-white">{category.title}</h2>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-white/80 mb-6">
+                {category.description}
+              </p>
+              
+              <div class="space-y-3 mb-6">
+                {topQuestions[category.id]?.map((q: FAQQuestion) => (
+                  <a 
+                    href={`/faq/${category.id}#${q.id}`}
+                    class="block p-3 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    <p class="text-white/90">{q.question}</p>
+                  </a>
+                ))}
+              </div>
+              
+              <a
+                href={`/faq/${category.id}`}
+                class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+              >
+                Alle Fragen anzeigen
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 ml-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Additional Info Section -->
+      <div class="bg-white/5 rounded-xl p-8 border border-white/10">
+        <h2 class="text-2xl font-bold mb-4">Noch Fragen offen?</h2>
+        <p class="mb-6">
+          Falls du hier keine Antwort auf deine Frage findest, kontaktiere mich gerne direkt. 
+          Ich helfe dir bei spezifischen Fragen zu KI-Implementierung, Prompt Engineering oder 
+          anderen Themen rund um künstliche Intelligenz.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+        >
+          Kontakt aufnehmen
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 ml-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,107 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Accordion from "../../components/ui/Accordion.astro";
+import BackToLink from "../../components/ui/BackToLink.astro";
+import { loadFAQCategory, loadFAQCategories, type FAQCategory, type FAQQuestion } from "../../utils/faqData";
+
+// Required for Astro dynamic routes
+export async function getStaticPaths() {
+  const categories = await loadFAQCategories();
+  
+  return categories.map(category => ({
+    params: { category: category.id },
+    props: { categoryId: category.id }
+  }));
+}
+
+// Get the category ID from props
+const { categoryId } = Astro.props;
+
+// Load the category data
+const categoryData = await loadFAQCategory(categoryId);
+
+// If category not found, redirect to main FAQ page
+if (!categoryData) {
+  return Astro.redirect('/faq');
+}
+
+const { category, questions, seoData, lastUpdated } = categoryData;
+
+// Load all categories for the related categories section
+const allCategories = await loadFAQCategories();
+
+// Prepare SEO metadata
+const pageTitle = seoData.metaTitle;
+const pageDescription = seoData.metaDescription;
+
+// Use the structured data from the JSON file
+const jsonLd = seoData.structuredData;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="container-padding mt-20">
+    <div class="max-container">
+      <BackToLink href="/faq" text="Zurück zur FAQ-Übersicht" />
+      
+      <div class="mb-12">
+        <div class={`inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r ${category.color} rounded-lg mb-6`}>
+          <span class="text-4xl">{category.icon}</span>
+          <h1 class="text-3xl md:text-4xl font-bold">{category.title}</h1>
+        </div>
+        <p class="text-xl max-w-3xl">
+          {category.description}
+        </p>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="space-y-6 mb-16">
+          {questions.map((item: FAQQuestion) => (
+          <div id={item.id} class="scroll-mt-32">
+            <Accordion title={item.question} initiallyOpen={false} class="mb-6">
+              <div class="prose prose-invert max-w-none">
+                {item.answer.split('\n\n').map((paragraph: string) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
+              
+              <!-- Keywords -->
+              <div class="mt-6 pt-4 border-t border-white/10">
+                <div class="flex flex-wrap gap-2">
+                  {item.keywords.map((keyword: string) => (
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-sm">
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Accordion>
+          </div>
+        ))}
+      </div>
+
+      <!-- Related Categories -->
+      <div class="bg-white/5 rounded-xl p-8 border border-white/10">
+        <h2 class="text-2xl font-bold mb-4">Weitere FAQ-Kategorien</h2>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {allCategories
+            .filter(cat => cat.id !== category.id)
+            .map(cat => (
+              <a 
+                href={`/faq/${cat.id}`}
+                class="p-4 bg-white/5 hover:bg-white/10 rounded-lg transition-colors flex items-center gap-3"
+              >
+                <span class="text-2xl">{cat.icon}</span>
+                <span class="font-medium">{cat.title}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

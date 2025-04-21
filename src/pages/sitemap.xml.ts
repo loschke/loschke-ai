@@ -13,6 +13,7 @@ const staticPages = [
     "guides",
     "projekte",  // Projektseite hinzugefügt
     "impulse",  // Vortragsseite hinzugefügt
+    "faq",  // FAQ-Übersichtsseite
 ];
 
 // Funktion zum Generieren der AI Design Framework URLs
@@ -50,6 +51,26 @@ async function getAiDesignFrameworkUrls(): Promise<string[]> {
         } catch (error) {
             console.error(`Error reading category data for ${categoryName}:`, error);
         }
+    }
+    
+    return urls;
+}
+
+// Funktion zum Generieren der FAQ-URLs
+async function getFaqUrls(): Promise<string[]> {
+    const urls: string[] = ["faq"];
+    
+    try {
+        // FAQ-Kategorien direkt aus der Datei importieren
+        const { loadFAQCategories } = await import('../utils/faqData');
+        const categories = await loadFAQCategories();
+        
+        // Für jede Kategorie eine URL hinzufügen
+        for (const category of categories) {
+            urls.push(`faq/${category.id}`);
+        }
+    } catch (error) {
+        console.error('Error loading FAQ categories:', error);
     }
     
     return urls;
@@ -107,12 +128,13 @@ async function generateSitemap(): Promise<string> {
     const staticUrls = staticPages;
     const aiFrameworkUrls = await getAiDesignFrameworkUrls();
     const promptBibliothekUrls = getPromptBibliothekUrls();
+    const faqUrls = await getFaqUrls();
     const blogResult = await getBlogUrls();
     const blogUrls = blogResult.urls;
     const audioMap = blogResult.audioMap;
     
     // Alle URLs kombinieren
-    const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls, ...blogUrls];
+    const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls, ...faqUrls, ...blogUrls];
     
     // XML generieren
     return `<?xml version="1.0" encoding="UTF-8"?>
