@@ -1,0 +1,94 @@
+{
+  "sectionId": "grundlagen-generative-ki",
+  "lastUpdated": "2025-04-21",
+  "questions": [
+    {
+      "id": "was-ist-generative-ki",
+      "question": "Was ist generative KI und wie unterscheidet sie sich von klassischer KI?",
+      "isTopQuestion": true,
+      "answer": "Generative KI bezeichnet Systeme, die neue Inhalte wie Texte, Bilder, Musik oder Code erschaffen können, statt nur bestehende Daten zu analysieren. Im Gegensatz zu klassischen KI-Ansätzen, die auf spezifische Aufgaben wie Klassifikation oder Vorhersage ausgerichtet sind, können generative Modelle kreativ sein und völlig neue Outputs produzieren.\n\nDer Hauptunterschied liegt in der Funktionsweise: Klassische KI-Systeme wie Spamfilter oder Empfehlungssysteme treffen Entscheidungen basierend auf klaren Mustern in den Trainingsdaten. Generative Systeme hingegen lernen die zugrundeliegende Struktur der Daten und können daraus neue, ähnliche Inhalte erzeugen.\n\nModerne generative KI-Systeme wie GPT-4, Claude, Midjourney oder DALL-E basieren auf großen neuronalen Netzwerken, die mit enormen Datenmengen trainiert wurden. Diese Modelle haben eine bemerkenswerte Fähigkeit entwickelt, menschenähnliche Texte zu verfassen, fotorealistische Bilder zu erstellen oder komplexe Programmcodes zu schreiben.\n\nEin wichtiges Konzept ist das 'Foundation Model' - ein großes Basismodell, das mit allgemeinen Daten vortrainiert wurde und dann für spezifische Aufgaben feinabgestimmt werden kann. Dieser Ansatz hat die KI-Entwicklung revolutioniert und ermöglicht vielseitigere und leistungsfähigere Anwendungen.",
+      "keywords": ["generative KI", "klassische KI", "Foundation Model", "GPT-4", "Claude", "Midjourney", "DALL-E", "neuronale Netzwerke"],
+      "chatbotExtras": {
+        "relatedQuestions": ["wie-funktionieren-llms", "arten-generativer-ki-modelle"],
+        "relatedResources": [
+          {"title": "Blog: Grundlagen moderner KI", "url": "https://loschke.ai/blog"},
+          {"title": "How to Prompt Guide", "url": "https://loschke.ai/how-to-prompt-guide"}
+        ],
+        "shortAnswer": "Generative KI bezeichnet Systeme, die neue Inhalte wie Texte, Bilder, Musik oder Code erschaffen können. Im Gegensatz zu klassischen KI-Ansätzen, die bestehende Daten analysieren und klassifizieren, lernen generative Modelle wie GPT-4, Claude oder DALL-E die Struktur der Daten und können daraus völlig neue, kreative Inhalte erzeugen."
+      }
+    },
+    {
+      "id": "wie-funktionieren-llms",
+      "question": "Wie funktionieren Large Language Models (LLMs)?",
+      "isTopQuestion": true,
+      "answer": "Large Language Models (LLMs) wie GPT-4 oder Claude sind hochkomplexe neuronale Netzwerke, die darauf trainiert wurden, Sprache zu verstehen und zu generieren. Ihre Funktionsweise lässt sich in drei Hauptphasen unterteilen:\n\n**1. Training:** LLMs werden mit enormen Textmengen aus dem Internet, Büchern und anderen Quellen trainiert. Während dieses Prozesses lernen sie Muster, Zusammenhänge und statistische Wahrscheinlichkeiten in der Sprache. Ein modernes LLM kann Hunderte von Milliarden Parameter enthalten - mathematische Werte, die während des Trainings optimiert werden.\n\n**2. Pattern Recognition:** LLMs erkennen komplexe Muster in Texten - von grundlegender Grammatik bis hin zu subtilen kontextuellen Bedeutungen. Sie erfassen die Wahrscheinlichkeit, mit der bestimmte Wörter auf andere folgen, und entwickeln ein statistisches Verständnis von Sprache.\n\n**3. Text Generation:** Bei der Anwendung erhält das LLM einen Prompt (Eingabetext) und generiert darauf basierend eine Fortsetzung. Es berechnet für jedes mögliche nächste Wort eine Wahrscheinlichkeit und wählt danach aus. Dieser Prozess wird wiederholt, bis die Antwort vollständig ist.\n\nModerne LLMs wie GPT-4 nutzen eine Architektur namens 'Transformer', die es ihnen ermöglicht, Aufmerksamkeit auf verschiedene Teile des Textes zu richten. Dadurch können sie weitreichende Zusammenhänge erkennen und kontextuell relevante Antworten generieren.\n\nLLMs haben kein echtes Verständnis oder Bewusstsein - sie sind statistische Modelle, die Muster reproduzieren. Ihre Fähigkeit, menschenähnlichen Text zu erzeugen, basiert auf mathematischen Vorhersagen, nicht auf echtem Verstehen.",
+      "keywords": ["LLM", "Large Language Model", "GPT-4", "Claude", "Transformer", "neuronales Netzwerk", "Pattern Recognition", "Training", "Text Generation", "Parameter"],
+      "chatbotExtras": {
+        "relatedQuestions": ["was-ist-generative-ki", "arten-generativer-ki-modelle", "prompt-engineering"],
+        "relatedResources": [
+          {"title": "KI-Transformation ohne Illusionen", "url": "https://loschke.ai/blog/ki-transformation-ohne-illusionen"},
+          {"title": "How to Prompt Guide", "url": "https://loschke.ai/how-to-prompt-guide"}
+        ],
+        "shortAnswer": "Large Language Models (LLMs) wie GPT-4 oder Claude sind neuronale Netzwerke, die in drei Phasen arbeiten: 1) Training mit enormen Textmengen, 2) Erkennung komplexer Sprachmuster und 3) Textgenerierung basierend auf Wahrscheinlichkeiten. Sie nutzen die Transformer-Architektur, haben aber kein echtes Verständnis, sondern reproduzieren statistische Muster."
+      }
+    },
+    {
+      "id": "prompt-engineering",
+      "question": "Was ist Prompt Engineering und warum ist es wichtig?",
+      "isTopQuestion": true,
+      "answer": "Prompt Engineering ist die Kunst und Wissenschaft, Anweisungen (Prompts) so zu formulieren, dass KI-Systeme optimale Ergebnisse liefern. Es ist die Schnittstelle zwischen menschlicher Intention und KI-Ausgabe.\n\nDie Bedeutung von Prompt Engineering ergibt sich aus einer grundlegenden Eigenschaft moderner KI-Systeme: Sie sind extrem leistungsfähig, aber gleichzeitig sehr sensibel gegenüber der genauen Formulierung von Anfragen. Ein gut gestalteter Prompt kann den Unterschied ausmachen zwischen einer vagen, unbrauchbaren Antwort und einem präzisen, maßgeschneiderten Ergebnis.\n\nEffektives Prompt Engineering umfasst mehrere Kernprinzipien:\n\n**Klarheit:** Eindeutige, spezifische Anweisungen ohne Mehrdeutigkeiten.\n**Kontext:** Ausreichend Hintergrundinformationen für eine fundierte Antwort.\n**Struktur:** Logischer Aufbau mit klarer Formatierung.\n**Beispiele:** In-Context-Learning durch Demonstration des gewünschten Outputs.\n**Iteration:** Systematische Verfeinerung von Prompts basierend auf Ergebnissen.\n\nGut gestaltete Prompts können die Genauigkeit, Relevanz und Nützlichkeit von KI-Antworten erheblich verbessern. Sie helfen, Halluzinationen zu reduzieren und die Zuverlässigkeit zu steigern. Zudem ermöglichen sie komplexere Aufgaben durch Aufteilung in logische Teilschritte.\n\nIn Unternehmen wird Prompt Engineering zunehmend zu einer strategischen Fähigkeit, die den ROI von KI-Investitionen maßgeblich beeinflusst.",
+      "keywords": ["Prompt Engineering", "KI-Anweisungen", "Prompt-Gestaltung", "In-Context-Learning", "Klarheit", "Kontext", "Struktur", "Iteration", "Halluzinationen", "ROI"],
+      "chatbotExtras": {
+        "relatedQuestions": ["wie-funktionieren-llms", "was-ist-generative-ki", "arten-generativer-ki-modelle"],
+        "relatedResources": [
+          {"title": "How to Prompt Guide", "url": "https://loschke.ai/how-to-prompt-guide"},
+          {"title": "Blog: Prompt-Begriffe im Glossar", "url": "https://loschke.ai/blog/prompt-begriffe-glossar"}
+        ],
+        "shortAnswer": "Prompt Engineering ist die Kunst, Anweisungen (Prompts) so zu formulieren, dass KI-Systeme optimale Ergebnisse liefern. Es ist wichtig, weil moderne KI-Systeme sehr sensibel auf die genaue Formulierung reagieren. Kernprinzipien sind Klarheit, Kontext, Struktur, Beispiele und Iteration. Gute Prompts verbessern die Genauigkeit, reduzieren Halluzinationen und ermöglichen komplexere Aufgaben."
+      }
+    },
+    {
+      "id": "arten-generativer-ki-modelle",
+      "question": "Welche Arten von generativen KI-Modellen gibt es?",
+      "isTopQuestion": true,
+      "answer": "Das Feld der generativen KI umfasst verschiedene Modelltypen, die jeweils auf bestimmte Inhalte und Anwendungsfälle spezialisiert sind:\n\n**Text-generative Modelle (LLMs):**\n- GPT-4, Claude, Llama\n- Anwendungen: Texterstellung, Chatbots, Übersetzung, Code-Generierung\n- Besonderheit: Verstehen und erzeugen natürliche Sprache, können Anweisungen befolgen\n\n**Bild-generative Modelle:**\n- Diffusion Models: Firefly, Midjourney, Flux\n- Anwendungen: Bildkreation, -bearbeitung, Stil-Transfer\n- Besonderheit: Erzeugen fotorealistische oder künstlerische Bilder aus Textbeschreibungen\n\n**Audio-generative Modelle:**\n- Suno, Mubert, Musicmuse\n- Anwendungen: Musik-Komposition, Sprachsynthese, Klangdesign\n- Besonderheit: Erzeugen natürlich klingender Sprache oder komplexer Musikstücke\n\n**Multimodale Modelle:**\n- GPT-4, Gemini, Claude Sonnet\n- Anwendungen: Bild-Text-Verständnis, komplexe Problemlösung\n- Besonderheit: Können mehrere Eingabeformate (Text, Bild, etc.) verarbeiten\n\n**Video-generative Modelle:**\n- Sora, Kling, Runway\n- Anwendungen: Videoproduktion, visuelle Effekte\n- Besonderheit: Erzeugen kohärente Bewegtbilder mit zeitlicher Konsistenz\n\nJede dieser Modellkategorien basiert auf unterschiedlichen Architekturen und Trainingsansätzen, von Transformer-basierten LLMs bis hin zu Diffusionsmodellen für Bilder. Die Forschung bewegt sich zunehmend in Richtung multimodaler Modelle, die mehrere Medienformate gleichzeitig verarbeiten können.",
+      "keywords": ["generative KI-Modelle", "LLMs", "Diffusion Models", "Audio-Modelle", "Multimodale Modelle", "Video-Modelle", "GPT-4", "DALL-E", "Midjourney", "Kling"],
+      "chatbotExtras": {
+        "relatedQuestions": ["was-ist-generative-ki", "wie-funktionieren-llms", "prompt-engineering"],
+        "relatedResources": [
+          {"title": "Blog: KI-Praxis", "url": "https://loschke.ai/blog/category/ki-praxis"},
+          {"title": "AI Design Framework", "url": "https://loschke.ai/ai-design-framework"}
+        ],
+        "shortAnswer": "Generative KI umfasst verschiedene Modelltypen: Text-generative Modelle (LLMs) wie GPT-4 und Claude, Bild-generative Modelle wie DALL-E und Midjourney, Audio-generative Modelle wie MusicLM und Bark, multimodale Modelle wie GPT-4V und Gemini sowie Video-generative Modelle wie Sora und Runway Gen-2. Jede Kategorie hat spezifische Anwendungen und technische Besonderheiten."
+      }
+    }
+  ],
+  "seoData": {
+    "metaTitle": "Grundlagen generativer KI: LLMs, Prompt Engineering & mehr | FAQ",
+    "metaDescription": "Verständliche Erklärungen zu den Konzepten, Technologien und Einsatzmöglichkeiten moderner generativer KI-Systeme wie GPT-4, Claude und DALL-E.",
+    "focusKeywords": ["generative KI", "LLM", "Prompt Engineering", "Foundation Model", "KI-Modelle", "GPT-4", "DALL-E", "Midjourney"],
+    "canonicalUrl": "https://loschke.ai/faq#grundlagen-generative-ki",
+    "structuredData": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Was ist generative KI und wie unterscheidet sie sich von klassischer KI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Generative KI bezeichnet Systeme, die neue Inhalte wie Texte, Bilder, Musik oder Code erschaffen können. Im Gegensatz zu klassischen KI-Ansätzen, die bestehende Daten analysieren und klassifizieren, lernen generative Modelle wie GPT-4, Claude oder DALL-E die Struktur der Daten und können daraus völlig neue, kreative Inhalte erzeugen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie funktionieren Large Language Models (LLMs)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Large Language Models (LLMs) wie GPT-4 oder Claude sind neuronale Netzwerke, die in drei Phasen arbeiten: 1) Training mit enormen Textmengen, 2) Erkennung komplexer Sprachmuster und 3) Textgenerierung basierend auf Wahrscheinlichkeiten. Sie nutzen die Transformer-Architektur, haben aber kein echtes Verständnis, sondern reproduzieren statistische Muster."
+          }
+        }
+      ]
+    }
+  }
+}

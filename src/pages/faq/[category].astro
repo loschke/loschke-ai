@@ -42,66 +42,147 @@ const jsonLd = seoData.structuredData;
   title={pageTitle}
   description={pageDescription}
 >
+  <style>
+    /* Custom styles for FAQ page */
+    .category-title-container {
+      background-size: 200% 200%;
+      animation: gradientShift 10s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .toc-link {
+      position: relative;
+    }
+    
+    .toc-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #E91E63;
+      transition: width 0.3s ease;
+    }
+    
+    .toc-link:hover::after {
+      width: 100%;
+    }
+    
+    .category-link {
+      transition: all 0.2s ease;
+    }
+    
+    .category-link:hover {
+      transform: translateY(-2px);
+    }
+  </style>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <section class="container-padding mt-20">
     <div class="max-container">
       <BackToLink href="/faq" text="Zurück zur FAQ-Übersicht" />
       
-      <div class="mb-12">
-        <div class={`inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r ${category.color} rounded-lg mb-6`}>
-          <span class="text-4xl">{category.icon}</span>
-          <h1 class="text-3xl md:text-4xl font-bold">{category.title}</h1>
+      <!-- Improved Header -->
+      <div class="mb-10 mt-8">
+        <div class={`flex items-center gap-6 px-8 py-6 bg-gradient-to-r ${category.color} rounded-lg mb-8 shadow-lg category-title-container`}>
+          <span class="text-6xl">{category.icon}</span>
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold">{category.title}</h1>
         </div>
-        <p class="text-xl max-w-3xl">
+        <p class="text-xl text-white/90 max-w-3xl">
           {category.description}
         </p>
       </div>
 
-      <!-- FAQ Items -->
-      <div class="space-y-6 mb-16">
-          {questions.map((item: FAQQuestion) => (
-          <div id={item.id} class="scroll-mt-32">
-            <Accordion title={item.question} initiallyOpen={false} class="mb-6">
-              <div class="prose prose-invert max-w-none">
-                {item.answer.split('\n\n').map((paragraph: string) => (
-                  <p>{paragraph}</p>
-                ))}
-              </div>
-              
-              <!-- Keywords -->
-              <div class="mt-6 pt-4 border-t border-white/10">
-                <div class="flex flex-wrap gap-2">
-                  {item.keywords.map((keyword: string) => (
-                    <span class="px-3 py-1 bg-white/10 rounded-full text-sm">
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Accordion>
-          </div>
-        ))}
-      </div>
 
-      <!-- Related Categories -->
-      <div class="bg-white/5 rounded-xl p-8 border border-white/10">
-        <h2 class="text-2xl font-bold mb-4">Weitere FAQ-Kategorien</h2>
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {allCategories
-            .filter(cat => cat.id !== category.id)
-            .map(cat => (
-              <a 
-                href={`/faq/${cat.id}`}
-                class="p-4 bg-white/5 hover:bg-white/10 rounded-lg transition-colors flex items-center gap-3"
+      <!-- Two-column Layout -->
+      <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+        <!-- Left Column: FAQ Items -->
+        <div class="lg:col-span-2 space-y-6 mb-16">
+            {questions.map((item: FAQQuestion) => (
+            <div id={item.id} class="scroll-mt-32">
+              <Accordion 
+                title={item.question} 
+                initiallyOpen={false} 
+                class="mb-6 border border-white/10 shadow-md hover:shadow-lg transition-all"
               >
-                <span class="text-2xl">{cat.icon}</span>
-                <span class="font-medium">{cat.title}</span>
-              </a>
-            ))
-          }
+                <div class="prose prose-invert max-w-none">
+                  {item.answer.split('\n\n').map((paragraph: string) => {
+                    // Convert markdown-style bold (**text**) to HTML <strong> tags
+                    const processedText = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    
+                    return <p set:html={processedText} />;
+                  })}
+                </div>
+                
+                <!-- Keywords with Category Color -->
+                <div class="mt-6 pt-4 border-t border-white/10">
+                  <div class="flex flex-wrap gap-2">
+                    {item.keywords.map((keyword: string) => (
+                      <span class={`px-3 py-1 ${category.color.replace('from-', 'bg-').split(' ')[0]} bg-opacity-20 rounded-full text-sm`}>
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Accordion>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Right Column: Related Categories -->
+        <div class="lg:col-span-1">
+          <div class="bg-white/5 rounded-xl p-6 border border-white/10 sticky top-24">
+            <h2 class="text-2xl font-bold mb-4">Weitere FAQ-Kategorien</h2>
+            <div class="grid gap-4">
+              {allCategories
+                .filter(cat => cat.id !== category.id)
+                .map(cat => (
+                <a
+                  href={`/faq/${cat.id}`}
+                  class="p-4 bg-white/5 hover:bg-white/10 rounded-lg transition-colors flex items-center gap-3 mb-2 category-link"
+                >
+                    <span class="text-2xl">{cat.icon}</span>
+                    <span class="font-medium">{cat.title}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Scroll-to-Top Button -->
+  <button id="scrollToTop" class="fixed bottom-8 right-8 p-3 bg-white/10 hover:bg-primary/30 rounded-full shadow-lg opacity-0 transition-opacity duration-300 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script>
+    // Show/hide scroll-to-top button
+    document.addEventListener('astro:page-load', () => {
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      if (!scrollToTopBtn) return;
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.classList.add('opacity-100');
+        } else {
+          scrollToTopBtn.classList.remove('opacity-100');
+        }
+      });
+      
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
 </Layout>

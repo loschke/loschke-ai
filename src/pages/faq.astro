@@ -27,6 +27,36 @@ const jsonLd = {
   title="KI-FAQ: Expertenwissen zu Künstlicher Intelligenz | Rico Loschke"
   description="Umfassende Antworten auf häufig gestellte Fragen zu KI, Prompt Engineering, AI-Design und digitaler Transformation – von KI-Experte Rico Loschke"
 >
+  <style>
+    /* Custom styles for FAQ page */
+    .category-card {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .category-header {
+      background-size: 200% 200%;
+      animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .arrow-icon {
+      transition: transform 0.2s ease;
+    }
+    
+    .category-card:hover .arrow-icon {
+      transform: translateX(5px);
+    }
+  </style>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <section class="container-padding mt-20">
@@ -37,22 +67,22 @@ const jsonLd = {
         Prompt Engineering, AI-Design und der digitalen Transformation von Unternehmen.
       </p>
 
-      <!-- FAQ Categories -->
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+      <!-- Grid Layout for categories - left to right ordering -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {categories.map((category) => (
-          <div class="bg-white/5 rounded-xl overflow-hidden border border-white/10 shadow-lg hover:shadow-xl transition-all group">
-            <div class={`aspect-[3/1] bg-gradient-to-br ${category.color} p-6 flex items-center`}>
-              <div class="flex items-center gap-4">
+          <div class="bg-white/5 rounded-xl overflow-hidden border border-white/10 shadow-lg hover:shadow-xl transition-all group category-card h-full flex flex-col">
+            <div class={`bg-gradient-to-br ${category.color} p-6 category-header`}>
+              <div class="flex items-center gap-4 mb-3">
                 <span class="text-4xl">{category.icon}</span>
                 <h2 class="text-2xl font-bold text-white">{category.title}</h2>
               </div>
-            </div>
-            <div class="p-6">
-              <p class="text-white/80 mb-6">
+              <p class="text-white/90 text-sm">
                 {category.description}
               </p>
+            </div>
+            <div class="p-6 flex-grow flex flex-col">
               
-              <div class="space-y-3 mb-6">
+              <div class="space-y-3 mb-6 flex-grow">
                 {topQuestions[category.id]?.map((q: FAQQuestion) => (
                   <a 
                     href={`/faq/${category.id}#${q.id}`}
@@ -65,12 +95,12 @@ const jsonLd = {
               
               <a
                 href={`/faq/${category.id}`}
-                class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
+                class="inline-flex items-center px-4 py-2 bg-white/10 text-white hover:bg-primary/30 rounded-md transition-colors mt-auto"
               >
                 Alle Fragen anzeigen
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 ml-2"
+                  class="h-4 w-4 ml-2 arrow-icon"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -84,35 +114,34 @@ const jsonLd = {
             </div>
           </div>
         ))}
-      </div>
-
-      <!-- Additional Info Section -->
-      <div class="bg-white/5 rounded-xl p-8 border border-white/10">
-        <h2 class="text-2xl font-bold mb-4">Noch Fragen offen?</h2>
-        <p class="mb-6">
-          Falls du hier keine Antwort auf deine Frage findest, kontaktiere mich gerne direkt. 
-          Ich helfe dir bei spezifischen Fragen zu KI-Implementierung, Prompt Engineering oder 
-          anderen Themen rund um künstliche Intelligenz.
-        </p>
-        <a
-          href="/contact"
-          class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
-        >
-          Kontakt aufnehmen
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 ml-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-      </div>
+        <!-- Additional Info Section -->
+        <div class="bg-white/5 rounded-xl p-8 border border-white/10 shadow-lg md:col-span-2">
+            <h2 class="text-2xl font-bold mb-4">Noch Fragen offen?</h2>
+            <p class="mb-6">
+              Falls du hier keine Antwort auf deine Frage findest, kontaktiere mich gerne direkt. 
+              Ich helfe dir bei spezifischen Fragen zu KI-Implementierung, Prompt Engineering oder 
+              anderen Themen rund um künstliche Intelligenz.
+            </p>
+            <a
+              href="/contact"
+              class="inline-flex items-center px-5 py-2 bg-white/10 text-white hover:bg-primary/30 rounded-md transition-colors"
+            >
+              Kontakt aufnehmen
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 ml-2 arrow-icon"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
     </div>
   </section>
 </Layout>

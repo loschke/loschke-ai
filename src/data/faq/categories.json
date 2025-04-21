@@ -1,8 +1,8 @@
 [
   {
-    "id": "grundlagen-ki-rolle",
-    "title": "Grundlegendes zu KI und meiner Rolle",
-    "description": "Erfahre mehr über meine Arbeit als KI-Generalist, meinen Werdegang und meine Herangehensweise an künstliche Intelligenz.",
+    "id": "grundlagen-generative-ki",
+    "title": "Grundlagen generativer KI",
+    "description": "Verständliche Erklärungen zu den Konzepten, Technologien und Einsatzmöglichkeiten moderner generativer KI-Systeme.",
     "icon": "💡",
     "color": "from-[#2a4858] to-[#162a36]",
     "order": 1
@@ -21,7 +21,7 @@
     "description": "Praktische Tipps zur effektiven Kommunikation mit KI-Systemen, Vermeidung häufiger Fehler und Auswahl der richtigen KI-Modelle für verschiedene Anwendungsfälle.",
     "icon": "💬",
     "color": "from-[#005461] to-[#003049]",
-    "order": 3
+    "order": 5
   },
   {
     "id": "ai-design-kreativprozesse",
@@ -29,7 +29,7 @@
     "description": "Einblicke in die Zukunft kreativer Arbeit mit KI, praktische Tipps zur Optimierung KI-generierter Bilder und Informationen zum 4K-Framework für AI-Design.",
     "icon": "🎨",
     "color": "from-[#3a3a59] to-[#232339]",
-    "order": 4
+    "order": 6
   },
   {
     "id": "ki-transformation-unternehmen",
@@ -37,7 +37,7 @@
     "description": "Praktische Erkenntnisse und Strategien zur erfolgreichen Implementierung von KI-Technologien in Unternehmen, vom Zeithorizont über die Priorisierung bis hin zum Change Management.",
     "icon": "🔄",
     "color": "from-[#2d4263] to-[#1a2639]",
-    "order": 5
+    "order": 3
   },
   {
     "id": "zukunftsperspektiven-trends",
@@ -45,6 +45,6 @@
     "description": "Einschätzungen zu kommenden KI-Entwicklungen, deren Auswirkungen auf Arbeitsplätze und Kompetenzen sowie Ausblicke auf die Zukunft der Mensch-KI-Kollaboration.",
     "icon": "🔮",
     "color": "from-[#3b5249] to-[#1e2a25]",
-    "order": 6
+    "order": 4
   }
 ]

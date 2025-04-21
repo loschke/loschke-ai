@@ -61,16 +61,23 @@ async function getFaqUrls(): Promise<string[]> {
     const urls: string[] = ["faq"];
     
     try {
-        // FAQ-Kategorien direkt aus der Datei importieren
-        const { loadFAQCategories } = await import('../utils/faqData');
-        const categories = await loadFAQCategories();
+        // FAQ-Kategorien direkt aus der Datei lesen
+        const categoriesData = JSON.parse(
+            await fs.readFile('src/data/faq/categories.json', 'utf-8')
+        );
+        
+        // Debug-Ausgabe
+        console.log('FAQ Categories:', categoriesData);
         
         // Für jede Kategorie eine URL hinzufügen
-        for (const category of categories) {
+        for (const category of categoriesData) {
             urls.push(`faq/${category.id}`);
         }
+        
+        // Debug-Ausgabe
+        console.log('FAQ URLs:', urls);
     } catch (error) {
-        console.error('Error loading FAQ categories:', error);
+        console.error('Error reading FAQ categories:', error);
     }
     
     return urls;
@@ -114,8 +121,13 @@ async function getBlogUrls(): Promise<{ urls: string[], audioMap: Map<string, st
         }
     });
     
+    // Nur Blog-Posts und Kategorien zurückgeben, keine Tags
+    // Explizit alle URLs filtern, die "tag" enthalten
+    const allUrls = [...blogUrls, ...categoryUrls];
+    const filteredUrls = allUrls.filter(url => !url.includes('/tag/'));
+    
     return { 
-        urls: [...blogUrls, ...categoryUrls],
+        urls: filteredUrls,
         audioMap
     };
 }
