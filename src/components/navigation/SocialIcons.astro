@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import queonextLogo from "../../assets/images/queonext_Logo_horiz_neg__w__rgb.png";
+
 const socialLinks = [
     {
         name: "GitHub",
@@ -18,7 +21,7 @@ const socialLinks = [
 ];
 ---
 
-<div class="flex gap-6">
+<div class="flex gap-6 items-center">
     {
         socialLinks.map(({ name, url, icon }) => (
             <a
@@ -34,4 +37,19 @@ const socialLinks = [
             </a>
         ))
     }
+    <a 
+        href="https://queonext.de" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="text-white/70 hover:text-white transition-colors"
+        aria-label="Visit queonext"
+    >
+        <Image 
+            src={queonextLogo} 
+            alt="queonext" 
+            width={100} 
+            height={24} 
+            class="h-7 w-auto"
+        />
+    </a>
 </div>

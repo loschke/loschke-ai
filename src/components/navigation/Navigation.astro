@@ -44,10 +44,10 @@ const currentPath = Astro.url.pathname;
                 </span>
             </a>
 
-            <!-- Desktop Navigation and Social Icons -->
-            <div class="hidden md:flex items-center relative">
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center justify-end flex-1">
                 <!-- Navigation Menu -->
-                <nav class="flex gap-10 mr-16" aria-label="Main navigation">
+                <nav class="flex gap-10" aria-label="Main navigation">
                     {
                         navItems.map(({ href, label }) => {
                             const isActive =
@@ -74,10 +74,7 @@ const currentPath = Astro.url.pathname;
                     }
                 </nav>
 
-                <!-- Social Icons -->
-                <div class="border-l border-white/10 pl-16">
-                    <SocialIcons />
-                </div>
+                <!-- Social Icons removed from header as requested -->
             </div>
 
             <!-- Mobile Hamburger Menu Button -->

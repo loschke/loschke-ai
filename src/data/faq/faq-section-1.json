@@ -1,0 +1,92 @@
+{
+  "sectionTitle": "Grundlegendes zu KI und meiner Rolle",
+  "sectionId": "grundlagen-ki-rolle",
+  "sectionDescription": "Erfahre mehr über meine Arbeit als KI-Generalist, meinen Werdegang und meine Herangehensweise an künstliche Intelligenz.",
+  "lastUpdated": "2025-04-19",
+  "questions": [
+    {
+      "id": "ki-generalist",
+      "question": "Was genau bedeutet \"KI-Generalist\" und wie unterscheidet sich das von KI-Spezialisten?",
+      "answer": "Als KI-Generalist verbinde ich verschiedene KI-Domänen zu einem ganzheitlichen Ansatz – eine Perspektive, die in Zeiten rapider technologischer Entwicklung besondere Vorteile bietet. Statt mich auf ein einzelnes Spezialgebiet wie Prompt Engineering oder AI-Design zu fokussieren, entwickle ich Kompetenz entlang von vier grundlegenden 'Powers':\n\nPower to Build: Ich entwickle maßgeschneiderte KI-Lösungen und integriere sie in bestehende Systeme.\nPower to Automate: Ich verbinde KI-Tools mit Geschäftsprozessen für effizientere Workflows.\nPower to Create: Ich nutze KI als kreatives Werkzeug für visuelle und textuelle Inhalte.\nPower to Connect: Ich vermittle komplexe KI-Themen verständlich und übersetze sie in die Unternehmenssprache.\n\nDiese generalistische Herangehensweise entspricht dem, was in der Evolution als 'Generalisten-Vorteil' bekannt ist: In Zeiten großer Umweltveränderungen sind es oft die anpassungsfähigen Generalisten, die besser überleben als hochspezialisierte Arten. KI-Spezialisten hingegen vertiefen sich in ein einzelnes Feld – etwa Machine Learning Engineering, Computer Vision oder NLP – und entwickeln dort tiefes Expertenwissen. Beide Ansätze haben ihre Berechtigung, ergänzen sich im Idealfall sogar. Für die meisten Unternehmen, die KI praktisch einsetzen wollen, ist der generalistische Ansatz jedoch zugänglicher und unmittelbar wertschöpfender.",
+      "keywords": ["KI-Generalist", "KI-Spezialist", "Power to Build", "Power to Automate", "Power to Create", "Power to Connect", "generalistische Herangehensweise", "Generalisten-Vorteil"],
+      "chatbotExtras": {
+        "relatedQuestions": ["werdegang-ki-experte", "auf-dem-laufenden-bleiben"],
+        "relatedResources": [
+          {"title": "KI-Transformation ohne Illusionen", "url": "https://loschke.ai/blog/ki-transformation-ohne-illusionen"},
+          {"title": "Generalisten vs. Spezialisten im KI-Zeitalter", "url": "https://loschke.ai/blog/generalist-vs-spezialist-in-zeiten-generativer-ki.mdx"}
+        ],
+        "shortAnswer": "Als KI-Generalist kombiniere ich vier verschiedene 'Powers': Build (Entwicklung maßgeschneiderter KI-Lösungen), Automate (Workflow-Optimierung), Create (kreative Nutzung) und Connect (Vermittlung komplexer Themen). Im Gegensatz zu Spezialisten, die sich auf ein KI-Teilgebiet konzentrieren, biete ich einen ganzheitlichen Ansatz, der besonders in Zeiten schneller technologischer Veränderungen wertvoll ist."
+      }
+    },
+    {
+      "id": "werdegang-ki-experte",
+      "question": "Wie bist du zum KI-Experten geworden und was war dein Weg in dieses Feld?",
+      "answer": "Mein Weg in die KI-Welt begann nicht mit akademischer KI-Forschung, sondern mit der praktischen Frage, wie neue Technologien konkrete Probleme lösen können. Seit 2021 beschäftige ich mich intensiv mit generativer KI – angefangen als Early Adopter und Beta-Tester von Midjourney, über die systematische Erforschung von Large Language Models bis hin zur Entwicklung eigener KI-gestützter Automatisierungslösungen.\n\nDer Schlüsselmoment war für mich die Erkenntnis, dass zwischen der theoretischen Leistungsfähigkeit von KI und ihrer praktischen Nutzbarkeit im Unternehmenskontext eine erhebliche Lücke klafft. Diese Lücke zu schließen – komplexe Technologie in handfesten Mehrwert zu übersetzen – wurde zu meiner Mission.\n\nStatt einen traditionellen Ausbildungsweg zu verfolgen, entwickelte ich meine Expertise durch tägliches Experimentieren, systematisches Testen verschiedener Ansätze und den kontinuierlichen Austausch mit der globalen KI-Community. Diese praxisorientierte Herangehensweise erlaubt mir, nicht nur zu verstehen, was theoretisch möglich ist, sondern auch, was in realen Szenarien tatsächlich funktioniert.\n\nHeute verbinde ich in meiner Rolle als Director Automation & AI bei queonext dieses praktische Know-how mit der strategischen Perspektive, um Unternehmen auf ihrem Weg zur KI-Transformation zu begleiten.",
+      "keywords": ["KI-Experte", "Werdegang", "Early Adopter", "generative KI", "Midjourney", "praxisorientiert", "Director Automation & AI", "queonext"],
+      "chatbotExtras": {
+        "relatedQuestions": ["ki-generalist", "rolle-queonext"],
+        "relatedResources": [
+          {"title": "AI-Design Guide", "url": "https://ai-design.guide/"},
+          {"title": "Meine KI-Projekte", "url": "https://loschke.ai/projekte"}
+        ],
+        "shortAnswer": "Mein Weg zum KI-Experten begann 2021 durch praktisches Experimentieren mit generativer KI, nicht durch akademische Forschung. Ich war Early Adopter von Tools wie Midjourney und entwickelte meine Expertise durch tägliches Testen und Anwenden. Meine Mission ist es, die Lücke zwischen KI-Theorie und praktischem Unternehmensnutzen zu schließen."
+      }
+    },
+    {
+      "id": "auf-dem-laufenden-bleiben",
+      "question": "Wie hältst du dich bei den schnellen Entwicklungen im KI-Bereich auf dem Laufenden?",
+      "answer": "Die Geschwindigkeit, mit der sich KI-Technologien entwickeln, macht kontinuierliches Lernen nicht nur zu einer persönlichen Präferenz, sondern zu einer beruflichen Notwendigkeit. Mein Ansatz basiert auf fünf Säulen:\n\n1. Tägliches Experimentieren: Ich teste neue Tools und Funktionen unmittelbar nach ihrer Veröffentlichung selbst, statt mich auf Berichte Dritter zu verlassen. Dieses Hands-on-Verständnis ist durch nichts zu ersetzen.\n\n2. Kuratierte Informationsquellen: Ich nutze ein systematisches System zur Filterung relevanter Informationen – von spezialisierten Newsletters über GitHub-Repositories bis zu ausgewählten Twitter-Accounts von KI-Forschern.\n\n3. Praktische Anwendungsprojekte: Nichts fördert Verständnis so sehr wie die Umsetzung in konkrete Projekte. Für jede wichtige neue Technologie entwickle ich mindestens ein Anwendungsprojekt.\n\n4. Community und Austausch: Der Dialog mit anderen Praktikern – sowohl Experten als auch Anwendern – liefert Perspektiven, die man alleine nicht entwickeln würde.\n\n5. Strukturierte Reflexion: Wöchentlich reflektiere ich systematisch, welche neuen Entwicklungen strategische Relevanz haben und welche eher inkrementell sind.\n\nDieser Ansatz ermöglicht es mir, trotz der Informationsflut den Überblick zu behalten und zwischen kurzfristigen Hypes und langfristig relevanten Entwicklungen zu unterscheiden.",
+      "keywords": ["kontinuierliches Lernen", "KI-Entwicklungen", "Experimentieren", "kuratierte Informationsquellen", "Anwendungsprojekte", "Community", "strukturierte Reflexion"],
+      "chatbotExtras": {
+        "relatedQuestions": ["ki-generalist", "rolle-queonext"],
+        "relatedResources": [
+          {"title": "Meine KI-Tools und Werkzeuge", "url": "https://loschke.ai/#tools"},
+          {"title": "Blog", "url": "https://loschke.ai/blog"}
+        ],
+        "shortAnswer": "Ich bleibe durch fünf Strategien auf dem Laufenden: tägliches Experimentieren mit neuen Tools, kuratierte Informationsquellen, praktische Anwendungsprojekte, Austausch in der Community und strukturierte wöchentliche Reflexion. Dies hilft mir, zwischen kurzfristigen Hypes und langfristig relevanten Entwicklungen zu unterscheiden."
+      }
+    },
+    {
+      "id": "rolle-queonext",
+      "question": "Was ist deine Rolle bei queonext und wie verbindest du sie mit deinen persönlichen Projekten?",
+      "answer": "Als Director Automation & AI bei queonext leite ich unsere strategischen KI-Initiativen und unterstütze Kunden bei ihrer digitalen Transformation. Meine Hauptaufgaben umfassen die Entwicklung maßgeschneiderter KI-Strategien für Unternehmen, die Konzeption und Implementierung von KI-gestützten Lösungen sowie die kontinuierliche Weiterentwicklung unseres KI-Leistungsportfolios.\n\nMeine persönlichen Projekte – wie der AI-Design.Guide, PromptBär oder HelpBärAI – dienen dabei als praktische Experimentierfelder und Wissenstransfer-Plattformen. Sie ermöglichen mir, neue Technologien und Ansätze in einem kontrollierten Umfeld zu testen, bevor sie in größere Kundenprojekte einfließen. Diese Projekte entstehen häufig aus realen Herausforderungen im Agenturalltag und werden dann zu eigenständigen Ressourcen weiterentwickelt.\n\nDiese Verbindung zwischen persönlichen Projekten und meiner Rolle bei queonext schafft eine produktive Synergie: Die praktischen Erkenntnisse und das Feedback aus meinen persönlichen Projekten fließen direkt in unsere Kundenberatung ein, während die vielfältigen Anforderungen unserer Kunden wiederum neue Impulse für meine persönlichen Projekte liefern. Diese kontinuierliche Feedback-Schleife zwischen Experimentieren, Lernen und Anwenden ist für mich der Schlüssel, um in diesem dynamischen Feld relevant zu bleiben.",
+      "keywords": ["Director Automation & AI", "queonext", "AI-Design.Guide", "PromptBär", "HelpBärAI", "KI-Strategien", "digitale Transformation", "Experimentierfelder", "Wissenstransfer"],
+      "chatbotExtras": {
+        "relatedQuestions": ["werdegang-ki-experte", "ki-generalist"],
+        "relatedResources": [
+          {"title": "queonext AI", "url": "https://queonext.de/ai"},
+          {"title": "Meine KI-Projekte", "url": "https://loschke.ai/projekte"}
+        ],
+        "shortAnswer": "Als Director Automation & AI bei queonext leite ich KI-Initiativen und unterstütze Kunden bei der digitalen Transformation. Meine persönlichen Projekte wie AI-Design.Guide, PromptBär und HelpBärAI dienen als Experimentierfelder, die eine produktive Synergie mit meiner Arbeit bei queonext schaffen – eine kontinuierliche Feedback-Schleife zwischen Experimentieren, Lernen und Anwenden."
+      }
+    }
+  ],
+  "seoData": {
+    "metaTitle": "KI-Experte Rico Loschke: KI-Generalist & AI-Transformation | FAQ",
+    "metaDescription": "Erfahre mehr über Rico Loschkes Rolle als KI-Generalist, seinen Werdegang und seine Herangehensweise an künstliche Intelligenz und digitale Transformation.",
+    "focusKeywords": ["KI-Generalist", "KI-Experte", "KI-Transformation", "generative KI", "AI-Design", "Prompt Engineering"],
+    "canonicalUrl": "https://loschke.ai/faq#grundlagen-ki-rolle",
+    "structuredData": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Was genau bedeutet \"KI-Generalist\" und wie unterscheidet sich das von KI-Spezialisten?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Als KI-Generalist verbinde ich verschiedene KI-Domänen zu einem ganzheitlichen Ansatz, basierend auf vier Powers: Build (Entwicklung maßgeschneiderter Lösungen), Automate (Workflow-Optimierung), Create (kreative Nutzung) und Connect (Vermittlung komplexer Themen). KI-Spezialisten vertiefen sich hingegen in einzelne Felder wie Machine Learning Engineering oder NLP."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie bist du zum KI-Experten geworden?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mein Weg in die KI-Welt begann 2021 mit praktischem Experimentieren mit generativer KI. Als Early Adopter von Tools wie Midjourney entwickelte ich Expertise durch tägliches Testen und Anwenden, mit dem Ziel, die Lücke zwischen KI-Theorie und praktischem Unternehmensnutzen zu schließen."
+          }
+        }
+      ]
+    }
+  }
+}
