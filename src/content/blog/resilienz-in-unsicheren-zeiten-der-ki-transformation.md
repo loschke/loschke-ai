@@ -1,7 +1,7 @@
 ---
 title: "Resilienz im KI-Sturm: Widerstandsfähigkeit für Unternehmen und Mitarbeitende"
 description: "Strategien zur Stärkung von individueller und organisationaler Widerstandsfähigkeit während der KI-Transformation"
-pubDate: 2025-05-02
+pubDate: 2025-05-03
 categories: ["KI-Transformation", "KI-Strategie"]
 tags: ["Resilienz", "Change Management", "KI-Transformation", "Unternehmenskultur", "Mitarbeiterentwicklung", "Stressmanagement", "Growth Mindset", "Organisationsentwicklung"]
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "Prompt-Bias: Wie deine Fragestellung das Ergebnis von KI-Antworten verzerrt"
 description: "Wie die Formulierung von Prompts die Antworten von KI-Systemen beeinflusst und wie man ausgewogenere Ergebnisse erzielt"
-pubDate: 2025-05-02
+pubDate: 2025-05-01
 categories: ["Prompt Engineering"]
 tags: ["Prompt Engineering", "KI-Textgenerierung", "Bias", "Framing-Effekt", "Kognitive Verzerrung"]
 audio: "prompt-bias-selbstgemachte-verzerrungen.mp3"

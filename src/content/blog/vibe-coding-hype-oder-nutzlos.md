@@ -1,7 +1,7 @@
 ---
 title: "Vibe Coding: KI-gestützte Softwareentwicklung zwischen Hype und Realität"
 description: "Eine differenzierte Analyse des Vibe Coding-Ansatzes, seiner Potenziale und Risiken für die moderne Softwareentwicklung"
-pubDate: 2025-05-10
+pubDate: 2025-05-02
 categories: ["KI-Praxis", "KI-Automation"]
 tags: ["Vibe Coding", "Software-Entwicklung", "Programmierung", "KI-Kollaboration", "Andrej Karpathy", "Entwicklungsmethoden", "Prototyping", "Code-Qualität"]
 draft: false
