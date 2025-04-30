@@ -1,7 +1,7 @@
 ---
 title: "Innovationskultur und KI: Die Rolle der Führung"
 description: "Wie Führungskräfte eine erfolgreiche KI-Transformation durch kulturellen Wandel ermöglichen"
-pubDate: 2025-04-21
+pubDate: 2025-04-30
 categories: ["KI-Transformation", "KI-Strategie"]
 tags: ["Führung", "Innovationskultur", "Change Management", "Mittelstand", "Kulturwandel"]
 audio: "ki-innovationskultur-und-fuehrung.mp3"
