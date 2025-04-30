@@ -147,6 +147,7 @@ const formatDate = (date: Date): string => {
                             loading="eager"
                             class="w-full h-full object-cover rounded-xl"
                             transition:name={`hero-${entry.id}`}
+                            transition:persist
                         />
                     ) : entry.data.heroImage ? (
                         <Picture

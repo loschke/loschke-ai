@@ -3,7 +3,7 @@ import "../style/global.css";
 import Navigation from "../components/navigation/Navigation.astro";
 import Footer from "../components/navigation/Footer.astro";
 import AudioPlayer from "../components/ui/AudioPlayer.astro";
-import { ClientRouter } from "astro:transitions";
+import { ViewTransitions } from "astro:transitions";
 import { SEO } from "astro-seo";
 
 interface ArticleMetadata {
@@ -161,17 +161,20 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
 			}}
 		/>
 
-		<ClientRouter />
+		<ViewTransitions fallback="swap" />
 
 		{/* Structured Data */}
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 		{/* Umami Analytics (cookieless) */}
-		<script
-			async
-			defer
-			data-website-id="c0442c57-4a05-4631-a4f0-e132ecbbbec0"
-			src="https://analytics.kvix.pro/script.js"></script>
+<script
+	async
+	defer
+	data-website-id="c0442c57-4a05-4631-a4f0-e132ecbbbec0"
+	src="https://analytics.kvix.pro/script.js"></script>
+
+{/* Transition debug script - remove in production */}
+<script is:inline src="/scripts/transition-test.js"></script>
 
 		<meta name="generator" content={Astro.generator} />
 

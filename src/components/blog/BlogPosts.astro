@@ -186,8 +186,9 @@ const formatDate = (date: Date): string => {
                                         width={800}
                                         height={450}
                                         class="w-full h-full object-cover aspect-[16/9]"
-                                        loading="lazy"
+                                        loading="eager"
                                         transition:name={`hero-${post.id}`}
+                                        transition:persist
                                     />
                                 ) : post.data.heroImage ? (
                                     <Picture

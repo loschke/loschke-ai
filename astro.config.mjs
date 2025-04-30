@@ -94,6 +94,8 @@ export default defineConfig({
       decoding: 'async'
     }
   },
+  // View Transitions configuration (non-experimental since Astro 3.x)
+  viewTransitions: true,
   build: {
     inlineStylesheets: 'auto',
     format: 'directory',
