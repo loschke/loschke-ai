@@ -1,5 +1,5 @@
 ---
-title: "Resilienz im KI-Sturm: Widerstandsfähigkeit für Unternehmen und Mitarbeitende"
+title: "Resilienz in der KI-Transformation: Tipps und Strategien zum Umgang mit der Unsicherheit"
 description: "Strategien zur Stärkung von individueller und organisationaler Widerstandsfähigkeit während der KI-Transformation"
 pubDate: 2025-05-03
 categories: ["KI-Transformation", "KI-Strategie"]
@@ -10,11 +10,11 @@ author:
   name: "Rico Loschke"
   avatar: "/images/rico-loschke_avatar.jpg"
 seo:
-  metaTitle: "Resilienz im KI-Sturm: Wie Unternehmen und Mitarbeitende gestärkt durch die Transformation navigieren"
+  metaTitle: "Resilienz in der KI-Transformation: Tipps und Strategien zum Umgang mit der Unsicherheit"
   metaDescription: "Erfahre, wie du individuelle und organisationale Resilienz aufbauen kannst, um erfolgreicher durch die KI-Transformation zu steuern - mit praktischen Strategien für Führungskräfte und Teams"
 ---
 
-# Resilienz im KI-Sturm: Wie Unternehmen und Mitarbeitende gestärkt durch die Transformation navigieren
+# Resilienz in der KI-Transformation: Tipps und Strategien zum Umgang mit der Unsicherheit
 
 Die generative KI-Revolution fordert uns alle heraus. Diese Technologie ist kein inkrementeller Fortschritt, sondern ein fundamentaler Wandel – besonders für Wissensarbeit und kognitive Prozesse. ChatGPT & Co. greifen tiefer in unsere Arbeitsprozesse ein als frühere Technologiewellen. Anders als bei klassischen Automatisierungswellen, die vor allem Routineaufgaben betrafen, dringt KI jetzt in Bereiche vor, die wir lange als "typisch menschlich" betrachtet haben.
 
