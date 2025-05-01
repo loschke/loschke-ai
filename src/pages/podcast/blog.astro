@@ -1,0 +1,230 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import PodcastBreadcrumb from '../../components/podcast/PodcastBreadcrumb.astro';
+import AudioBlogCard from '../../components/podcast/AudioBlogCard.astro';
+import { getAudioBlogPosts, getAudioBlogCategories } from '../../utils/podcast';
+
+// Page metadata
+const title = "KI Audio Blog | Praxiswissen und Erfahrungen rund um KI | Rico Loschke";
+const description = "✓ Höre Blog-Artikel als Audio ✓ KI-Expertenwissen für unterwegs ✓ Praktische Insights zu KI-Strategie, Prompt Engineering & digitaler Transformation ✓ Perfekt zum Lernen während der Fahrt ➤ Jetzt anhören!";
+
+// Get all available categories for filtering buttons
+const allCategories = await getAudioBlogCategories();
+
+// Get all audio blog posts - we'll filter them client-side
+const allPosts = await getAudioBlogPosts();
+
+// Serialize the posts data to use in client-side JavaScript
+const serializedPosts = allPosts.map(post => ({
+  slug: post.slug,
+  title: post.data.title,
+  description: post.data.description,
+  categories: post.data.categories || [],
+  audio: post.data.audio
+}));
+---
+
+<Layout title={title} description={description}>
+  <!-- Breadcrumb -->
+  <PodcastBreadcrumb section="blog" />
+  
+  <div class="audio-blog-page container-padding py-16">
+    <div class="max-container">
+      <!-- Hero Section -->
+      <section class="mb-16">
+        <h1 class="heading-xl mb-4">Audio Blog</h1>
+        <p class="text-lg text-white/80 max-w-3xl">
+          Höre meine Blog-Artikel als Audio-Zusammenfassungen - 
+          ideal für unterwegs oder wenn du lieber zuhörst als liest. 
+          Alle Audio-Inhalte in einer übersichtlichen Sammlung.
+        </p>
+      </section>
+      
+      <!-- Category filters -->
+      {allCategories.length > 0 && (
+        <section class="mb-12">
+          <h2 class="heading-md mb-4">Nach Kategorie filtern</h2>
+          <div class="flex flex-wrap gap-3" id="audioblog-filter-container">
+            <button 
+              data-audioblog-category=""
+              class="audioblog-filter-btn audioblog-active px-4 py-2 bg-primary transition-colors rounded-full text-white"
+            >
+              Alle anzeigen
+            </button>
+            {allCategories.map(category => (
+              <button 
+                data-audioblog-category={category.toLowerCase()}
+                class="audioblog-filter-btn px-4 py-2 bg-base-darker hover:bg-base-lighter transition-colors rounded-full text-white/80 hover:text-white"
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+      
+      <!-- Audio blog posts list -->
+      <section>
+        <h2 class="heading-md mb-8" id="audioblog-category-heading">
+          Alle Audio-Blog Artikel
+        </h2>
+        
+        <div id="audioblog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allPosts.map((post) => (
+            <div class="audioblog-post-card" data-audioblog-categories={JSON.stringify(post.data.categories || [])}>
+              <AudioBlogCard slug={post.slug} />
+            </div>
+          ))}
+        </div>
+        
+        <div id="audioblog-no-results" class="text-center py-10 hidden">
+          <p class="text-white/60">Keine Audio Blog Artikel gefunden</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ allCategories }}>
+// Audio Blog client-side filtering logic - Isolated in IIFE
+(function() {
+  // Function to initialize filter functionality
+  function initializeFilter() {
+    console.log("Initializing Audio Blog filter...");
+    
+    // Audio Blog specific selectors
+    const filterButtons = document.querySelectorAll('.audioblog-filter-btn');
+    const postCards = document.querySelectorAll('.audioblog-post-card');
+    const noResults = document.getElementById('audioblog-no-results');
+    const categoryHeading = document.getElementById('audioblog-category-heading');
+    
+    if (!noResults || !categoryHeading) {
+      console.error('Could not find necessary DOM elements for Audio Blog filtering');
+      return;
+    }
+    
+    // Initialize from URL parameter if present
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    
+    if (categoryParam) {
+      // Find the button that matches this category
+      const matchingButton = Array.from(filterButtons).find(
+        btn => {
+          const btnElement = btn;
+          return btnElement.dataset && btnElement.dataset.audioblogCategory === categoryParam.toLowerCase();
+        }
+      );
+      
+      if (matchingButton) {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => {
+          btn.classList.remove('audioblog-active', 'bg-primary');
+          btn.classList.add('bg-base-darker');
+        });
+        
+        // Add active class to the matching button
+        matchingButton.classList.add('audioblog-active', 'bg-primary');
+        matchingButton.classList.remove('bg-base-darker');
+        
+        // Apply the filter
+        applyFilter(categoryParam.toLowerCase());
+      }
+    }
+    
+    // Add click event to each filter button
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const btnElement = button;
+        const category = btnElement.dataset && btnElement.dataset.audioblogCategory || '';
+        
+        // Update URL query parameter without page reload
+        const url = new URL(window.location.href);
+        if (category) {
+          url.searchParams.set('category', category);
+        } else {
+          url.searchParams.delete('category');
+        }
+        window.history.pushState({}, '', url);
+        
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => {
+          btn.classList.remove('audioblog-active', 'bg-primary');
+          btn.classList.add('bg-base-darker');
+        });
+        
+        // Add active class to clicked button
+        button.classList.add('audioblog-active', 'bg-primary');
+        button.classList.remove('bg-base-darker');
+        
+        // Apply the filter
+        applyFilter(category);
+      });
+    });
+    
+    // Filter function
+    function applyFilter(category) {
+      console.log(`AudioBlog: Filtering by category: ${category || 'all'}`);
+      let visibleCount = 0;
+      
+      // For each post card
+      postCards.forEach(card => {
+        const cardElement = card;
+        // Get the categories from the data attribute
+        const cardCategories = JSON.parse(cardElement.dataset && cardElement.dataset.audioblogCategories || '[]');
+        const lowercaseCardCategories = cardCategories.map(c => c.toLowerCase());
+        
+        // If no filter or card matches filter
+        if (!category || lowercaseCardCategories.includes(category.toLowerCase())) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      
+      // Show/hide no results message
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+      
+      // Update heading
+      if (category) {
+        // Find the original category name with correct casing
+        const originalCategory = allCategories.find(
+          c => c.toLowerCase() === category.toLowerCase()
+        );
+        categoryHeading.textContent = `Audio-Blog Artikel: ${originalCategory || category}`;
+      } else {
+        categoryHeading.textContent = 'Alle Audio-Blog Artikel';
+      }
+    }
+  }
+  
+  // Run initialization immediately for client-side navigation support
+  initializeFilter();
+  
+  // Also run on DOMContentLoaded for fallback/initial page load
+  document.addEventListener('DOMContentLoaded', initializeFilter);
+  
+  // For Astro View Transitions support
+  document.addEventListener('astro:page-load', initializeFilter);
+})();
+</script>
+
+<style>
+  .heading-xl {
+    @apply text-4xl sm:text-5xl font-bold text-white;
+  }
+  
+  .heading-md {
+    @apply text-2xl font-bold text-white;
+  }
+  
+  .audioblog-filter-btn.audioblog-active {
+    @apply bg-primary text-white;
+  }
+</style>

@@ -2,6 +2,7 @@
 import SocialIcons from "./SocialIcons.astro";
 import { Image } from "astro:assets";
 import avatarImage from "../../assets/images/rico-loschke_avatar.jpg";
+import Button from "../ui/Button.astro";
 
 const currentYear = new Date().getFullYear();
 
@@ -23,6 +24,7 @@ const footerLinks: FooterSection[] = [
             { label: "Kontakt", href: "/contact" },
             { label: "Impressum", href: "/impressum" },
             { label: "Datenschutz", href: "/datenschutz" },
+            { label: "llms.txt", href: "/llms.txt" },
         ],
     },
     {
@@ -83,8 +85,17 @@ const footerLinks: FooterSection[] = [
                             Dabei verbinde ich technisches Know-how mit strategischem Denken, um ganzheitliche Lösungen 
                             zu entwickeln, die echten Mehrwert schaffen und dich zukunftsfähig machen.
                         </p>
-                        <div class="mb-8">
+                        <div class="mb-4">
                             <SocialIcons />
+                        </div>
+                        <div class="mt-12">
+                            <Button 
+                                href="/contact" 
+                                variant="primary" 
+                                size="md"
+                            >
+                                Kontakt aufnehmen
+                            </Button>
                         </div>
                     </div>
 

@@ -1,0 +1,134 @@
+---
+// List component for displaying podcast episodes (both AudioBlog and DeepDives)
+import { getCollection } from 'astro:content';
+import AudioBlogCard from './AudioBlogCard.astro';
+import DeepDiveCard from './DeepDiveCard.astro';
+
+interface Props {
+  type?: 'all' | 'audioblog' | 'deepdive';
+  limit?: number;
+  featured?: boolean;
+  filterTopic?: string;
+}
+
+const { 
+  type = 'all', 
+  limit = 0, 
+  featured = false,
+  filterTopic
+} = Astro.props;
+
+// Get all blog posts with audio
+const audioBlogPosts = await getCollection('blog', (post) => {
+  return post.data.audio !== undefined && !post.data.draft;
+});
+
+// Sort by date, newest first
+const sortedAudioBlogPosts = audioBlogPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Get all deepdive posts
+// @ts-ignore - Collection might not be recognized yet since it's new
+const deepdivePosts = await getCollection('podcast');
+
+// @ts-ignore - Since the collection is new, TypeScript doesn't recognize its structure yet
+const filteredDeepDives = deepdivePosts.filter(post => !post.data.draft);
+
+// Sort by date, newest first
+// @ts-ignore - Type casting to handle new collection structure
+const sortedDeepDivePosts = filteredDeepDives
+  .sort((a, b) => {
+    // @ts-ignore - TypeScript doesn't recognize the new schema yet
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+  });
+
+// Filter by type
+// @ts-ignore - Explicit typing to be added once collection is fully established
+let audioBlogs: any[] = [];
+// @ts-ignore - Explicit typing to be added once collection is fully established
+let deepDives: any[] = [];
+
+if (type === 'all' || type === 'audioblog') {
+  audioBlogs = sortedAudioBlogPosts;
+  
+  // Apply featured filter if needed
+  if (featured) {
+    audioBlogs = audioBlogs.filter(post => post.data.featured);
+  }
+  
+  // Apply topic filter if needed
+  if (filterTopic) {
+    const filterLower = filterTopic.toLowerCase();
+    audioBlogs = audioBlogs.filter(post => 
+      (post.data.categories || []).some((category: string) => category.toLowerCase() === filterLower) || 
+      (post.data.tags || []).some((tag: string) => tag.toLowerCase() === filterLower)
+    );
+  }
+  
+  // Apply limit
+  if (limit > 0) {
+    audioBlogs = audioBlogs.slice(0, limit);
+  }
+}
+
+if (type === 'all' || type === 'deepdive') {
+  deepDives = sortedDeepDivePosts;
+  
+  // Apply featured filter if needed
+  if (featured) {
+    // @ts-ignore - Type casting to handle new collection structure
+    deepDives = deepDives.filter(post => post.data.featured);
+  }
+  
+  // Apply topic filter if needed
+  if (filterTopic) {
+    const filterLower = filterTopic.toLowerCase();
+    // @ts-ignore - Type casting to handle new collection structure
+    deepDives = deepDives.filter(post => 
+      (post.data.topics || []).some((topic: string) => topic.toLowerCase() === filterLower)
+    );
+  }
+  
+  // Apply limit
+  if (limit > 0) {
+    deepDives = deepDives.slice(0, limit);
+  }
+}
+
+// Combine and sort all episodes by date if needed
+let allEpisodes = [];
+if (type === 'all') {
+  // @ts-ignore - Combine different types
+  allEpisodes = [...audioBlogs, ...deepDives].sort((a, b) => 
+    b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  );
+  
+  // Apply limit to combined list
+  if (limit > 0) {
+    allEpisodes = allEpisodes.slice(0, limit);
+  }
+}
+
+const episodes = type === 'all' ? allEpisodes : 
+                type === 'audioblog' ? audioBlogs : deepDives;
+---
+
+<div class="episode-list">
+  {episodes.length === 0 && (
+    <div class="text-center py-10">
+      <p class="text-white/60">Keine Episoden gefunden</p>
+    </div>
+  )}
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {episodes.map((episode) => (
+      <div>
+        {episode.collection === 'blog' ? (
+          <AudioBlogCard slug={episode.slug} />
+        ) : (
+          <DeepDiveCard slug={episode.slug} />
+        )}
+      </div>
+    ))}
+  </div>
+</div>

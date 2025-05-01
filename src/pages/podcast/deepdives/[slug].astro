@@ -1,0 +1,242 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Button from '../../../components/ui/Button.astro';
+import PodcastBreadcrumb from '../../../components/podcast/PodcastBreadcrumb.astro';
+
+// Get all deepdive slugs for static paths
+export async function getStaticPaths() {
+  // @ts-ignore - Collection might not be recognized yet since it's new
+  const allPodcasts = await getCollection('podcast');
+  
+  // Filter only deepdives based on the slug patterns
+  const deepdives = allPodcasts.filter(entry => {
+    return entry.slug === 'eu-ai-act-anforderungen' || entry.slug === 'ki-strategie-leitfaden-mittelstand';
+  });
+  
+  return deepdives.map(deepdive => ({
+    params: { slug: deepdive.slug },
+    props: { deepdive },
+  }));
+}
+
+// @ts-ignore - TypeScript doesn't recognize the new schema yet
+const { deepdive } = Astro.props;
+
+// Format date
+const formattedDate = new Intl.DateTimeFormat('de-DE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+// @ts-ignore - TypeScript doesn't recognize the new schema yet
+}).format(deepdive.data.pubDate);
+
+// Get related blog posts if any
+// @ts-ignore - TypeScript doesn't recognize the new schema yet
+const relatedBlogSlugs = deepdive.data.relatedBlogPosts || [];
+const relatedBlogPosts = await Promise.all(
+  relatedBlogSlugs.map(async (slug: string) => {
+    const posts = await getCollection('blog', (post) => post.slug === slug);
+    return posts[0];
+  })
+);
+
+// Thumbnail path
+// @ts-ignore - TypeScript doesn't recognize the new schema yet
+const thumbnailPath = deepdive.data.thumbnail 
+  ? `/images/podcast/thumbnails/${deepdive.data.thumbnail}`
+  : '/images/podcast/thumbnails/default-podcast.jpg';
+
+// Get content
+const { Content } = await deepdive.render();
+---
+
+{/* Prepare variables for Layout to avoid TypeScript errors */}
+{(() => {
+  // @ts-ignore - TypeScript doesn't recognize the new schema yet
+  const pageTitle = deepdive.data.title + " - Podcast DeepDive - Rico Loschke";
+  // @ts-ignore - TypeScript doesn't recognize the new schema yet
+  const pageDescription = deepdive.data.description;
+  // @ts-ignore - TypeScript doesn't recognize the new schema yet
+  const pageAudioFile = deepdive.data.audioFile.includes('deepdives/') 
+    ? deepdive.data.audioFile 
+    : `deepdives/${deepdive.data.audioFile}`;
+  // @ts-ignore - TypeScript doesn't recognize the new schema yet
+  const pageAudioTitle = deepdive.data.title;
+  
+  return (
+    <Layout 
+      title={pageTitle}
+      description={pageDescription}
+      audioFile={pageAudioFile}
+      audioTitle={pageAudioTitle}
+    >
+  <!-- Breadcrumb -->
+  <PodcastBreadcrumb 
+    section="deepdives" 
+    subsection={deepdive.data.title} 
+  />
+  
+  <div class="deepdive-detail container-padding py-16">
+    <div class="max-container">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main content -->
+        <div class="lg:col-span-2">
+          <!-- Thumbnail -->
+          <div class="rounded-xl overflow-hidden mb-8">
+            <img 
+              src={thumbnailPath} 
+              alt={deepdive.data.title} 
+              class="w-full aspect-video object-cover object-center"
+            />
+          </div>
+          
+          <!-- Title and meta -->
+          <div class="mb-8">
+            <!-- @ts-ignore - TypeScript doesn't recognize the new schema yet -->
+            <h1 class="text-4xl font-bold text-white mb-4">{deepdive.data.title}</h1>
+            <div class="flex flex-wrap gap-4 mb-4">
+              <div class="flex items-center text-white/60">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <span>{formattedDate}</span>
+              </div>
+              <div class="flex items-center text-white/60">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                </svg>
+                <!-- @ts-ignore - TypeScript doesn't recognize the new schema yet -->
+                <span>{deepdive.data.duration}</span>
+              </div>
+            </div>
+            
+            <!-- Play button -->
+            {/* @ts-ignore - TypeScript doesn't recognize the new schema yet */}
+            <button 
+              id="play-deepdive-btn"
+              class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full transition-colors mt-4"
+              data-audio-file={deepdive.data.audioFile.includes('deepdives/') 
+                ? deepdive.data.audioFile 
+                : `deepdives/${deepdive.data.audioFile}`}
+              data-audio-title={deepdive.data.title}
+              aria-label={`${deepdive.data.title} abspielen`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+              </svg>
+              <span class="font-medium">Episode abspielen</span>
+            </button>
+          </div>
+          
+          <!-- Description -->
+          <!-- @ts-ignore - TypeScript doesn't recognize the new schema yet -->
+          <p class="text-lg text-white/80 mb-8 leading-relaxed">{deepdive.data.description}</p>
+          
+          <!-- Content -->
+          <div class="prose prose-lg prose-invert max-w-none">
+            <Content />
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div>
+          <!-- Participants -->
+          <div class="bg-base-darker rounded-xl p-6 mb-6">
+            <h2 class="text-xl font-bold text-white mb-4">Teilnehmer</h2>
+            <div class="flex flex-col gap-4">
+              <!-- @ts-ignore - TypeScript doesn't recognize the new schema yet -->
+              {deepdive.data.participants.map(participant => (
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <span class="text-white">{participant}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Topics -->
+          <div class="bg-base-darker rounded-xl p-6 mb-6">
+            <h2 class="text-xl font-bold text-white mb-4">Themen</h2>
+            <div class="flex flex-wrap gap-2">
+              <!-- @ts-ignore - TypeScript doesn't recognize the new schema yet -->
+              {deepdive.data.topics.map(topic => (
+                <a 
+                  href={`/podcast?topic=${encodeURIComponent(topic)}`}
+                  class="px-3 py-1 bg-base-lighter rounded-full text-white/80 hover:text-white transition-colors text-sm"
+                >
+                  {topic}
+                </a>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Related blog posts -->
+          {relatedBlogPosts.length > 0 && (
+            <div class="bg-base-darker rounded-xl p-6">
+              <h2 class="text-xl font-bold text-white mb-4">Verwandte Artikel</h2>
+              <div class="flex flex-col gap-4">
+                {relatedBlogPosts.map((post: any) => (
+                  <a href={`/blog/${post.slug}`} class="group">
+                    <h3 class="text-white group-hover:text-primary transition-colors font-medium">{post.data.title}</h3>
+                    <p class="text-white/60 text-sm line-clamp-2">{post.data.description}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+  );
+})()}
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const playButton = document.getElementById('play-deepdive-btn');
+    
+    if (playButton) {
+      playButton.addEventListener('click', () => {
+        const audioFile = playButton.getAttribute('data-audio-file');
+        const audioTitle = playButton.getAttribute('data-audio-title');
+        
+        if (audioFile && audioTitle) {
+          // Set data attributes on body to trigger audio player
+          document.body.dataset.audioFile = audioFile;
+          document.body.dataset.articleTitle = audioTitle;
+          
+          // Trigger custom event to notify audio player
+          document.dispatchEvent(new CustomEvent('audioContentChanged'));
+          
+          // Show audio player
+          const audioPlayer = document.getElementById('global-audio-player');
+          if (audioPlayer) {
+            audioPlayer.classList.remove('translate-y-full');
+          }
+          
+          // Auto play
+          const audioElement = document.getElementById('audio-element') as HTMLAudioElement;
+          if (audioElement) {
+            audioElement.play()
+              .then(() => {
+                const playIcon = document.getElementById('play-icon');
+                const pauseIcon = document.getElementById('pause-icon');
+                playIcon?.classList.add('hidden');
+                pauseIcon?.classList.remove('hidden');
+              })
+              .catch(error => {
+                console.error('Audio playback failed:', error);
+              });
+          }
+        }
+      });
+    }
+  });
+</script>

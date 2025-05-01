@@ -1,0 +1,94 @@
+# Rico Loschke
+
+> KI-Generalist, Director Automation & AI bei queonext, Experte für generative KI mit Fokus auf praktische Anwendungen in Marketing, Kreativprozessen, Kundenservice und Vertrieb.
+
+## Über Rico Loschke
+
+Rico Loschke ist Director Automation & AI bei queonext und hat sich als KI-Generalist positioniert. Seit 2021 beschäftigt er sich intensiv mit generativer KI und hat es sich zur Mission gemacht, Menschen zu befähigen, diese Technologien sinnvoll und selbstbewusst zu nutzen ohne überzogene Versprechen, sondern mit konkreten, umsetzbaren Lösungen für echte Herausforderungen im Arbeitsalltag 
+
+Als zertifizierter Prompt Engineer und KI-Experte mit Fokus auf generative KI im kreativen Bereich verbindet er technisches Know-how mit der Leidenschaft, Menschen den Weg in die KI-gestützte Zukunft zu ebnen. Seine Expertise umfasst sowohl die Entwicklung maßgeschneiderter KI-Modelle als auch deren Integration in bestehende Systeme und Workflows.
+
+Rico vertritt eine ausgewogene Perspektive zwischen KI-Optimismus und Realismus. Er erkennt das transformative Potenzial der Technologie, betont aber gleichzeitig die Notwendigkeit eines verantwortungsvollen Umgangs damit. Als leidenschaftlicher Befürworter von KI sieht er den unglaublichen Nutzen und das Potenzial, ist jedoch auch überzeugt, dass wir als Gesellschaft – und insbesondere als Entwickler und Anwender von KI – eine große Verantwortung tragen. 
+
+Seine Arbeit basiert auf vier Kernkompetenzen, den vier "Powers":
+
+1. **BUILD**: Entwicklung maßgeschneiderter KI-Lösungen und deren Integration in bestehende Systeme
+2. **AUTOMATE**: Systematische Verknüpfung von KI-Tools mit Geschäftsprozessen für effizientere Workflows
+3. **CREATE**: Nutzung von KI als kreatives Werkzeug zur Entwicklung visueller und textueller Inhalte
+4. **CONNECT**: Fähigkeit, komplexe KI-Themen verständlich zu vermitteln und in verschiedene Kontexte zu übersetzen
+
+Als Honorardozent für führende Institutionen wie IHK, Haufe Akademie und Bitkom teilt er seine Expertise im Bereich generative KI und digitale Transformation. Mit seinem praxisorientierten Ansatz baut er Brücken zwischen komplexer Technologie und praktischer Anwendung.
+
+## Hauptinhalte
+
+- [Startseite](https://loschke.ai/): Übersicht und aktuelle Aktivitäten
+- [Kontakt](https://loschke.ai/contact): Kontaktmöglichkeiten für Anfragen und Projekte
+- [Projekte](https://loschke.ai/projekte): Übersicht meiner KI-Projekte und Initiativen
+- [Impulse](https://loschke.ai/impulse): Gedanken und Reflexionen zu KI-Themen
+
+## Leitfäden und Ressourcen
+
+- [How to Prompt Guide](https://loschke.ai/how-to-prompt-guide): Systematischer Leitfaden für effektives Prompt Engineering
+- [Blog](https://loschke.ai/blog): Aktuelle Artikel zu verschiedenen KI-Themen
+- [Guides](https://loschke.ai/guides): Praxisorientierte Anleitungen zu KI-Themen
+- [FAQ](https://loschke.ai/faq): Häufig gestellte Fragen zu generativer KI
+
+## AI-Design Framework
+
+- [4K Framework Übersicht](https://loschke.ai/ai-design-framework): Systematischer Ansatz für KI-Bildgenerierung
+- [Konzept](https://loschke.ai/ai-design-framework/concept): Erste Säule des 4K Frameworks
+- [Kontext](https://loschke.ai/ai-design-framework/context): Zweite Säule des 4K Frameworks
+- [Komposition](https://loschke.ai/ai-design-framework/composition): Dritte Säule des 4K Frameworks
+- [Kreativität](https://loschke.ai/ai-design-framework/creativity): Vierte Säule des 4K Frameworks
+
+## Prompt-Bibliothek
+
+- [Übersicht](https://loschke.ai/prompt-bibliothek): Sammlung effektiver Prompts für verschiedene Anwendungsfälle
+- [Marketing](https://loschke.ai/prompt-bibliothek/marketing): Prompt-Vorlagen für Marketingaufgaben
+- [PR](https://loschke.ai/prompt-bibliothek/pr): Prompt-Vorlagen für PR und Öffentlichkeitsarbeit
+- [Projektmanagement](https://loschke.ai/prompt-bibliothek/project): Prompt-Vorlagen für Projektmanagement
+- [Vertrieb](https://loschke.ai/prompt-bibliothek/sales): Prompt-Vorlagen für Vertriebsaufgaben
+- [Bildung](https://loschke.ai/prompt-bibliothek/education): Prompt-Vorlagen für Bildungskontext
+- [Führung](https://loschke.ai/prompt-bibliothek/leader): Prompt-Vorlagen für Führungskräfte
+- [Kreativität](https://loschke.ai/prompt-bibliothek/creative): Prompt-Vorlagen für kreative Prozesse
+- [Kundenservice](https://loschke.ai/prompt-bibliothek/support): Prompt-Vorlagen für Kundenservice
+- [Strategie](https://loschke.ai/prompt-bibliothek/strategy): Prompt-Vorlagen für strategische Aufgaben
+- [Präsentationen](https://loschke.ai/prompt-bibliothek/keynote): Prompt-Vorlagen für Keynotes und Präsentationen
+
+## FAQ-Kategorien
+
+- [Grundlagen generative KI](https://loschke.ai/faq/grundlagen-generative-ki): Basiswissen zu generativer KI
+- [KI-Einstieg für Unternehmen](https://loschke.ai/faq/ki-einstieg-unternehmen): Hilfestellung für Organisationen
+- [Prompt Engineering & KI-Nutzung](https://loschke.ai/faq/prompt-engineering-ki-nutzung): Effektive KI-Kommunikation
+- [AI-Design & Kreativprozesse](https://loschke.ai/faq/ai-design-kreativprozesse): KI in kreativen Workflows
+- [KI-Transformation im Unternehmen](https://loschke.ai/faq/ki-transformation-unternehmen): Organisationswandel
+- [Zukunftsperspektiven & Trends](https://loschke.ai/faq/zukunftsperspektiven-trends): Ausblick auf KI-Entwicklungen
+
+## Ausgewählte Blog-Artikel
+
+- [Resilienz in unsicheren Zeiten der KI-Transformation](https://loschke.ai/blog/resilienz-in-unsicheren-zeiten-der-ki-transformation)
+- [Vibe Coding: Hype oder nutzlos?](https://loschke.ai/blog/vibe-coding-hype-oder-nutzlos)
+- [Prompt Bias: Selbstgemachte Verzerrungen](https://loschke.ai/blog/prompt-bias-selbstgemachte-verzerrungen)
+- [KI-Innovationskultur und Führung](https://loschke.ai/blog/ki-innovationskultur-und-fuehrung)
+- [Dialog vs. One-Shot Prompting](https://loschke.ai/blog/dialog-vs-one-shot-prompting)
+- [KI-Strategie im Mittelstand](https://loschke.ai/blog/ki-strategie-im-mittelstand)
+- [Generalist vs. Spezialist in Zeiten generativer KI](https://loschke.ai/blog/generalist-vs-spezialist-in-zeiten-generativer-ki.mdx)
+- [KI-Content erkennen und verbessern](https://loschke.ai/blog/ki-content-erkennen-verbessern)
+- [Ethik & Compliance im KI-Marketing](https://loschke.ai/blog/ethik-compliance-ki-marketing)
+- [Prompt-Fehlerbehebung: Typische Probleme und Lösungen](https://loschke.ai/blog/prompt-fehlerbehebung-loesungen)
+- [Zukunftssichere Prompt-Strategien](https://loschke.ai/blog/zukunftssichere-prompt-strategien)
+- [Prompt-Bibliothek aufbauen: Systematisches Wissensmanagement](https://loschke.ai/blog/prompt-bibliothek-aufbauen-wissensmanagement)
+
+## Blog-Kategorien
+
+- [KI-Transformation](https://loschke.ai/blog/category/ki-transformation): Gesellschaftliche und arbeitsweltliche Veränderungen
+- [KI-Strategie](https://loschke.ai/blog/category/ki-strategie): Strategische Integration von KI in Unternehmen
+- [KI-Praxis](https://loschke.ai/blog/category/ki-praxis): Praktische Anwendungen und Fallbeispiele
+- [KI-Automation](https://loschke.ai/blog/category/ki-automation): Workflow-Optimierung und Prozessautomatisierung
+- [Prompt Engineering](https://loschke.ai/blog/category/prompt%20engineering): Techniken für effektive KI-Kommunikation
+- [KI-Tools](https://loschke.ai/blog/category/ki-tools): Vergleich und Anwendung spezifischer KI-Werkzeuge
+
+## Optional
+
+- [Impressum](https://loschke.ai/impressum): Rechtliche Informationen
+- [Datenschutz](https://loschke.ai/datenschutz): Datenschutzrichtlinien

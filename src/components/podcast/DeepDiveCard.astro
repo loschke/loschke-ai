@@ -1,0 +1,151 @@
+---
+// Card component for displaying DeepDive podcast entries
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import deepdiveThumbnail from '../../assets/podcast/deepdive-podcast_thumbnail-no-text.png';
+
+interface PodcastEntry {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    duration: string;
+    audioFile: string;
+    thumbnail?: string;
+    episodeNumber?: number;
+    participants?: string[];
+    topics?: string[];
+    relatedBlogPosts?: string[];
+    draft: boolean;
+    featured: boolean;
+    seo: {
+      metaTitle?: string;
+      metaDescription?: string;
+      noindex: boolean;
+      ogImage?: string;
+      canonicalURL?: string;
+    }
+  }
+}
+
+interface Props {
+  slug: string;
+  showCategory?: boolean;
+}
+
+const { slug, showCategory = true } = Astro.props;
+
+// Get all podcast deepdives
+// @ts-ignore - Collection might not be recognized yet since it's new
+const allEntries = await getCollection('podcast');
+// @ts-ignore - Type casting to handle new collection structure
+const deepdives = allEntries.filter(entry => !entry.data.draft) as PodcastEntry[];
+
+// Find the specific deepdive
+const deepdive = deepdives.find(entry => entry.slug === slug) as PodcastEntry | undefined;
+
+if (!deepdive) {
+  throw new Error(`DeepDive with slug ${slug} not found`);
+}
+
+// Format date
+const formattedDate = new Intl.DateTimeFormat('de-DE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(deepdive.data.pubDate);
+
+// We'll use the standard deepdive thumbnail for all episodes
+---
+
+  <div class="podcast-card bg-base-darker rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+  <div class="flex flex-col h-full">
+    <div class="relative">
+      <Image 
+        src={deepdiveThumbnail} 
+        alt={deepdive.data.title}
+        class="w-full aspect-video object-cover object-center"
+      />
+      <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-base-darker to-transparent h-20"></div>
+      {deepdive.data.episodeNumber && (
+        <div class="absolute bottom-3 left-3">
+          <span class="px-3 py-1 text-xs font-bold text-white bg-primary rounded-full">
+            Folge #{deepdive.data.episodeNumber}
+          </span>
+        </div>
+      )}
+    </div>
+    
+    <div class="p-5 flex flex-col flex-grow" style="min-height: 250px;">
+      <h3 class="text-xl font-bold text-white mb-2 line-clamp-2 min-h-[3.5rem]">{deepdive.data.title}</h3>
+      <p class="text-white/70 text-sm mb-4 line-clamp-3">{deepdive.data.description}</p>
+      
+      <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
+        <div class="flex gap-2">
+          <button 
+            class="play-deepdive-btn flex items-center gap-2 text-white bg-primary hover:bg-primary-dark transition-colors hover:scale-105 px-3 py-1.5 rounded-full" 
+            data-audio-file={`deepdives/${deepdive.data.audioFile}`}
+            data-audio-title={deepdive.data.title}
+            aria-label={`${deepdive.data.title} abspielen`}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-base font-normal text-white">Anhören</span>
+          </button>
+        </div>
+        
+        <div class="text-xs bg-base-lighter px-2 py-0.5 rounded text-white/70">
+          {deepdive.data.duration} min
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const playButtons = document.querySelectorAll('.play-deepdive-btn');
+    
+    playButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const audioFile = button.getAttribute('data-audio-file');
+        const audioTitle = button.getAttribute('data-audio-title');
+        
+        if (audioFile && audioTitle) {
+          // Set data attributes on body to trigger audio player
+          document.body.dataset.audioFile = audioFile;
+          document.body.dataset.articleTitle = audioTitle;
+          
+          // Trigger custom event to notify audio player
+          document.dispatchEvent(new CustomEvent('audioContentChanged'));
+          
+          // Show audio player
+          const audioPlayer = document.getElementById('global-audio-player');
+          if (audioPlayer) {
+            audioPlayer.classList.remove('translate-y-full');
+          }
+          
+          // Auto play
+          const audioElement = document.getElementById('audio-element') as HTMLAudioElement;
+          if (audioElement) {
+            audioElement.play()
+              .then(() => {
+                const playIcon = document.getElementById('play-icon');
+                const pauseIcon = document.getElementById('pause-icon');
+                playIcon?.classList.add('hidden');
+                pauseIcon?.classList.remove('hidden');
+              })
+              .catch(error => {
+                console.error('Audio playback failed:', error);
+              });
+          }
+        }
+      });
+    });
+  });
+</script>

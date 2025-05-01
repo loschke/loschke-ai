@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import EpisodeList from '../../components/podcast/EpisodeList.astro';
+import Button from '../../components/ui/Button.astro';
+
+// Page metadata
+const title = "KI-Podcast | Audio-Blog & DeepDive Gespräche mit virtuellen Experten | Rico Loschke";
+const description = "✓ KI-Experten im Gespräch ✓ Wertvolle Insights zur künstlichen Intelligenz ✓ Blog-Artikel als Audiofassung ✓ DeepDive Analysen zu KI-Strategien & Transformationen ➤ Jetzt reinhören!";
+
+// Get latest episodes for featured sections
+// @ts-ignore - Collection might not be recognized yet since it's new
+const featuredDeepDives = await getCollection('podcast');
+// @ts-ignore - Type casting to handle new collection structure
+const filteredFeaturedDeepDives = featuredDeepDives.filter(entry => entry.data.featured && !entry.data.draft);
+
+// Get count of audio blogs
+const audioBlogCount = (await getCollection('blog', (post) => {
+  return post.data.audio !== undefined && !post.data.draft;
+})).length;
+
+// Get count of deepdives
+// @ts-ignore - New collection might not be fully recognized yet
+const deepDiveCount = (await getCollection('podcast', (post) => {
+  return !post.data.draft;
+})).length;
+
+// Get all topics across deepdives for filtering
+// @ts-ignore - New collection might not be fully recognized yet
+const allTopics = [...new Set(
+  (await getCollection('podcast'))
+    // @ts-ignore - New collection might not be fully recognized yet
+    .filter(post => !post.data.draft)
+    // @ts-ignore - New collection might not be fully recognized yet
+    .flatMap(post => post.data.topics)
+)];
+
+// Get all categories across audio blogs for filtering
+const allCategories = [...new Set(
+  (await getCollection('blog', (post) => {
+    return post.data.audio !== undefined && !post.data.draft;
+  }))
+    .flatMap(post => post.data.categories)
+)];
+
+// Combine topics and categories
+const allTopicsAndCategories = [...new Set([...allTopics, ...allCategories])].sort();
+---
+
+<Layout title={title} description={description}>
+  <div class="podcast-page container-padding py-16">
+    <div class="max-container">
+      <!-- Hero Section -->
+      <section class="mb-20">
+        <h1 class="heading-xl mb-6">Podcast</h1>
+        <div class="mb-12">
+          <p class="text-xl text-white/80 leading-relaxed mb-6">
+            Hier gibt es Zusammenfassungen meiner Blog-Artikel und thematische DeepDives..
+          </p>
+          
+          <!-- Audio Blog Intro Video -->
+          <div class="mb-10">
+            <div class="video-container rounded-xl overflow-hidden mb-3 w-3/4 mx-0">
+              <video 
+                controls 
+                preload="auto"
+                class="w-full aspect-video"
+              >
+                <source src="/video/audio-blog_intro.mp4" type="video/mp4">
+                Ihr Browser unterstützt keine Video-Wiedergabe.
+              </video>
+            </div>
+            <div class="video-caption text-white/80 text-sm mb-6">
+              <p>Das ist Lia, vollständig KI-generiert - Bild (Midjourney), Speaker Script (Claude), Audio (Elevenlabs), Lip Sync + Video (Hedra) </p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 flex-wrap">
+            <Button href="/podcast/blog" color="primary" size="md">
+              Audio-Blog ({audioBlogCount})
+            </Button>
+            <Button href="/podcast/deepdives" color="secondary" size="md">
+              Thementalks ({deepDiveCount})
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Deep Dives -->
+      <section class="mb-20">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="heading-lg">Aktuelle Thementalks</h2>
+          <Button href="/podcast/deepdives" variant="text" color="white">
+            Alle anzeigen
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </Button>
+        </div>
+        <EpisodeList type="deepdive" limit={3} featured={true} />
+      </section>
+
+      <!-- Latest Audio Blogs -->
+      <section class="mb-20">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="heading-lg">Neueste Audio-Blogs</h2>
+          <Button href="/podcast/blog" variant="text" color="white">
+            Alle anzeigen
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </Button>
+        </div>
+        <EpisodeList type="audioblog" limit={3} />
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .podcast-icon-container svg {
+    filter: drop-shadow(0 0 8px theme('colors.primary.DEFAULT'));
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+    70% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    100% {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .heading-xl {
+    @apply text-5xl font-bold text-white;
+  }
+  
+  .heading-lg {
+    @apply text-3xl font-bold text-white;
+  }
+  
+  .video-container {
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%;
+    position: relative;
+  }
+  
+  .video-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.4);
+  }
+  
+  .video-container video {
+    display: block;
+  }
+  
+  .video-caption {
+    line-height: 1.5;
+  }
+  
+  .video-caption .text-primary {
+    font-weight: 500;
+  }
+</style>

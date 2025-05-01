@@ -63,8 +63,14 @@
       const articleTitle = document.body.dataset.articleTitle;
       
       if (audioFile) {
-        // Set the audio source
-        audioElement.src = `/audio/blog/${audioFile}`;
+        // Set the audio source - handle both blog and deepdives paths
+        if (audioFile.startsWith('deepdives/')) {
+          // For DeepDive audio files
+          audioElement.src = `/audio/${audioFile}`;
+        } else {
+          // For regular blog audio files
+          audioElement.src = `/audio/blog/${audioFile}`;
+        }
         
         // Set the title
         if (audioTitle && articleTitle) {

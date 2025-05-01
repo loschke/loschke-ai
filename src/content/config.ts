@@ -109,9 +109,36 @@ const aufgaben = defineCollection({
     }),
 });
 
+// Podcast DeepDives schema definition
+const podcastDeepDives = defineCollection({
+    type: 'content',
+    schema: z.object({
+        // Basic information
+        title: z.string().min(1).max(100),
+        description: z.string().min(10).max(250),
+        
+        // Date and duration
+        pubDate: z.coerce.date(),
+        duration: z.string(), // Format: MM:SS or HH:MM:SS
+        
+        // Media
+        audioFile: z.string(), // Path to audio file under public/audio/deepdives/
+        thumbnail: z.string().optional(), // Path to thumbnail under public/images/podcast/thumbnails/
+        episodeNumber: z.number().int().positive().optional(), // Episode number for display in badge
+        
+        // Content status
+        draft: z.boolean().default(false),
+        featured: z.boolean().default(false),
+        
+        // SEO
+        seo: seoSchema.default({}),
+    }),
+});
+
 // Export the collections
 export const collections = {
     blog,
     'how-to-prompt-guide': howToPromptGuide,
     'aufgaben': aufgaben,
+    'podcast': podcastDeepDives,
 };

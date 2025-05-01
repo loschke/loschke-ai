@@ -1,22 +1,43 @@
 ---
 interface Props {
     href?: string;
-    variant?: "primary" | "secondary";
+    variant?: "primary" | "secondary" | "text";
+    color?: "primary" | "secondary" | "white";
+    size?: "sm" | "md" | "lg";
     class?: string;
 }
 
-const { href, variant = "primary", class: className = "" } = Astro.props;
+const { 
+    href, 
+    variant = "primary", 
+    color = "primary", 
+    size = "md", 
+    class: className = "" 
+} = Astro.props;
 
-const baseStyles =
-    "px-8 py-4 rounded-full text-white transition-colors duration-300 text-lg font-medium tracking-wide shadow-lg";
+const baseStyles = "rounded-full transition-colors duration-300 font-medium tracking-wide";
+
 const variants = {
-    primary: "bg-primary hover:bg-primary-dark",
-    secondary: "bg-white/10 hover:bg-white/20",
+    primary: "bg-primary hover:bg-primary-dark text-white shadow-lg",
+    secondary: "bg-white/10 hover:bg-white/20 text-white shadow-lg",
+    text: "bg-transparent hover:bg-white/5 flex items-center"
+};
+
+const colors = {
+    primary: variant === "text" ? "text-primary hover:text-primary-light" : "",
+    secondary: variant === "text" ? "text-white/80 hover:text-white" : "",
+    white: variant === "text" ? "text-white/80 hover:text-white" : ""
+};
+
+const sizes = {
+    sm: "px-4 py-2 text-sm",
+    md: "px-6 py-3 text-base",
+    lg: "px-8 py-4 text-lg"
 };
 
 const Tag = href ? "a" : "button";
 ---
 
-<Tag href={href} class:list={[baseStyles, variants[variant], className]}>
+<Tag href={href} class:list={[baseStyles, variants[variant], colors[color], sizes[size], className]}>
     <slot />
 </Tag>

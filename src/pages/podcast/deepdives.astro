@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import PodcastBreadcrumb from '../../components/podcast/PodcastBreadcrumb.astro';
+import DeepDiveCard from '../../components/podcast/DeepDiveCard.astro';
+import { getDeepDivePosts, getDeepDiveTopics } from '../../utils/podcast';
+
+// Page metadata
+const title = "KI-DeepDives | Virtuelle Experten diskutieren spannende KI-Themen | Rico Loschke";
+const description = "✓ Exklusive Einblicke in KI-Innovationen ✓ Fachgespräche mit führenden Experten ✓ Praxisnahe Analysen zu KI-Transformation & digitaler Strategie ✓ Von KI-Spezialist Rico Loschke ➤ Jetzt einschalten!";
+
+// Get all available topics for filtering buttons
+const allTopics = await getDeepDiveTopics();
+
+// Get all deepdive posts - we'll filter them client-side
+const allPosts = await getDeepDivePosts();
+
+// Serialize the posts data to use in client-side JavaScript
+const serializedPosts = allPosts.map(post => ({
+  slug: post.slug,
+  title: post.data.title,
+  description: post.data.description
+}));
+---
+
+<Layout title={title} description={description}>
+  <!-- Breadcrumb -->
+  <PodcastBreadcrumb section="deepdives" />
+  
+  <div class="deepdives-page container-padding py-16">
+    <div class="max-container">
+      <!-- Hero Section -->
+      <section class="mb-16">
+        <h1 class="heading-xl mb-4">Thementalks</h1>
+        <p class="text-lg text-white/80 max-w-3xl">
+          Tauche tiefer ein in die Welt der KI mit meinen Podcast-Gesprächen. 
+          Hier findest du ausführliche Diskussionen mit Experten zu relevanten 
+          Themen der KI-Transformation und praktischen Anwendungen.
+        </p>
+      </section>
+      
+      <!-- Topic filters removed as requested -->
+      
+      <!-- DeepDive episodes list -->
+      <section>
+        <h2 class="heading-md mb-8" id="deepdive-topic-heading">
+          Episoden
+        </h2>
+        
+        <div id="deepdive-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allPosts.map((post) => (
+            <div class="deepdive-post-card">
+              <DeepDiveCard slug={post.slug} />
+            </div>
+          ))}
+        </div>
+        
+        <div id="deepdive-no-results" class="text-center py-10 hidden">
+          <p class="text-white/60">Keine Thementalks gefunden</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .heading-xl {
+    @apply text-4xl sm:text-5xl font-bold text-white;
+  }
+  
+  .heading-md {
+    @apply text-2xl font-bold text-white;
+  }
+</style>
