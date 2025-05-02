@@ -1,21 +1,20 @@
 ---
-title: "Von Bild zu Video - Die konzeptuelle Erweiterung des Promptings"
+title: "Prompts in Bewegung: So funktioniert Video-Prompting"
 description: "Ein ausführlicher Vergleich der Prompt-Strategien für Bild- und Videogenerierung mit praktischen Beispielen und Konzepten"
 pubDate: 2025-05-02
 categories: ["AI-Design", "Prompt-Engineering"]
 tags: ["Videogenerierung", "Bildgenerierung", "Prompt-Strategien", "Kreativprozesse", "Generative KI"]
 draft: false
 audio: "unterschiede-zwischen-bild-und-video-prompts.mp3"
-hasScalableContent: true
 author:
   name: "Rico Loschke"
   avatar: "/images/rico-loschke_avatar.jpg"
 seo:
-  metaTitle: "Von Bild zu Video - Die konzeptuelle Erweiterung des Promptings"
-  metaDescription: "So erweitern Sie Ihre Prompt-Fähigkeiten von der Bildgenerierung zur Videoerzeugung - mit praktischen Beispielen und konzeptuellen Frameworks"
+  metaTitle: "Prompts in Bewegung: So funktioniert Video-Prompting"
+  metaDescription: "So erweiterst du deine Prompt-Fähigkeiten von der Bildgenerierung zur Videoerzeugung - mit praktischen Beispielen und konzeptuellen Frameworks"
 ---
 
-# Von Bild zu Video - Die konzeptuelle Erweiterung des Promptings
+# Prompts in Bewegung: So funktioniert Video-Prompting
 
 ## Einleitung: Eine neue Dimension des visuellen Denkens
 

@@ -6,7 +6,6 @@ categories: ["KI-Tools", "KI-Praxis"]
 tags: ["MCP", "A2A", "KI-Agenten", "Interoperabilität", "Agenten-Integration"]
 draft: false
 audio: "mcp-a2a-was-ist-was-und-wofuer.mp3"
-hasScalableContent: true
 author:
   name: "Rico Loschke"
   avatar: "/images/rico-loschke_avatar.jpg"

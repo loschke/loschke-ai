@@ -6,7 +6,6 @@ categories: ["KI-Transformation", "KI-Strategie"]
 tags: ["Change Management", "Mitarbeiterführung", "KI-Akzeptanz", "Organisationsentwicklung", "KI-Einführung"]
 draft: false
 audio: "mitarbeitertypen-ki-einfuehrung.mp3"
-hasScalableContent: true
 author:
   name: "Rico Loschke"
   avatar: "/images/rico-loschke_avatar.jpg"
