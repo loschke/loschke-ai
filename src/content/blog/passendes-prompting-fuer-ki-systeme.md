@@ -2,7 +2,7 @@
 title: "Drei KI-Systeme: Drei Prompt-Strategien für Automatisierung, Assistenten und Agenten"
 description: "Wie Sie für KI-Agenten, KI-Assistenten und KI-Automatisierung die passenden Prompt-Strukturen entwickeln und einsetzen"
 pubDate: 2025-05-02
-categories: ["KI-Praxis", "Prompt Engineering"]
+categories: ["Prompt Engineering", "KI-Praxis"]
 tags: ["Prompting", "KI-Agenten", "KI-Assistenten", "KI-Automatisierung", "Prompt-Techniken", "Chain-of-Thought"]
 draft: false
 audio: "passendes-prompting-fuer-ki-systeme.mp3"
