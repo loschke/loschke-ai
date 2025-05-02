@@ -22,6 +22,16 @@ interface Props {
 	noindex?: boolean;
 	audioFile?: string;
 	audioTitle?: string;
+	isPodcast?: boolean;            // Für Podcast-Übersichtsseiten
+	isPodcastEpisode?: boolean;     // Für einzelne Podcast-Episoden
+	podcastData?: {                 // Zusätzliche Podcast-Daten für Schema.org
+		seriesName?: string;        // Name der Podcast-Serie
+		episodeNumber?: number;     // Episodennummer (für DeepDives)
+		duration?: string;          // Dauer im ISO 8601 Format
+		audioUrl?: string;          // Vollständige URL zur Audiodatei
+		authorName?: string;        // Name des Autors/Hosts
+		categories?: string[];      // Kategorien/Themen
+	};
 }
 
 const {
@@ -51,33 +61,123 @@ const currentIndex = NAV_ITEMS.findIndex((path) =>
 );
 
 // Prepare JSON-LD structured data
-const jsonLd = {
-	"@context": "https://schema.org",
-	"@type": article ? "BlogPosting" : "WebPage",
-	url: finalCanonicalURL,
-	headline: title,
-	description: description,
-	...(article && {
-		datePublished: article.publishedTime,
-		dateModified: article.modifiedTime || article.publishedTime,
-		author: article.authors.map((author) => ({
+let jsonLd;
+
+// Podcast series schema
+if (Astro.props.isPodcast) {
+	jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "PodcastSeries",
+		"url": finalCanonicalURL,
+		"name": title,
+		"description": description,
+		"webFeed": new URL("/podcast.xml", Astro.site || "https://loschke.ai").toString(),
+		"author": {
 			"@type": "Person",
-			name: author,
-		})),
-		keywords: article.tags?.join(", "),
-	}),
-	...(ogImage && {
-		image: {
-			"@type": "ImageObject",
-			url: new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+			"name": Astro.props.podcastData?.authorName || "Rico Loschke",
 		},
-	}),
-	publisher: {
-		"@type": "Person",
-		name: "Rico Loschke",
-		url: "https://loschke.ai",
-	},
-};
+		...(ogImage && {
+			"image": {
+				"@type": "ImageObject",
+				"url": new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+			},
+		}),
+		"publisher": {
+			"@type": "Person",
+			"name": "Rico Loschke",
+			"url": "https://loschke.ai",
+		},
+	};
+}
+// Podcast episode schema
+else if (Astro.props.isPodcastEpisode) {
+	jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "PodcastEpisode",
+		"url": finalCanonicalURL,
+		"name": title,
+		"description": description,
+		...(Astro.props.podcastData?.seriesName && {
+			"partOfSeries": {
+				"@type": "PodcastSeries",
+				"name": Astro.props.podcastData.seriesName,
+				"url": new URL("/podcast", Astro.site || "https://loschke.ai").toString(),
+			},
+		}),
+		...(Astro.props.podcastData?.episodeNumber && {
+			"episodeNumber": Astro.props.podcastData.episodeNumber,
+		}),
+		...(Astro.props.podcastData?.duration && {
+			"timeRequired": Astro.props.podcastData.duration,
+		}),
+		...(Astro.props.podcastData?.audioUrl && {
+			"associatedMedia": {
+				"@type": "AudioObject",
+				"contentUrl": Astro.props.podcastData.audioUrl,
+				"encodingFormat": "audio/mpeg",
+			},
+		}),
+		"author": {
+			"@type": "Person",
+			"name": Astro.props.podcastData?.authorName || "Rico Loschke",
+		},
+		...(Astro.props.podcastData?.categories && {
+			"keywords": Astro.props.podcastData.categories.join(", "),
+		}),
+		...(ogImage && {
+			"image": {
+				"@type": "ImageObject",
+				"url": new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+			},
+		}),
+		"publisher": {
+			"@type": "Person",
+			"name": "Rico Loschke",
+			"url": "https://loschke.ai",
+		},
+	};
+} 
+// Default schema for articles or regular pages
+else {
+	jsonLd = {
+		"@context": "https://schema.org",
+		"@type": article ? "BlogPosting" : "WebPage",
+		"url": finalCanonicalURL,
+		"headline": title,
+		"description": description,
+		...(article && {
+			"datePublished": article.publishedTime,
+			"dateModified": article.modifiedTime || article.publishedTime,
+			"author": article.authors.map((author) => ({
+				"@type": "Person",
+				"name": author,
+			})),
+			"keywords": article.tags?.join(", "),
+		}),
+		...(ogImage && {
+			"image": {
+				"@type": "ImageObject",
+				"url": new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+			},
+		}),
+		"publisher": {
+			"@type": "Person",
+			"name": "Rico Loschke",
+			"url": "https://loschke.ai",
+		},
+	};
+}
+
+// Wenn es ein Audio-Blog ist, fügen wir das AudioObject hinzu
+if (audioFile && !Astro.props.isPodcastEpisode) {
+	// Typanpassung für TypeScript
+	(jsonLd as any).associatedMedia = {
+		"@type": "AudioObject",
+		"contentUrl": new URL(`/audio/blog/${audioFile}`, Astro.site || "https://loschke.ai").toString(),
+		"encodingFormat": "audio/mpeg",
+		"name": audioTitle || title
+	};
+}
 
 // Determine if this is an error page (404 or 500)
 const isErrorPage = ["/404", "/500"].includes(currentPath);
@@ -158,6 +258,8 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
 					{ rel: "manifest", href: "/manifest.json" },
 					{ rel: "author", href: "/humans.txt" },
 					{ rel: "llms", href: "/llms.txt" },
+					{ rel: "alternate", type: "application/rss+xml", title: "Blog Feed", href: "/rss.xml" },
+					{ rel: "alternate", type: "application/rss+xml", title: "Podcast Feed", href: "/podcast.xml" },
 				],
 			}}
 		/>
@@ -176,6 +278,7 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
 
 {/* Transition debug script - remove in production */}
 <script is:inline src="/scripts/transition-test.js"></script>
+
 
 		<meta name="generator" content={Astro.generator} />
 

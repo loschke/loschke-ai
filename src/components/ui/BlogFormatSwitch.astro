@@ -1,0 +1,74 @@
+---
+interface Props {
+  currentMode: 'read' | 'listen';
+  readUrl: string;
+  listenUrl: string;
+}
+
+const { currentMode, readUrl, listenUrl } = Astro.props;
+---
+
+<div class="blog-format-switch">
+  <div class="switch-container">
+    <a 
+      href={readUrl} 
+      class={`switch-option ${currentMode === 'read' ? 'active' : ''}`}
+      aria-label="Artikel lesen"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+      <span>Lesen</span>
+    </a>
+    <a 
+      href={listenUrl} 
+      class={`switch-option ${currentMode === 'listen' ? 'active' : ''}`}
+      aria-label="Audio anhören"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.828-2.828" />
+      </svg>
+      <span>Hören</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .blog-format-switch {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  
+  .switch-container {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    padding: 0.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .switch-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+  }
+  
+  .switch-option:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .switch-option.active {
+    background-color: var(--color-primary, #3B82F6);
+    color: white;
+  }
+  
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>

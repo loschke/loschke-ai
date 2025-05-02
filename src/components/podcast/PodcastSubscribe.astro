@@ -1,0 +1,107 @@
+---
+import { PODCAST_TITLE, SITE_URL } from '../../consts';
+
+// Verfügbare Podcast-Plattformen
+const platforms = [
+  {
+    id: 'apple',
+    name: 'Apple Podcasts',
+    icon: 'fa-brands fa-apple',
+    baseUrl: 'https://podcasts.apple.com/search?term=',
+    color: 'bg-slate-100 hover:bg-slate-200 text-gray-800'
+  },
+  {
+    id: 'spotify',
+    name: 'Spotify',
+    icon: 'fa-brands fa-spotify',
+    baseUrl: 'https://open.spotify.com/search/',
+    color: 'bg-green-600 hover:bg-green-700 text-white'
+  },
+  {
+    id: 'google',
+    name: 'Google Podcasts',
+    icon: 'fa-brands fa-google',
+    baseUrl: 'https://podcasts.google.com/?q=',
+    color: 'bg-blue-500 hover:bg-blue-600 text-white'
+  },
+  {
+    id: 'amazon',
+    name: 'Amazon Music',
+    icon: 'fa-brands fa-amazon',
+    baseUrl: 'https://music.amazon.com/search/',
+    color: 'bg-blue-900 hover:bg-blue-950 text-white'
+  },
+  {
+    id: 'rss',
+    name: 'RSS Feed',
+    icon: 'fa-solid fa-rss',
+    baseUrl: `${SITE_URL}/podcast.xml`,
+    color: 'bg-orange-500 hover:bg-orange-600 text-white',
+    isDirectLink: true
+  }
+];
+
+// Abonnement-URLs konstruieren
+// Hinweis: Diese würden durch die echten URLs ersetzt, nachdem der Podcast in den Verzeichnissen gelistet ist
+const subscribeLinks = platforms.map(platform => {
+  if (platform.isDirectLink) {
+    return { ...platform, url: platform.baseUrl };
+  }
+  
+  const encodedTitle = encodeURIComponent(PODCAST_TITLE);
+  return { ...platform, url: `${platform.baseUrl}${encodedTitle}` };
+});
+
+// Props
+interface Props {
+  layout?: 'row' | 'grid';
+  showHeading?: boolean;
+  className?: string;
+}
+
+const { 
+  layout = 'row',
+  showHeading = true,
+  className = ''
+} = Astro.props;
+
+// Layout-Klassen
+const containerClass = layout === 'row' 
+  ? 'flex flex-wrap gap-3 items-center justify-center md:justify-start' 
+  : 'grid grid-cols-2 md:grid-cols-3 gap-3';
+---
+
+<div class={`podcast-subscribe ${className}`}>
+  {showHeading && (
+    <h3 class="text-xl font-bold mb-4">Podcast abonnieren</h3>
+  )}
+  
+  <div class={containerClass}>
+    {subscribeLinks.map(platform => (
+      <a 
+        href={platform.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`podcast-link ${platform.color} py-2 px-4 rounded-lg flex items-center gap-2 transition-transform hover:scale-105`}
+        title={`Auf ${platform.name} abonnieren`}
+      >
+        <i class={platform.icon}></i>
+        <span>{platform.name}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .podcast-subscribe {
+    margin-bottom: 2rem;
+  }
+  
+  /* FontAwesome wird vorausgesetzt, oder wir könnten SVG-Icons direkt einfügen */
+  /* Dies ist ein Fallback für den Fall, dass FontAwesome nicht geladen ist */
+  i.fa-brands, i.fa-solid {
+    display: inline-block;
+    width: 1.25em;
+    text-align: center;
+  }
+</style>

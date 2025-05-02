@@ -5,9 +5,10 @@ interface Props {
   audioFile?: string;
   url: string;
   hasScalableContent: boolean;
+  slug?: string;
 }
 
-const { title, hasAudio, audioFile, url, hasScalableContent } = Astro.props;
+const { title, hasAudio, audioFile, url, hasScalableContent, slug } = Astro.props;
 
 // Ensure we have an absolute URL for sharing
 let absoluteUrl = url;

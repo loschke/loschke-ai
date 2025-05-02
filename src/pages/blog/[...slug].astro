@@ -135,6 +135,7 @@ const formatDate = (date: Date): string => {
                 audioFile={entry.data.audio}
                 url={Astro.url.href}
                 hasScalableContent={!!entry.data.hasScalableContent}
+                slug={entry.id.replace(/\.md$/, "")}
             />
             <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
                 <div class="relative w-full aspect-[16/9] mb-8">
@@ -198,7 +199,7 @@ const formatDate = (date: Date): string => {
 
                     {entry.data.description && (
                         <p
-                            class="text-xl text-white/80"
+                            class="text-xl text-white/80 mb-8"
                             transition:name={`excerpt-${entry.id}`}
                         >
                             {entry.data.description}

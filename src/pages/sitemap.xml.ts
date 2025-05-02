@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { promises as fs } from 'fs';
 import { getBlogPosts } from '../utils/blog';
+import { getAudioBlogPosts, getDeepDivePosts } from '../utils/podcast';
 
 // Statische Seiten
 const staticPages = [
@@ -14,6 +15,9 @@ const staticPages = [
     "projekte",  // Projektseite hinzugefügt
     "impulse",  // Vortragsseite hinzugefügt
     "faq",  // FAQ-Übersichtsseite
+    "podcast",  // Podcast-Hauptseite
+    "podcast/blog",  // Audio-Blog Übersicht
+    "podcast/deepdives",  // DeepDives Übersicht
 ];
 
 // Funktion zum Generieren der AI Design Framework URLs
@@ -132,6 +136,46 @@ async function getBlogUrls(): Promise<{ urls: string[], audioMap: Map<string, st
     };
 }
 
+// Funktion zum Generieren der Podcast-URLs
+async function getPodcastUrls(): Promise<{ urls: string[], audioMap: Map<string, string> }> {
+    // Audio-Blog-Posts
+    const audioBlogPosts = await getAudioBlogPosts();
+    const audioBlogUrls = audioBlogPosts.map(post => `podcast/blog/${post.slug}`);
+    
+    // DeepDive-Posts
+    const deepDivePosts = await getDeepDivePosts();
+    const deepDiveUrls = deepDivePosts.map(post => `podcast/deepdives/${post.slug}`);
+    
+    // Audio-Metadaten für beide Podcast-Typen sammeln
+    const audioMap = new Map<string, string>();
+    
+    // Audio-Blog-Metadaten
+    audioBlogPosts.forEach(post => {
+        const postUrl = `podcast/blog/${post.slug}`;
+        if (post.data.audio) {
+            audioMap.set(postUrl, `blog/${post.data.audio}`);
+        }
+    });
+    
+    // DeepDive-Metadaten
+    deepDivePosts.forEach(post => {
+        const postUrl = `podcast/deepdives/${post.slug}`;
+        // @ts-ignore - DeepDive Schema
+        if (post.data.audioFile) {
+            // @ts-ignore - DeepDive Schema
+            audioMap.set(postUrl, `deepdives/${post.data.audioFile}`);
+        }
+    });
+    
+    // Alle Podcast-URLs kombinieren
+    const allUrls = [...audioBlogUrls, ...deepDiveUrls];
+    
+    return {
+        urls: allUrls,
+        audioMap
+    };
+}
+
 // Sitemap generieren
 async function generateSitemap(): Promise<string> {
     const baseUrl = 'https://loschke.ai';
@@ -142,11 +186,15 @@ async function generateSitemap(): Promise<string> {
     const promptBibliothekUrls = getPromptBibliothekUrls();
     const faqUrls = await getFaqUrls();
     const blogResult = await getBlogUrls();
+    const podcastResult = await getPodcastUrls();
     const blogUrls = blogResult.urls;
-    const audioMap = blogResult.audioMap;
+    const podcastUrls = podcastResult.urls;
+    
+    // Audio-Metadaten kombinieren
+    const audioMap = new Map([...blogResult.audioMap, ...podcastResult.audioMap]);
     
     // Alle URLs kombinieren
-    const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls, ...faqUrls, ...blogUrls];
+    const allUrls = [...staticUrls, ...aiFrameworkUrls, ...promptBibliothekUrls, ...faqUrls, ...blogUrls, ...podcastUrls];
     
     // XML generieren
     return `<?xml version="1.0" encoding="UTF-8"?>
@@ -158,6 +206,18 @@ async function generateSitemap(): Promise<string> {
         const hasAudio = audioMap.has(page);
         const audioFile = hasAudio ? audioMap.get(page) : null;
         
+        // Überprüfen, ob es sich um ein DeepDive oder Audio-Blog handelt
+        const isDeepDive = audioFile ? audioFile.startsWith('deepdives/') : false;
+        
+        // Für jeden Eintrag einen Titel und eine Beschreibung generieren
+        const audioTitle = isDeepDive 
+            ? `Podcast-Episode: ${page.replace('podcast/deepdives/', '')}`
+            : `Audio-Zusammenfassung: ${page.replace(/^(podcast\/)?blog\//, '')}`;
+            
+        const audioDesc = isDeepDive
+            ? 'Podcast-Episode zum Thema'
+            : 'Audio-Zusammenfassung des Artikels';
+        
         return `
     <url>
         <loc>${baseUrl}/${page}</loc>
@@ -165,9 +225,9 @@ async function generateSitemap(): Promise<string> {
         <changefreq>${page === "" ? "daily" : "monthly"}</changefreq>
         <priority>${page === "" ? "1.0" : "0.8"}</priority>${hasAudio ? `
         <audio:audio>
-            <audio:content_loc>${baseUrl}/audio/blog/${audioFile}</audio:content_loc>
-            <audio:title>Audio-Zusammenfassung: ${page.replace('blog/', '')}</audio:title>
-            <audio:description>Audio-Zusammenfassung des Artikels</audio:description>
+            <audio:content_loc>${baseUrl}/audio/${audioFile}</audio:content_loc>
+            <audio:title>${audioTitle}</audio:title>
+            <audio:description>${audioDesc}</audio:description>
             <audio:format>audio/mpeg</audio:format>
         </audio:audio>` : ''}
     </url>`;

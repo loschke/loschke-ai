@@ -3,11 +3,16 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import PodcastBreadcrumb from '../../components/podcast/PodcastBreadcrumb.astro';
 import AudioBlogCard from '../../components/podcast/AudioBlogCard.astro';
+import BlogFormatSwitch from '../../components/ui/BlogFormatSwitch.astro';
 import { getAudioBlogPosts, getAudioBlogCategories } from '../../utils/podcast';
+import { categoryColors, isValidCategory } from "../../utils/categoryColors";
 
 // Page metadata
 const title = "KI Audio Blog | Praxiswissen und Erfahrungen rund um KI | Rico Loschke";
 const description = "✓ Höre Blog-Artikel als Audio ✓ KI-Expertenwissen für unterwegs ✓ Praktische Insights zu KI-Strategie, Prompt Engineering & digitaler Transformation ✓ Perfekt zum Lernen während der Fahrt ➤ Jetzt anhören!";
+
+// Check if we have a focus parameter to highlight a specific post
+const focus = Astro.url.searchParams.get('focus');
 
 // Get all available categories for filtering buttons
 const allCategories = await getAudioBlogCategories();
@@ -25,16 +30,38 @@ const serializedPosts = allPosts.map(post => ({
 }));
 ---
 
-<Layout title={title} description={description}>
-  <!-- Breadcrumb -->
-  <PodcastBreadcrumb section="blog" />
-  
+<Layout 
+  title={title} 
+  description={description}
+  isPodcast={true}
+  podcastData={{
+    seriesName: "KI Audio Blog mit Rico Loschke",
+    authorName: "Rico Loschke",
+    categories: allCategories
+  }}
+>
   <div class="audio-blog-page container-padding py-16">
     <div class="max-container">
       <!-- Hero Section -->
       <section class="mb-16">
-        <h1 class="heading-xl mb-4">Audio Blog</h1>
-        <p class="text-lg text-white/80 max-w-3xl">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-3">
+            <h1 class="heading-xl">Audio Blog</h1>
+            <a href="/podcast.xml" target="_blank" class="rss-badge" title="RSS Feed abonnieren">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500 hover:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z" />
+              </svg>
+            </a>
+          </div>
+          <div class="hidden sm:block">
+            <BlogFormatSwitch 
+              currentMode="listen"
+              readUrl="/blog"
+              listenUrl="/podcast/blog"
+            />
+          </div>
+        </div>
+        <p class="text-lg text-white/80 max-w-3xl mb-6">
           Höre meine Blog-Artikel als Audio-Zusammenfassungen - 
           ideal für unterwegs oder wenn du lieber zuhörst als liest. 
           Alle Audio-Inhalte in einer übersichtlichen Sammlung.
@@ -44,30 +71,36 @@ const serializedPosts = allPosts.map(post => ({
       <!-- Category filters -->
       {allCategories.length > 0 && (
         <section class="mb-12">
-          <h2 class="heading-md mb-4">Nach Kategorie filtern</h2>
+          <h2 class="heading-md mb-4">Kategorien</h2>
           <div class="flex flex-wrap gap-3" id="audioblog-filter-container">
             <button 
               data-audioblog-category=""
-              class="audioblog-filter-btn audioblog-active px-4 py-2 bg-primary transition-colors rounded-full text-white"
+              class="audioblog-filter-btn audioblog-active px-5 py-2 bg-primary bg-opacity-90 transition-colors rounded-full text-white text-sm font-medium"
             >
-              Alle anzeigen
+              Alle
             </button>
-            {allCategories.map(category => (
-              <button 
-                data-audioblog-category={category.toLowerCase()}
-                class="audioblog-filter-btn px-4 py-2 bg-base-darker hover:bg-base-lighter transition-colors rounded-full text-white/80 hover:text-white"
-              >
-                {category}
-              </button>
-            ))}
+            {allCategories.map(category => {
+              const bgColorClass = isValidCategory(category) 
+                ? `${categoryColors[category]} bg-opacity-20` 
+                : "bg-white/5";
+              
+              return (
+                <button 
+                  data-audioblog-category={category.toLowerCase()}
+                  class={`audioblog-filter-btn px-5 py-2 ${bgColorClass} rounded-full text-sm font-medium hover:bg-opacity-30 transition-colors`}
+                >
+                  {category}
+                </button>
+              );
+            })}
           </div>
         </section>
       )}
       
       <!-- Audio blog posts list -->
       <section>
-        <h2 class="heading-md mb-8" id="audioblog-category-heading">
-          Alle Audio-Blog Artikel
+        <h2 class="heading-md mb-8 mt-12" id="audioblog-category-heading">
+          Audio-Blog Artikel
         </h2>
         
         <div id="audioblog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -86,7 +119,7 @@ const serializedPosts = allPosts.map(post => ({
   </div>
 </Layout>
 
-<script define:vars={{ allCategories }}>
+<script define:vars={{ allCategories, focus }}>
 // Audio Blog client-side filtering logic - Isolated in IIFE
 (function() {
   // Function to initialize filter functionality
@@ -104,33 +137,100 @@ const serializedPosts = allPosts.map(post => ({
       return;
     }
     
-    // Initialize from URL parameter if present
-    const urlParams = new URLSearchParams(window.location.search);
-    const categoryParam = urlParams.get('category');
+    // Speichere die ursprünglichen Button-Klassen beim Initialisieren
+    // Diese Map wird außerhalb der Event-Handler erstellt und bleibt bestehen
+    const originalButtonStates = new Map();
     
-    if (categoryParam) {
-      // Find the button that matches this category
-      const matchingButton = Array.from(filterButtons).find(
-        btn => {
-          const btnElement = btn;
-          return btnElement.dataset && btnElement.dataset.audioblogCategory === categoryParam.toLowerCase();
-        }
-      );
+    // Speichere initial die ursprünglichen Klassen aller Buttons
+    filterButtons.forEach(btn => {
+      const btnElement = btn;
+      const category = btnElement.dataset.audioblogCategory || '';
+      const isDefault = category === '';
       
-      if (matchingButton) {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => {
-          btn.classList.remove('audioblog-active', 'bg-primary');
-          btn.classList.add('bg-base-darker');
-        });
+      // Speichere den ursprünglichen Zustand (Kategorie und CSS-Klasse)
+      originalButtonStates.set(btnElement, {
+        category: category,
+        isDefault: isDefault,
+        // Merke die ursprüngliche CSS-Klasse des Buttons (ohne aktiv-Klassen)
+        cssClass: btnElement.className
+      });
+    });
+    
+    // Check URL parameters for initial state
+    function checkUrlParameters() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryParam = urlParams.get('category');
+      const focusParam = urlParams.get('focus');
+      
+      // First handle category filtering if present
+      if (categoryParam) {
+        // Find the button that matches this category
+        const matchingButton = Array.from(filterButtons).find(
+          btn => {
+            const btnElement = btn;
+            return btnElement.dataset && btnElement.dataset.audioblogCategory === categoryParam.toLowerCase();
+          }
+        );
         
-        // Add active class to the matching button
-        matchingButton.classList.add('audioblog-active', 'bg-primary');
-        matchingButton.classList.remove('bg-base-darker');
-        
-        // Apply the filter
-        applyFilter(categoryParam.toLowerCase());
+        if (matchingButton) {
+          // Reset all buttons to their original state first
+          resetAllButtonsToOriginalState();
+          
+          // Then activate the matching button
+          activateButton(matchingButton);
+          
+          // Apply the filter
+          applyFilter(categoryParam.toLowerCase());
+        }
       }
+      
+      // Then handle focus if present (scrolls to specific card)
+      if (focusParam) {
+        setTimeout(() => {
+          const allCards = document.querySelectorAll('.audioblog-post-card');
+          
+          // Find the card with the matching slug
+          const targetCard = Array.from(allCards).find(card => {
+            const slug = card.querySelector('[slug]')?.getAttribute('slug');
+            return slug === focusParam;
+          });
+          
+          if (targetCard) {
+            // Add a data attribute for styling
+            targetCard.setAttribute('data-focused', 'true');
+            // Highlight the card
+            targetCard.classList.add('highlight-card');
+            // Scroll to it
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 500); // Small delay to ensure DOM is ready
+      }
+    }
+    
+    // Initialize from URL parameters
+    checkUrlParameters();
+    
+    // Funktion zum Zurücksetzen aller Buttons auf ihren Originalzustand
+    function resetAllButtonsToOriginalState() {
+      filterButtons.forEach(btn => {
+        const originalState = originalButtonStates.get(btn);
+        if (originalState) {
+          // Setze die ursprüngliche CSS-Klasse zurück
+          btn.className = originalState.cssClass;
+          
+          // Stelle sicher, dass der "Alle" Button standardmäßig nicht aktiv ist
+          if (originalState.isDefault) {
+            btn.classList.remove('audioblog-active', 'bg-primary', 'bg-opacity-90');
+          }
+        }
+      });
+    }
+    
+    // Funktion zum Aktivieren eines spezifischen Buttons
+    function activateButton(button) {
+      // Füge aktive Klassen hinzu und entferne inaktive Klassen
+      button.classList.add('audioblog-active', 'bg-primary', 'bg-opacity-90');
+      button.classList.remove('bg-white/5', 'bg-opacity-20', 'hover:bg-opacity-30');
     }
     
     // Add click event to each filter button
@@ -148,15 +248,9 @@ const serializedPosts = allPosts.map(post => ({
         }
         window.history.pushState({}, '', url);
         
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => {
-          btn.classList.remove('audioblog-active', 'bg-primary');
-          btn.classList.add('bg-base-darker');
-        });
-        
-        // Add active class to clicked button
-        button.classList.add('audioblog-active', 'bg-primary');
-        button.classList.remove('bg-base-darker');
+        // Erst alle Buttons zurücksetzen, dann nur den geklickten aktivieren
+        resetAllButtonsToOriginalState();
+        activateButton(button);
         
         // Apply the filter
         applyFilter(category);

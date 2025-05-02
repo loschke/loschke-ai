@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import ErrorLayout from "../layouts/ErrorLayout.astro";
 import BlogPosts from "../components/blog/BlogPosts.astro";
 import ErrorBoundary from "../components/ui/ErrorBoundary.astro";
+import BlogFormatSwitch from "../components/ui/BlogFormatSwitch.astro";
 import { getBlogPosts } from "../utils/blog";
 
 export const prerender = true;
@@ -42,15 +43,30 @@ try {
         >
             <div class="max-container container-padding py-12">
                 <div class="mb-16">
-                    <h1
-                        class="text-4xl md:text-5xl font-bold mb-6"
-                        transition:name="page-title"
-                    >
-                        Blog
-                    </h1>
-                    <p class="text-xl text-white/80 max-w-2xl">
-                        Aktuelle Einblicke und Gedanken zu KI, Technologie und
-                        digitaler Transformation.
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <h1
+                                class="text-4xl md:text-5xl font-bold"
+                                transition:name="page-title"
+                            >
+                                Blog
+                            </h1>
+                            <a href="/rss.xml" target="_blank" class="rss-badge" title="RSS Feed abonnieren">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500 hover:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="hidden sm:block">
+                            <BlogFormatSwitch 
+                                currentMode="read"
+                                readUrl="/blog"
+                                listenUrl="/podcast/blog"
+                            />
+                        </div>
+                    </div>
+                    <p class="text-xl text-white/80 max-w-4xl">
+                        Aktuelle Einblicke und Gedanken zu KI, Technologie und digitaler Transformation.
                     </p>
                 </div>
                 <BlogPosts
