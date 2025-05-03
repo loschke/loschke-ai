@@ -1,7 +1,7 @@
 ---
 title: "Die Zukunft spricht: Wie Audio und generative KI die digitale Interaktion transformieren"
 description: "Ein Einblick in die Audio-Revolution und wie generative KI die Mensch-Computer-Interaktion grundlegend verändert"
-pubDate: 2025-05-03
+pubDate: 2025-05-04
 categories: ["KI-Praxis","KI-Transformation"]
 tags: ["Audio-Interfaces", "Generative KI", "Digitale Interaktion", "Sprachassistenten", "Customer Experience"]
 draft: false
