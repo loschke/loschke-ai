@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import DesignAufgabenDetailLayout from '../../components/layouts/DesignAufgabenDetailLayout.astro';
+
+// Definiere einen Interface-Typ, der die erwartete Struktur der Designaufgaben-Daten spezifiziert
+interface DesignAufgabenEntry {
+  id: string;
+  slug: string;
+  body: string;
+  collection: 'designaufgaben';
+  data: {
+    title: string;
+    description: string;
+    order: number;
+    category: string;
+    tags: string[];
+  };
+}
+
+export async function getStaticPaths() {
+  const designaufgabenEntries = await getCollection('designaufgaben') as unknown as DesignAufgabenEntry[];
+  
+  return designaufgabenEntries.map(entry => {
+    return {
+      params: { slug: entry.slug },
+      props: { entryPath: entry.slug }
+    };
+  });
+}
+
+const { entryPath } = Astro.props;
+---
+
+<DesignAufgabenDetailLayout entryPath={entryPath} />

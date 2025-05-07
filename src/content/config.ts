@@ -135,10 +135,33 @@ const podcastDeepDives = defineCollection({
     }),
 });
 
+// Designaufgaben schema definition
+const designaufgaben = defineCollection({
+    type: 'content',
+    schema: z.object({
+        // Basic information
+        title: z.string().min(1),
+        description: z.string(),
+        
+        // Kategorisierung im 4K-Framework
+        category: z.string().default('4k-framework'),
+        
+        // Reihenfolge für das sequentielle Lernen
+        order: z.number().default(0),
+        
+        // Taxonomy
+        tags: z.array(z.string()).default([]),
+        
+        // SEO
+        seo: seoSchema.default({}),
+    }),
+});
+
 // Export the collections
 export const collections = {
     blog,
     'how-to-prompt-guide': howToPromptGuide,
     'aufgaben': aufgaben,
     'podcast': podcastDeepDives,
+    'designaufgaben': designaufgaben,
 };

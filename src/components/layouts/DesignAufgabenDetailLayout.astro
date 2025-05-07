@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEntry, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entryPath: string;
+}
+
+// Definiere einen Interface-Typ, der die erwartete Struktur der Designaufgaben-Daten spezifiziert
+interface DesignAufgabenData {
+  title: string;
+  description: string;
+  order: number;
+  category: string;
+}
+
+const { entryPath } = Astro.props;
+
+// Get the content entry
+const entry = await getEntry('designaufgaben', entryPath) as CollectionEntry<'designaufgaben'>;
+if (!entry) {
+  throw new Error(`Content entry not found: ${entryPath}`);
+}
+
+const { Content } = await entry.render();
+
+// Zugriff auf typisierte Daten
+const data = entry.data as unknown as DesignAufgabenData;
+
+function getKNumber(title: string): number {
+  if (title.includes("Basismotive")) return 1;
+  if (title.includes("Konzept")) return 2;
+  if (title.includes("Kontext")) return 3;
+  if (title.includes("Komposition")) return 4;
+  if (title.includes("Kreativität")) return 5;
+  if (title.includes("Kombination")) return 6;
+  return 0;
+}
+
+const kNumber = getKNumber(data.title);
+const order = data.order;
+
+// Farbschema basierend auf der K-Nummer
+const colorClass = kNumber === 1 ? "from-blue-600 to-blue-900" : 
+                   kNumber === 2 ? "from-purple-600 to-purple-900" :
+                   kNumber === 3 ? "from-green-600 to-green-900" :
+                   kNumber === 4 ? "from-orange-600 to-orange-900" :
+                   kNumber === 5 ? "from-red-600 to-red-900" : 
+                   "from-indigo-600 to-indigo-900";
+---
+
+<Layout title={data.title || '4K Framework'}>
+  <!-- Sticky Breadcrumb Navigation -->
+  <nav class="sticky top-[94px] z-30 bg-gray-800 backdrop-blur-sm border-b border-white/10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center gap-3 text-sm">
+        <a href="/designaufgaben" class="flex items-center gap-2 text-gray-200 hover:text-blue-300 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12L9 6m-6 6l6 6"/>
+          </svg>
+          <span>Design-Aufgaben</span>
+        </a>
+        <span class="text-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span class="text-white font-medium px-2 py-1 bg-white/5 rounded truncate max-w-[200px]">
+          {data.title}
+        </span>
+      </div>
+    </div>
+  </nav>
+  
+  <main class="max-w-[1200px] mx-auto px-4 py-6 pb-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold mb-2">{data.title}</h1>
+        <p class="text-lg text-gray-400">{data.description}</p>
+      </div>
+      
+      <article class="prose prose-lg dark:prose-invert max-w-none bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-800">
+        <div id="exercise-content">
+          <Content />
+        </div>
+      </article>
+      
+      <div class="mt-8 flex justify-between">
+        {order > 1 && (
+          <a href={`/designaufgaben/${order-1}_basismotive-exercise-updated`} class="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors inline-flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Vorherige Übung
+          </a>
+        )}
+        
+        {order < 6 && (
+          <a href={`/designaufgaben/${order+1}_${order === 1 ? 'konzept' : order === 2 ? 'kontext' : order === 3 ? 'komposition' : order === 4 ? 'kreativitaet' : 'combination'}-exercise-updated`} class="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors inline-flex items-center ml-auto">
+            Nächste Übung
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </div>
+  </main>
+</Layout>
