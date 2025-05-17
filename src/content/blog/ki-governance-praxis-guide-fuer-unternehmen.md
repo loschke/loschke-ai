@@ -2,7 +2,7 @@
 title: "KI-Governance, die wirklich funktioniert: Warum Unternehmen einen dualen Ansatz brauchen"
 description: "Ein praxisnaher Leitfaden für eine effektive KI-Governance mit einem dualen Ansatz aus Compliance-Richtlinien und Anwenderhandbuch"
 pubDate: 2025-05-18
-categories: ["KI-Transformation", "KI-Praxis"]
+categories: ["KI-Strategie", "KI-Praxis"]
 tags: ["KI-Governance", "Compliance", "Regelwerke", "Innovation", "Change Management", "Datenschutz"]
 audio: "ki-governance-praxis-guide-fuer-unternehmen.mp3"
 draft: false
