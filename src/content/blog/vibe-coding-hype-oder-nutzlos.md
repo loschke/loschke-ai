@@ -1,7 +1,7 @@
 ---
 title: "Vibe Coding: KI-gestützte Softwareentwicklung zwischen Hype und Realität"
 description: "Eine differenzierte Analyse des Vibe Coding-Ansatzes, seiner Potenziale und Risiken für die moderne Softwareentwicklung"
-pubDate: 2025-05-02
+pubDate: 2025-06-30
 categories: ["KI-Praxis", "KI-Automation"]
 tags: ["Vibe Coding", "Software-Entwicklung", "Programmierung", "KI-Kollaboration", "Andrej Karpathy", "Entwicklungsmethoden", "Prototyping", "Code-Qualität"]
 draft: false
@@ -130,9 +130,9 @@ Statt die Qualitätskontrolle zu umgehen, integriere ich sie bewusst in den KI-g
 
 Dabei hat sich ein interessanter Workflow bewährt: Die KI nicht nur Code generieren lassen, sondern sie auch bitten, Tests dafür zu schreiben. So entsteht ein natürliches Gegengewicht, das die Codequaliät verbessert.
 
-### 3. Hybrid-Ansatz nach Kritikalität
+### 3. Hybrid-Ansatz als Kompromiss
 
-Eine differenzierte Herangehensweise je nach Komponente und deren Kritikalität:
+Eine differenzierte Herangehensweise je nach Komponente und deren Relevanz:
 
 - **Kritische Kernmodule:** Traditionelles Engineering mit KI-Unterstützung
 - **Boilerplate und Standardfunktionen:** Stärkerer Einsatz von KI-Generierung
