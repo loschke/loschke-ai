@@ -12,7 +12,7 @@ const seoSchema = z.object({
 // Define the collections
 const blog = defineCollection({
     type: 'content',
-    schema: ({ image }) => z.object({
+    schema: ({ image }: { image: any }) => z.object({
         // Basic post information
         title: z.string().min(1).max(100),
         description: z.string().min(10).max(160),
@@ -96,7 +96,7 @@ const aufgaben = defineCollection({
         
         // Categorization
         branch: z.string(), // bildung-schule, marketing, etc.
-        complexity: z.enum(["simple", "medium", "advanced", "complex"]),
+        complexity: z.enum(["simple", "medium", "advanced", "complex", "challenge"]),
         
         // Taxonomy
         tags: z.array(z.string()).default([]),

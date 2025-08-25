@@ -34,6 +34,7 @@ function formatComplexity(complexity: string): string {
 function formatBranch(branch: string): string {
   switch(branch) {
     case 'bildung-schule': return 'Bildung & Schule';
+    case 'wissenschaft': return 'Wissenschaftskommunikation';
     // Add more branches here as needed
     default: return branch.replace('-', ' & ').replace(/\b\w/g, l => l.toUpperCase());
   }

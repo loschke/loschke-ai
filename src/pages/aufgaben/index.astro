@@ -19,6 +19,7 @@ const branchGroups = allAufgaben.reduce((groups, aufgabe) => {
 function formatBranch(branch) {
   switch(branch) {
     case 'bildung-schule': return 'Bildung & Schule';
+    case 'wissenschaft': return 'Wissenschaftskommunikation';
     case 'projektmanagement': return 'Projektmanagement';
     case 'anwendungsentwicklung': return 'Anwendungsentwicklung';
     case 'marketing': return 'Marketing';
@@ -39,6 +40,7 @@ function formatComplexity(complexity) {
     case 'medium': return 'Mittel';
     case 'advanced': return 'Fortgeschritten';
     case 'complex': return 'Komplex';
+    case 'challenge': return 'Challenge';
     default: return complexity;
   }
 }
@@ -76,14 +78,14 @@ function formatComplexity(complexity) {
             
             <div class="grid md:grid-cols-2 gap-4">
               {aufgaben
-                .sort((a, b) => {
+                .sort((a: any, b: any) => {
                   // Sort by complexity and then by title
-                  const complexityOrder = { simple: 1, medium: 2, advanced: 3, complex: 4 };
+                  const complexityOrder = { simple: 1, medium: 2, advanced: 3, complex: 4, challenge: 5 };
                   return complexityOrder[a.data.complexity] - complexityOrder[b.data.complexity] || 
                          a.data.title.localeCompare(b.data.title);
                 })
                 .slice(0, 4) // Only show the first 4
-                .map(aufgabe => {
+                .map((aufgabe: any) => {
                   const slug = aufgabe.slug;
                   const complexity = aufgabe.data.complexity;
                   
@@ -94,7 +96,9 @@ function formatComplexity(complexity) {
                           complexity === 'simple' ? 'bg-green-600 text-white' : 
                           complexity === 'medium' ? 'bg-yellow-600 text-white' : 
                           complexity === 'advanced' ? 'bg-red-600 text-white' :
-                          'bg-purple-600 text-white'
+                          complexity === 'complex' ? 'bg-purple-600 text-white' :
+                          complexity === 'challenge' ? 'bg-indigo-600 text-white' :
+                          'bg-gray-600 text-white'
                         }`}>
                           {formatComplexity(complexity)}
                         </span>

@@ -1,14 +1,13 @@
 // Types
-interface TOCHeading extends HTMLElement {
+type TOCHeading = HTMLElement & {
     id: string;
-    textContent: string | null;
-}
+};
 
-interface TOCItem extends HTMLElement {
+type TOCItem = HTMLElement & {
     dataset: {
         heading: string;
     };
-}
+};
 
 // Constants
 const SCROLL_BUFFER = 150;
@@ -23,13 +22,13 @@ const debug = (message: string, data?: unknown): void => {
 };
 
 const getHeadings = (): TOCHeading[] => {
-    return Array.from(document.querySelectorAll<TOCHeading>(
+    return Array.from(document.querySelectorAll(
         ".prose h1[id], .prose h2[id], .prose h3[id], .prose h4[id], .prose h5[id], .prose h6[id]"
-    ));
+    )) as TOCHeading[];
 };
 
 const getTOCItems = (): TOCItem[] => {
-    return Array.from(document.querySelectorAll<TOCItem>(".toc-item"));
+    return Array.from(document.querySelectorAll(".toc-item")) as TOCItem[];
 };
 
 const getActiveHeadingIndex = (headings: TOCHeading[]): number => {

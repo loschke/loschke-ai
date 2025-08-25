@@ -39,10 +39,6 @@ export default defineConfig({
     // Redirect old tag URLs to new format
     '/blog/tags/[tag]': '/blog/tag/[tag]',
 
-    // Handle potential index redirects
-    '/blog/index': '/blog',
-    '/blog/index.html': '/blog',
-
     // Redirect potential old RSS feed URLs
     '/blog/feed': '/rss.xml',
     '/blog/rss': '/rss.xml',
