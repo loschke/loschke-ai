@@ -9,6 +9,9 @@
     "astro": "astro",
     "start": "node ./dist/server/entry.mjs"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "esbuild"]
+  },
   "dependencies": {
     "@astrojs/mdx": "^4.3.4",
     "@astrojs/node": "^9.1.3",
