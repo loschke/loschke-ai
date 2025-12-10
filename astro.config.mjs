@@ -1,15 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel/serverless';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://loschke.ai',
-  adapter: node({
-    mode: 'standalone',
-    host: '0.0.0.0',
-    port: 4321
-  }),
+  adapter: vercel(),
   integrations: [tailwind(), mdx()],
   markdown: {
     shikiConfig: {
