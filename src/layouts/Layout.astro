@@ -296,13 +296,6 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
     {/* Structured Data */}
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    {/* Umami Analytics (cookieless) */}
-    <script
-      async
-      defer
-      data-website-id="c0442c57-4a05-4631-a4f0-e132ecbbbec0"
-      src="https://analytics.kvix.pro/script.js"></script>
-
     {/* Transition debug script - remove in production */}
     <script is:inline src="/scripts/transition-test.js"></script>
 
