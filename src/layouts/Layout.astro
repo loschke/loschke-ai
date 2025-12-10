@@ -5,44 +5,46 @@ import Footer from "../components/navigation/Footer.astro";
 import AudioPlayer from "../components/ui/AudioPlayer.astro";
 import { ViewTransitions } from "astro:transitions";
 import { SEO } from "astro-seo";
+import Analytics from "@vercel/analytics/astro";
 
 interface ArticleMetadata {
-	publishedTime: string;
-	modifiedTime?: string;
-	authors: string[];
-	tags?: string[];
+  publishedTime: string;
+  modifiedTime?: string;
+  authors: string[];
+  tags?: string[];
 }
 
 interface Props {
-	title?: string;
-	description?: string;
-	ogImage?: string;
-	canonicalURL?: string;
-	article?: ArticleMetadata;
-	noindex?: boolean;
-	audioFile?: string;
-	audioTitle?: string;
-	isPodcast?: boolean;            // Für Podcast-Übersichtsseiten
-	isPodcastEpisode?: boolean;     // Für einzelne Podcast-Episoden
-	podcastData?: {                 // Zusätzliche Podcast-Daten für Schema.org
-		seriesName?: string;        // Name der Podcast-Serie
-		episodeNumber?: number;     // Episodennummer (für DeepDives)
-		duration?: string;          // Dauer im ISO 8601 Format
-		audioUrl?: string;          // Vollständige URL zur Audiodatei
-		authorName?: string;        // Name des Autors/Hosts
-		categories?: string[];      // Kategorien/Themen
-	};
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  article?: ArticleMetadata;
+  noindex?: boolean;
+  audioFile?: string;
+  audioTitle?: string;
+  isPodcast?: boolean; // Für Podcast-Übersichtsseiten
+  isPodcastEpisode?: boolean; // Für einzelne Podcast-Episoden
+  podcastData?: {
+    // Zusätzliche Podcast-Daten für Schema.org
+    seriesName?: string; // Name der Podcast-Serie
+    episodeNumber?: number; // Episodennummer (für DeepDives)
+    duration?: string; // Dauer im ISO 8601 Format
+    audioUrl?: string; // Vollständige URL zur Audiodatei
+    authorName?: string; // Name des Autors/Hosts
+    categories?: string[]; // Kategorien/Themen
+  };
 }
 
 const {
-	title = "Rico Loschke - KI Experte",
-	description = "Ganzheitliches Wissen zu generativer KI und deren Anwendung in der Praxis",
-	ogImage,
-	canonicalURL,
-	article,
-	noindex = false,
-	audioFile,
-	audioTitle,
+  title = "Rico Loschke - KI Experte",
+  description = "Ganzheitliches Wissen zu generativer KI und deren Anwendung in der Praxis",
+  ogImage,
+  canonicalURL,
+  article,
+  noindex = false,
+  audioFile,
+  audioTitle,
 } = Astro.props;
 
 // Check if we're on the homepage
@@ -50,14 +52,14 @@ const isHomepage = Astro.url.pathname === "/";
 
 // Prepare canonical URL
 const finalCanonicalURL =
-	canonicalURL ||
-	new URL(Astro.url.pathname, Astro.site || "https://loschke.ai").toString();
+  canonicalURL ||
+  new URL(Astro.url.pathname, Astro.site || "https://loschke.ai").toString();
 
 // Navigation items in order (used to determine direction)
 const NAV_ITEMS = ["/about", "/projekte", "/blog", "/playground", "/guides"];
 const currentPath = Astro.url.pathname;
 const currentIndex = NAV_ITEMS.findIndex((path) =>
-	currentPath.startsWith(path),
+  currentPath.startsWith(path)
 );
 
 // Prepare JSON-LD structured data
@@ -65,118 +67,124 @@ let jsonLd;
 
 // Podcast series schema
 if (Astro.props.isPodcast) {
-	jsonLd = {
-		"@context": "https://schema.org",
-		"@type": "PodcastSeries",
-		"url": finalCanonicalURL,
-		"name": title,
-		"description": description,
-		"webFeed": new URL("/podcast.xml", Astro.site || "https://loschke.ai").toString(),
-		"author": {
-			"@type": "Person",
-			"name": Astro.props.podcastData?.authorName || "Rico Loschke",
-		},
-		...(ogImage && {
-			"image": {
-				"@type": "ImageObject",
-				"url": new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
-			},
-		}),
-		"publisher": {
-			"@type": "Person",
-			"name": "Rico Loschke",
-			"url": "https://loschke.ai",
-		},
-	};
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    url: finalCanonicalURL,
+    name: title,
+    description: description,
+    webFeed: new URL(
+      "/podcast.xml",
+      Astro.site || "https://loschke.ai"
+    ).toString(),
+    author: {
+      "@type": "Person",
+      name: Astro.props.podcastData?.authorName || "Rico Loschke",
+    },
+    ...(ogImage && {
+      image: {
+        "@type": "ImageObject",
+        url: new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+      },
+    }),
+    publisher: {
+      "@type": "Person",
+      name: "Rico Loschke",
+      url: "https://loschke.ai",
+    },
+  };
 }
 // Podcast episode schema
 else if (Astro.props.isPodcastEpisode) {
-	jsonLd = {
-		"@context": "https://schema.org",
-		"@type": "PodcastEpisode",
-		"url": finalCanonicalURL,
-		"name": title,
-		"description": description,
-		...(Astro.props.podcastData?.seriesName && {
-			"partOfSeries": {
-				"@type": "PodcastSeries",
-				"name": Astro.props.podcastData.seriesName,
-				"url": new URL("/podcast", Astro.site || "https://loschke.ai").toString(),
-			},
-		}),
-		...(Astro.props.podcastData?.episodeNumber && {
-			"episodeNumber": Astro.props.podcastData.episodeNumber,
-		}),
-		...(Astro.props.podcastData?.duration && {
-			"timeRequired": Astro.props.podcastData.duration,
-		}),
-		...(Astro.props.podcastData?.audioUrl && {
-			"associatedMedia": {
-				"@type": "AudioObject",
-				"contentUrl": Astro.props.podcastData.audioUrl,
-				"encodingFormat": "audio/mpeg",
-			},
-		}),
-		"author": {
-			"@type": "Person",
-			"name": Astro.props.podcastData?.authorName || "Rico Loschke",
-		},
-		...(Astro.props.podcastData?.categories && {
-			"keywords": Astro.props.podcastData.categories.join(", "),
-		}),
-		...(ogImage && {
-			"image": {
-				"@type": "ImageObject",
-				"url": new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
-			},
-		}),
-		"publisher": {
-			"@type": "Person",
-			"name": "Rico Loschke",
-			"url": "https://loschke.ai",
-		},
-	};
-} 
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "PodcastEpisode",
+    url: finalCanonicalURL,
+    name: title,
+    description: description,
+    ...(Astro.props.podcastData?.seriesName && {
+      partOfSeries: {
+        "@type": "PodcastSeries",
+        name: Astro.props.podcastData.seriesName,
+        url: new URL("/podcast", Astro.site || "https://loschke.ai").toString(),
+      },
+    }),
+    ...(Astro.props.podcastData?.episodeNumber && {
+      episodeNumber: Astro.props.podcastData.episodeNumber,
+    }),
+    ...(Astro.props.podcastData?.duration && {
+      timeRequired: Astro.props.podcastData.duration,
+    }),
+    ...(Astro.props.podcastData?.audioUrl && {
+      associatedMedia: {
+        "@type": "AudioObject",
+        contentUrl: Astro.props.podcastData.audioUrl,
+        encodingFormat: "audio/mpeg",
+      },
+    }),
+    author: {
+      "@type": "Person",
+      name: Astro.props.podcastData?.authorName || "Rico Loschke",
+    },
+    ...(Astro.props.podcastData?.categories && {
+      keywords: Astro.props.podcastData.categories.join(", "),
+    }),
+    ...(ogImage && {
+      image: {
+        "@type": "ImageObject",
+        url: new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+      },
+    }),
+    publisher: {
+      "@type": "Person",
+      name: "Rico Loschke",
+      url: "https://loschke.ai",
+    },
+  };
+}
 // Default schema for articles or regular pages
 else {
-	jsonLd = {
-		"@context": "https://schema.org",
-		"@type": article ? "BlogPosting" : "WebPage",
-		"url": finalCanonicalURL,
-		"headline": title,
-		"description": description,
-		...(article && {
-			"datePublished": article.publishedTime,
-			"dateModified": article.modifiedTime || article.publishedTime,
-			"author": article.authors.map((author) => ({
-				"@type": "Person",
-				"name": author,
-			})),
-			"keywords": article.tags?.join(", "),
-		}),
-		...(ogImage && {
-			"image": {
-				"@type": "ImageObject",
-				"url": new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
-			},
-		}),
-		"publisher": {
-			"@type": "Person",
-			"name": "Rico Loschke",
-			"url": "https://loschke.ai",
-		},
-	};
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": article ? "BlogPosting" : "WebPage",
+    url: finalCanonicalURL,
+    headline: title,
+    description: description,
+    ...(article && {
+      datePublished: article.publishedTime,
+      dateModified: article.modifiedTime || article.publishedTime,
+      author: article.authors.map((author) => ({
+        "@type": "Person",
+        name: author,
+      })),
+      keywords: article.tags?.join(", "),
+    }),
+    ...(ogImage && {
+      image: {
+        "@type": "ImageObject",
+        url: new URL(ogImage, Astro.site || "https://loschke.ai").toString(),
+      },
+    }),
+    publisher: {
+      "@type": "Person",
+      name: "Rico Loschke",
+      url: "https://loschke.ai",
+    },
+  };
 }
 
 // Wenn es ein Audio-Blog ist, fügen wir das AudioObject hinzu
 if (audioFile && !Astro.props.isPodcastEpisode) {
-	// Typanpassung für TypeScript
-	(jsonLd as any).associatedMedia = {
-		"@type": "AudioObject",
-		"contentUrl": new URL(`/audio/blog/${audioFile}`, Astro.site || "https://loschke.ai").toString(),
-		"encodingFormat": "audio/mpeg",
-		"name": audioTitle || title
-	};
+  // Typanpassung für TypeScript
+  (jsonLd as any).associatedMedia = {
+    "@type": "AudioObject",
+    contentUrl: new URL(
+      `/audio/blog/${audioFile}`,
+      Astro.site || "https://loschke.ai"
+    ).toString(),
+    encodingFormat: "audio/mpeg",
+    name: audioTitle || title,
+  };
 }
 
 // Determine if this is an error page (404 or 500)
@@ -184,171 +192,194 @@ const isErrorPage = ["/404", "/500"].includes(currentPath);
 ---
 
 <!doctype html>
-<html lang="de" class="dark" data-audio-file={audioFile} data-article-title={audioTitle}>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html
+  lang="de"
+  class="dark"
+  data-audio-file={audioFile}
+  data-article-title={audioTitle}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<SEO
-			title={title}
-			description={description}
-			canonical={finalCanonicalURL}
-			noindex={noindex || isErrorPage}
-			openGraph={{
-				basic: {
-					title,
-					type: article ? "article" : "website",
-					image: ogImage || "",
-					url: finalCanonicalURL,
-				},
-				optional: {
-					description,
-					siteName: "Rico Loschke",
-				},
-				article: article
-					? {
-							publishedTime: article.publishedTime,
-							modifiedTime: article.modifiedTime,
-							authors: article.authors,
-							tags: article.tags,
-						}
-					: undefined,
-			}}
-			twitter={{
-				card: "summary_large_image",
-				title,
-				description,
-				image: ogImage,
-			}}
-			extend={{
-				meta: [
-					{ name: "theme-color", content: "#000000" },
-					{ name: "display-mode", content: "standalone" },
-					{
-						name: "apple-mobile-web-app-status-bar-style",
-						content: "black",
-					},
-					{ name: "robots", content: "index, follow" },
-					{ name: "googlebot", content: "index, follow" },
-					{ name: "bingbot", content: "index, follow" },
-					{ name: "yandex", content: "index, follow" },
-					{ name: "perplexitybot", content: "index, follow" },
-					{ name: "keywords", content: "KI, Künstliche Intelligenz, AI, Artificial Intelligence, Generative AI, Generative KI, Prompt Engineering, AI Design, KI Design, KI Experte, AI Expert, Rico Loschke" },
-					{ name: "publisher", content: "Rico Loschke" },
-				],
-				link: [
-					{
-						rel: "icon",
-						type: "image/svg+xml",
-						href: "/favicon.svg",
-					},
-					{
-						rel: "icon",
-						type: "image/x-icon",
-						href: "/favicon.ico",
-					},
-					{
-						rel: "preload",
-						href: "/fonts/FFClanProRegular.woff2",
-						as: "font",
-						type: "font/woff2",
-						crossorigin: "anonymous",
-					},
-					{ rel: "stylesheet", href: "/fonts/fonts.css" },
-					{ rel: "manifest", href: "/manifest.json" },
-					{ rel: "author", href: "/humans.txt" },
-					{ rel: "llms", href: "/llms.txt" },
-					{ rel: "alternate", type: "application/rss+xml", title: "Blog Feed", href: "/rss.xml" },
-					{ rel: "alternate", type: "application/rss+xml", title: "Podcast Feed", href: "/podcast.xml" },
-				],
-			}}
-		/>
+    <SEO
+      title={title}
+      description={description}
+      canonical={finalCanonicalURL}
+      noindex={noindex || isErrorPage}
+      openGraph={{
+        basic: {
+          title,
+          type: article ? "article" : "website",
+          image: ogImage || "",
+          url: finalCanonicalURL,
+        },
+        optional: {
+          description,
+          siteName: "Rico Loschke",
+        },
+        article: article
+          ? {
+              publishedTime: article.publishedTime,
+              modifiedTime: article.modifiedTime,
+              authors: article.authors,
+              tags: article.tags,
+            }
+          : undefined,
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title,
+        description,
+        image: ogImage,
+      }}
+      extend={{
+        meta: [
+          { name: "theme-color", content: "#000000" },
+          { name: "display-mode", content: "standalone" },
+          {
+            name: "apple-mobile-web-app-status-bar-style",
+            content: "black",
+          },
+          { name: "robots", content: "index, follow" },
+          { name: "googlebot", content: "index, follow" },
+          { name: "bingbot", content: "index, follow" },
+          { name: "yandex", content: "index, follow" },
+          { name: "perplexitybot", content: "index, follow" },
+          {
+            name: "keywords",
+            content:
+              "KI, Künstliche Intelligenz, AI, Artificial Intelligence, Generative AI, Generative KI, Prompt Engineering, AI Design, KI Design, KI Experte, AI Expert, Rico Loschke",
+          },
+          { name: "publisher", content: "Rico Loschke" },
+        ],
+        link: [
+          {
+            rel: "icon",
+            type: "image/svg+xml",
+            href: "/favicon.svg",
+          },
+          {
+            rel: "icon",
+            type: "image/x-icon",
+            href: "/favicon.ico",
+          },
+          {
+            rel: "preload",
+            href: "/fonts/FFClanProRegular.woff2",
+            as: "font",
+            type: "font/woff2",
+            crossorigin: "anonymous",
+          },
+          { rel: "stylesheet", href: "/fonts/fonts.css" },
+          { rel: "manifest", href: "/manifest.json" },
+          { rel: "author", href: "/humans.txt" },
+          { rel: "llms", href: "/llms.txt" },
+          {
+            rel: "alternate",
+            type: "application/rss+xml",
+            title: "Blog Feed",
+            href: "/rss.xml",
+          },
+          {
+            rel: "alternate",
+            type: "application/rss+xml",
+            title: "Podcast Feed",
+            href: "/podcast.xml",
+          },
+        ],
+      }}
+    />
 
-		<ViewTransitions fallback="swap" />
+    <ViewTransitions fallback="swap" />
 
-		{/* Structured Data */}
-		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {/* Structured Data */}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-		{/* Umami Analytics (cookieless) */}
-<script
-	async
-	defer
-	data-website-id="c0442c57-4a05-4631-a4f0-e132ecbbbec0"
-	src="https://analytics.kvix.pro/script.js"></script>
+    {/* Umami Analytics (cookieless) */}
+    <script
+      async
+      defer
+      data-website-id="c0442c57-4a05-4631-a4f0-e132ecbbbec0"
+      src="https://analytics.kvix.pro/script.js"></script>
 
-{/* Transition debug script - remove in production */}
-<script is:inline src="/scripts/transition-test.js"></script>
+    {/* Transition debug script - remove in production */}
+    <script is:inline src="/scripts/transition-test.js"></script>
 
+    <meta name="generator" content={Astro.generator} />
 
-		<meta name="generator" content={Astro.generator} />
+    <style is:global>
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
 
-		<style is:global>
-			::view-transition-old(root),
-			::view-transition-new(root) {
-				animation: none;
-				mix-blend-mode: normal;
-			}
+      ::view-transition-old(page) {
+        animation: var(--page-transition-out, fade-scale-out) 0.5s
+          cubic-bezier(0.76, 0, 0.24, 1);
+      }
 
-			::view-transition-old(page) {
-				animation: var(--page-transition-out, fade-scale-out) 0.5s
-					cubic-bezier(0.76, 0, 0.24, 1);
-			}
+      ::view-transition-new(page) {
+        animation: var(--page-transition-in, fade-scale-in) 0.5s
+          cubic-bezier(0.76, 0, 0.24, 1);
+      }
 
-			::view-transition-new(page) {
-				animation: var(--page-transition-in, fade-scale-in) 0.5s
-					cubic-bezier(0.76, 0, 0.24, 1);
-			}
+      @keyframes fade-scale-out {
+        to {
+          opacity: 0;
+          transform: scale(0.95) translateY(10px);
+        }
+      }
 
-			@keyframes fade-scale-out {
-				to {
-					opacity: 0;
-					transform: scale(0.95) translateY(10px);
-				}
-			}
+      @keyframes fade-scale-in {
+        from {
+          opacity: 0;
+          transform: scale(1.05) translateY(-10px);
+        }
+      }
 
-			@keyframes fade-scale-in {
-				from {
-					opacity: 0;
-					transform: scale(1.05) translateY(-10px);
-				}
-			}
+      @keyframes fade-scale-out-reverse {
+        to {
+          opacity: 0;
+          transform: scale(1.05) translateY(-10px);
+        }
+      }
 
-			@keyframes fade-scale-out-reverse {
-				to {
-					opacity: 0;
-					transform: scale(1.05) translateY(-10px);
-				}
-			}
+      @keyframes fade-scale-in-reverse {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(10px);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-base text-white/90 min-h-screen flex flex-col"
+    data-audio-file={audioFile}
+    data-article-title={audioTitle}
+  >
+    <Navigation />
+    <main
+      class={`flex-grow ${isHomepage ? "" : "pt-28"}`}
+      style="view-transition-name: page;"
+      data-nav-index={currentIndex}
+    >
+      <slot />
+    </main>
+    <Footer />
+    <AudioPlayer />
+    <Analytics />
 
-			@keyframes fade-scale-in-reverse {
-				from {
-					opacity: 0;
-					transform: scale(0.95) translateY(10px);
-				}
-			}
-		</style>
-	</head>
-	<body class="bg-base text-white/90 min-h-screen flex flex-col" data-audio-file={audioFile} data-article-title={audioTitle}>
-		<Navigation />
-		<main
-			class={`flex-grow ${isHomepage ? "" : "pt-28"}`}
-			style="view-transition-name: page;"
-			data-nav-index={currentIndex}
-		>
-			<slot />
-		</main>
-		<Footer />
-		<AudioPlayer />
+    <style>
+      body {
+        overflow-x: hidden;
+      }
 
-		<style>
-			body {
-				overflow-x: hidden;
-			}
-
-			main {
-				position: relative;
-				z-index: 1;
-			}
-		</style>
-	</body>
+      main {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </body>
 </html>

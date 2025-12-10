@@ -23,6 +23,9 @@ importers:
       '@astrojs/vercel':
         specifier: ^9.0.2
         version: 9.0.2(@aws-sdk/credential-provider-web-identity@3.873.0)(astro@5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1))(rollup@4.48.1)
+      '@vercel/analytics':
+        specifier: ^1.6.1
+        version: 1.6.1
       astro:
         specifier: ^5.6.1
         version: 5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1)
@@ -31,7 +34,7 @@ importers:
         version: 0.8.4(typescript@5.9.2)
       kvix-blog:
         specifier: 'file:'
-        version: file:(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1)
+        version: file:(@aws-sdk/credential-provider-web-identity@3.873.0)(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1)
       nodemailer:
         specifier: ^6.9.16
         version: 6.10.1
@@ -5243,18 +5246,20 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  kvix-blog@file:(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1):
+  kvix-blog@file:(@aws-sdk/credential-provider-web-identity@3.873.0)(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1):
     dependencies:
       '@astrojs/mdx': 4.3.4(astro@5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1))
       '@astrojs/node': 9.4.3(astro@5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1))
       '@astrojs/rss': 4.0.12
       '@astrojs/tailwind': 5.1.5(astro@5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1))(tailwindcss@3.4.17)
+      '@astrojs/vercel': 9.0.2(@aws-sdk/credential-provider-web-identity@3.873.0)(astro@5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1))(rollup@4.48.1)
       astro: 5.13.3(@types/node@22.18.0)(@vercel/functions@2.2.13(@aws-sdk/credential-provider-web-identity@3.873.0))(jiti@1.21.7)(rollup@4.48.1)(typescript@5.9.2)(yaml@2.8.1)
       astro-seo: 0.8.4(typescript@5.9.2)
       nodemailer: 6.10.1
       sharp: 0.34.5
       tailwindcss: 3.4.17
     transitivePeerDependencies:
+      - '@aws-sdk/credential-provider-web-identity'
       - '@azure/app-configuration'
       - '@azure/cosmos'
       - '@azure/data-tables'
@@ -5265,6 +5270,8 @@ snapshots:
       - '@deno/kv'
       - '@netlify/blobs'
       - '@planetscale/database'
+      - '@remix-run/react'
+      - '@sveltejs/kit'
       - '@types/node'
       - '@upstash/redis'
       - '@vercel/blob'
@@ -5278,19 +5285,24 @@ snapshots:
       - jiti
       - less
       - lightningcss
+      - next
       - prettier
       - prettier-plugin-astro
+      - react
       - rollup
       - sass
       - sass-embedded
       - stylus
       - sugarss
       - supports-color
+      - svelte
       - terser
       - ts-node
       - tsx
       - typescript
       - uploadthing
+      - vue
+      - vue-router
       - yaml
 
   lilconfig@3.1.3: {}
